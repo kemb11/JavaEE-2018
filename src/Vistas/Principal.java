@@ -25,7 +25,6 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null); //centrar
-        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -124,7 +123,9 @@ public class Principal extends javax.swing.JFrame {
         
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
-       
+        
+        Estudiante_Menu em = new Estudiante_Menu();
+        em.setVisible(true);
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**
