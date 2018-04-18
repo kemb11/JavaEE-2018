@@ -7,6 +7,9 @@ package Vistas;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.UIManager;
 
 /**
@@ -22,6 +25,10 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null); //centrar
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
     }
 
     /**
@@ -169,5 +176,20 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
+
+    public void persist(Object object) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            em.persist(object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
 
 }

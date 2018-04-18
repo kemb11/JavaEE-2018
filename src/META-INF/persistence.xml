@@ -3,6 +3,7 @@
   <persistence-unit name="JavaEE2018PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>Clases.Usuario</class>
+    <class>Clases.Estudiante</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3305/javaee2018?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
