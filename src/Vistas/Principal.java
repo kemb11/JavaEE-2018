@@ -27,7 +27,9 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null); //centrar
-        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
     }
 
     /**

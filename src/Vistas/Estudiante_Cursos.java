@@ -31,6 +31,9 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         listarCursos();
+        
+        // ocultar la columna del id
+        CursosTable.getColumnModel().removeColumn( CursosTable.getColumnModel().getColumn(0) ); 
     }
 
     /**
@@ -46,6 +49,7 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         InscripcionesButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         CursosTable = new javax.swing.JTable();
+        VerCursoButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cursos");
@@ -67,11 +71,11 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Descripcion", "Creditos", "Horarios", "Optativo"
+                "ObjCurso", "Nombre", "Creditos", "Optativo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -80,6 +84,14 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(CursosTable);
 
+        VerCursoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerCursoButton.setText("Ver Curso");
+        VerCursoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerCursoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,9 +99,10 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VerCursoButton)
                     .addComponent(InscripcionesButton)
                     .addComponent(TituloListaLabel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,6 +114,8 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
                 .addComponent(TituloListaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -111,11 +126,21 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         
         if(CursosTable.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un curso para inscribirse","Title", WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un curso para inscribirse","", WARNING_MESSAGE);
         }else{
             
         }
     }//GEN-LAST:event_InscripcionesButtonActionPerformed
+
+    private void VerCursoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerCursoButtonActionPerformed
+        if(CursosTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un curso","", WARNING_MESSAGE);
+        }else{
+            DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
+            Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
+            JOptionPane.showMessageDialog(this, "Descripción: "+curso.getDescripcion());
+        }
+    }//GEN-LAST:event_VerCursoButtonActionPerformed
 
     public void listarCursos(){
         List<Curso> lista = new ArrayList<>();
@@ -140,7 +165,7 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
             if(curso.isOptativo()){
                 esOptativo = "Si";
             }
-            String[] datos={curso.getNombre(), curso.getDescripcion(), String.valueOf(curso.getCreditos()), curso.getHorarios(), esOptativo};
+            Object[] datos={curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo};
             modelo.addRow(datos);
         }
     }
@@ -191,6 +216,7 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
     private javax.swing.JTable CursosTable;
     private javax.swing.JButton InscripcionesButton;
     private javax.swing.JLabel TituloListaLabel;
+    private javax.swing.JButton VerCursoButton;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
