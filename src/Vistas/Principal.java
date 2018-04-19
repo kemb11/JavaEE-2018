@@ -5,11 +5,13 @@
  */
 package Vistas;
 
+import Clases.Fabrica;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -26,9 +28,6 @@ public class Principal extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null); //centrar
         
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
     }
 
     /**
@@ -124,7 +123,11 @@ public class Principal extends javax.swing.JFrame {
         
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
-       
+        boolean control = Fabrica.getInstance().getContEst().login(id, pass);
+        if(control)
+            JOptionPane.showMessageDialog(this,"ok");
+        else
+            JOptionPane.showMessageDialog(this,"no");
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**

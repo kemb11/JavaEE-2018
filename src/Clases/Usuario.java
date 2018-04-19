@@ -23,6 +23,7 @@ public abstract class Usuario implements Serializable {
     @Id
     protected String id;
     protected String pass, email;
+    
 
     public String getId() {
         return id;
@@ -32,11 +33,6 @@ public abstract class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Usuario(String id, String pass, String email) {
-        this.id = id;
-        this.pass = pass;
-        this.email = email;
-    }
 
     public void setPass(String pass) {
         this.pass = pass;
@@ -54,12 +50,6 @@ public abstract class Usuario implements Serializable {
         return email;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
     @Override
     public boolean equals(Object object) {
