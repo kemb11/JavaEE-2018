@@ -47,7 +47,7 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         CursosTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Menú Principal");
+        setTitle("Cursos");
 
         TituloListaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TituloListaLabel.setText("Cursos");

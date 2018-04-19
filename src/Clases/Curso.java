@@ -41,20 +41,6 @@ public class Curso implements Serializable {
         this.id = id;
     }
 
-    public Curso() {
-        this.estudiantes = new ArrayList<>();
-    }
-
-    public Curso(Long id, String nombre, String descripcion, int creditos, String horarios, boolean optativo, List<Estudiante> estudiantes) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.creditos = creditos;
-        this.horarios = horarios;
-        this.optativo = optativo;
-        this.estudiantes = estudiantes;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
