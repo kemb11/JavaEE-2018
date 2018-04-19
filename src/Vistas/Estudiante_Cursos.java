@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -110,7 +111,7 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         
         if(CursosTable.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un curso para inscribirse");
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un curso para inscribirse","Title", WARNING_MESSAGE);
         }else{
             
         }
