@@ -5,50 +5,65 @@
  */
 package Clases;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
 
 @Entity
-public class Estudiante extends Usuario{
-    
+public class Estudiante extends Usuario {
     private String ci, nombres, apellidos;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date FechaNac;
+//    @ManyToMany
+//    private List<Sede> sedes;
+//    @ManyToMany
+//    private List<Carrera> carreras;
+    @ManyToMany
+    private List<Curso> cursos;
 
-    public String getCi() {
-        return ci;
-    }
-
+    
     public void setCi(String ci) {
         this.ci = ci;
-    }
-
-    public String getNombres() {
-        return nombres;
     }
 
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public void setFechaNac(Date FechaNac) {
+        this.FechaNac = FechaNac;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
     }
 
     public Date getFechaNac() {
         return FechaNac;
     }
 
-    public void setFechaNac(Date FechaNac) {
-        this.FechaNac = FechaNac;
+    public List<Curso> getCursos() {
+        return cursos;
     }
-    
     
     
 }

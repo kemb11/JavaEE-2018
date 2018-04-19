@@ -124,10 +124,13 @@ public class Principal extends javax.swing.JFrame {
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
         boolean control = Fabrica.getInstance().getContEst().login(id, pass);
-        if(control)
-            JOptionPane.showMessageDialog(this,"ok");
-        else
+        if(control){
+            Estudiante_Menu em = new Estudiante_Menu();
+            em.setVisible(true);
+        }else
             JOptionPane.showMessageDialog(this,"no");
+        
+        
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**
