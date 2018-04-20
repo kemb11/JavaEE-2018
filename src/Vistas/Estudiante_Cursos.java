@@ -7,6 +7,7 @@ package Vistas;
 
 import Clases.Curso;
 import Clases.Estudiante;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +15,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -45,7 +49,6 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TituloListaLabel = new javax.swing.JLabel();
         InscripcionesButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         CursosTable = new javax.swing.JTable();
@@ -53,9 +56,6 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cursos");
-
-        TituloListaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        TituloListaLabel.setText("Cursos");
 
         InscripcionesButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         InscripcionesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion.png"))); // NOI18N
@@ -101,7 +101,6 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(VerCursoButton)
                     .addComponent(InscripcionesButton)
-                    .addComponent(TituloListaLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 25, Short.MAX_VALUE))
         );
@@ -111,8 +110,6 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(InscripcionesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(TituloListaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +135,8 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         }else{
             DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
             Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-            JOptionPane.showMessageDialog(this, "Descripción: "+curso.getDescripcion());
+            Estudiante_VerCurso verC = new Estudiante_VerCurso(curso);
+            verC.setVisible(true);
         }
     }//GEN-LAST:event_VerCursoButtonActionPerformed
 
@@ -167,6 +165,23 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
             }
             Object[] datos={curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo};
             modelo.addRow(datos);
+        }
+        
+        resizeColumnWidth(CursosTable);
+    }
+    
+    public void resizeColumnWidth(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 15; // Min width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width +1 , width);
+            }
+            if(width > 300)
+                width=300;
+            columnModel.getColumn(column).setPreferredWidth(width);
         }
     }
     
@@ -215,7 +230,6 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CursosTable;
     private javax.swing.JButton InscripcionesButton;
-    private javax.swing.JLabel TituloListaLabel;
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
