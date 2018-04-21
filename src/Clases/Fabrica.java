@@ -18,4 +18,7 @@ public class Fabrica {
     public IContEstudiante getContEst(){
         return ContEstudiante.getInstance();
     }
+    public IContEducacion getContEdu(){
+        return ContEducacion.getInstance();
+    }
 }

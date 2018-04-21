@@ -2,8 +2,10 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,9 +13,8 @@ import javax.persistence.Query;
 
 public class ContEstudiante implements IContEstudiante{
     private static ContEstudiante instancia;
-    private List<Estudiante> estudiantes;
+    private Estudiante login;
     private ContEstudiante(){
-        estudiantes = this.getEstudiantes();
     }
     
     public static ContEstudiante getInstance(){
@@ -41,13 +42,19 @@ public class ContEstudiante implements IContEstudiante{
     }
 
     public boolean login(String id, String pass) {
-        Iterator<Estudiante> it = estudiantes.iterator();
+        Iterator<Estudiante> it = this.getEstudiantes().iterator();
         while (it.hasNext()) {
             Estudiante next = it.next();
-            if(next.getPass().equals(pass) && next.getId().equals(id))
-                return true;
+            if(next.getPass().equals(pass) && next.getId().equals(id)){
+                login = next;
+                return true;}
         }
         return false;
+    }
+
+    @Override
+    public void inscripcion(CursoSede cs) throws Exception{
+        this.login.setIncripcion(cs);
     }
     
     
