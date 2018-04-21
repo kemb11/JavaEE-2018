@@ -5,10 +5,8 @@
  */
 package Clases;
 
-/**
- *
- * @author rodri
- */
 public interface IContEducacion {
+    public abstract void seleccionCarrera(long id);
+    public abstract void seleccionSede(long id);
     
 }
