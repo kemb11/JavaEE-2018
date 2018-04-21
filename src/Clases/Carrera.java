@@ -27,10 +27,10 @@ public class Carrera implements Serializable {
     private String nombre;
     private String descripcion;
     private int creditos;
-//    @ManyToMany
-//    private List<Estudiante> estudiantes;
-//    @ManyToMany
-//    private List<Sede> sedes;
+    @ManyToMany
+    private List<Estudiante> estudiantes;
+    @ManyToMany
+    private List<Sede> sedes;
 
     public Long getId() {
         return id;

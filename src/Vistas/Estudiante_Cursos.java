@@ -7,6 +7,7 @@ package Vistas;
 
 import Clases.Curso;
 import Clases.Estudiante;
+import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -33,11 +35,18 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
+        CursosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         listarCursos();
         
         // ocultar la columna del id
         CursosTable.getColumnModel().removeColumn( CursosTable.getColumnModel().getColumn(0) ); 
+        
+        //Por defecto que se vea asi
+        BuscarTextField.setText("Buscar por curso, carrera, sede");
+        BuscarTextField.setForeground(Color.GRAY);
+        
+        CursosTable.requestFocus();
     }
 
     /**
@@ -53,6 +62,8 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         CursosTable = new javax.swing.JTable();
         VerCursoButton = new javax.swing.JButton();
+        BuscarTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cursos");
@@ -71,11 +82,11 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ObjCurso", "Nombre", "Creditos", "Optativo"
+                "ObjCurso", "Nombre", "Creditos", "Optativo", "Carrera", "Sede"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -85,12 +96,25 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         jScrollPane2.setViewportView(CursosTable);
 
         VerCursoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerCursoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Ver.png"))); // NOI18N
         VerCursoButton.setText("Ver Curso");
         VerCursoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VerCursoButtonActionPerformed(evt);
             }
         });
+
+        BuscarTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                BuscarTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                BuscarTextFieldFocusLost(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Buscar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,21 +123,31 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(VerCursoButton)
-                    .addComponent(InscripcionesButton)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(VerCursoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(InscripcionesButton))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(InscripcionesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InscripcionesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,7 +174,23 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VerCursoButtonActionPerformed
 
+    private void BuscarTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarTextFieldFocusGained
+        if (BuscarTextField.getText().equals("Buscar por curso, carrera, sede")) {
+            BuscarTextField.setText("");
+            BuscarTextField.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_BuscarTextFieldFocusGained
+
+    private void BuscarTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarTextFieldFocusLost
+        if (BuscarTextField.getText().isEmpty()) {
+            BuscarTextField.setText("Buscar por curso, carrera, sede");
+            BuscarTextField.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_BuscarTextFieldFocusLost
+
     public void listarCursos(){
+        
+        // LLamar a funcion de contrlador
         List<Curso> lista = new ArrayList<>();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
         EntityManager em = emf.createEntityManager();
@@ -151,6 +201,7 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
         } catch (Exception e) {
             em.getTransaction().rollback();
         }
+        //
         
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         
@@ -228,9 +279,11 @@ public class Estudiante_Cursos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BuscarTextField;
     private javax.swing.JTable CursosTable;
     private javax.swing.JButton InscripcionesButton;
     private javax.swing.JButton VerCursoButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

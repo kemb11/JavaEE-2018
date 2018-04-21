@@ -6,14 +6,13 @@
 package Clases;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -33,8 +32,8 @@ public class Curso implements Serializable {
     @Column(columnDefinition = "text")
     private String horarios;
     private boolean optativo;
-    @ManyToMany
-    private List<Estudiante> estudiantes;
+    @OneToMany
+    private List<CursoSede> cursoSedes;
 
     public Long getId() {
         return id;
@@ -64,8 +63,8 @@ public class Curso implements Serializable {
         this.optativo = optativo;
     }
 
-    public void setEstudiantes(List<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
+    public void setCursoSedes(List<CursoSede> cursoSedes) {
+        this.cursoSedes = cursoSedes;
     }
 
     public String getNombre() {
@@ -88,8 +87,8 @@ public class Curso implements Serializable {
         return optativo;
     }
 
-    public List<Estudiante> getEstudiantes() {
-        return estudiantes;
+    public List<CursoSede> getCursoSedes() {
+        return cursoSedes;
     }
 
     @Override
