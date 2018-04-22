@@ -60,6 +60,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         PanelLateral = new javax.swing.JPanel();
         CursosOpcion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -78,6 +79,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CursosTable = new javax.swing.JTable();
         VerCursoButton = new javax.swing.JButton();
         InscripcionesButton = new javax.swing.JButton();
+        TodosRadioButton = new javax.swing.JRadioButton();
+        CursandoRadioButton = new javax.swing.JRadioButton();
+        AprobadosRadioButton = new javax.swing.JRadioButton();
         CarrerasPanel = new javax.swing.JPanel();
         SedesPanel = new javax.swing.JPanel();
 
@@ -220,7 +224,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(122, 122, 122)
                 .addComponent(CursosOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,6 +288,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        TodosRadioButton.setBackground(new java.awt.Color(73, 202, 114));
+        buttonGroup1.add(TodosRadioButton);
+        TodosRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TodosRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        TodosRadioButton.setText("Todos");
+
+        CursandoRadioButton.setBackground(new java.awt.Color(73, 202, 114));
+        buttonGroup1.add(CursandoRadioButton);
+        CursandoRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CursandoRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        CursandoRadioButton.setText("Cursando");
+        CursandoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CursandoRadioButtonActionPerformed(evt);
+            }
+        });
+
+        AprobadosRadioButton.setBackground(new java.awt.Color(73, 202, 114));
+        buttonGroup1.add(AprobadosRadioButton);
+        AprobadosRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        AprobadosRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        AprobadosRadioButton.setText("Aprobados");
+
         javax.swing.GroupLayout CursosPanelLayout = new javax.swing.GroupLayout(CursosPanel);
         CursosPanel.setLayout(CursosPanelLayout);
         CursosPanelLayout.setHorizontalGroup(
@@ -295,7 +322,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CursosPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TodosRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CursandoRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AprobadosRadioButton))
                     .addGroup(CursosPanelLayout.createSequentialGroup()
                         .addComponent(VerCursoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -305,12 +338,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CursosPanelLayout.setVerticalGroup(
             CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CursosPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(27, 27, 27)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TodosRadioButton)
+                    .addComponent(CursandoRadioButton)
+                    .addComponent(AprobadosRadioButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,10 +476,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_InscripcionesButtonActionPerformed
 
+    private void CursandoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CursandoRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CursandoRadioButtonActionPerformed
+
     void opcionSeleccionada(String opcion){
         CardLayout cl = (CardLayout)(PanelPrincipal.getLayout());
         switch(opcion){
             case "cursos":
+                //Por defecto listar todos
+                TodosRadioButton.setSelected(true);
+                
                 CursosOpcion.setBackground(Color.decode("#4a9f6e"));
                 CarrerasOpcion.setBackground(Color.decode("#1d8348"));
                 SedesOpcion.setBackground(Color.decode("#1d8348"));                
@@ -561,9 +604,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton AprobadosRadioButton;
     private javax.swing.JTextField BuscarTextField;
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
+    private javax.swing.JRadioButton CursandoRadioButton;
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
     private javax.swing.JTable CursosTable;
@@ -572,7 +617,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel SedesOpcion;
     private javax.swing.JPanel SedesPanel;
+    private javax.swing.JRadioButton TodosRadioButton;
     private javax.swing.JButton VerCursoButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
