@@ -81,8 +81,7 @@ public class Estudiante extends Usuario {
             ins.setFecha(new Date());
             ins.setEstudiante(this);
 //            this.inscripciones.add(ins);
-            InscripcionJpaController jpaIns = new InscripcionJpaController();
-            jpaIns.create(ins);
+            Fabrica.getInstance().getEntity().persist(ins);
         }
     }
 
