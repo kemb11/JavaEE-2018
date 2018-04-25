@@ -1,8 +1,7 @@
 
 package Clases;
 
-import Persistencia.CarreraJpaController;
-import Persistencia.SedeJpaController;
+import Persistencia.*;
 
 
 public class ContEducacion implements IContEducacion{
@@ -29,6 +28,26 @@ public class ContEducacion implements IContEducacion{
     public void seleccionSede(long id) {
         SedeJpaController sjpa = new SedeJpaController(Fabrica.getInstance().getEmf());
         this.sede = sjpa.findSede(id);
+    }
+
+    @Override
+    public boolean cursoApto(long carrera, long sede, long id) throws Exception {
+        CursoSedeJpaController csjpa = new CursoSedeJpaController(Fabrica.getInstance().getEmf());
+        CursoSede curso = csjpa.findCursoSedeEntities(id, sede);
+        if(curso != null && curso.getCurso().getCarrera().getId() == carrera)
+            return true;
+        else{
+            if(curso == null)
+                throw new Exception("El curso no pertenece a la sede seleccionada");
+            else
+                throw new Exception("El curso no pertenece a la carrera seleccionada");
+        }
+    }
+
+    @Override
+    public void cerrarSesionEstudiante() {
+        carrera = null;
+        sede = null;
     }
     
 }

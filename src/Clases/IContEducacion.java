@@ -8,5 +8,6 @@ package Clases;
 public interface IContEducacion {
     public abstract void seleccionCarrera(long id);
     public abstract void seleccionSede(long id);
-    
+    public abstract boolean cursoApto(long sede, long curso, long carrera) throws Exception;
+    public abstract void cerrarSesionEstudiante();
 }

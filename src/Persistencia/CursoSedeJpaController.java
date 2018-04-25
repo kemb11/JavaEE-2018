@@ -216,4 +216,14 @@ public class CursoSedeJpaController implements Serializable {
         }
     }
     
+    public CursoSede findCursoSedeEntities(long idcurso, long idsede) {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNativeQuery("select * from cursosede where sede_id = " + String.valueOf(idsede) + " and curso_id", CursoSede.class);
+            return (CursoSede) q.getResultList().get(0);
+        } finally {
+            em.close();
+        }
+    }
+    
 }

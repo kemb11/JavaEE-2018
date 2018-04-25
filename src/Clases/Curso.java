@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -20,6 +21,17 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Curso implements Serializable {
+
+    @ManyToOne
+    private Carrera carrera;
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
 
     private static final long serialVersionUID = 1L;
     @Id
