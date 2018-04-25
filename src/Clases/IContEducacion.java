@@ -5,8 +5,10 @@
  */
 package Clases;
 
+import java.util.List;
+
 public interface IContEducacion {
     public abstract void seleccionCarrera(long id);
     public abstract void seleccionSede(long id);
-    
+    public abstract List<Curso> listarCursos(String buscar);
 }

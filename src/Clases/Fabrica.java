@@ -11,9 +11,9 @@ import javax.persistence.Persistence;
 
 public class Fabrica {
     private static Fabrica instancia;
-    private EntityManagerFactory emf;
+    private EntityManager em;
     private Fabrica(){
-        this.emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
+        this.em = Persistence.createEntityManagerFactory("JavaEE2018PU").createEntityManager();
     }
     public static Fabrica getInstance(){
         if(instancia == null){
@@ -28,9 +28,8 @@ public class Fabrica {
         return ContEducacion.getInstance();
     }
 
-    public EntityManagerFactory getEmf() {
-        return emf;
-    }
-    
+    public EntityManager getEntity() {
+        return em;
+    }    
     
 }

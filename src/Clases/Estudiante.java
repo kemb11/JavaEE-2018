@@ -68,10 +68,12 @@ public class Estudiante extends Usuario {
     }
 
     public void setIncripcion(CursoSede cs) throws Exception {
+        System.out.println("Clases.Estudiante.setIncripcion()");
         if (buscarInscripcion(cs)) {
             throw new Exception("Ya está inscripto al curso");
         } else {
             Inscripcion ins = new Inscripcion();
+            System.out.println("Clases.Estudiante.setIncripcion() 2");
             ins.setCurso(cs);
             cs.setInscripcion(ins);
             ins.setFecha(new Date());
@@ -81,10 +83,9 @@ public class Estudiante extends Usuario {
     }
 
     private boolean buscarInscripcion(CursoSede cs) {
-        Iterator<Inscripcion> it = this.inscripciones.iterator();
-        while (it.hasNext()) {
-            Inscripcion next = it.next();
-            if (next.getCurso().equals(cs)) {
+        System.out.println("Clases.Estudiante.buscarInscripcion()");
+        for (Inscripcion inscripcion : this.inscripciones) {
+            if (inscripcion.getCurso().equals(cs)) {
                 return true;
             }
         }

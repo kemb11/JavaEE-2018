@@ -3,6 +3,7 @@ package Clases;
 
 import Persistencia.EstudianteJpaController;
 import java.util.Iterator;
+import javax.persistence.Persistence;
 
 public class ContEstudiante implements IContEstudiante{
     private static ContEstudiante instancia;
@@ -17,20 +18,30 @@ public class ContEstudiante implements IContEstudiante{
         return instancia;
     }
 
+    @Override
     public boolean login(String id, String pass) {
-        EstudianteJpaController ejpa = new EstudianteJpaController(Fabrica.getInstance().getEmf());
+        EstudianteJpaController ejpa = new EstudianteJpaController(Persistence.createEntityManagerFactory("JavaEE2018PU"));
         Estudiante e = ejpa.findEstudiante(id);
         if(e != null && e.getPass().equals(pass)){
+            this.login = e;
                 return true;
         }
         return false;
     }
 
+   
     @Override
-    public void inscripcion(CursoSede cs) throws Exception{
-        this.login.setIncripcion(cs);
+    public void inscripcionCurso(Curso curso) throws Exception{
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            System.out.println("Curso.getId() -> "+curso.getId());
+            CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'", CursoSede.class).getSingleResult();
+            System.out.println("CursoSede.getId() -> "+cs.getId());
+            this.login.setIncripcion(cs);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+        } catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+        }
     }
-    
-    
     
 }

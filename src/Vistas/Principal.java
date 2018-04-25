@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.UIManager;
 
 /**
@@ -130,7 +131,7 @@ public class Principal extends javax.swing.JFrame {
             MenuPrincipal menu = new MenuPrincipal();
             menu.setVisible(true);
         }else
-            JOptionPane.showMessageDialog(this,"no");
+            JOptionPane.showMessageDialog(this,"El id y/o contraseña ingresados son incorrectos","",WARNING_MESSAGE);
         
         
     }//GEN-LAST:event_IniciarButtonActionPerformed
