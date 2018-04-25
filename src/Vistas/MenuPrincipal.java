@@ -154,37 +154,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Carreras");
 
-        javax.swing.GroupLayout CarrerasOpcionLayout = new javax.swing.GroupLayout(CarrerasOpcion);
-        CarrerasOpcion.setLayout(CarrerasOpcionLayout);
-        CarrerasOpcionLayout.setHorizontalGroup(
-            CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CarrerasOpcionLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        CarrerasOpcionLayout.setVerticalGroup(
-            CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CarrerasOpcionLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(10, 10, 10))
-        );
-
         SedesOpcion.setBackground(new java.awt.Color(29, 131, 72));
         SedesOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SedesOpcionMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                SedesOpcionMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 SedesOpcionMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SedesOpcionMouseEntered(evt);
             }
         });
 
@@ -208,11 +187,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
         SedesOpcionLayout.setVerticalGroup(
             SedesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SedesOpcionLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(SedesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
                 .addGap(10, 10, 10))
+        );
+
+        javax.swing.GroupLayout CarrerasOpcionLayout = new javax.swing.GroupLayout(CarrerasOpcion);
+        CarrerasOpcion.setLayout(CarrerasOpcionLayout);
+        CarrerasOpcionLayout.setHorizontalGroup(
+            CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CarrerasOpcionLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addContainerGap(56, Short.MAX_VALUE))
+            .addComponent(SedesOpcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CarrerasOpcionLayout.setVerticalGroup(
+            CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CarrerasOpcionLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SedesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         SedeSelec.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
@@ -225,7 +228,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(CursosOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(CarrerasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(SedesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,8 +240,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(CursosOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(SedesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -499,15 +499,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CursosOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseClicked
-        opcionSeleccionada("cursos");
+        if(Fabrica.getInstance().getContEdu().getSede() != null){
+        opcionSeleccionada("cursos");}else
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una sede"); 
     }//GEN-LAST:event_CursosOpcionMouseClicked
 
     private void SedesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SedesOpcionMouseClicked
-        opcionSeleccionada("sedes");
+        if(Fabrica.getInstance().getContEdu().getSede() != null){
+        opcionSeleccionada("sedes");}else
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una sede"); 
     }//GEN-LAST:event_SedesOpcionMouseClicked
 
     private void CarrerasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CarrerasOpcionMouseClicked
-        opcionSeleccionada("carreras");
+        if(Fabrica.getInstance().getContEdu().getSede() != null){
+        opcionSeleccionada("carreras");}else
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una sede"); 
     }//GEN-LAST:event_CarrerasOpcionMouseClicked
 
     private void CursosOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseEntered
@@ -605,12 +611,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         if(index!=-1){
             Sede s = (Sede) SedeTable.getModel().getValueAt(index, 0);
             Fabrica.getInstance().getContEdu().seleccionSede(s.getId());
+            opcionSeleccionada("cursos");
+            SedeSelec.setText("<html>"+ s.getNombre()+"</html>");
         }else
             JOptionPane.showMessageDialog(this, "No ha seleccionado una sede");
     }//GEN-LAST:event_SeleccionarSedeActionPerformed
 
     void opcionSeleccionada(String opcion){
         CardLayout cl = (CardLayout)(PanelPrincipal.getLayout());
+        
         switch(opcion){
             case "cursos":
                 //Por defecto listar todos
@@ -645,7 +654,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 this.listarSede();
                 cl.show(PanelPrincipal, "sedes");
                 break;
-        }
+        }           
     }
     
     public void listarCursos(String buscar){
