@@ -62,11 +62,7 @@ public class EstudianteJpaController implements Serializable {
                 throw new PreexistingEntityException("Estudiante " + estudiante + " already exists.", ex);
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
     }
 
     public void edit(Estudiante estudiante) throws NonexistentEntityException, Exception {
@@ -112,10 +108,6 @@ public class EstudianteJpaController implements Serializable {
                 }
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
@@ -139,9 +131,7 @@ public class EstudianteJpaController implements Serializable {
             em.remove(estudiante);
             em.getTransaction().commit();
         } finally {
-            if (em != null) {
-                em.close();
-            }
+           
         }
     }
 
@@ -165,7 +155,7 @@ public class EstudianteJpaController implements Serializable {
             }
             return q.getResultList();
         } finally {
-            em.close();
+            
         }
     }
 
@@ -174,7 +164,6 @@ public class EstudianteJpaController implements Serializable {
         try {
             return em.find(Estudiante.class, id);
         } finally {
-            em.close();
         }
     }
 
@@ -187,7 +176,7 @@ public class EstudianteJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
-            em.close();
+            
         }
     }
     

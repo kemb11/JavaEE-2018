@@ -69,7 +69,6 @@ public class CursoSedeJpaController implements Serializable {
             em.getTransaction().commit();
         } finally {
             if (em != null) {
-                em.close();
             }
         }
     }
@@ -133,7 +132,6 @@ public class CursoSedeJpaController implements Serializable {
             throw ex;
         } finally {
             if (em != null) {
-                em.close();
             }
         }
     }
@@ -164,7 +162,6 @@ public class CursoSedeJpaController implements Serializable {
             em.getTransaction().commit();
         } finally {
             if (em != null) {
-                em.close();
             }
         }
     }
@@ -189,7 +186,6 @@ public class CursoSedeJpaController implements Serializable {
             }
             return q.getResultList();
         } finally {
-            em.close();
         }
     }
 
@@ -211,7 +207,6 @@ public class CursoSedeJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
-            em.close();
         }
     }
     
@@ -221,7 +216,6 @@ public class CursoSedeJpaController implements Serializable {
             Query q = em.createNativeQuery("select * from cursosede where sede_id = " + String.valueOf(idsede) + " and curso_id", CursoSede.class);
             return (CursoSede) q.getResultList().get(0);
         } finally {
-            em.close();
         }
     }
     

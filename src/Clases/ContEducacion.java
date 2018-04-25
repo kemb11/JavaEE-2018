@@ -58,11 +58,10 @@ public class ContEducacion implements IContEducacion{
     
     public List<Curso> listarCursos(String buscar){
         List<Curso> lista = new ArrayList<>();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = Fabrica.getInstance().getEntity();
         em.getTransaction().begin();
         try {
-            Query q = em.createNativeQuery("SELECT * FROM curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class);
+            Query q = em.createNativeQuery("SELECT * FROM Curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class);
             lista = q.getResultList();
             //em.getTransaction().commit();
         } catch (Exception e) {

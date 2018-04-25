@@ -44,9 +44,6 @@ public class UsuarioJpaController implements Serializable {
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
@@ -67,9 +64,7 @@ public class UsuarioJpaController implements Serializable {
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            
         }
     }
 
@@ -88,9 +83,7 @@ public class UsuarioJpaController implements Serializable {
             em.remove(usuario);
             em.getTransaction().commit();
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            
         }
     }
 
@@ -114,7 +107,6 @@ public class UsuarioJpaController implements Serializable {
             }
             return q.getResultList();
         } finally {
-            em.close();
         }
     }
 
@@ -123,7 +115,6 @@ public class UsuarioJpaController implements Serializable {
         try {
             return em.find(Usuario.class, id);
         } finally {
-            em.close();
         }
     }
 
@@ -136,7 +127,6 @@ public class UsuarioJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
-            em.close();
         }
     }
     
