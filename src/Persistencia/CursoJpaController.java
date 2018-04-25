@@ -58,7 +58,6 @@ public class CursoJpaController implements Serializable {
             em.getTransaction().commit();
         } finally {
             if (em != null) {
-                em.close();
             }
         }
     }
@@ -108,7 +107,6 @@ public class CursoJpaController implements Serializable {
             throw ex;
         } finally {
             if (em != null) {
-                em.close();
             }
         }
     }
@@ -134,7 +132,6 @@ public class CursoJpaController implements Serializable {
             em.getTransaction().commit();
         } finally {
             if (em != null) {
-                em.close();
             }
         }
     }
@@ -159,7 +156,6 @@ public class CursoJpaController implements Serializable {
             }
             return q.getResultList();
         } finally {
-            em.close();
         }
     }
 
@@ -181,7 +177,6 @@ public class CursoJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
-            em.close();
         }
     }
     
