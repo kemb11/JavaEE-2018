@@ -136,9 +136,11 @@ public class Principal extends javax.swing.JFrame {
         try {
             control = Fabrica.getInstance().getContEst().login(id, pass);
             if (control) {
-                Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
-                es.setVisible(true);
-                this.setVisible(false);
+                //Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
+                //es.setVisible(true);
+                //this.setVisible(false);
+                MenuPrincipal m = new MenuPrincipal();
+                m.setVisible(true);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
