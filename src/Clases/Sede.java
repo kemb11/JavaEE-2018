@@ -8,6 +8,7 @@ package Clases;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,11 +29,11 @@ public class Sede implements Serializable {
     private String nombre;
     private String direccion;
     private String telefono;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<Estudiante> estudiantes;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<Carrera> carreras;
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
     private List<CursoSede> cursoSedes;
     
     public Long getId() {
