@@ -8,6 +8,8 @@ package Vistas;
 import Clases.Fabrica;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,7 +28,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null); //centrar
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
         EntityManager em = emf.createEntityManager();
@@ -123,17 +125,19 @@ public class Principal extends javax.swing.JFrame {
 
     private void IniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarButtonActionPerformed
         // TODO add your handling code here:
-        
+
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
-        boolean control = Fabrica.getInstance().getContEst().login(id, pass);
-        if(control){
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.setVisible(true);
-        }else
-            JOptionPane.showMessageDialog(this,"El id y/o contraseña ingresados son incorrectos","",WARNING_MESSAGE);
-        
-        
+        boolean control;
+        try {
+            control = Fabrica.getInstance().getContEst().login(id, pass);
+            if (control) {
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.setVisible(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,ex.getMessage());
+        }
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**
@@ -151,10 +155,10 @@ public class Principal extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }*/
-                
+
                 // setTheme(String themeName, String licenseKey, String logoString)
                 com.jtattoo.plaf.graphite.GraphiteLookAndFeel.setTheme("Green-Medium-Font", "INSERT YOUR LICENSE KEY HERE", "my company");
-                
+
                 // select the Look and Feel
                 UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
             }

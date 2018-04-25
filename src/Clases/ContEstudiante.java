@@ -18,15 +18,20 @@ public class ContEstudiante implements IContEstudiante{
         return instancia;
     }
 
-    @Override
-    public boolean login(String id, String pass) {
+    public boolean login(String id, String pass) throws Exception {
         EstudianteJpaController ejpa = new EstudianteJpaController(Persistence.createEntityManagerFactory("JavaEE2018PU"));
         Estudiante e = ejpa.findEstudiante(id);
         if(e != null && e.getPass().equals(pass)){
             this.login = e;
                 return true;
         }
-        return false;
+        else{
+            if(e != null){
+                throw new Exception("Contraseña incorrecta");
+            }else{
+                throw new Exception("Usuario y contraseña incorrecta");
+            }
+        }
     }
 
    
