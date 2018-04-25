@@ -17,13 +17,19 @@ public class ContEstudiante implements IContEstudiante{
         return instancia;
     }
 
-    public boolean login(String id, String pass) {
+    public boolean login(String id, String pass) throws Exception {
         EstudianteJpaController ejpa = new EstudianteJpaController(Fabrica.getInstance().getEmf());
         Estudiante e = ejpa.findEstudiante(id);
         if(e != null && e.getPass().equals(pass)){
                 return true;
         }
-        return false;
+        else{
+            if(e != null){
+                throw new Exception("Contraseña incorrecta");
+            }else{
+                throw new Exception("Usuario y contraseña incorrecta");
+            }
+        }
     }
 
     @Override
