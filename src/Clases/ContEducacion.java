@@ -63,9 +63,9 @@ public class ContEducacion implements IContEducacion{
         try {
             Query q = em.createNativeQuery("SELECT * FROM Curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class);
             lista = q.getResultList();
-            //em.getTransaction().commit();
+            em.getTransaction().commit();
         } catch (Exception e) {
-            //em.getTransaction().rollback();
+            em.getTransaction().rollback();
             e.printStackTrace();
         }
         
