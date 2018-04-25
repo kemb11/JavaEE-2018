@@ -4,6 +4,7 @@ import Persistencia.EstudianteJpaController;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.Persistence;
 
 public class ContEstudiante implements IContEstudiante {
 
@@ -21,7 +22,7 @@ public class ContEstudiante implements IContEstudiante {
     }
 
     public boolean login(String id, String pass) throws Exception {
-        EstudianteJpaController ejpa = new EstudianteJpaController(Fabrica.getInstance().getEmf());
+        EstudianteJpaController ejpa = new EstudianteJpaController();
         Estudiante e = ejpa.findEstudiante(id);
         if (e != null && e.getPass().equals(pass)) {
             this.login = e;
@@ -35,9 +36,19 @@ public class ContEstudiante implements IContEstudiante {
         }
     }
 
+   
     @Override
-    public void inscripcion(CursoSede cs) throws Exception {
-        this.login.setIncripcion(cs);
+    public void inscripcionCurso(Curso curso) throws Exception{
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            System.out.println("Curso.getId() -> "+curso.getId());
+            CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'", CursoSede.class).getSingleResult();
+            System.out.println("CursoSede.getId() -> "+cs.getId());
+            this.login.setIncripcion(cs);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+        } catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+        }
     }
 
     @Override
@@ -63,4 +74,5 @@ public class ContEstudiante implements IContEstudiante {
         this.login = null;
     }
 
+    
 }

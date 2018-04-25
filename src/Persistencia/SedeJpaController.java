@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import Clases.Fabrica;
 import Clases.Sede;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -22,13 +23,10 @@ import javax.persistence.criteria.Root;
  */
 public class SedeJpaController implements Serializable {
 
-    public SedeJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public SedeJpaController() {
     }
-    private EntityManagerFactory emf = null;
-
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return Fabrica.getInstance().getEntity();
     }
 
     public void create(Sede sede) {

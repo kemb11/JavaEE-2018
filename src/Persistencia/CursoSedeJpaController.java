@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Clases.Curso;
 import Clases.CursoSede;
+import Clases.Fabrica;
 import Clases.Inscripcion;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
@@ -25,13 +26,11 @@ import javax.persistence.EntityManagerFactory;
  */
 public class CursoSedeJpaController implements Serializable {
 
-    public CursoSedeJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public CursoSedeJpaController() {
     }
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return Fabrica.getInstance().getEntity();
     }
 
     public void create(CursoSede cursoSede) {

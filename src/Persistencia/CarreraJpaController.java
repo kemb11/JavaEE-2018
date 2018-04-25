@@ -6,6 +6,7 @@
 package Persistencia;
 
 import Clases.Carrera;
+import Clases.Fabrica;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -22,13 +23,11 @@ import javax.persistence.criteria.Root;
  */
 public class CarreraJpaController implements Serializable {
 
-    public CarreraJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public CarreraJpaController() {
     }
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return Fabrica.getInstance().getEntity();
     }
 
     public void create(Carrera carrera) {

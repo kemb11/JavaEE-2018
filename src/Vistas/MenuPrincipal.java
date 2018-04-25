@@ -6,12 +6,17 @@
 package Vistas;
 
 import Clases.Curso;
+import Clases.Fabrica;
+import Clases.IContEducacion;
+import Clases.IContEstudiante;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -60,6 +65,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         PanelLateral = new javax.swing.JPanel();
         CursosOpcion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -73,11 +79,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal = new javax.swing.JPanel();
         CursosPanel = new javax.swing.JPanel();
         BuscarTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         CursosTable = new javax.swing.JTable();
         VerCursoButton = new javax.swing.JButton();
         InscripcionesButton = new javax.swing.JButton();
+        TodosRadioButton = new javax.swing.JRadioButton();
+        CursandoRadioButton = new javax.swing.JRadioButton();
+        AprobadosRadioButton = new javax.swing.JRadioButton();
+        BuscarButton = new javax.swing.JButton();
         CarrerasPanel = new javax.swing.JPanel();
         SedesPanel = new javax.swing.JPanel();
 
@@ -220,7 +229,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(122, 122, 122)
                 .addComponent(CursosOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,6 +243,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         CursosPanel.setBackground(new java.awt.Color(73, 202, 114));
 
+        BuscarTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         BuscarTextField.setText("Buscar por curso, carrera, sede");
         BuscarTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -243,10 +253,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 BuscarTextFieldFocusLost(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Buscar:");
+        BuscarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarTextFieldKeyReleased(evt);
+            }
+        });
 
         CursosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -284,6 +295,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        TodosRadioButton.setBackground(new java.awt.Color(73, 202, 114));
+        buttonGroup1.add(TodosRadioButton);
+        TodosRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TodosRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        TodosRadioButton.setText("Todos");
+
+        CursandoRadioButton.setBackground(new java.awt.Color(73, 202, 114));
+        buttonGroup1.add(CursandoRadioButton);
+        CursandoRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CursandoRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        CursandoRadioButton.setText("Cursando");
+        CursandoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CursandoRadioButtonActionPerformed(evt);
+            }
+        });
+
+        AprobadosRadioButton.setBackground(new java.awt.Color(73, 202, 114));
+        buttonGroup1.add(AprobadosRadioButton);
+        AprobadosRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        AprobadosRadioButton.setForeground(new java.awt.Color(255, 255, 255));
+        AprobadosRadioButton.setText("Aprobados");
+
+        BuscarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BuscarButton.setText("Buscar");
+        BuscarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CursosPanelLayout = new javax.swing.GroupLayout(CursosPanel);
         CursosPanel.setLayout(CursosPanelLayout);
         CursosPanelLayout.setHorizontalGroup(
@@ -293,9 +335,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(CursosPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BuscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TodosRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CursandoRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AprobadosRadioButton))
                     .addGroup(CursosPanelLayout.createSequentialGroup()
                         .addComponent(VerCursoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -305,12 +353,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CursosPanelLayout.setVerticalGroup(
             CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CursosPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(27, 27, 27)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BuscarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TodosRadioButton)
+                    .addComponent(CursandoRadioButton)
+                    .addComponent(AprobadosRadioButton)
+                    .addComponent(BuscarButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -431,19 +482,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_VerCursoButtonActionPerformed
 
     private void InscripcionesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionesButtonActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
-
         if(CursosTable.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un curso","", WARNING_MESSAGE);
         }else{
-
+            DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
+            Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
+            
+            IContEstudiante contEst = Fabrica.getInstance().getContEst();
+            try {
+                contEst.inscripcionCurso(curso);
+                JOptionPane.showMessageDialog(this, "Se ha inscripto correctamente");
+            } catch (Exception ex) {
+                Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_InscripcionesButtonActionPerformed
+
+    private void CursandoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CursandoRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CursandoRadioButtonActionPerformed
+
+    private void BuscarTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarTextFieldKeyReleased
+        
+    }//GEN-LAST:event_BuscarTextFieldKeyReleased
+
+    private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
+        listarCursos(BuscarTextField.getText());
+    }//GEN-LAST:event_BuscarButtonActionPerformed
 
     void opcionSeleccionada(String opcion){
         CardLayout cl = (CardLayout)(PanelPrincipal.getLayout());
         switch(opcion){
             case "cursos":
+                //Por defecto listar todos
+                TodosRadioButton.setSelected(true);
+                
                 CursosOpcion.setBackground(Color.decode("#4a9f6e"));
                 CarrerasOpcion.setBackground(Color.decode("#1d8348"));
                 SedesOpcion.setBackground(Color.decode("#1d8348"));                
@@ -456,7 +529,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 BuscarTextField.setForeground(Color.GRAY);        
                 CursosTable.requestFocus();       
                 
-                listarCursos();
+                listarCursos("");
                 
                 cl.show(PanelPrincipal, "cursos");
                 break;
@@ -475,20 +548,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
     }
     
-    public void listarCursos(){
+    public void listarCursos(String buscar){
         
-        // LLamar a funcion de contrlador
-        List<Curso> lista = new ArrayList<>();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            lista = em.createNativeQuery("SELECT * FROM curso", Curso.class).getResultList();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        }
-        //
+        IContEducacion contEdu = Fabrica.getInstance().getContEdu();
+        List<Curso> lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
         
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         
@@ -496,13 +559,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             modelo.removeRow(0);
         }
         
-        for (Curso curso : lista) {
-            String esOptativo = "No";
-            if(curso.isOptativo()){
-                esOptativo = "Si";
+        if(lista.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
+        }else{
+            for (Curso curso : lista) {
+                String esOptativo = "No";
+                if(curso.isOptativo()){
+                    esOptativo = "Si";
+                }
+                Object[] datos={curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo};
+                modelo.addRow(datos);
             }
-            Object[] datos={curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo};
-            modelo.addRow(datos);
         }
         
         resizeColumnWidth(CursosTable);
@@ -526,9 +593,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton AprobadosRadioButton;
+    private javax.swing.JButton BuscarButton;
     private javax.swing.JTextField BuscarTextField;
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
+    private javax.swing.JRadioButton CursandoRadioButton;
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
     private javax.swing.JTable CursosTable;
@@ -537,8 +607,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JPanel SedesOpcion;
     private javax.swing.JPanel SedesPanel;
+    private javax.swing.JRadioButton TodosRadioButton;
     private javax.swing.JButton VerCursoButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

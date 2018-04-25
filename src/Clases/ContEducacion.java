@@ -2,6 +2,11 @@
 package Clases;
 
 import Persistencia.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 public class ContEducacion implements IContEducacion{
@@ -20,19 +25,19 @@ public class ContEducacion implements IContEducacion{
 
     @Override
     public void seleccionCarrera(long id) {
-        CarreraJpaController cjpa = new CarreraJpaController(Fabrica.getInstance().getEmf());
+        CarreraJpaController cjpa = new CarreraJpaController();
         this.carrera = cjpa.findCarrera(id);
     }
 
     @Override
     public void seleccionSede(long id) {
-        SedeJpaController sjpa = new SedeJpaController(Fabrica.getInstance().getEmf());
+        SedeJpaController sjpa = new SedeJpaController();
         this.sede = sjpa.findSede(id);
     }
 
     @Override
     public boolean cursoApto(long carrera, long sede, long id) throws Exception {
-        CursoSedeJpaController csjpa = new CursoSedeJpaController(Fabrica.getInstance().getEmf());
+        CursoSedeJpaController csjpa = new CursoSedeJpaController();
         CursoSede curso = csjpa.findCursoSedeEntities(id, sede);
         if(curso != null && curso.getCurso().getCarrera().getId() == carrera)
             return true;
@@ -48,6 +53,21 @@ public class ContEducacion implements IContEducacion{
     public void cerrarSesionEstudiante() {
         carrera = null;
         sede = null;
+    }
+    
+    public List<Curso> listarCursos(String buscar){
+        List<Curso> lista = new ArrayList<>();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+        
+        return lista;
     }
     
 }

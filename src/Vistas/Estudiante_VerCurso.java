@@ -44,6 +44,7 @@ public class Estudiante_VerCurso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         TituloLabel = new javax.swing.JLabel();
         TituloLabel1 = new javax.swing.JLabel();
         TituloLabel2 = new javax.swing.JLabel();
@@ -57,69 +58,80 @@ public class Estudiante_VerCurso extends javax.swing.JFrame {
         HorariosTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cursos");
+        setTitle("Ver curso");
+
+        jPanel1.setBackground(new java.awt.Color(73, 202, 114));
 
         TituloLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        TituloLabel.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel.setText("Nombre");
 
         TituloLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel1.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel1.setText("Créditos:");
 
         TituloLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel2.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel2.setText("Optativo:");
 
         TituloLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel3.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel3.setText("Horarios:");
 
         TituloLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel4.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel4.setText("Descripción:");
 
         CreditosLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CreditosLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         OptativoLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        OptativoLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         DescTextArea.setEditable(false);
         DescTextArea.setColumns(20);
+        DescTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         DescTextArea.setLineWrap(true);
         DescTextArea.setRows(5);
         jScrollPane1.setViewportView(DescTextArea);
 
         HorariosTextArea.setEditable(false);
         HorariosTextArea.setColumns(20);
+        HorariosTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         HorariosTextArea.setLineWrap(true);
         jScrollPane2.setViewportView(HorariosTextArea);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TituloLabel4)
                     .addComponent(TituloLabel3)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(TituloLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(TituloLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TituloLabel)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(TituloLabel)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TituloLabel1)
                             .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -127,13 +139,24 @@ public class Estudiante_VerCurso extends javax.swing.JFrame {
                     .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TituloLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TituloLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -151,6 +174,7 @@ public class Estudiante_VerCurso extends javax.swing.JFrame {
     private javax.swing.JLabel TituloLabel2;
     private javax.swing.JLabel TituloLabel3;
     private javax.swing.JLabel TituloLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

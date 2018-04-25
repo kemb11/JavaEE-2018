@@ -6,6 +6,7 @@
 package Persistencia;
 
 import Clases.Estudiante;
+import Clases.Fabrica;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -25,13 +26,10 @@ import javax.persistence.EntityManagerFactory;
  */
 public class EstudianteJpaController implements Serializable {
 
-    public EstudianteJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public EstudianteJpaController() {
     }
-    private EntityManagerFactory emf = null;
-
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return Fabrica.getInstance().getEntity();
     }
 
     public void create(Estudiante estudiante) throws PreexistingEntityException, Exception {
