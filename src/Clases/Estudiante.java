@@ -82,6 +82,7 @@ public class Estudiante extends Usuario {
             ins.setEstudiante(this);
 //            this.inscripciones.add(ins);
             InscripcionJpaController jpaIns = new InscripcionJpaController();
+            jpaIns.create(ins);
         }
     }
 
