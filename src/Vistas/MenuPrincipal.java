@@ -44,8 +44,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         CursosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
-         // ocultar la columna del id
+         // ocultar la columna del objeto
         CursosTable.getColumnModel().removeColumn( CursosTable.getColumnModel().getColumn(0) ); 
+        SedeTable.getColumnModel().removeColumn( SedeTable.getColumnModel().getColumn(0) ); 
         
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
