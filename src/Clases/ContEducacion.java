@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 
 public class ContEducacion implements IContEducacion{
@@ -60,10 +61,12 @@ public class ContEducacion implements IContEducacion{
         EntityManager em = Fabrica.getInstance().getEntity();
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT * FROM curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class).getResultList();
-            em.getTransaction().commit();
+            Query q = em.createNativeQuery("SELECT * FROM curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class);
+            lista = q.getResultList();
+            //em.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            //em.getTransaction().rollback();
+            e.printStackTrace();
         }
         
         return lista;
