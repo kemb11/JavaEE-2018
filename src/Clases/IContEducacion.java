@@ -13,4 +13,5 @@ public interface IContEducacion {
     public abstract boolean cursoApto(long sede, long curso, long carrera) throws Exception;
     public abstract void cerrarSesionEstudiante();
     public abstract List<Curso> listarCursos(String buscar);
+    public abstract Sede getSede();
 }

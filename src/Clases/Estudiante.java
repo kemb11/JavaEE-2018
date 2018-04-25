@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import Persistencia.InscripcionJpaController;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -76,10 +77,11 @@ public class Estudiante extends Usuario {
             Inscripcion ins = new Inscripcion();
             System.out.println("Clases.Estudiante.setIncripcion() 2");
             ins.setCurso(cs);
-            cs.setInscripcion(ins);
+//            cs.setInscripcion(ins);
             ins.setFecha(new Date());
             ins.setEstudiante(this);
-            this.inscripciones.add(ins);
+//            this.inscripciones.add(ins);
+            Fabrica.getInstance().getEntity().persist(ins);
         }
     }
 

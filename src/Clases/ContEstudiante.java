@@ -41,9 +41,8 @@ public class ContEstudiante implements IContEstudiante {
     public void inscripcionCurso(Curso curso) throws Exception{
         Fabrica.getInstance().getEntity().getTransaction().begin();
         try {
-            System.out.println("Curso.getId() -> "+curso.getId());
-            CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'", CursoSede.class).getSingleResult();
-            System.out.println("CursoSede.getId() -> "+cs.getId());
+            Sede sede = Fabrica.getInstance().getContEdu().getSede();
+            CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'"+" AND sede_id = '"+sede.getId()+"'", CursoSede.class).getSingleResult();
             this.login.setIncripcion(cs);
             Fabrica.getInstance().getEntity().getTransaction().commit();
         } catch (Exception e) {
