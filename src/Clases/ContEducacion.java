@@ -1,8 +1,7 @@
 
 package Clases;
 
-import Persistencia.CarreraJpaController;
-import Persistencia.SedeJpaController;
+import Persistencia.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -26,14 +25,34 @@ public class ContEducacion implements IContEducacion{
 
     @Override
     public void seleccionCarrera(long id) {
-        CarreraJpaController cjpa = new CarreraJpaController(Persistence.createEntityManagerFactory("JavaEE2018PU"));
+        CarreraJpaController cjpa = new CarreraJpaController();
         this.carrera = cjpa.findCarrera(id);
     }
 
     @Override
     public void seleccionSede(long id) {
-        SedeJpaController sjpa = new SedeJpaController(Persistence.createEntityManagerFactory("JavaEE2018PU"));
+        SedeJpaController sjpa = new SedeJpaController();
         this.sede = sjpa.findSede(id);
+    }
+
+    @Override
+    public boolean cursoApto(long carrera, long sede, long id) throws Exception {
+        CursoSedeJpaController csjpa = new CursoSedeJpaController();
+        CursoSede curso = csjpa.findCursoSedeEntities(id, sede);
+        if(curso != null && curso.getCurso().getCarrera().getId() == carrera)
+            return true;
+        else{
+            if(curso == null)
+                throw new Exception("El curso no pertenece a la sede seleccionada");
+            else
+                throw new Exception("El curso no pertenece a la carrera seleccionada");
+        }
+    }
+
+    @Override
+    public void cerrarSesionEstudiante() {
+        carrera = null;
+        sede = null;
     }
     
     public List<Curso> listarCursos(String buscar){

@@ -30,9 +30,12 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null); //centrar
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+       
+    }
+    
+    public void vaciar(){
+        IdTextField.setText("");
+        PasswordField.setText("");
     }
 
     /**
@@ -128,16 +131,21 @@ public class Principal extends javax.swing.JFrame {
 
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
+        if(!(id.isEmpty() && pass.isEmpty())){
         boolean control;
         try {
             control = Fabrica.getInstance().getContEst().login(id, pass);
             if (control) {
-                MenuPrincipal menu = new MenuPrincipal();
-                menu.setVisible(true);
+                Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
+                es.setVisible(true);
+                this.setVisible(false);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,ex.getMessage());
-        }
+            JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }}
+        else
+            JOptionPane.showMessageDialog(this,"Rellene los campos", "Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**

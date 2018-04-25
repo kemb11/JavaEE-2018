@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import Clases.Fabrica;
 import Clases.Usuario;
 import Persistencia.exceptions.NonexistentEntityException;
 import Persistencia.exceptions.PreexistingEntityException;
@@ -23,13 +24,11 @@ import javax.persistence.criteria.Root;
  */
 public class UsuarioJpaController implements Serializable {
 
-    public UsuarioJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public UsuarioJpaController() {
     }
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return Fabrica.getInstance().getEntity();
     }
 
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {

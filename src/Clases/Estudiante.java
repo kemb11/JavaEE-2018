@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -23,8 +24,8 @@ public class Estudiante extends Usuario {
     private String ci, nombres, apellidos;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date FechaNac;
-//    @ManyToMany
-//    private List<Sede> sedes;
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Sede> sedes;
 //    @ManyToMany
 //    private List<Carrera> carreras;
 
@@ -92,5 +93,13 @@ public class Estudiante extends Usuario {
             }
         }
         return false;
+    }
+
+    public List<Sede> getSedes() {
+        return sedes;
+    }
+
+    public void setSedes(List<Sede> sedes) {
+        this.sedes = sedes;
     }
 }

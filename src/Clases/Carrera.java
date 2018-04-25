@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -31,9 +32,35 @@ public class Carrera implements Serializable {
     private List<Estudiante> estudiantes;
     @ManyToMany
     private List<Sede> sedes;
+    @OneToMany(mappedBy = "carrera")
+    private List<Curso> cursos;
 
     public Long getId() {
         return id;
+    }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+    public List<Sede> getSedes() {
+        return sedes;
+    }
+
+    public void setSedes(List<Sede> sedes) {
+        this.sedes = sedes;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 
     public void setId(Long id) {

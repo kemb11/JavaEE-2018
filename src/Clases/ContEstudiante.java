@@ -1,34 +1,36 @@
-
 package Clases;
 
 import Persistencia.EstudianteJpaController;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import javax.persistence.Persistence;
 
-public class ContEstudiante implements IContEstudiante{
+public class ContEstudiante implements IContEstudiante {
+
     private static ContEstudiante instancia;
     private Estudiante login;
-    private ContEstudiante(){
+
+    private ContEstudiante() {
     }
-    
-    public static ContEstudiante getInstance(){
-        if(instancia == null){
+
+    public static ContEstudiante getInstance() {
+        if (instancia == null) {
             instancia = new ContEstudiante();
         }
         return instancia;
     }
 
     public boolean login(String id, String pass) throws Exception {
-        EstudianteJpaController ejpa = new EstudianteJpaController(Persistence.createEntityManagerFactory("JavaEE2018PU"));
+        EstudianteJpaController ejpa = new EstudianteJpaController();
         Estudiante e = ejpa.findEstudiante(id);
-        if(e != null && e.getPass().equals(pass)){
+        if (e != null && e.getPass().equals(pass)) {
             this.login = e;
-                return true;
-        }
-        else{
-            if(e != null){
+            return true;
+        } else {
+            if (e != null) {
                 throw new Exception("Contraseña incorrecta");
-            }else{
+            } else {
                 throw new Exception("Usuario y contraseña incorrecta");
             }
         }
@@ -48,5 +50,29 @@ public class ContEstudiante implements IContEstudiante{
             Fabrica.getInstance().getEntity().getTransaction().rollback();
         }
     }
+
+    @Override
+    public List<Object[]> sedesEstudiante() {
+        List<Object[]> retornar = new ArrayList<>();
+        if(this.login.getSedes()!= null){
+        Iterator<Sede> it = this.login.getSedes().iterator();
+        while (it.hasNext()) {
+            Sede next = it.next();
+            Object[] o = {next.getId(), next.getNombre()};
+            retornar.add(o);
+        }}
+        return retornar;
+    }
+
+    @Override
+    public void seleccionarSede(Long id) {
+        Fabrica.getInstance().getContEdu().seleccionSede(id);
+    }
+
+    @Override
+    public void cerrarSesion() {
+        this.login = null;
+    }
+
     
 }
