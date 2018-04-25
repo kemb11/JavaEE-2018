@@ -57,8 +57,7 @@ public class ContEducacion implements IContEducacion{
     
     public List<Curso> listarCursos(String buscar){
         List<Curso> lista = new ArrayList<>();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = Fabrica.getInstance().getEntity();
         em.getTransaction().begin();
         try {
             lista = em.createNativeQuery("SELECT * FROM curso WHERE nombre LIKE '%"+buscar+"%' OR descripcion LIKE '%"+buscar+"%'", Curso.class).getResultList();

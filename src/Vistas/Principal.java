@@ -136,10 +136,11 @@ public class Principal extends javax.swing.JFrame {
         try {
             control = Fabrica.getInstance().getContEst().login(id, pass);
             if (control) {
-//                Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
-                MenuPrincipal es = new MenuPrincipal();
-                es.setVisible(true);
-//                this.setVisible(false);
+                //Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
+                //es.setVisible(true);
+                //this.setVisible(false);
+                MenuPrincipal m = new MenuPrincipal();
+                m.setVisible(true);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -198,20 +199,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
-
-    public void persist(Object object) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaEE2018PU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
 
 }

@@ -89,6 +89,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         BuscarButton = new javax.swing.JButton();
         CarrerasPanel = new javax.swing.JPanel();
         SedesPanel = new javax.swing.JPanel();
+        BuscarSede = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        SedeTable = new javax.swing.JTable();
+        SeleccionarSede = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -388,15 +392,78 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         SedesPanel.setBackground(new java.awt.Color(73, 202, 114));
 
+        BuscarSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BuscarSede.setText("Nombre sede");
+        BuscarSede.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                BuscarSedeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                BuscarSedeFocusLost(evt);
+            }
+        });
+        BuscarSede.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarSedeKeyReleased(evt);
+            }
+        });
+
+        SedeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ObjSede", "Nombre", "Direccion", "Telefono"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(SedeTable);
+
+        SeleccionarSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SeleccionarSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        SeleccionarSede.setText("Seleccionar");
+        SeleccionarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeleccionarSedeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SedesPanelLayout = new javax.swing.GroupLayout(SedesPanel);
         SedesPanel.setLayout(SedesPanelLayout);
         SedesPanelLayout.setHorizontalGroup(
             SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
+            .addGroup(SedesPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(SeleccionarSede)
+                .addContainerGap(549, Short.MAX_VALUE))
+            .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SedesPanelLayout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(BuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(36, Short.MAX_VALUE)))
         );
         SedesPanelLayout.setVerticalGroup(
             SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SedesPanelLayout.createSequentialGroup()
+                .addContainerGap(442, Short.MAX_VALUE)
+                .addComponent(SeleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SedesPanelLayout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(BuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addGap(79, 79, 79)))
         );
 
         PanelPrincipal.add(SedesPanel, "cardSedes");
@@ -510,6 +577,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listarCursos(BuscarTextField.getText());
     }//GEN-LAST:event_BuscarButtonActionPerformed
 
+    private void BuscarSedeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarSedeFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarSedeFocusGained
+
+    private void BuscarSedeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarSedeFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarSedeFocusLost
+
+    private void BuscarSedeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarSedeKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarSedeKeyReleased
+
+    private void SeleccionarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SeleccionarSedeActionPerformed
+
     void opcionSeleccionada(String opcion){
         CardLayout cl = (CardLayout)(PanelPrincipal.getLayout());
         switch(opcion){
@@ -595,6 +678,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
     private javax.swing.JButton BuscarButton;
+    private javax.swing.JTextField BuscarSede;
     private javax.swing.JTextField BuscarTextField;
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
@@ -605,8 +689,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton InscripcionesButton;
     private javax.swing.JPanel PanelLateral;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JTable SedeTable;
     private javax.swing.JPanel SedesOpcion;
     private javax.swing.JPanel SedesPanel;
+    private javax.swing.JButton SeleccionarSede;
     private javax.swing.JRadioButton TodosRadioButton;
     private javax.swing.JButton VerCursoButton;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -617,5 +703,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
