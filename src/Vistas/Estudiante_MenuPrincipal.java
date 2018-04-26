@@ -25,12 +25,12 @@ import javax.swing.table.TableColumnModel;
  *
  * @author Usuario
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public Estudiante_MenuPrincipal() {
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -577,7 +577,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 contEst.inscripcionCurso(curso);
                 JOptionPane.showMessageDialog(this, "Se ha inscripto correctamente");
             } catch (Exception ex) {
-                Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Estudiante_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_InscripcionesButtonActionPerformed
