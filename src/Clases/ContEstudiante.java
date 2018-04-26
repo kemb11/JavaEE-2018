@@ -55,14 +55,13 @@ public class ContEstudiante implements IContEstudiante {
     }
 
     @Override
-    public List<Object[]> sedesEstudiante() {
-        List<Object[]> retornar = new ArrayList<>();
+    public List<Sede> sedesEstudiante() {
+        List<Sede> retornar = new ArrayList<>();
         if(this.login.getSedes()!= null){
         Iterator<Sede> it = this.login.getSedes().iterator();
         while (it.hasNext()) {
             Sede next = it.next();
-            Object[] o = {next.getId(), next.getNombre()};
-            retornar.add(o);
+            retornar.add(next);
         }}
         return retornar;
     }
