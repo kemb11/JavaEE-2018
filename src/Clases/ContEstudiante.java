@@ -41,6 +41,10 @@ public class ContEstudiante implements IContEstudiante {
     public void inscripcionCurso(Curso curso) throws Exception{
         Fabrica.getInstance().getEntity().getTransaction().begin();
         try {
+//            if(this.login.estaInscrpto(this.sede)){
+//                
+//            }
+            
             Sede sede = Fabrica.getInstance().getContEdu().getSede();
             CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'"+" AND sede_id = '"+sede.getId()+"'", CursoSede.class).getSingleResult();
             this.login.setIncripcion(cs);

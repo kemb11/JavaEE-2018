@@ -102,4 +102,14 @@ public class Estudiante extends Usuario {
     public void setSedes(List<Sede> sedes) {
         this.sedes = sedes;
     }
+    
+    public boolean estaInscripto(Inscripcion ins){
+        for (Inscripcion i : inscripciones) {
+            if(i.equals(ins)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
