@@ -145,11 +145,11 @@ public class Principal extends javax.swing.JFrame {
                 m.setVisible(true);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             ex.printStackTrace();
         }}
         else
-            JOptionPane.showMessageDialog(this,"Rellene los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**
