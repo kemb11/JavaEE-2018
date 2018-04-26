@@ -103,13 +103,12 @@ public class Estudiante extends Usuario {
         this.sedes = sedes;
     }
     
-    public boolean estaInscripto(Inscripcion ins){
-        for (Inscripcion i : inscripciones) {
-            if(i.equals(ins)){
+    public boolean estaInscripto(Sede sede){
+        for (Sede s : this.sedes) {
+            if(s.equals(sede)){
                 return true;
             }
-        }
-        
+        }        
         return false;
     }
 }
