@@ -19,7 +19,7 @@ import javax.persistence.Temporal;
 @Entity
 public class Estudiante extends Usuario {
 
-    @OneToMany(mappedBy = "estudiante")
+    @OneToMany(mappedBy = "estudiante", fetch=FetchType.EAGER)
     private List<Inscripcion> inscripciones;
     private String ci, nombres, apellidos;
     @Temporal(javax.persistence.TemporalType.DATE)

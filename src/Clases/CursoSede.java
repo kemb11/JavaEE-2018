@@ -8,6 +8,7 @@ package Clases;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,12 +22,12 @@ import javax.persistence.OneToMany;
 @Entity
 public class CursoSede implements Serializable {
 
-    @OneToMany(mappedBy = "curso")
+    @OneToMany(mappedBy = "curso", fetch=FetchType.EAGER)
     private List<Inscripcion> inscripciones;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Curso curso;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Sede sede;
     
     private static final long serialVersionUID = 1L;

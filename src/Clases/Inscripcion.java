@@ -8,6 +8,7 @@ package Clases;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +26,9 @@ public class Inscripcion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Estudiante estudiante;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private CursoSede curso;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;

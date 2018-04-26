@@ -5,7 +5,9 @@
  */
 package Vistas;
 
+import Clases.Estudiante;
 import Clases.Fabrica;
+import Clases.Usuario;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -139,15 +141,15 @@ public class Principal extends javax.swing.JFrame {
                 //Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
                 //es.setVisible(true);
                 //this.setVisible(false);
-                MenuPrincipal m = new MenuPrincipal();
+                Estudiante_MenuPrincipal m = new Estudiante_MenuPrincipal();
                 m.setVisible(true);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             ex.printStackTrace();
         }}
         else
-            JOptionPane.showMessageDialog(this,"Rellene los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**

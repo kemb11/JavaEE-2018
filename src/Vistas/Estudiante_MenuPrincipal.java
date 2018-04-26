@@ -25,12 +25,12 @@ import javax.swing.table.TableColumnModel;
  *
  * @author Usuario
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public Estudiante_MenuPrincipal() {
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -241,7 +241,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         PanelPrincipal.setBackground(new java.awt.Color(73, 202, 114));
@@ -573,13 +574,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             
             IContEstudiante contEst = Fabrica.getInstance().getContEst();
             try {
-                if(contEst.inscripcionCurso(curso)==true){
-                    JOptionPane.showMessageDialog(this, "Se ha inscripto correctamente");
-                }else{
-                    JOptionPane.showMessageDialog(this, "Debe estar inscripto a la sede del curso","",WARNING_MESSAGE);
-                }
+                contEst.inscripcionCurso(curso);
+                JOptionPane.showMessageDialog(this, "Se ha inscripto correctamente");
             } catch (Exception ex) {
-                Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Estudiante_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_InscripcionesButtonActionPerformed
@@ -614,7 +612,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             Sede s = (Sede) SedeTable.getModel().getValueAt(index, 0);
             Fabrica.getInstance().getContEdu().seleccionSede(s.getId());
             opcionSeleccionada("cursos");
-            SedeSelec.setText("<html> Sede: "+ s.getNombre()+"</html>");
+            SedeSelec.setText("<html>"+ s.getNombre()+"</html>");
         }else
             JOptionPane.showMessageDialog(this, "No ha seleccionado una sede");
     }//GEN-LAST:event_SeleccionarSedeActionPerformed
