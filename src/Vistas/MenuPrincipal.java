@@ -700,7 +700,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     
     private void listarSede(){
-        List<Sede> sedes = Fabrica.getInstance().getContEst().sedesEstudiante();
+        List<Sede> sedes = Fabrica.getInstance().getContEdu().listarSedes();
         DefaultTableModel modelo = (DefaultTableModel) SedeTable.getModel();
         while(modelo.getRowCount()>0){
             modelo.removeRow(0);
