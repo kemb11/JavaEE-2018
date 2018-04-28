@@ -69,19 +69,18 @@ public class Estudiante extends Usuario {
         this.inscripciones = inscripciones;
     }
 
-    public void setIncripcion(CursoSede cs) throws Exception {
-        System.out.println("Clases.Estudiante.setIncripcion()");
+    public boolean setIncripcion(CursoSede cs) throws Exception {
         if (buscarInscripcion(cs)) {
-            throw new Exception("Ya está inscripto al curso");
+            return false;
         } else {
             Inscripcion ins = new Inscripcion();
-            System.out.println("Clases.Estudiante.setIncripcion() 2");
             ins.setCurso(cs);
-//            cs.setInscripcion(ins);
+            cs.setInscripcion(ins);
             ins.setFecha(new Date());
             ins.setEstudiante(this);
-//            this.inscripciones.add(ins);
+            this.inscripciones.add(ins);
             Fabrica.getInstance().getEntity().persist(ins);
+            return true;
         }
     }
 
@@ -103,7 +102,7 @@ public class Estudiante extends Usuario {
         this.sedes = sedes;
     }
     
-    public boolean estaInscripto(Sede sede){
+    public boolean estaInscriptoEnSede(Sede sede){
         for (Sede s : this.sedes) {
             if(s.equals(sede)){
                 return true;

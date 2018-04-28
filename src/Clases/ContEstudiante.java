@@ -41,18 +41,20 @@ public class ContEstudiante implements IContEstudiante {
     public boolean inscripcionCurso(Curso curso) throws Exception{
         Fabrica.getInstance().getEntity().getTransaction().begin();
         try {
-            if(this.login.estaInscripto(Fabrica.getInstance().getContEdu().getSede())){
+            if(this.login.estaInscriptoEnSede(Fabrica.getInstance().getContEdu().getSede())){
                  Sede sede = Fabrica.getInstance().getContEdu().getSede();
                 CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'"+" AND sede_id = '"+sede.getId()+"'", CursoSede.class).getSingleResult();
-                this.login.setIncripcion(cs);
+                if(this.login.setIncripcion(cs) == false){
+                    throw new Exception("Ya está inscripto a este curso");
+                }                
                 Fabrica.getInstance().getEntity().getTransaction().commit();
                 return true;
             }else{
-               return false;
+                throw new Exception("Debe estar inscripto en la sede en la cual se dicta el curso");
             }
         } catch (Exception e) {
             Fabrica.getInstance().getEntity().getTransaction().rollback();
-            return false;
+            throw e;
         }
     }
 
