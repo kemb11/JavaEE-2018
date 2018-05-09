@@ -61,18 +61,10 @@ public class ContEducacion implements IContEducacion{
         EntityManager em = Fabrica.getInstance().getEntity();
         em.getTransaction().begin();
         try {
-//            Query q = em.createNativeQuery("SELECT * FROM Curso WHERE nombre LIKE '%"+buscar+"%'", Curso.class);
             Query q = em.createNativeQuery("SELECT curso.id, curso.creditos, curso.descripcion, curso.horarios, curso.nombre,"
                     + " curso.optativo, curso.carrera_id FROM curso INNER JOIN cursosede ON curso.id = cursosede.curso_id"
                     + " AND cursosede.sede_id="+this.sede.getId()+" AND nombre LIKE '%"+buscar+"%'", Curso.class);
             List<Curso> lista = q.getResultList();
-//            for (Curso curso : lista) {
-//                for (CursoSede cursoSede : curso.getCursoSedes()) {
-//                    if(cursoSede.getSede().equals(this.sede)){
-//                        cursosRetornar.add(curso);
-//                    }
-//                }
-//            }
             cursosRetornar=lista;
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -81,6 +73,12 @@ public class ContEducacion implements IContEducacion{
         }
         
         return cursosRetornar;
+    }
+    
+    @Override
+    public List<Curso> listarCursosAprobados(String buscar){
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();        
+        return e.getCursosAprobados();
     }
 
     @Override

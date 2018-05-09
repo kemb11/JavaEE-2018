@@ -422,6 +422,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Todos"/>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="TodosRadioButtonItemStateChanged"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="CursandoRadioButton">
               <Properties>
@@ -440,6 +443,7 @@
                 <Property name="text" type="java.lang.String" value="Cursando"/>
               </Properties>
               <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="CursandoRadioButtonItemStateChanged"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CursandoRadioButtonActionPerformed"/>
               </Events>
             </Component>
@@ -459,6 +463,10 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Aprobados"/>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="AprobadosRadioButtonItemStateChanged"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AprobadosRadioButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="BuscarButton">
               <Properties>

@@ -21,6 +21,11 @@ public class ContEstudiante implements IContEstudiante {
         return instancia;
     }
 
+    public Estudiante getLogin() {
+        return login;
+    }
+
+    @Override
     public boolean login(String id, String pass) throws Exception {
         EstudianteJpaController ejpa = new EstudianteJpaController();
         Estudiante e = ejpa.findEstudiante(id);
@@ -31,7 +36,7 @@ public class ContEstudiante implements IContEstudiante {
             if (e != null) {
                 throw new Exception("Contraseña incorrecta");
             } else {
-                throw new Exception("Usuario y contraseña incorrecta");
+                throw new Exception("Usuario y contraseña incorrectos");
             }
         }
     }

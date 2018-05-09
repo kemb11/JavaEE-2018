@@ -26,6 +26,9 @@ public class Fabrica {
     public IContEducacion getContEdu(){
         return ContEducacion.getInstance();
     }
+    public IContAdmin getContAdmin(){
+        return ContAdmin.getInstance();
+    }
 
     public EntityManager getEntity() {
         return em;

@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -47,6 +48,8 @@ public class Curso implements Serializable {
     private boolean optativo;
     @OneToMany
     private List<CursoSede> cursoSedes;
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Estudiante> estudiantesAprobados;
 
     public Long getId() {
         return id;
@@ -80,7 +83,11 @@ public class Curso implements Serializable {
         this.cursoSedes = cursoSedes;
     }
 
-    public String getNombre() {
+    public void setEstudiantesAprobados(List<Estudiante> estudiantesAprobados) {
+        this.estudiantesAprobados = estudiantesAprobados;
+    }
+
+        public String getNombre() {
         return nombre;
     }
 
@@ -94,6 +101,10 @@ public class Curso implements Serializable {
 
     public String getHorarios() {
         return horarios;
+    }
+
+    public List<Estudiante> getEstudiantesAprobados() {
+        return estudiantesAprobados;
     }
 
     public boolean isOptativo() {

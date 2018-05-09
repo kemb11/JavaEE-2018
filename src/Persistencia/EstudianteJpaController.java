@@ -34,13 +34,13 @@ public class EstudianteJpaController implements Serializable {
 
     public void create(Estudiante estudiante) throws PreexistingEntityException, Exception {
         if (estudiante.getInscripciones() == null) {
-            estudiante.setInscripciones(new ArrayList<Inscripcion>());
+            estudiante.setInscripciones(new ArrayList<>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Inscripcion> attachedInscripciones = new ArrayList<Inscripcion>();
+            List<Inscripcion> attachedInscripciones = new ArrayList<>();
             for (Inscripcion inscripcionesInscripcionToAttach : estudiante.getInscripciones()) {
                 inscripcionesInscripcionToAttach = em.getReference(inscripcionesInscripcionToAttach.getClass(), inscripcionesInscripcionToAttach.getId());
                 attachedInscripciones.add(inscripcionesInscripcionToAttach);

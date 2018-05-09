@@ -26,6 +26,8 @@ public class Estudiante extends Usuario {
     private Date FechaNac;
     @ManyToMany(fetch=FetchType.EAGER)
     private List<Sede> sedes;
+    @ManyToMany(fetch=FetchType.EAGER)
+    private List<Curso> cursosAprobados;
 //    @ManyToMany
 //    private List<Carrera> carreras;
 
@@ -43,6 +45,10 @@ public class Estudiante extends Usuario {
 
     public void setFechaNac(Date FechaNac) {
         this.FechaNac = FechaNac;
+    }
+
+    public void setCursosAprobados(List<Curso> cursosAprobados) {
+        this.cursosAprobados = cursosAprobados;
     }
 
     public String getCi() {
@@ -63,6 +69,10 @@ public class Estudiante extends Usuario {
 
     public List<Inscripcion> getInscripciones() {
         return inscripciones;
+    }
+
+    public List<Curso> getCursosAprobados() {
+        return cursosAprobados;
     }
 
     public void setInscripciones(List<Inscripcion> inscripciones) {
