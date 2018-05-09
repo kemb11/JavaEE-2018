@@ -71,6 +71,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         SedeSelec = new javax.swing.JLabel();
+        NewsOpcion = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         PanelPrincipal = new javax.swing.JPanel();
         CursosPanel = new javax.swing.JPanel();
         BuscarTextField = new javax.swing.JTextField();
@@ -89,6 +92,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         SedeTable = new javax.swing.JTable();
         SeleccionarSede = new javax.swing.JButton();
         btnBuscarSede = new javax.swing.JButton();
+        Noticias = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,7 +168,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         CarrerasOpcionLayout.setVerticalGroup(
             CarrerasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,12 +208,12 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         SedesOpcionLayout.setVerticalGroup(
             SedesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SedesOpcionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(SedesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
@@ -218,17 +224,59 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         SedeSelec.setForeground(new java.awt.Color(255, 255, 255));
         SedeSelec.setText("<html>No hay sede seleccionada</html>");
 
+        NewsOpcion.setBackground(new java.awt.Color(29, 131, 72));
+        NewsOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NewsOpcionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NewsOpcionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                NewsOpcionMouseExited(evt);
+            }
+        });
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/newspaper.png"))); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Noticias");
+
+        javax.swing.GroupLayout NewsOpcionLayout = new javax.swing.GroupLayout(NewsOpcion);
+        NewsOpcion.setLayout(NewsOpcionLayout);
+        NewsOpcionLayout.setHorizontalGroup(
+            NewsOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NewsOpcionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        NewsOpcionLayout.setVerticalGroup(
+            NewsOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(NewsOpcionLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addContainerGap())
+            .addGroup(NewsOpcionLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
         PanelLateral.setLayout(PanelLateralLayout);
         PanelLateralLayout.setHorizontalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(CursosOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(CarrerasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(SedesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
-            .addComponent(SedesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE))
+            .addComponent(NewsOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,6 +287,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SedesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NewsOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -483,6 +533,38 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(SedesPanel, "cardSedes");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout NoticiasLayout = new javax.swing.GroupLayout(Noticias);
+        Noticias.setLayout(NoticiasLayout);
+        NoticiasLayout.setHorizontalGroup(
+            NoticiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NoticiasLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        NoticiasLayout.setVerticalGroup(
+            NoticiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NoticiasLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(254, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(Noticias, "card5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -634,6 +716,18 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarSedeActionPerformed
 
+    private void NewsOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewsOpcionMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewsOpcionMouseClicked
+
+    private void NewsOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewsOpcionMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewsOpcionMouseExited
+
+    private void NewsOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewsOpcionMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewsOpcionMouseEntered
+
     void opcionSeleccionada(String opcion){
         CardLayout cl = (CardLayout)(PanelPrincipal.getLayout());
         
@@ -746,6 +840,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel CursosPanel;
     private javax.swing.JTable CursosTable;
     private javax.swing.JButton InscripcionesButton;
+    private javax.swing.JPanel NewsOpcion;
+    private javax.swing.JPanel Noticias;
     private javax.swing.JPanel PanelLateral;
     private javax.swing.JPanel PanelPrincipal;
     private javax.swing.JLabel SedeSelec;
@@ -757,13 +853,17 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
