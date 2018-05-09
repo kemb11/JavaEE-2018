@@ -63,7 +63,7 @@ public class ContEducacion implements IContEducacion{
         try {
 //            Query q = em.createNativeQuery("SELECT * FROM Curso WHERE nombre LIKE '%"+buscar+"%'", Curso.class);
             Query q = em.createNativeQuery("SELECT curso.id, curso.creditos, curso.descripcion, curso.horarios, curso.nombre,"
-                    + " curso.optativo, curso.carrera_id FROM Curso as curso INNER JOIN CursoSede as cursosede ON curso.id = cursosede.curso_id"
+                    + " curso.optativo, curso.carrera_id FROM curso INNER JOIN cursosede ON curso.id = cursosede.curso_id"
                     + " AND cursosede.sede_id="+this.sede.getId()+" AND nombre LIKE '%"+buscar+"%'", Curso.class);
             List<Curso> lista = q.getResultList();
 //            for (Curso curso : lista) {
