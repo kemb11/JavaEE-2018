@@ -2,6 +2,7 @@ package Clases;
 
 import Persistencia.EstudianteJpaController;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Persistence;
@@ -41,6 +42,7 @@ public class ContEstudiante implements IContEstudiante {
     public boolean inscripcionCurso(Curso curso) throws Exception{
         Fabrica.getInstance().getEntity().getTransaction().begin();
         try {
+            if(curso.getCarrera().periodo())
             if(this.login.estaInscriptoEnSede(Fabrica.getInstance().getContEdu().getSede())){
                  Sede sede = Fabrica.getInstance().getContEdu().getSede();
                 CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'"+" AND sede_id = '"+sede.getId()+"'", CursoSede.class).getSingleResult();
@@ -52,6 +54,8 @@ public class ContEstudiante implements IContEstudiante {
             }else{
                 throw new Exception("Debe estar inscripto en la sede en la cual se dicta el curso");
             }
+            else
+                throw new Exception("Está fuera del periodo de inscripción");
         } catch (Exception e) {
             Fabrica.getInstance().getEntity().getTransaction().rollback();
             throw e;
