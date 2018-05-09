@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -35,6 +36,10 @@ public class Carrera implements Serializable {
     private List<Sede> sedes;
     @OneToMany(mappedBy = "carrera", fetch=FetchType.EAGER)
     private List<Curso> cursos;
+    @OneToOne
+    private PeriodoInscripcion primerSemestre;
+    @OneToOne
+    private PeriodoInscripcion segundoSemestre;
 
     public Long getId() {
         return id;
