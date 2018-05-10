@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -35,9 +37,29 @@ public class Carrera implements Serializable {
     private List<Sede> sedes;
     @OneToMany(mappedBy = "carrera", fetch=FetchType.EAGER)
     private List<Curso> cursos;
+    @OneToOne(fetch=FetchType.EAGER)
+    private PeriodoInscripcion primerSemestre;
+    @OneToOne(fetch=FetchType.EAGER)
+    private PeriodoInscripcion segundoSemestre;
 
     public Long getId() {
         return id;
+    }
+
+    public PeriodoInscripcion getPrimerSemestre() {
+        return primerSemestre;
+    }
+
+    public void setPrimerSemestre(PeriodoInscripcion primerSemestre) {
+        this.primerSemestre = primerSemestre;
+    }
+
+    public PeriodoInscripcion getSegundoSemestre() {
+        return segundoSemestre;
+    }
+
+    public void setSegundoSemestre(PeriodoInscripcion segundoSemestre) {
+        this.segundoSemestre = segundoSemestre;
     }
 
     public List<Estudiante> getEstudiantes() {
@@ -125,6 +147,15 @@ public class Carrera implements Serializable {
     @Override
     public String toString() {
         return "Clases.Carrera[ id=" + id + " ]";
+    }
+    
+    public boolean periodo(){
+        Date dia = new Date();
+        if(dia.after(this.primerSemestre.getInicio()) && dia.before(this.primerSemestre.getFin()))
+            return true;
+        if(dia.after(this.segundoSemestre.getInicio()) && dia.before(this.segundoSemestre.getFin()))
+            return true;
+        return false;
     }
     
 }

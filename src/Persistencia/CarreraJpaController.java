@@ -11,7 +11,6 @@ import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -127,6 +126,24 @@ public class CarreraJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             
+        }
+    }
+    
+    public List<Carrera> findCarreraSede(long id) {
+        EntityManager em = getEntityManager();
+        try {
+            Query carreras = em.createNativeQuery("select * from carrera where id in (select carreras_id from sede_carrera where sede_id = "+String.valueOf(id)+")",Carrera.class);
+            return carreras.getResultList();
+        } finally {
+        }
+    }
+    
+    public List<Carrera> findCarreraSede(long id, String palabra) {
+        EntityManager em = getEntityManager();
+        try {
+            Query carreras = em.createNativeQuery("select * from carrera where id in (select carreras_id from sede_carrera where sede_id = "+String.valueOf(id)+") and (nombre like '%"+palabra+"%' or descripcion like '%"+palabra+"%'",Carrera.class);
+            return carreras.getResultList();
+        } finally {
         }
     }
     

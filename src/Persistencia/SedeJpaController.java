@@ -127,4 +127,13 @@ public class SedeJpaController implements Serializable {
         }
     }
     
+    public List<Sede> findSede(String palabra) {
+        EntityManager em = getEntityManager();
+        try {
+            Query carreras = em.createNativeQuery("select * from sede where nombre like '%"+palabra+"%'",Sede.class);
+            return carreras.getResultList();
+        } finally {
+        }
+    }
+    
 }

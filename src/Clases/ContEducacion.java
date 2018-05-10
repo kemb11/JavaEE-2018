@@ -94,4 +94,19 @@ public class ContEducacion implements IContEducacion{
         return sjpa.findSedeEntities();
     }
     
+    public List<Sede> listarSedes(String palabra) {
+        SedeJpaController sjpa = new SedeJpaController();
+        return sjpa.findSede(palabra);
+    }
+    
+    public List<Carrera> listarCarrerasSede(){
+        CarreraJpaController cjpa = new CarreraJpaController();
+        return cjpa.findCarreraSede(sede.getId());
+    }
+    
+    public List<Carrera> listarCarrerasSede(String palabra){
+        CarreraJpaController cjpa = new CarreraJpaController();
+        return cjpa.findCarreraSede(sede.getId(), palabra);
+    }
+    
 }

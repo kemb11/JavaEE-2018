@@ -5,18 +5,8 @@
  */
 package Vistas;
 
-import Clases.Estudiante;
 import Clases.Fabrica;
-import Clases.Usuario;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.UIManager;
 
 /**
