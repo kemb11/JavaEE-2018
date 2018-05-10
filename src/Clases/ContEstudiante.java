@@ -20,6 +20,11 @@ public class ContEstudiante implements IContEstudiante {
         return instancia;
     }
 
+    public Estudiante getLogin() {
+        return login;
+    }
+
+    @Override
     public boolean login(String id, String pass) throws Exception {
         EstudianteJpaController ejpa = new EstudianteJpaController();
         Estudiante e = ejpa.findEstudiante(id);
@@ -30,7 +35,7 @@ public class ContEstudiante implements IContEstudiante {
             if (e != null) {
                 throw new Exception("Contraseña incorrecta");
             } else {
-                throw new Exception("Usuario y contraseña incorrecta");
+                throw new Exception("Usuario y contraseña incorrectos");
             }
         }
     }
@@ -40,19 +45,19 @@ public class ContEstudiante implements IContEstudiante {
     public boolean inscripcionCurso(Curso curso) throws Exception{
         Fabrica.getInstance().getEntity().getTransaction().begin();
         try {
-            if(curso.getCarrera().periodo())
-            if(this.login.estaInscriptoEnSede(Fabrica.getInstance().getContEdu().getSede())){
-                 Sede sede = Fabrica.getInstance().getContEdu().getSede();
-                CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'"+" AND sede_id = '"+sede.getId()+"'", CursoSede.class).getSingleResult();
-                if(this.login.setIncripcion(cs) == false){
-                    throw new Exception("Ya está inscripto a este curso");
-                }                
-                Fabrica.getInstance().getEntity().getTransaction().commit();
-                return true;
-            }else{
-                throw new Exception("Debe estar inscripto en la sede en la cual se dicta el curso");
-            }
-            else
+            if(curso.getCarrera().periodo()){
+                if(this.login.estaInscriptoEnSede(Fabrica.getInstance().getContEdu().getSede())){
+                     Sede sede = Fabrica.getInstance().getContEdu().getSede();
+                    CursoSede cs = (CursoSede) Fabrica.getInstance().getEntity().createNativeQuery("SELECT * FROM cursosede WHERE curso_id = '"+curso.getId()+"'"+" AND sede_id = '"+sede.getId()+"'", CursoSede.class).getSingleResult();
+                    if(this.login.setIncripcion(cs) == false){
+                        throw new Exception("Ya está inscripto a este curso");
+                    }                
+                    Fabrica.getInstance().getEntity().getTransaction().commit();
+                    return true;
+                }else{
+                    throw new Exception("Debe estar inscripto en la sede en la cual se dicta el curso");
+                }
+            }else
                 throw new Exception("Está fuera del periodo de inscripción");
         } catch (Exception e) {
             Fabrica.getInstance().getEntity().getTransaction().rollback();

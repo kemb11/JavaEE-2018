@@ -7,62 +7,72 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
  *
- * @author rodri
+ * @author Usuario
  */
 @Entity
-public class Inscripcion implements Serializable {
+public class Noticia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Estudiante estudiante;
-    @ManyToOne
-    private CursoSede curso;
+    private String titulo;
+    @Column(columnDefinition = "text")
+    private String texto;
+    @ElementCollection
+    private List<String> etiquetas;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-
+    
     public Long getId() {
         return id;
     }
 
-    public Estudiante getEstudiante() {
-        return estudiante;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public CursoSede getCurso() {
-        return curso;
+    public String getTexto() {
+        return texto;
     }
 
-    public void setCurso(CursoSede curso) {
-        this.curso = curso;
+    public List<String> getEtiquetas() {
+        return etiquetas;
     }
 
     public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public void setEtiquetas(List<String> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     @Override
@@ -75,10 +85,10 @@ public class Inscripcion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Inscripcion)) {
+        if (!(object instanceof Noticia)) {
             return false;
         }
-        Inscripcion other = (Inscripcion) object;
+        Noticia other = (Noticia) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -87,9 +97,7 @@ public class Inscripcion implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Inscripcion[ id=" + id + " ]";
+        return "Clases.Noticia[ id=" + id + " ]";
     }
-    
-    
     
 }

@@ -6,6 +6,8 @@
 package Vistas;
 
 import Clases.Fabrica;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -22,10 +24,11 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null); //centrar
-       
+//        Admin_NuevaNoticia a = new Admin_NuevaNoticia();
+//        a.setVisible(true);
     }
-    
-    public void vaciar(){
+
+    public void vaciar() {
         IdTextField.setText("");
         PasswordField.setText("");
     }
@@ -123,23 +126,30 @@ public class Principal extends javax.swing.JFrame {
 
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
-        if(!(id.isEmpty() && pass.isEmpty())){
-        boolean control;
-        try {
-            control = Fabrica.getInstance().getContEst().login(id, pass);
-            if (control) {
-                //Estudiante_SeleccionSede es = new Estudiante_SeleccionSede(this);
-                //es.setVisible(true);
-                //this.setVisible(false);
-                Estudiante_MenuPrincipal m = new Estudiante_MenuPrincipal();
-                m.setVisible(true);
+        if (!(id.isEmpty() && pass.isEmpty())) {
+            boolean control;
+            try {
+                control = Fabrica.getInstance().getContEst().login(id, pass);
+                if (control) {
+                    Estudiante_MenuPrincipal m = new Estudiante_MenuPrincipal();
+                    m.setVisible(true);
+                } 
+            } catch (Exception ex) {
+                try {
+                    control = Fabrica.getInstance().getContAdmin().login(id, pass);
+                    if (control) {
+                    Admin_menu am = new Admin_menu();
+                    am.setVisible(true);}                
+                } catch (Exception ex1) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex1);
+                    ex.printStackTrace();
+                }                
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
-            ex.printStackTrace();
-        }}
-        else
-            JOptionPane.showMessageDialog(this,"Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
     /**

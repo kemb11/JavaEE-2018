@@ -29,11 +29,11 @@ public class Sede implements Serializable {
     private String nombre;
     private String direccion;
     private String telefono;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Estudiante> estudiantes;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Carrera> carreras;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany
     private List<CursoSede> cursoSedes;
 
     public List<Estudiante> getEstudiantes() {

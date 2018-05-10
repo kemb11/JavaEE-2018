@@ -10,6 +10,8 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,6 +105,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
 
         PanelLateral.setBackground(new java.awt.Color(29, 131, 72));
 
@@ -227,7 +230,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         );
 
         SedeSelec.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        SedeSelec.setForeground(new java.awt.Color(255, 255, 255));
+        SedeSelec.setForeground(new java.awt.Color(255, 255, 51));
         SedeSelec.setText("<html>No hay sede seleccionada</html>");
 
         NewsOpcion.setBackground(new java.awt.Color(29, 131, 72));
@@ -355,12 +358,22 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         TodosRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         TodosRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         TodosRadioButton.setText("Todos");
+        TodosRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TodosRadioButtonItemStateChanged(evt);
+            }
+        });
 
         CursandoRadioButton.setBackground(new java.awt.Color(73, 202, 114));
         buttonGroup1.add(CursandoRadioButton);
         CursandoRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         CursandoRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         CursandoRadioButton.setText("Cursando");
+        CursandoRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CursandoRadioButtonItemStateChanged(evt);
+            }
+        });
         CursandoRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CursandoRadioButtonActionPerformed(evt);
@@ -372,6 +385,16 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         AprobadosRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         AprobadosRadioButton.setForeground(new java.awt.Color(255, 255, 255));
         AprobadosRadioButton.setText("Aprobados");
+        AprobadosRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                AprobadosRadioButtonItemStateChanged(evt);
+            }
+        });
+        AprobadosRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AprobadosRadioButtonActionPerformed(evt);
+            }
+        });
 
         BuscarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         BuscarButton.setText("Buscar");
@@ -831,6 +854,27 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private void btnBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarreraActionPerformed
         this.listarCarreras();
     }//GEN-LAST:event_btnBuscarCarreraActionPerformed
+    private void AprobadosRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonActionPerformed
+        
+    }//GEN-LAST:event_AprobadosRadioButtonActionPerformed
+
+    private void TodosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TodosRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            listarCursos("");
+        }
+    }//GEN-LAST:event_TodosRadioButtonItemStateChanged
+
+    private void CursandoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CursandoRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            listarCursos("");
+        }
+    }//GEN-LAST:event_CursandoRadioButtonItemStateChanged
+
+    private void AprobadosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            listarCursos("");
+        }
+    }//GEN-LAST:event_AprobadosRadioButtonItemStateChanged
 
     private void NewsOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewsOpcionMouseClicked
         // TODO add your handling code here:
@@ -881,8 +925,18 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     public void listarCursos(String buscar) {
 
         IContEducacion contEdu = Fabrica.getInstance().getContEdu();
-        List<Curso> lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
-
+        List<Curso> lista = new ArrayList<>();
+        
+        if(TodosRadioButton.isSelected()){
+            lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
+        }else{
+            if(CursandoRadioButton.isSelected()){
+                    lista = contEdu.listarCursosCursando(buscar); // parametro de busqueda, si es vacia lista todo
+            }else{
+                lista = contEdu.listarCursosAprobados(buscar); // parametro de busqueda, si es vacia lista todo
+            }
+        }        
+        
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
 
         while (modelo.getRowCount() > 0) {

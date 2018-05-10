@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -23,7 +24,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Curso implements Serializable {
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     private Carrera carrera;
 
     public Carrera getCarrera() {
@@ -47,6 +48,8 @@ public class Curso implements Serializable {
     private boolean optativo;
     @OneToMany
     private List<CursoSede> cursoSedes;
+    @ManyToMany
+    private List<Estudiante> estudiantesAprobados;
 
     public Long getId() {
         return id;
@@ -80,7 +83,11 @@ public class Curso implements Serializable {
         this.cursoSedes = cursoSedes;
     }
 
-    public String getNombre() {
+    public void setEstudiantesAprobados(List<Estudiante> estudiantesAprobados) {
+        this.estudiantesAprobados = estudiantesAprobados;
+    }
+
+        public String getNombre() {
         return nombre;
     }
 
@@ -96,12 +103,25 @@ public class Curso implements Serializable {
         return horarios;
     }
 
+    public List<Estudiante> getEstudiantesAprobados() {
+        return estudiantesAprobados;
+    }
+
     public boolean isOptativo() {
         return optativo;
     }
 
     public List<CursoSede> getCursoSedes() {
         return cursoSedes;
+    }
+    
+    public boolean estaEnSede(Sede sede){
+        for (CursoSede cursoSede : cursoSedes) {
+            if(cursoSede.getSede().equals(sede)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

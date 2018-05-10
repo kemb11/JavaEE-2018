@@ -31,15 +31,15 @@ public class Carrera implements Serializable {
     private String nombre;
     private String descripcion;
     private int creditos;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Estudiante> estudiantes;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Sede> sedes;
-    @OneToMany(mappedBy = "carrera", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "carrera")
     private List<Curso> cursos;
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne
     private PeriodoInscripcion primerSemestre;
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne
     private PeriodoInscripcion segundoSemestre;
 
     public Long getId() {
