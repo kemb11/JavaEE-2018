@@ -29,12 +29,36 @@ public class Sede implements Serializable {
     private String nombre;
     private String direccion;
     private String telefono;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Estudiante> estudiantes;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Carrera> carreras;
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany
     private List<CursoSede> cursoSedes;
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+    public List<Carrera> getCarreras() {
+        return carreras;
+    }
+
+    public void setCarreras(List<Carrera> carreras) {
+        this.carreras = carreras;
+    }
+
+    public List<CursoSede> getCursoSedes() {
+        return cursoSedes;
+    }
+
+    public void setCursoSedes(List<CursoSede> cursoSedes) {
+        this.cursoSedes = cursoSedes;
+    }
     
     public Long getId() {
         return id;

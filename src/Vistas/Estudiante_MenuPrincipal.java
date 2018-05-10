@@ -42,7 +42,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
          // ocultar la columna del objeto
         CursosTable.getColumnModel().removeColumn( CursosTable.getColumnModel().getColumn(0) ); 
         SedeTable.getColumnModel().removeColumn(SedeTable.getColumnModel().getColumn(0) ); 
-        
+        CarreraTable.getColumnModel().removeColumn(CarreraTable.getColumnModel().getColumn(0) ); 
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
         PanelPrincipal.add(CarrerasPanel, "carreras");
@@ -85,6 +85,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         AprobadosRadioButton = new javax.swing.JRadioButton();
         BuscarButton = new javax.swing.JButton();
         CarrerasPanel = new javax.swing.JPanel();
+        BuscarCarrera = new javax.swing.JTextField();
+        VerCarrera = new javax.swing.JButton();
+        btnBuscarCarrera = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        CarreraTable = new javax.swing.JTable();
         SedesPanel = new javax.swing.JPanel();
         BuscarSede = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -93,6 +98,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         btnBuscarSede = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Principal");
 
         PanelLateral.setBackground(new java.awt.Color(29, 131, 72));
 
@@ -217,7 +223,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         );
 
         SedeSelec.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        SedeSelec.setForeground(new java.awt.Color(255, 255, 255));
+        SedeSelec.setForeground(new java.awt.Color(255, 255, 51));
         SedeSelec.setText("<html>No hay sede seleccionada</html>");
 
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
@@ -271,11 +277,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ObjCurso", "Nombre", "Creditos", "Optativo", "Carrera", "Sede"
+                "ObjCurso", "Nombre", "Creditos", "Optativo", "Carrera"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -400,15 +406,93 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         CarrerasPanel.setBackground(new java.awt.Color(73, 202, 114));
 
+        BuscarCarrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BuscarCarrera.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                BuscarCarreraFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                BuscarCarreraFocusLost(evt);
+            }
+        });
+        BuscarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarCarreraActionPerformed(evt);
+            }
+        });
+        BuscarCarrera.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarCarreraKeyReleased(evt);
+            }
+        });
+
+        VerCarrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerCarrera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
+        VerCarrera.setText("Ver Detalles");
+        VerCarrera.setToolTipText("");
+        VerCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerCarreraActionPerformed(evt);
+            }
+        });
+
+        btnBuscarCarrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBuscarCarrera.setText("Buscar");
+        btnBuscarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCarreraActionPerformed(evt);
+            }
+        });
+
+        CarreraTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ObjCarrera", "Nombre", "Créditos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(CarreraTable);
+
         javax.swing.GroupLayout CarrerasPanelLayout = new javax.swing.GroupLayout(CarrerasPanel);
         CarrerasPanel.setLayout(CarrerasPanelLayout);
         CarrerasPanelLayout.setHorizontalGroup(
             CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 733, Short.MAX_VALUE)
+            .addGroup(CarrerasPanelLayout.createSequentialGroup()
+                .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CarrerasPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(VerCarrera))
+                    .addGroup(CarrerasPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(CarrerasPanelLayout.createSequentialGroup()
+                                .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         CarrerasPanelLayout.setVerticalGroup(
             CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 523, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CarrerasPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarCarrera)
+                    .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         PanelPrincipal.add(CarrerasPanel, "cardCarreras");
@@ -656,6 +740,35 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarSedeActionPerformed
 
+    private void BuscarCarreraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarCarreraFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarCarreraFocusGained
+
+    private void BuscarCarreraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarCarreraFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarCarreraFocusLost
+
+    private void BuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCarreraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarCarreraActionPerformed
+
+    private void BuscarCarreraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarCarreraKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarCarreraKeyReleased
+
+    private void VerCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerCarreraActionPerformed
+        int index = CarreraTable.getSelectedRow();
+        if(index!=-1){
+            Carrera c = (Carrera) CarreraTable.getModel().getValueAt(index, 0);
+            Estudiante_VerCarrera vc = new Estudiante_VerCarrera(c);
+            vc.setVisible(true);
+        }else
+            JOptionPane.showMessageDialog(this, "No ha seleccionado una sede");
+    }//GEN-LAST:event_VerCarreraActionPerformed
+
+    private void btnBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarreraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarCarreraActionPerformed
     private void AprobadosRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonActionPerformed
         
     }//GEN-LAST:event_AprobadosRadioButtonActionPerformed
@@ -667,7 +780,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TodosRadioButtonItemStateChanged
 
     private void CursandoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CursandoRadioButtonItemStateChanged
-        
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            listarCursos("");
+        }
     }//GEN-LAST:event_CursandoRadioButtonItemStateChanged
 
     private void AprobadosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonItemStateChanged
@@ -705,6 +820,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 CursosOpcion.setBackground(Color.decode("#1d8348"));
                 SedesOpcion.setBackground(Color.decode("#1d8348"));
                 cl.show(PanelPrincipal, "carreras");
+                listarCarreras();
                 break;
             case "sedes":
                 SedesOpcion.setBackground(Color.decode("#4a9f6e"));
@@ -725,7 +841,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
         }else{
             if(CursandoRadioButton.isSelected()){
-    //                lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
+                    lista = contEdu.listarCursosCursando(buscar); // parametro de busqueda, si es vacia lista todo
             }else{
                 lista = contEdu.listarCursosAprobados(buscar); // parametro de busqueda, si es vacia lista todo
             }
@@ -745,7 +861,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 if(curso.isOptativo()){
                     esOptativo = "Si";
                 }
-                Object[] datos={curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo};
+                Object[] datos={curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo, curso.getCarrera().getNombre()};
                 modelo.addRow(datos);
             }
         }
@@ -784,13 +900,31 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         }
     }
     
+    private void listarCarreras(){
+        List<Carrera> carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede();
+        DefaultTableModel modelo = (DefaultTableModel) CarreraTable.getModel();
+        while(modelo.getRowCount()>0){
+            modelo.removeRow(0);
+        }
+        if(carreras.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
+        }else{
+            for (Carrera c : carreras) {
+                Object[] datos={c, c.getNombre(), c.getCreditos()};
+                modelo.addRow(datos);
+            }
+        }
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
     private javax.swing.JButton BuscarButton;
+    private javax.swing.JTextField BuscarCarrera;
     private javax.swing.JTextField BuscarSede;
     private javax.swing.JTextField BuscarTextField;
+    private javax.swing.JTable CarreraTable;
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
     private javax.swing.JRadioButton CursandoRadioButton;
@@ -806,7 +940,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel SedesPanel;
     private javax.swing.JButton SeleccionarSede;
     private javax.swing.JRadioButton TodosRadioButton;
+    private javax.swing.JButton VerCarrera;
     private javax.swing.JButton VerCursoButton;
+    private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel2;
@@ -817,5 +953,6 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }

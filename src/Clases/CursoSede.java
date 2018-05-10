@@ -22,13 +22,16 @@ import javax.persistence.OneToMany;
 @Entity
 public class CursoSede implements Serializable {
 
-    @OneToMany(mappedBy = "curso", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "curso")
     private List<Inscripcion> inscripciones;
-
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     private Curso curso;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     private Sede sede;
+    @OneToMany(mappedBy = "curso")
+    private List<Examen> exmenes;
+    @OneToMany(mappedBy = "curso")
+    private List<Parcial> parciales;
     
     private static final long serialVersionUID = 1L;
     @Id
@@ -95,5 +98,21 @@ public class CursoSede implements Serializable {
     public void setInscripcion(Inscripcion ins){
         this.inscripciones.add(ins);
     }    
+
+    public List<Examen> getExmenes() {
+        return exmenes;
+    }
+
+    public void setExmenes(List<Examen> exmenes) {
+        this.exmenes = exmenes;
+    }
+
+    public List<Parcial> getParciales() {
+        return parciales;
+    }
+
+    public void setParciales(List<Parcial> parciales) {
+        this.parciales = parciales;
+    }
     
 }

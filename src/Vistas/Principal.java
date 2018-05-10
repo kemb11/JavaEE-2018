@@ -22,8 +22,8 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null); //centrar
-        Admin_NuevaNoticia a = new Admin_NuevaNoticia();
-        a.setVisible(true);
+//        Admin_NuevaNoticia a = new Admin_NuevaNoticia();
+//        a.setVisible(true);
     }
     
     public void vaciar(){

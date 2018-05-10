@@ -130,4 +130,13 @@ public class CarreraJpaController implements Serializable {
         }
     }
     
+    public List<Carrera> findCarreraSede(long id) {
+        EntityManager em = getEntityManager();
+        try {
+            Query carreras = em.createNativeQuery("select * from Carrera where id in (select carreras_id from Sede_Carrera where Sede_id = "+String.valueOf(id)+")",Carrera.class);
+            return carreras.getResultList();
+        } finally {
+        }
+    }
+    
 }

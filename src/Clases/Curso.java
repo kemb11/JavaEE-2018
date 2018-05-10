@@ -24,7 +24,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Curso implements Serializable {
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     private Carrera carrera;
 
     public Carrera getCarrera() {
@@ -48,7 +48,7 @@ public class Curso implements Serializable {
     private boolean optativo;
     @OneToMany
     private List<CursoSede> cursoSedes;
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private List<Estudiante> estudiantesAprobados;
 
     public Long getId() {
@@ -113,6 +113,15 @@ public class Curso implements Serializable {
 
     public List<CursoSede> getCursoSedes() {
         return cursoSedes;
+    }
+    
+    public boolean estaEnSede(Sede sede){
+        for (CursoSede cursoSede : cursoSedes) {
+            if(cursoSede.getSede().equals(sede)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
