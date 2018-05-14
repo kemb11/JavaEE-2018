@@ -2,6 +2,8 @@
 package Clases;
 
 import Persistencia.AdminJpaController;
+import Persistencia.NoticiaJpaController;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +53,20 @@ public class ContAdmin implements IContAdmin {
             Fabrica.getInstance().getEntity().getTransaction().rollback();
             throw e;
         }
+    }
+    
+    @Override
+    public List<Noticia> listarNoticias(String buscar) {
+        NoticiaJpaController njpa = new NoticiaJpaController();
+        List<Noticia> noticias = new ArrayList<>();
+        
+        for (Noticia noticia : njpa.findNoticiaEntities()) {
+            if(noticia.getTitulo().contains(buscar)){
+                noticias.add(noticia);
+            }
+        }
+        
+        return noticias;
     }
     
 }

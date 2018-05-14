@@ -23,7 +23,7 @@ import javax.persistence.OneToMany;
 public class CursoSede implements Serializable {
 
     @OneToMany(mappedBy = "curso")
-    private List<Inscripcion> inscripciones;
+    private List<InscripcionC> inscripciones;
     @ManyToOne
     private Curso curso;
     @ManyToOne
@@ -71,11 +71,11 @@ public class CursoSede implements Serializable {
         return "Clases.CursoSede[ id=" + id + " ]";
     }
 
-    public List<Inscripcion> getInscripciones() {
+    public List<InscripcionC> getInscripciones() {
         return inscripciones;
     }
 
-    public void setInscripciones(List<Inscripcion> inscripciones) {
+    public void setInscripciones(List<InscripcionC> inscripciones) {
         this.inscripciones = inscripciones;
     }
 
@@ -95,7 +95,7 @@ public class CursoSede implements Serializable {
         this.sede = sede;
     }
     
-    public void setInscripcion(Inscripcion ins){
+    public void setInscripcion(InscripcionC ins){
         this.inscripciones.add(ins);
     }    
 

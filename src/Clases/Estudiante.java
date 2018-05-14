@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -20,7 +21,7 @@ import javax.persistence.Temporal;
 public class Estudiante extends Usuario {
 
     @OneToMany(mappedBy = "estudiante")
-    private List<Inscripcion> inscripciones;
+    private List<InscripcionC> inscripciones;
     private String ci, nombres, apellidos;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date FechaNac;
@@ -28,8 +29,10 @@ public class Estudiante extends Usuario {
     private List<Sede> sedes;
     @ManyToMany
     private List<Curso> cursosAprobados;
-//    @ManyToMany
-//    private List<Carrera> carreras;
+    @ManyToMany
+    private List<Carrera> carreras;
+    @OneToMany(mappedBy = "estudiante")
+    private List<InscripcionE> examenes;
 
     public void setCi(String ci) {
         this.ci = ci;
@@ -51,6 +54,10 @@ public class Estudiante extends Usuario {
         this.cursosAprobados = cursosAprobados;
     }
 
+    public void setExamenes(List<InscripcionE> examenes) {
+        this.examenes = examenes;
+    }
+
     public String getCi() {
         return ci;
     }
@@ -67,7 +74,7 @@ public class Estudiante extends Usuario {
         return FechaNac;
     }
 
-    public List<Inscripcion> getInscripciones() {
+    public List<InscripcionC> getInscripciones() {
         return inscripciones;
     }
 
@@ -75,33 +82,40 @@ public class Estudiante extends Usuario {
         return cursosAprobados;
     }
 
-    public void setInscripciones(List<Inscripcion> inscripciones) {
+    public List<Carrera> getCarreras() {
+        return carreras;
+    }
+
+    public List<InscripcionE> getExamenes() {
+        return examenes;
+    }
+
+    public void setInscripciones(List<InscripcionC> inscripciones) {
         this.inscripciones = inscripciones;
     }
 
-    public boolean setIncripcion(CursoSede cs) throws Exception {
-        if (buscarInscripcion(cs)) {
+    public boolean setIncripcionC(CursoSede cs) throws Exception {
+        if (estaInscriptoEnCurso(cs.getCurso())) {
             return false;
         } else {
-            Inscripcion ins = new Inscripcion();
-            ins.setCurso(cs);
-            cs.setInscripcion(ins);
-            ins.setFecha(new Date());
-            ins.setEstudiante(this);
-            this.inscripciones.add(ins);
-            Fabrica.getInstance().getEntity().persist(ins);
-            return true;
-        }
-    }
-
-    private boolean buscarInscripcion(CursoSede cs) {
-        System.out.println("Clases.Estudiante.buscarInscripcion()");
-        for (Inscripcion inscripcion : this.inscripciones) {
-            if (inscripcion.getCurso().equals(cs)) {
+            EntityManager em = Fabrica.getInstance().getEntity();
+            em.getTransaction().begin();
+            try {
+                InscripcionC ins = new InscripcionC();
+                ins.setCurso(cs);
+                cs.setInscripcion(ins);
+                ins.setFecha(new Date());
+                ins.setEstudiante(this);
+                this.inscripciones.add(ins);
+                Fabrica.getInstance().getEntity().persist(ins);
+                em.getTransaction().commit();
                 return true;
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                e.printStackTrace();
+                return false;
             }
         }
-        return false;
     }
 
     public List<Sede> getSedes() {
@@ -111,6 +125,10 @@ public class Estudiante extends Usuario {
     public void setSedes(List<Sede> sedes) {
         this.sedes = sedes;
     }
+
+    public void setCarreras(List<Carrera> carreras) {
+        this.carreras = carreras;
+    }
     
     public boolean estaInscriptoEnSede(Sede sede){
         for (Sede s : this.sedes) {
@@ -118,6 +136,57 @@ public class Estudiante extends Usuario {
                 return true;
             }
         }        
+        return false;
+    }
+    
+    public boolean estaInscriptoEnCarrera(Carrera carrera){
+        for (Carrera c : this.carreras) {
+            if(c.equals(carrera)){
+                return true;
+            }
+        }        
+        return false;
+    }
+    
+    public boolean estaInscriptoEnCurso(Curso curso){
+        for (InscripcionC ic : this.inscripciones) {
+            Curso c = ic.getCurso().getCurso();
+            if(c.equals(curso)){
+                return true;
+            }
+        }        
+        return false;
+    }
+    
+    public boolean setIncripcionE(Examen examen) throws Exception {
+        if (buscarInscripcionExamen(examen)) {
+            return false;
+        } else {
+            EntityManager em = Fabrica.getInstance().getEntity();
+            em.getTransaction().begin();
+            try {
+                InscripcionE ins = new InscripcionE();
+                ins.setExamen(examen);
+                ins.setFecha(new Date());
+                ins.setEstudiante(this);
+                this.examenes.add(ins);
+                Fabrica.getInstance().getEntity().persist(ins);
+                em.getTransaction().commit();
+                return true;
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
+    
+    private boolean buscarInscripcionExamen(Examen examen) {
+        for (InscripcionE inscripcion : this.examenes) {
+            if (inscripcion.getExamen().equals(examen)) {
+                return true;
+            }
+        }
         return false;
     }
 }

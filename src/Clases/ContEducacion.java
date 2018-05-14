@@ -73,7 +73,11 @@ public class ContEducacion implements IContEducacion{
         }*/
         
         for (CursoSede cursoSede : this.sede.getCursoSedes()) {
-            cursosRetornar.add(cursoSede.getCurso());
+            String nombreC = cursoSede.getCurso().getNombre().toLowerCase();
+            buscar = buscar.toLowerCase();
+            if(nombreC.contains(buscar)){
+                cursosRetornar.add(cursoSede.getCurso());
+            }
         }
         
         return cursosRetornar;
@@ -82,24 +86,14 @@ public class ContEducacion implements IContEducacion{
     @Override
     public List<Curso> listarCursosAprobados(String buscar){
         List<Curso> cursosRetornar = new ArrayList<>();
-//        EntityManager em = Fabrica.getInstance().getEntity();
-//        em.getTransaction().begin();
-//        try {
-//            Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
-//            Query q = em.createNativeQuery("SELECT curso.id, curso.creditos, curso.descripcion, curso.horarios, curso.nombre,"
-//                    + " curso.optativo, curso.carrera_id FROM curso INNER JOIN estudiante_curso ON curso.id = estudiante_curso.cursosAprobados_id"
-//                    + " AND estudiante_curso.estudiante_id='"+e.getId()+"' AND nombre LIKE '%"+buscar+"%'", Curso.class);
-//            List<Curso> lista = q.getResultList();
-//            cursosRetornar=lista;
-//            em.getTransaction().commit();
-//        } catch (Exception e) {
-//            em.getTransaction().rollback();
-//            e.printStackTrace();
-//        }
         Estudiante e = Fabrica.getInstance().getContEst().getLogin(); 
         for (Curso c : e.getCursosAprobados()) {
             if(c.estaEnSede(this.sede)){
-                cursosRetornar.add(c);
+                String nombreC = c.getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreC.contains(buscar)){
+                    cursosRetornar.add(c);
+                }
             }
         }
         return cursosRetornar;
@@ -134,30 +128,77 @@ public class ContEducacion implements IContEducacion{
     @Override
     public List<Curso> listarCursosCursando(String buscar){
         List<Curso> cursosRetornar = new ArrayList<>();
-        /*EntityManager em = Fabrica.getInstance().getEntity();
-        em.getTransaction().begin();
-        try {
-            Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
-            Query q = em.createNativeQuery("SELECT curso.id, curso.creditos, curso.descripcion, curso.horarios, curso.nombre,"
-                    + " curso.optativo, curso.carrera_id FROM curso INNER JOIN inscripcion ON curso.id = inscripcion.curso_id"
-                    + " AND inscripcion.estudiante_id='"+e.getId()+"' INNER JOIN cursosede ON curso.id = cursosede.curso_id"
-                    + " AND cursosede.sede_id="+this.sede.getId()+" AND nombre LIKE '%"+buscar+"%'", Curso.class);
-            List<Curso> lista = q.getResultList();
-            cursosRetornar=lista;
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
-        }*/
         
         Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
-        for (Inscripcion inscripcion : e.getInscripciones()) {
+        for (InscripcionC inscripcion : e.getInscripciones()) {
             Curso c = inscripcion.getCurso().getCurso();
             if(c.estaEnSede(this.sede)){
-                cursosRetornar.add(c);
+                String nombreC = c.getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreC.contains(buscar)){
+                    cursosRetornar.add(c);
+                }
             }
         }
         
         return cursosRetornar;
     }
+    
+    @Override
+    public List<Examen> listarExamenes(String buscar){
+        List<Examen> examenesRetornar = new ArrayList<>();
+        CursoSedeJpaController jpa = new CursoSedeJpaController();
+        for (CursoSede cursoS : jpa.findCursoSedeEntities()) {
+            if(cursoS.getSede().equals(this.sede)){
+                for (Examen e : cursoS.getExmenes()) {
+                    String nombreC = e.getCurso().getCurso().getNombre().toLowerCase();
+                    buscar = buscar.toLowerCase();
+                    if(nombreC.contains(buscar)){
+                        examenesRetornar.add(e);
+                    }
+
+                }
+            }
+        }
+        
+        return examenesRetornar;
+    }
+    
+    public List<Examen> listaExamenesEst(String buscar){
+        List<Examen> examenesRetornar = new ArrayList<>();
+        
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
+        for (InscripcionE insEx:  e.getExamenes()) {
+            Sede sedeEx = insEx.getExamen().getCurso().getSede();
+            if(sedeEx.equals(this.sede)){
+                String nombreC = insEx.getExamen().getCurso().getCurso().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreC.contains(buscar)){
+                    examenesRetornar.add(insEx.getExamen());
+                }
+            }
+        }
+        
+        return examenesRetornar;
+    }
+    
+//    public List<Examen> listarExamenes(String buscar){
+//        List<Examen> examenesRetornar = new ArrayList<>();
+//        EstudianteJpaController jpa = new EstudianteJpaController();
+//        for (Estudiante findEstudianteEntity : jpa.findEstudianteEntities()) {
+//            Estudiante est = Fabrica.getInstance().getContEst().getLogin();   
+//            for (InscripcionE examen : est.getExamenes()) {
+//                Examen e = examen.getExamen();
+//                if(e.getCurso().getSede().equals(this.sede)){
+//                    String nombreC = e.getCurso().getCurso().getNombre().toLowerCase();
+//                    buscar = buscar.toLowerCase();
+//                    if(nombreC.contains(buscar)){
+//                        examenesRetornar.add(e);
+//                    }
+//                }
+//            }
+//        }
+//        
+//        return examenesRetornar;
+//    }
 }

@@ -5,26 +5,27 @@
  */
 package Clases;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Entity
+@DiscriminatorValue("P")
 public class Parcial extends Prueba {
-    String periodo;
+    String instancia;
     @ManyToOne
     private CursoSede curso;
 
-    public String getPeriodo() {
-        return periodo;
+    public String getInstancia() {
+        return instancia;
     }
 
     public CursoSede getCurso() {
         return curso;
     }
 
-    public void setPeriodo(String periodo) {
-        this.periodo = periodo;
+    public void setInstancia(String instancia) {
+        this.instancia = instancia;
     }
 
     public void setCurso(CursoSede curso) {

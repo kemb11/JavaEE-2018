@@ -20,4 +20,5 @@ public interface IContEducacion {
     public abstract List<Carrera> listarCarrerasSede();
     public abstract List<Sede> listarSedes(String palabra);
     public abstract List<Carrera> listarCarrerasSede(String palabra);    
+    public abstract List<Examen> listarExamenes(String buscar);
 }

@@ -7,37 +7,50 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
  *
- * @author Usuario
+ * @author rodri
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Tipo")
-public abstract class Prueba implements Serializable {
+public class InscripcionC implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    private Estudiante estudiante;
+    @ManyToOne
+    private CursoSede curso;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public CursoSede getCurso() {
+        return curso;
+    }
+
+    public void setCurso(CursoSede curso) {
+        this.curso = curso;
     }
 
     public Date getFecha() {
@@ -46,6 +59,10 @@ public abstract class Prueba implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -58,10 +75,10 @@ public abstract class Prueba implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Prueba)) {
+        if (!(object instanceof InscripcionC)) {
             return false;
         }
-        Prueba other = (Prueba) object;
+        InscripcionC other = (InscripcionC) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -70,7 +87,9 @@ public abstract class Prueba implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Prueba[ id=" + id + " ]";
+        return "Clases.Inscripcion[ id=" + id + " ]";
     }
+    
+    
     
 }
