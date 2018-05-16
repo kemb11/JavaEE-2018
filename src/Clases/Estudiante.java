@@ -15,9 +15,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
+@Table(name="estudiante")
 public class Estudiante extends Usuario {
 
     @OneToMany(mappedBy = "estudiante")

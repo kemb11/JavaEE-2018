@@ -6,6 +6,8 @@
 package Vistas;
 
 import Clases.Fabrica;
+import java.nio.charset.Charset;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,7 +24,6 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-
         this.setLocationRelativeTo(null); //centrar
 //        Admin_NuevaNoticia a = new Admin_NuevaNoticia();
 //        a.setVisible(true);
@@ -32,6 +33,8 @@ public class Principal extends javax.swing.JFrame {
         IdTextField.setText("");
         PasswordField.setText("");
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,20 +136,21 @@ public class Principal extends javax.swing.JFrame {
                 if (control) {
                     Estudiante_MenuPrincipal m = new Estudiante_MenuPrincipal();
                     m.setVisible(true);
-                } 
+                }
             } catch (Exception ex) {
                 try {
                     control = Fabrica.getInstance().getContAdmin().login(id, pass);
                     if (control) {
-                    Admin_menu am = new Admin_menu();
-                    am.setVisible(true);}                
+                        Admin_menu am = new Admin_menu();
+                        am.setVisible(true);
+                    }
                 } catch (Exception ex1) {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex1);
                     ex.printStackTrace();
-                }                
+                }
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
         }
