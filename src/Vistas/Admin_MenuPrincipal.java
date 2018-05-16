@@ -1029,14 +1029,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         Estudiante_Crear.setBackground(new java.awt.Color(73, 202, 114));
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Selecciona una sede");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Selecciona una carrera");
 
         cmbSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         cmbCarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cédula de identidad:");
 
         try {
@@ -1050,6 +1053,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Nombre : ");
 
         est_ape.addActionListener(new java.awt.event.ActionListener() {
@@ -1058,8 +1062,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Apellido :");
 
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Fecha de nacimiento:");
 
         try {
@@ -1073,24 +1079,34 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Email:");
 
         est_btn_agregar.setText("Aceptar");
 
         est_btn_volver.setText("Volver");
 
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Datos estudiante");
 
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jScrollPane7.setForeground(new java.awt.Color(255, 255, 255));
+
+        jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane7.setViewportView(jTextArea2);
 
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Datos Sede");
 
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Datos Carrera");
 
         javax.swing.GroupLayout Estudiante_CrearLayout = new javax.swing.GroupLayout(Estudiante_Crear);
@@ -1111,17 +1127,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel20)
                         .addComponent(jLabel21)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbSede, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(est_ci, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(est_nom, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(est_ape, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(est_ema, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(est_fec, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-                    .addComponent(est_btn_volver))
-                .addGap(83, 83, 83)
+                .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(est_nom)
+                    .addComponent(est_ape)
+                    .addComponent(est_ema)
+                    .addComponent(est_fec, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(est_btn_volver)
+                    .addComponent(cmbCarrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(est_ci, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(cmbSede, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(94, 94, 94)
                 .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
                     .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
