@@ -180,4 +180,20 @@ public class EstudianteJpaController implements Serializable {
         }
     }
     
+    public boolean email(String email){
+        for(Estudiante e : this.findEstudianteEntities()){
+            if(e.getEmail().equals(email))
+                return true;
+        } 
+        return false;
+    }
+    
+    public boolean id(String id){
+        for(Estudiante e : this.findEstudianteEntities()){
+            if(e.getId().equals(id))
+                return true;
+        } 
+        return false;
+    }
+    
 }

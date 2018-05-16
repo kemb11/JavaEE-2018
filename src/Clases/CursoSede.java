@@ -14,12 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Usuario
  */
 @Entity
+@Table(name="cursosede")
 public class CursoSede implements Serializable {
 
     @OneToMany(mappedBy = "curso")

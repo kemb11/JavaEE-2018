@@ -1,13 +1,11 @@
 
 package Clases;
 
-import Persistencia.AdminJpaController;
-import Persistencia.NoticiaJpaController;
+import Persistencia.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-
+import java.util.Random;
 public class ContAdmin implements IContAdmin {
     private static ContAdmin instancia;
     private Admin login;
@@ -67,6 +65,29 @@ public class ContAdmin implements IContAdmin {
         }
         
         return noticias;
+    }
+    
+    public void crearEstudiante(Estudiante e) throws Exception{
+        EstudianteJpaController ejpa = new EstudianteJpaController();  
+        if(ejpa.email(e.getEmail()))
+            throw new Exception("El email está ocupado");
+        if(ejpa.id(e.getId()))
+            throw new Exception("El id está ocupado");
+        e.setPass(clave());
+        ejpa.create(e);
+    }
+    
+    private String clave() {
+        int leftLimit = 48; // letter 'a'
+        int rightLimit = 125; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        return buffer.toString();
     }
     
 }
