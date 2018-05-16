@@ -100,10 +100,10 @@ public class ContEstudiante implements IContEstudiante {
                             else
                                 throw new Exception("Ya está inscrito a este exámen");
                         }else{
-                            throw new Exception("Debe estar inscrito en el curso en la cual se dicta el curso");
+                            throw new Exception("Debe estar inscrito en el curso en la cual se dará el exámen");
                         }
                     }else{
-                        throw new Exception("Debe estar inscrito en la carrera en la cual se dicta el curso");
+                        throw new Exception("Debe estar inscrito en la carrera en la cual se dará el exámen");
                     }
                 }
                 
@@ -113,5 +113,16 @@ public class ContEstudiante implements IContEstudiante {
             }
         }else
             throw new Exception("Está fuera del periodo de inscripción");
+    }
+    
+    @Override
+    public InscripcionE getInscripcionExamen(Examen examen){
+        for (InscripcionE insEx : this.login.getExamenes()) {
+            if(insEx.getExamen().equals(examen)){
+                return insEx;
+            }
+        }
+        
+        return null;
     }
 }
