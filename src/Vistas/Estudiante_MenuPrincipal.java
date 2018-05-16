@@ -40,6 +40,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
      */
     
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    ArrayList<String> volver = new ArrayList<>();
     
     public Estudiante_MenuPrincipal() {
         initComponents();
@@ -61,6 +62,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(SedesPanel, "sedes");
         PanelPrincipal.add(NoticiasPanel, "noticias");
         PanelPrincipal.add(ExamenesPanel, "examenes");
+        PanelPrincipal.add(VerExamenPanel, "verExamenes");
 
         String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
         String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
@@ -143,10 +145,19 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         TodosExRadioButton = new javax.swing.JRadioButton();
         MisExmenesRadioButton = new javax.swing.JRadioButton();
         InscripcionExButton = new javax.swing.JButton();
+        VerExamenPanel = new javax.swing.JPanel();
+        CurExamenLabel = new javax.swing.JLabel();
+        TituloLabel1 = new javax.swing.JLabel();
+        TituloLabel2 = new javax.swing.JLabel();
+        FechaInscLabel = new javax.swing.JLabel();
+        NotaLabel = new javax.swing.JLabel();
+        TituloLabel3 = new javax.swing.JLabel();
+        fechaNotaLabel = new javax.swing.JLabel();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         nombreUsrLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
@@ -863,7 +874,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         SeleccionarExamen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         SeleccionarExamen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
-        SeleccionarExamen.setText("Ver Exámen");
+        SeleccionarExamen.setText("Ver detalles");
         SeleccionarExamen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SeleccionarExamenActionPerformed(evt);
@@ -954,6 +965,81 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(ExamenesPanel, "cardSedes");
 
+        VerExamenPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        CurExamenLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        CurExamenLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CurExamenLabel.setText("Nombre");
+
+        TituloLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel1.setText("Fecha de inscipción:");
+
+        TituloLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel2.setText("Nota:");
+
+        FechaInscLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        FechaInscLabel.setForeground(new java.awt.Color(255, 255, 255));
+        FechaInscLabel.setText("-");
+
+        NotaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        NotaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        NotaLabel.setText("-");
+
+        TituloLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel3.setText("Fecha de nota:");
+
+        fechaNotaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fechaNotaLabel.setForeground(new java.awt.Color(255, 255, 255));
+        fechaNotaLabel.setText("-");
+
+        javax.swing.GroupLayout VerExamenPanelLayout = new javax.swing.GroupLayout(VerExamenPanel);
+        VerExamenPanel.setLayout(VerExamenPanelLayout);
+        VerExamenPanelLayout.setHorizontalGroup(
+            VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FechaInscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CurExamenLabel)
+                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaNotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(547, Short.MAX_VALUE))
+        );
+        VerExamenPanelLayout.setVerticalGroup(
+            VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(CurExamenLabel)
+                .addGap(35, 35, 35)
+                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                        .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel1)
+                            .addComponent(FechaInscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel2))
+                    .addComponent(NotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel3)
+                    .addComponent(fechaNotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(290, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(VerExamenPanel, "card7");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -983,12 +1069,22 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         nombreUsrLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nombreUsrLabel.setForeground(new java.awt.Color(255, 255, 255));
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelCabeceraLayout = new javax.swing.GroupLayout(PanelCabecera);
         PanelCabecera.setLayout(PanelCabeceraLayout);
         PanelCabeceraLayout.setHorizontalGroup(
             PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(nombreUsrLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
@@ -1005,6 +1101,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(notificacionIcono)
                     .addComponent(nombreUsrLabel))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1287,7 +1386,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarExamenTextFieldKeyReleased
 
     private void SeleccionarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarExamenActionPerformed
-        // TODO add your handling code here:
+        opcionSeleccionada("verExamen");
+        volver.add("examenes");
     }//GEN-LAST:event_SeleccionarExamenActionPerformed
 
     private void btnBuscarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarExamenActionPerformed
@@ -1347,6 +1447,12 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             listarExamenes("");
         }
     }//GEN-LAST:event_TodosExRadioButtonItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+        cl.show(PanelPrincipal, volver.get(volver.size()-1)); //mostrar la ultima ventana visitada
+        volver.remove(volver.size()-1); //borrar la ventana
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     void opcionSeleccionada(String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -1410,6 +1516,22 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 SedesOpcion.setBackground(Color.decode("#1d8348"));
                 this.listarExamenes("");
                 cl.show(PanelPrincipal, "examenes");
+                break;
+            case "verExamen":
+                modelo = (DefaultTableModel) ExamenesTable.getModel();
+                Examen examen = (Examen) modelo.getValueAt(ExamenesTable.getSelectedRow(), 0);
+                CurExamenLabel.setText(examen.getCurso().getCurso().getNombre());
+                
+                InscripcionE insEx = Fabrica.getInstance().getContEst().getInscripcionExamen(examen);
+                if(insEx == null){
+                    JOptionPane.showMessageDialog(this, "No está inscrito a este exámen", "", WARNING_MESSAGE);
+                }else{
+                    FechaInscLabel.setText(dateFormat.format(insEx.getFecha()));
+    //                NotaLabel.setText(insEx.getResultado());
+                    fechaNotaLabel.setText(dateFormat.format(insEx.getFecha()));
+
+                    cl.show(PanelPrincipal, "verExamenes");
+                }
                 break;
         }
     }
@@ -1570,6 +1692,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable CarreraTable;
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
+    private javax.swing.JLabel CurExamenLabel;
     private javax.swing.JRadioButton CursandoRadioButton;
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
@@ -1577,9 +1700,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel ExamenesOpcion;
     private javax.swing.JPanel ExamenesPanel;
     private javax.swing.JTable ExamenesTable;
+    private javax.swing.JLabel FechaInscLabel;
     private javax.swing.JButton InscripcionCButton;
     private javax.swing.JButton InscripcionExButton;
     private javax.swing.JRadioButton MisExmenesRadioButton;
+    private javax.swing.JLabel NotaLabel;
     private javax.swing.JPanel NoticiasOpcion;
     private javax.swing.JPanel NoticiasPanel;
     private javax.swing.JTable NoticiasTable;
@@ -1593,16 +1718,22 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton SeleccionarExamen;
     private javax.swing.JButton SeleccionarNoticia;
     private javax.swing.JButton SeleccionarSede;
+    private javax.swing.JLabel TituloLabel1;
+    private javax.swing.JLabel TituloLabel2;
+    private javax.swing.JLabel TituloLabel3;
     private javax.swing.JRadioButton TodosExRadioButton;
     private javax.swing.JRadioButton TodosRadioButton;
     private javax.swing.JButton VerCarrera;
     private javax.swing.JButton VerCursoButton;
+    private javax.swing.JPanel VerExamenPanel;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarExamen;
     private javax.swing.JButton btnBuscarNoticia;
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
+    private javax.swing.JLabel fechaNotaLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

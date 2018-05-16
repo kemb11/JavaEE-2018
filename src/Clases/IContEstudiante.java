@@ -11,4 +11,5 @@ public interface IContEstudiante {
     public abstract void seleccionarSede(Long id);
     public abstract void cerrarSesion();
     public abstract boolean inscripcionExamen(Examen examen) throws Exception;
+    public abstract InscripcionE getInscripcionExamen(Examen examen);
 }
