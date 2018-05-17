@@ -14,11 +14,13 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -152,8 +154,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         Estudiante_Crear = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cmbSede = new javax.swing.JComboBox<>();
-        cmbCarrera = new javax.swing.JComboBox<>();
+        est_sede = new javax.swing.JComboBox<>();
+        est_carrera = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         est_ci = new javax.swing.JFormattedTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -1035,9 +1037,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Selecciona una carrera");
 
-        cmbSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        est_sede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cmbCarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        est_carrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cédula de identidad:");
@@ -1047,6 +1049,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        est_ci.setText("");
         est_ci.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 est_ciActionPerformed(evt);
@@ -1083,6 +1086,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel20.setText("Email:");
 
         est_btn_agregar.setText("Aceptar");
+        est_btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                est_btn_agregarActionPerformed(evt);
+            }
+        });
 
         est_btn_volver.setText("Volver");
 
@@ -1133,9 +1141,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(est_ema)
                     .addComponent(est_fec, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(est_btn_volver)
-                    .addComponent(cmbCarrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(est_carrera, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(est_ci, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                    .addComponent(cmbSede, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(est_sede, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(94, 94, 94)
                 .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23)
@@ -1159,11 +1167,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(Estudiante_CrearLayout.createSequentialGroup()
                         .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(cmbSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(est_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(13, 13, 13)
                         .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(cmbCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(est_carrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel21)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1616,6 +1624,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_est_apeActionPerformed
 
+    private void est_btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_btn_agregarActionPerformed
+        
+    }//GEN-LAST:event_est_btn_agregarActionPerformed
+
     void opcionSeleccionada(String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
 
@@ -1826,6 +1838,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void createEstudiante() throws Exception{
+        InternetAddress correo = new InternetAddress(est_ema.getText());
+        try{
+            correo.validate();
+        }catch(AddressException ex){
+            throw new Exception("Formato de correo invalido");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
@@ -1873,15 +1894,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
-    private javax.swing.JComboBox<String> cmbCarrera;
-    private javax.swing.JComboBox<String> cmbSede;
     private javax.swing.JTextField est_ape;
     private javax.swing.JButton est_btn_agregar;
     private javax.swing.JButton est_btn_volver;
+    private javax.swing.JComboBox<String> est_carrera;
     private javax.swing.JFormattedTextField est_ci;
     private javax.swing.JTextField est_ema;
     private javax.swing.JFormattedTextField est_fec;
     private javax.swing.JTextField est_nom;
+    private javax.swing.JComboBox<String> est_sede;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

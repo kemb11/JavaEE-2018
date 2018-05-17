@@ -1350,9 +1350,9 @@
                           <Component id="est_ema" alignment="0" max="32767" attributes="0"/>
                           <Component id="est_fec" alignment="0" pref="149" max="32767" attributes="0"/>
                           <Component id="est_btn_volver" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbCarrera" alignment="0" max="32767" attributes="0"/>
+                          <Component id="est_carrera" alignment="0" max="32767" attributes="0"/>
                           <Component id="est_ci" alignment="0" pref="149" max="32767" attributes="0"/>
-                          <Component id="cmbSede" alignment="0" max="32767" attributes="0"/>
+                          <Component id="est_sede" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1382,12 +1382,12 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbSede" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="est_sede" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmbCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="est_carrera" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
@@ -1450,7 +1450,7 @@
                 <Property name="text" type="java.lang.String" value="Selecciona una carrera"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbSede">
+            <Component class="javax.swing.JComboBox" name="est_sede">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -1465,7 +1465,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cmbCarrera">
+            <Component class="javax.swing.JComboBox" name="est_carrera">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -1493,6 +1493,7 @@
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="#.###.###-#" subtype="-1" type="5"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="est_ciActionPerformed"/>
@@ -1553,6 +1554,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Aceptar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="est_btn_agregarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="est_btn_volver">
               <Properties>

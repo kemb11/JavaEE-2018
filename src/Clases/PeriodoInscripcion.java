@@ -77,4 +77,10 @@ public class PeriodoInscripcion implements Serializable {
         }
         return true;
     }
+    
+    public boolean valido(Date dia){
+        if(dia.after(inicio) && dia.before(fin))
+            return true;
+        return false;
+    }
 }
