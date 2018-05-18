@@ -6,15 +6,10 @@
 package Vistas;
 
 import Clases.Fabrica;
-import java.nio.charset.Charset;
-import java.text.ParseException;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
