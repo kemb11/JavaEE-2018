@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.persistence.EntityManager;
 public class ContAdmin implements IContAdmin {
     private static ContAdmin instancia;
     private Admin login;

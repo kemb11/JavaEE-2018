@@ -34,8 +34,8 @@ public class InscripcionE implements Serializable {
     private Examen examen;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-//    @OneToOne
-//    private ResultadoE nota;
+    @OneToOne
+    private ResultadoE nota;
 
     public Long getId() {
         return id;
@@ -67,6 +67,14 @@ public class InscripcionE implements Serializable {
 
     public Date getFecha() {
         return fecha;
+    }
+
+    public ResultadoE getNota() {
+        return nota;
+    }
+
+    public void setNota(ResultadoE nota) {
+        this.nota = nota;
     }
 
     @Override

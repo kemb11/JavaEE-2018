@@ -5,14 +5,10 @@
  */
 package Clases;
 
-import Persistencia.InscripcionJpaController;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,6 +31,8 @@ public class Estudiante extends Usuario {
     private List<Carrera> carreras;
     @OneToMany(mappedBy = "estudiante")
     private List<InscripcionE> examenes;
+    @OneToMany
+    private List<ResultadoP> notasParciales;
 
     public void setCi(String ci) {
         this.ci = ci;
@@ -90,6 +88,14 @@ public class Estudiante extends Usuario {
 
     public List<InscripcionE> getExamenes() {
         return examenes;
+    }
+
+    public void setNotasParciales(List<ResultadoP> parciales) {
+        this.notasParciales = parciales;
+    }
+
+    public List<ResultadoP> getNotasParciales() {
+        return notasParciales;
     }
 
     public void setInscripciones(List<InscripcionC> inscripciones) {

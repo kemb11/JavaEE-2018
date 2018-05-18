@@ -2,20 +2,22 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="JavaEE2018PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>Clases.Admin</class>
     <class>Clases.Carrera</class>
     <class>Clases.Curso</class>
-    <class>Clases.CursoSede</class>
     <class>Clases.Estudiante</class>
+    <class>Clases.Sede</class>
+    <class>Clases.Usuario</class>
+    <class>Clases.CursoSede</class>
+    <class>Clases.Noticia</class>
+    <class>Clases.Admin</class>
+    <class>Clases.PeriodoInscripcion</class>
+    <class>Clases.Prueba</class>
     <class>Clases.Examen</class>
     <class>Clases.InscripcionC</class>
     <class>Clases.InscripcionE</class>
-    <class>Clases.Noticia</class>
+    <class>Clases.ResultadoE</class>
     <class>Clases.Parcial</class>
-    <class>Clases.PeriodoInscripcion</class>
-    <class>Clases.Prueba</class>
-    <class>Clases.Sede</class>
-    <class>Clases.Usuario</class>
+    <class>Clases.ResultadoP</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/javaee2018?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
