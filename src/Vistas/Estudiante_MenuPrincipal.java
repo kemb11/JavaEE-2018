@@ -42,7 +42,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
      */
     
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    ArrayList<String> volver = new ArrayList<>();
+    ArrayList<Object[]> volver = new ArrayList<>();
     ArrayList<JPanel> opciones = new ArrayList<>(); 
     
     public Estudiante_MenuPrincipal() {
@@ -496,7 +496,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         CursosPanel.setBackground(new java.awt.Color(73, 202, 114));
 
         BuscarTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        BuscarTextField.setText("Buscar por curso, carrera, sede");
+        BuscarTextField.setText("Buscar por curso, carrera");
         BuscarTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 BuscarTextFieldFocusGained(evt);
@@ -1577,7 +1577,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_SedesOpcionMouseEntered
 
     private void BuscarTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarTextFieldFocusGained
-        if (BuscarTextField.getText().equals("Buscar por curso, carrera, sede")) {
+        if (BuscarTextField.getText().equals("Buscar por curso, carrera")) {
             BuscarTextField.setText("");
             BuscarTextField.setForeground(Color.BLACK);
         }
@@ -1585,7 +1585,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
     private void BuscarTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarTextFieldFocusLost
         if (BuscarTextField.getText().isEmpty()) {
-            BuscarTextField.setText("Buscar por curso, carrera, sede");
+            BuscarTextField.setText("Buscar por curso, carrera");
             BuscarTextField.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_BuscarTextFieldFocusLost
@@ -1598,8 +1598,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 //            Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
 //            Estudiante_VerCurso verC = new Estudiante_VerCurso(curso);
 //            verC.setVisible(true);
-            opcionSeleccionada(null, "verCurso");
-            volver.add("cursos");
+            opcionSeleccionada(CursosOpcion, "verCurso");
             
         }
     }//GEN-LAST:event_VerCursoButtonActionPerformed
@@ -1632,7 +1631,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
         String buscar = BuscarTextField.getText();
-        if (buscar.equals("Buscar por curso, carrera, sede")) {
+        if (buscar.equals("Buscar por curso, carrera")) {
             buscar = "";
         }
         listarCursos(buscar);
@@ -1790,8 +1789,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         if (ExamenesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un exámen", "", WARNING_MESSAGE);
         } else {
-            opcionSeleccionada(null, "verExamen");
-            volver.add("examenes");
+            opcionSeleccionada(ExamenesOpcion, "verExamen");
         }
     }//GEN-LAST:event_SeleccionarExamenActionPerformed
 
@@ -1854,10 +1852,14 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TodosExRadioButtonItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(volver.isEmpty() == false){
+        // Si es mayor a 1 porque si solo tiene 1 es el panel actual, no tiene anterior
+        if(volver.size() > 1){
             CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
-            cl.show(PanelPrincipal, volver.get(volver.size()-1)); //mostrar la ultima ventana visitada
-            volver.remove(volver.size()-1); //borrar la ventana
+            String ultimaVentana = (String) volver.get(volver.size()-2)[0]; //el 0 tiene el panel principal
+            JPanel ultimaOpcion = (JPanel) volver.get(volver.size()-2)[1]; //el 1 el tiene panel lateral
+            cl.show(PanelPrincipal, ultimaVentana); //la ultima ventana visitada es el anteultimo agregado, el ultimo es el actual
+            resaltarOpcioneleccionada(ultimaOpcion);
+            volver.remove(volver.size()-1); //borrar la ventana actual
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1897,8 +1899,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         if (ParcialesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial", "", WARNING_MESSAGE);
         } else {
-            opcionSeleccionada(null, "verParcial");
-            volver.add("parciales");
+            opcionSeleccionada(ParcialesOpcion, "verParcial");
         }
     }//GEN-LAST:event_SeleccionarParcialActionPerformed
 
@@ -1923,13 +1924,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
         
         if(opcionSelec!=null){
-            for (JPanel opcionAux : opciones) {
-                if(opcionAux.equals(opcionSelec)){
-                    opcionAux.setBackground(Color.decode("#4a9f6e"));
-                }else{
-                    opcionAux.setBackground(Color.decode("#1d8348"));
-                }
-            }
+            resaltarOpcioneleccionada(opcionSelec);
         }
         
         boolean control = true;
@@ -1944,7 +1939,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 }
                 
                 //Por defecto que se vea asi
-                BuscarTextField.setText("Buscar por curso, carrera, sede");
+                BuscarTextField.setText("Buscar por curso, carrera");
                 BuscarTextField.setForeground(Color.GRAY);
                 CursosTable.requestFocus();
 
@@ -2027,6 +2022,18 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         
         if(control){
             cl.show(PanelPrincipal, opcion);
+            Object[] v = {opcion, opcionSelec};
+            volver.add(v);
+        }
+    }
+    
+    public void resaltarOpcioneleccionada(JPanel opcionSelec){
+        for (JPanel opcionAux : opciones) {
+            if(opcionAux.equals(opcionSelec)){
+                opcionAux.setBackground(Color.decode("#4a9f6e"));
+            }else{
+                opcionAux.setBackground(Color.decode("#1d8348"));
+            }
         }
     }
 

@@ -73,9 +73,10 @@ public class ContEducacion implements IContEducacion{
         }*/
         
         for (CursoSede cursoSede : this.sede.getCursoSedes()) {
-            String nombreC = cursoSede.getCurso().getNombre().toLowerCase();
+            String nombreCurso = cursoSede.getCurso().getNombre().toLowerCase();
+            String nombreCarrera = cursoSede.getCurso().getCarrera().getNombre().toLowerCase();
             buscar = buscar.toLowerCase();
-            if(nombreC.contains(buscar)){
+            if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
                 cursosRetornar.add(cursoSede.getCurso());
             }
         }
@@ -89,9 +90,11 @@ public class ContEducacion implements IContEducacion{
         Estudiante e = Fabrica.getInstance().getContEst().getLogin(); 
         for (Curso c : e.getCursosAprobados()) {
             if(c.estaEnSede(this.sede)){
-                String nombreC = c.getNombre().toLowerCase();
+                String nombreCurso = c.getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                String nombreCarrera = c.getCarrera().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
                     cursosRetornar.add(c);
                 }
             }
@@ -133,9 +136,10 @@ public class ContEducacion implements IContEducacion{
         for (InscripcionC inscripcion : e.getInscripciones()) {
             Curso c = inscripcion.getCurso().getCurso();
             if(c.estaEnSede(this.sede)){
-                String nombreC = c.getNombre().toLowerCase();
+                String nombreCurso = c.getNombre().toLowerCase();
+                String nombreCarrera = c.getCarrera().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
                     cursosRetornar.add(c);
                 }
             }
