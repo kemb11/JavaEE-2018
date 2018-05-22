@@ -49,7 +49,6 @@ public class Admin_NuevaNoticia extends javax.swing.JInternalFrame {
         BorrarButton = new javax.swing.JButton();
         CrearButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ver curso");
 
         jPanel1.setBackground(new java.awt.Color(73, 202, 114));
@@ -186,6 +185,8 @@ public class Admin_NuevaNoticia extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
