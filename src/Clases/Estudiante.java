@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -19,6 +20,9 @@ import javax.persistence.Temporal;
 public class Estudiante extends Usuario {
 
     @OneToMany(mappedBy = "estudiante")
+    private List<CarreraEstudiante> carreraEstudiante;
+
+    @OneToMany(mappedBy = "estudiante")
     private List<InscripcionC> inscripciones;
     private String ci, nombres, apellidos;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -27,8 +31,6 @@ public class Estudiante extends Usuario {
     private List<Sede> sedes;
     @ManyToMany
     private List<Curso> cursosAprobados;
-    @ManyToMany
-    private List<Carrera> carreras;
     @OneToMany(mappedBy = "estudiante")
     private List<InscripcionE> examenes;
     @OneToMany
@@ -82,10 +84,6 @@ public class Estudiante extends Usuario {
         return cursosAprobados;
     }
 
-    public List<Carrera> getCarreras() {
-        return carreras;
-    }
-
     public List<InscripcionE> getExamenes() {
         return examenes;
     }
@@ -134,9 +132,6 @@ public class Estudiante extends Usuario {
         this.sedes = sedes;
     }
 
-    public void setCarreras(List<Carrera> carreras) {
-        this.carreras = carreras;
-    }
     
     public boolean estaInscriptoEnSede(Sede sede){
         for (Sede s : this.sedes) {
@@ -148,7 +143,7 @@ public class Estudiante extends Usuario {
     }
     
     public boolean estaInscriptoEnCarrera(Carrera carrera){
-        for (Carrera c : this.carreras) {
+        for (Carrera c : getCarreras()) {
             if(c.equals(carrera)){
                 return true;
             }
@@ -196,5 +191,25 @@ public class Estudiante extends Usuario {
             }
         }
         return false;
+    }
+    
+    public List<Carrera> getCarreras(){
+        List<Carrera> list = new ArrayList<>();
+        for(CarreraEstudiante c : carreraEstudiante)
+            list.add(c.getCarrera());
+        return list;
+    }
+    
+    public void setCarrera(Carrera c){
+        if(!estaInscriptoEnCarrera(c)){
+            CarreraEstudiante ce = new CarreraEstudiante();
+            ce.setEstudiante(this);
+            ce.setCarrera(c);
+            ce.setCreditos(0);
+            ce.setFechaInscripcion(new Date());
+            ce.setAprobada(false);
+            c.setEstudiante(ce);
+            this.carreraEstudiante.add(ce);
+        }
     }
 }

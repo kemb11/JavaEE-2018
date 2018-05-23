@@ -126,7 +126,10 @@ public class Sede implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Sede[ id=" + id + " ]";
+        String texto = "Nombre: "+ this.nombre;
+        texto += "\nDirección: "+ this.direccion;
+        texto += "\nTeléfono: " + this.telefono;
+        return texto;
     }
     
 }

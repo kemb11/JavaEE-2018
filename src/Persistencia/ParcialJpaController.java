@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases;
+package Persistencia;
 
-import Clases.exceptions.NonexistentEntityException;
+import Clases.CursoSede;
+import Clases.Fabrica;
+import Clases.Parcial;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;

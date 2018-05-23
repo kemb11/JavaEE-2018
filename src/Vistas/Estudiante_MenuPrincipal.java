@@ -1653,6 +1653,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         int index = SedeTable.getSelectedRow();
         if (index != -1) {
             Sede s = (Sede) SedeTable.getModel().getValueAt(index, 0);
+            System.out.println(s.toString());
             Fabrica.getInstance().getContEdu().seleccionSede(s.getId());
             opcionSeleccionada(CursosOpcion,"cursos");
             SedeSelec.setText("<html>Sede: " + s.getNombre() + "</html>");
