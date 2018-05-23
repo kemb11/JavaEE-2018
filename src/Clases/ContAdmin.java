@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import javax.persistence.EntityManager;
 public class ContAdmin implements IContAdmin {
     private static ContAdmin instancia;
@@ -91,4 +92,14 @@ public class ContAdmin implements IContAdmin {
         return buffer.toString();
     }
     
+    public void crearDocente(Docente d) throws Exception{
+        EstudianteJpaController ejpa = new EstudianteJpaController();  
+        DocenteJpaController djpa = new DocenteJpaController();
+        if(ejpa.id(d.getId()))
+            throw new Exception("El id está ocupado");
+        if(djpa.id(d.getId()))
+            throw new Exception("El id está ocupado");
+        d.setPass(this.clave());
+        
+    }
 }
