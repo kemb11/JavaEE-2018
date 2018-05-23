@@ -136,4 +136,19 @@ public class SedeJpaController implements Serializable {
         }
     }
     
+    public boolean existeNombre(String nombre){
+        for(Sede s : this.findSedeEntities()){
+            if(s.getNombre().equals(nombre))
+                return true;
+        }
+        return false;
+    }
+    
+    public Sede returnByNombre(String nombre){
+        for(Sede s : this.findSedeEntities()){
+            if(s.getNombre().equals(nombre))
+                return s;
+        }
+        return new Sede();
+    }
 }

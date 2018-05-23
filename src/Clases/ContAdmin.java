@@ -32,9 +32,9 @@ public class ContAdmin implements IContAdmin {
             return true;
         } else {
             if (a != null) {
-                throw new Exception("Contrase�a incorrecta");
+                throw new Exception("Contraseña incorrecta");
             } else {
-                throw new Exception("Usuario y contrase�a incorrectos");
+                throw new Exception("Usuario y contraseña incorrectos");
             }
         }
     }
@@ -73,9 +73,9 @@ public class ContAdmin implements IContAdmin {
     public void crearEstudiante(Estudiante e) throws Exception{
         EstudianteJpaController ejpa = new EstudianteJpaController();  
         if(ejpa.email(e.getEmail()))
-            throw new Exception("El email est� ocupado");
+            throw new Exception("El email está ocupado");
         if(ejpa.id(e.getId()))
-            throw new Exception("El id est� ocupado");
+            throw new Exception("El id está ocupado");
         e.setPass(clave());
         ejpa.create(e);
     }
@@ -92,6 +92,7 @@ public class ContAdmin implements IContAdmin {
         }
         return buffer.toString();
     }
+    
     @Override
     public void crearSedeVar(String nombre, String direccion, String telefono) throws Exception{
         Sede s = new Sede();
@@ -137,4 +138,5 @@ public class ContAdmin implements IContAdmin {
         hm.put("telefono", s.getTelefono());
         return hm;
     }
+    
 }

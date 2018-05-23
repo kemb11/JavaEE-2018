@@ -5,6 +5,8 @@
  */
 package Vistas;
 
+
+import java.util.Map;
 import Clases.*;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -48,6 +50,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         initComponents();
 
         this.setLocationRelativeTo(null);
+        // Cargar sedes existentes en el CB SEDES
+        llenarListaSedes();
+                
+
 
         CursosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -134,8 +140,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         BuscarSede = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         SedeTable = new javax.swing.JTable();
-        SeleccionarSede = new javax.swing.JButton();
+        btn_abrirnuevasede = new javax.swing.JButton();
         btnBuscarSede = new javax.swing.JButton();
+        SeleccionarSede1 = new javax.swing.JButton();
         NoticiasPanel = new javax.swing.JPanel();
         BuscarNoticia = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -175,6 +182,26 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        panelNuevaSede = new javax.swing.JPanel();
+        sede_txt_nombre = new javax.swing.JTextField();
+        sede_txt_direccion = new javax.swing.JTextField();
+        sede_txt_telefono = new javax.swing.JTextField();
+        sede_btn_crear = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        panelBorrarSede = new javax.swing.JPanel();
+        cb_listaSedes = new javax.swing.JComboBox<>();
+        btn_borrarSede = new javax.swing.JButton();
+        panelModSede = new javax.swing.JPanel();
+        selectSede = new javax.swing.JComboBox<>();
+        mod_sede_nombre = new javax.swing.JTextField();
+        mod_sede_direccion = new javax.swing.JTextField();
+        mod_sede_telefono = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        mod_btn_confirmar = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -752,12 +779,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             SedeTable.getColumnModel().getColumn(3).setHeaderValue("Telefono");
         }
 
-        SeleccionarSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SeleccionarSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
-        SeleccionarSede.setText("Seleccionar");
-        SeleccionarSede.addActionListener(new java.awt.event.ActionListener() {
+        btn_abrirnuevasede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_abrirnuevasede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        btn_abrirnuevasede.setText("Nueva Sede");
+        btn_abrirnuevasede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeleccionarSedeActionPerformed(evt);
+                btn_abrirnuevasedeActionPerformed(evt);
             }
         });
 
@@ -769,6 +796,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        SeleccionarSede1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SeleccionarSede1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        SeleccionarSede1.setText("Seleccionar");
+        SeleccionarSede1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeleccionarSede1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SedesPanelLayout = new javax.swing.GroupLayout(SedesPanel);
         SedesPanel.setLayout(SedesPanelLayout);
         SedesPanelLayout.setHorizontalGroup(
@@ -776,16 +812,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(SedesPanelLayout.createSequentialGroup()
                 .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SedesPanelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(SeleccionarSede))
-                    .addGroup(SedesPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(BuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SedesPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SedesPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(SeleccionarSede1)
+                        .addGap(33, 33, 33)
+                        .addComponent(btn_abrirnuevasede)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         SedesPanelLayout.setVerticalGroup(
@@ -798,7 +836,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(SeleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SeleccionarSede1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_abrirnuevasede, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1019,7 +1059,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(MisExmenesRadioButton)
                     .addComponent(TodosExRadioButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SeleccionarExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1151,7 +1191,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                         .addComponent(jLabel22)
                         .addComponent(jScrollPane7)))
-                .addGap(0, 109, Short.MAX_VALUE))
+                .addGap(0, 169, Short.MAX_VALUE))
         );
         Estudiante_CrearLayout.setVerticalGroup(
             Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1205,6 +1245,159 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         );
 
         PanelPrincipal.add(Estudiante_Crear, "card7");
+
+        sede_btn_crear.setText("Agregar");
+        sede_btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sede_btn_crearActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setText("Nombre");
+
+        jLabel25.setText("Direción");
+
+        jLabel26.setText("Teléfono");
+
+        javax.swing.GroupLayout panelNuevaSedeLayout = new javax.swing.GroupLayout(panelNuevaSede);
+        panelNuevaSede.setLayout(panelNuevaSedeLayout);
+        panelNuevaSedeLayout.setHorizontalGroup(
+            panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNuevaSedeLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addGroup(panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel24)
+                    .addGroup(panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(sede_txt_nombre)
+                        .addComponent(sede_txt_direccion)
+                        .addComponent(sede_txt_telefono)
+                        .addComponent(sede_btn_crear, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                .addContainerGap(603, Short.MAX_VALUE))
+        );
+        panelNuevaSedeLayout.setVerticalGroup(
+            panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNuevaSedeLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addComponent(sede_txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addGap(18, 18, 18)
+                .addComponent(sede_txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addGap(18, 18, 18)
+                .addComponent(sede_txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sede_btn_crear)
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(panelNuevaSede, "card8");
+
+        cb_listaSedes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btn_borrarSede.setText("Borrar Sede");
+        btn_borrarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarSedeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBorrarSedeLayout = new javax.swing.GroupLayout(panelBorrarSede);
+        panelBorrarSede.setLayout(panelBorrarSedeLayout);
+        panelBorrarSedeLayout.setHorizontalGroup(
+            panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                .addGroup(panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                        .addGap(291, 291, 291)
+                        .addComponent(btn_borrarSede)))
+                .addContainerGap(341, Short.MAX_VALUE))
+        );
+        panelBorrarSedeLayout.setVerticalGroup(
+            panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(btn_borrarSede)
+                .addContainerGap(319, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(panelBorrarSede, "card9");
+
+        selectSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectSedeActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setText("Nombre");
+
+        jLabel28.setText("Dirección");
+
+        jLabel29.setText("Telefono");
+
+        mod_btn_confirmar.setText("Confirmar cambios");
+        mod_btn_confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_btn_confirmarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelModSedeLayout = new javax.swing.GroupLayout(panelModSede);
+        panelModSede.setLayout(panelModSedeLayout);
+        panelModSedeLayout.setHorizontalGroup(
+            panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModSedeLayout.createSequentialGroup()
+                .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelModSedeLayout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelModSedeLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mod_btn_confirmar)
+                            .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel27)
+                                .addComponent(jLabel28)
+                                .addComponent(jLabel29)
+                                .addComponent(mod_sede_nombre)
+                                .addComponent(mod_sede_direccion)
+                                .addComponent(mod_sede_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))))
+                .addContainerGap(393, Short.MAX_VALUE))
+        );
+        panelModSedeLayout.setVerticalGroup(
+            panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModSedeLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(mod_sede_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addComponent(mod_sede_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel29)
+                .addGap(18, 18, 18)
+                .addComponent(mod_sede_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(mod_btn_confirmar)
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(panelModSede, "card10");
 
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
@@ -1402,17 +1595,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarSedeKeyReleased
 
-    private void SeleccionarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSedeActionPerformed
-        int index = SedeTable.getSelectedRow();
-        if (index != -1) {
-            Sede s = (Sede) SedeTable.getModel().getValueAt(index, 0);
-            Fabrica.getInstance().getContEdu().seleccionSede(s.getId());
-            opcionSeleccionada("cursos");
-            SedeSelec.setText("<html>Sede: " + s.getNombre() + "</html>");
-        } else {
-            JOptionPane.showMessageDialog(this, "No ha seleccionado una sede");
-        }
-    }//GEN-LAST:event_SeleccionarSedeActionPerformed
+    private void btn_abrirnuevasedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirnuevasedeActionPerformed
+        /*CardLayout cl = (CardLayout) PanelPrincipal.getLayout();
+        cl.addLayoutComponent(panelNuevaSede);
+        panelNuevaSede.setVisible(true);*/
+    }//GEN-LAST:event_btn_abrirnuevasedeActionPerformed
 
     private void BuscarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSedeActionPerformed
         
@@ -1627,6 +1814,46 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private void est_btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_btn_agregarActionPerformed
         
     }//GEN-LAST:event_est_btn_agregarActionPerformed
+
+    private void sede_btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sede_btn_crearActionPerformed
+        // TODO add your handling code here:
+        String nombreSede = sede_txt_nombre.getText();
+        String direccionSede = sede_txt_direccion.getText();
+        String telefonoSede = sede_txt_telefono.getText();
+        
+        /*Fabrica f = Fabrica.getInstance();
+        IContAdmin ica = f.getContAdmin();*/
+        try{
+            Fabrica.getInstance().getContAdmin().crearSedeVar(nombreSede, direccionSede, telefonoSede);
+        }catch(Exception e){
+            
+        }
+        
+    }//GEN-LAST:event_sede_btn_crearActionPerformed
+
+    private void SeleccionarSede1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSede1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SeleccionarSede1ActionPerformed
+
+    private void btn_borrarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarSedeActionPerformed
+        // TODO add your handling code here:
+        String nombre = cb_listaSedes.getItemAt(cb_listaSedes.getSelectedIndex());
+        Fabrica.getInstance().getContAdmin().borrarSede(nombre);
+    }//GEN-LAST:event_btn_borrarSedeActionPerformed
+
+    private void selectSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSedeActionPerformed
+        // TODO add your handling code here:
+       String nombre = this.selectSede.getItemAt(selectSede.getSelectedIndex());
+       Map<String, String> hm = Fabrica.getInstance().getContAdmin().getInfoSedeByNombre(nombre);
+       mod_sede_direccion.setText(hm.get("direccion"));
+       mod_sede_nombre.setText(hm.get("nombre"));
+       mod_sede_telefono.setText(hm.get("telefono"));
+    }//GEN-LAST:event_selectSedeActionPerformed
+
+    private void mod_btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_btn_confirmarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mod_btn_confirmarActionPerformed
 
     void opcionSeleccionada(String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -1847,6 +2074,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             throw new Exception("Formato de correo invalido");
         }
     }
+    
+    private void llenarListaSedes(){
+        List<String> ls = Fabrica.getInstance().getContAdmin().getSedes();
+        for (String nombre : ls){
+            cb_listaSedes.addItem(nombre);
+            selectSede.addItem(nombre);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
@@ -1883,7 +2118,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel SedesPanel;
     private javax.swing.JButton SeleccionarExamen;
     private javax.swing.JButton SeleccionarNoticia;
-    private javax.swing.JButton SeleccionarSede;
+    private javax.swing.JButton SeleccionarSede1;
     private javax.swing.JRadioButton TodosExRadioButton;
     private javax.swing.JRadioButton TodosRadioButton;
     private javax.swing.JButton VerCarrera;
@@ -1892,8 +2127,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarExamen;
     private javax.swing.JButton btnBuscarNoticia;
     private javax.swing.JButton btnBuscarSede;
+    private javax.swing.JButton btn_abrirnuevasede;
+    private javax.swing.JButton btn_borrarSede;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
+    private javax.swing.JComboBox<String> cb_listaSedes;
     private javax.swing.JTextField est_ape;
     private javax.swing.JButton est_btn_agregar;
     private javax.swing.JButton est_btn_volver;
@@ -1919,6 +2157,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1935,7 +2179,19 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JButton mod_btn_confirmar;
+    private javax.swing.JTextField mod_sede_direccion;
+    private javax.swing.JTextField mod_sede_nombre;
+    private javax.swing.JTextField mod_sede_telefono;
     private javax.swing.JLabel nombreUsrLabel;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JPanel panelBorrarSede;
+    private javax.swing.JPanel panelModSede;
+    private javax.swing.JPanel panelNuevaSede;
+    private javax.swing.JButton sede_btn_crear;
+    private javax.swing.JTextField sede_txt_direccion;
+    private javax.swing.JTextField sede_txt_nombre;
+    private javax.swing.JTextField sede_txt_telefono;
+    private javax.swing.JComboBox<String> selectSede;
     // End of variables declaration//GEN-END:variables
 }
