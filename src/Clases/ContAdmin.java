@@ -2,9 +2,12 @@
 package Clases;
 
 import Persistencia.*;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Random;
 public class ContAdmin implements IContAdmin {
     private static ContAdmin instancia;
@@ -29,9 +32,9 @@ public class ContAdmin implements IContAdmin {
             return true;
         } else {
             if (a != null) {
-                throw new Exception("Contraseña incorrecta");
+                throw new Exception("Contrase�a incorrecta");
             } else {
-                throw new Exception("Usuario y contraseña incorrectos");
+                throw new Exception("Usuario y contrase�a incorrectos");
             }
         }
     }
@@ -70,9 +73,9 @@ public class ContAdmin implements IContAdmin {
     public void crearEstudiante(Estudiante e) throws Exception{
         EstudianteJpaController ejpa = new EstudianteJpaController();  
         if(ejpa.email(e.getEmail()))
-            throw new Exception("El email está ocupado");
+            throw new Exception("El email est� ocupado");
         if(ejpa.id(e.getId()))
-            throw new Exception("El id está ocupado");
+            throw new Exception("El id est� ocupado");
         e.setPass(clave());
         ejpa.create(e);
     }
@@ -89,5 +92,49 @@ public class ContAdmin implements IContAdmin {
         }
         return buffer.toString();
     }
-    
+    @Override
+    public void crearSedeVar(String nombre, String direccion, String telefono) throws Exception{
+        Sede s = new Sede();
+        s.setNombre(nombre);
+        s.setTelefono(telefono);
+        s.setDireccion(direccion);
+        s.setCarreras(null);
+        s.setCursoSedes(null);
+        s.setEstudiantes(null);
+        SedeJpaController sjpa = new SedeJpaController();
+        if(sjpa.existeNombre(s.getNombre()))
+            throw new Exception("El nombre de la sede ya existe");
+        sjpa.create(s);
+    }
+    @Override
+    public List<String> getSedes(){
+        SedeJpaController sjpa = new SedeJpaController();
+        List<String> ls = new ArrayList();
+        for( Sede s : sjpa.findSedeEntities() ){
+            ls.add(s.getNombre());
+        }
+        return ls;
+    }
+    @Override
+    public void borrarSede(String nombre){
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(nombre);
+        Long id = s.getId();
+        try{
+            sjpa.destroy(id);
+        }catch(NonexistentEntityException nee){
+            
+        }
+        
+    }
+    @Override
+    public Map<String,String> getInfoSedeByNombre(String nombre){
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(nombre);
+        Map<String, String> hm = new HashMap<String,String>();
+        hm.put("nombre", s.getNombre());
+        hm.put("direccion", s.getDireccion());
+        hm.put("telefono", s.getTelefono());
+        return hm;
+    }
 }
