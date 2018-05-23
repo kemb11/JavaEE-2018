@@ -7,7 +7,7 @@ package Persistencia;
 
 import Clases.CursoSede;
 import Clases.Examen;
-import Clases.exceptions.NonexistentEntityException;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;

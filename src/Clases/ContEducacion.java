@@ -1,6 +1,7 @@
 
 package Clases;
 
+import Persistencia.ParcialJpaController;
 import Persistencia.*;
 import java.util.ArrayList;
 import java.util.List;
