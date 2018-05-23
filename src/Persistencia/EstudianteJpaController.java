@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Clases.Inscripcion;
+import Clases.InscripcionC;
 import Persistencia.exceptions.NonexistentEntityException;
 import Persistencia.exceptions.PreexistingEntityException;
 import java.util.ArrayList;
@@ -40,14 +40,14 @@ public class EstudianteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Inscripcion> attachedInscripciones = new ArrayList<>();
-            for (Inscripcion inscripcionesInscripcionToAttach : estudiante.getInscripciones()) {
+            List<InscripcionC> attachedInscripciones = new ArrayList<>();
+            for (InscripcionC inscripcionesInscripcionToAttach : estudiante.getInscripciones()) {
                 inscripcionesInscripcionToAttach = em.getReference(inscripcionesInscripcionToAttach.getClass(), inscripcionesInscripcionToAttach.getId());
                 attachedInscripciones.add(inscripcionesInscripcionToAttach);
             }
             estudiante.setInscripciones(attachedInscripciones);
             em.persist(estudiante);
-            for (Inscripcion inscripcionesInscripcion : estudiante.getInscripciones()) {
+            for (InscripcionC inscripcionesInscripcion : estudiante.getInscripciones()) {
                 Estudiante oldEstudianteOfInscripcionesInscripcion = inscripcionesInscripcion.getEstudiante();
                 inscripcionesInscripcion.setEstudiante(estudiante);
                 inscripcionesInscripcion = em.merge(inscripcionesInscripcion);
@@ -71,23 +71,23 @@ public class EstudianteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Estudiante persistentEstudiante = em.find(Estudiante.class, estudiante.getId());
-            List<Inscripcion> inscripcionesOld = persistentEstudiante.getInscripciones();
-            List<Inscripcion> inscripcionesNew = estudiante.getInscripciones();
-            List<Inscripcion> attachedInscripcionesNew = new ArrayList<Inscripcion>();
-            for (Inscripcion inscripcionesNewInscripcionToAttach : inscripcionesNew) {
+            List<InscripcionC> inscripcionesOld = persistentEstudiante.getInscripciones();
+            List<InscripcionC> inscripcionesNew = estudiante.getInscripciones();
+            List<InscripcionC> attachedInscripcionesNew = new ArrayList<InscripcionC>();
+            for (InscripcionC inscripcionesNewInscripcionToAttach : inscripcionesNew) {
                 inscripcionesNewInscripcionToAttach = em.getReference(inscripcionesNewInscripcionToAttach.getClass(), inscripcionesNewInscripcionToAttach.getId());
                 attachedInscripcionesNew.add(inscripcionesNewInscripcionToAttach);
             }
             inscripcionesNew = attachedInscripcionesNew;
             estudiante.setInscripciones(inscripcionesNew);
             estudiante = em.merge(estudiante);
-            for (Inscripcion inscripcionesOldInscripcion : inscripcionesOld) {
+            for (InscripcionC inscripcionesOldInscripcion : inscripcionesOld) {
                 if (!inscripcionesNew.contains(inscripcionesOldInscripcion)) {
                     inscripcionesOldInscripcion.setEstudiante(null);
                     inscripcionesOldInscripcion = em.merge(inscripcionesOldInscripcion);
                 }
             }
-            for (Inscripcion inscripcionesNewInscripcion : inscripcionesNew) {
+            for (InscripcionC inscripcionesNewInscripcion : inscripcionesNew) {
                 if (!inscripcionesOld.contains(inscripcionesNewInscripcion)) {
                     Estudiante oldEstudianteOfInscripcionesNewInscripcion = inscripcionesNewInscripcion.getEstudiante();
                     inscripcionesNewInscripcion.setEstudiante(estudiante);
@@ -123,8 +123,8 @@ public class EstudianteJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The estudiante with id " + id + " no longer exists.", enfe);
             }
-            List<Inscripcion> inscripciones = estudiante.getInscripciones();
-            for (Inscripcion inscripcionesInscripcion : inscripciones) {
+            List<InscripcionC> inscripciones = estudiante.getInscripciones();
+            for (InscripcionC inscripcionesInscripcion : inscripciones) {
                 inscripcionesInscripcion.setEstudiante(null);
                 inscripcionesInscripcion = em.merge(inscripcionesInscripcion);
             }
@@ -180,4 +180,29 @@ public class EstudianteJpaController implements Serializable {
         }
     }
     
+    public boolean email(String email){
+        for(Estudiante e : this.findEstudianteEntities()){
+            if(e.getEmail().equals(email))
+                return true;
+        } 
+        return false;
+    }
+    
+    public boolean id(String id){
+        for(Estudiante e : this.findEstudianteEntities()){
+            if(e.getId().equals(id))
+                return true;
+        } 
+        return false;
+    }
+    
+    public List<Estudiante> findEstudianteEntities(String palabra){
+        List<Estudiante> estudiantes = this.findEstudianteEntities();
+        for(Estudiante e : estudiantes){
+            if(!e.getCi().contains(palabra) && !e.getNombres().contains(palabra) && !e.getApellidos().contains(palabra) && !e.getEmail().contains(palabra))
+                estudiantes.remove(e);
+                
+        }
+        return estudiantes;
+    }
 }

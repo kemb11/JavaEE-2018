@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
 import Clases.Estudiante;
 import Clases.CursoSede;
 import Clases.Fabrica;
-import Clases.Inscripcion;
+import Clases.InscripcionC;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,7 +31,7 @@ public class InscripcionJpaController implements Serializable {
         return Fabrica.getInstance().getEntity();
     }
 
-    public void create(Inscripcion inscripcion) {
+    public void create(InscripcionC inscripcion) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -62,12 +62,12 @@ public class InscripcionJpaController implements Serializable {
         }
     }
 
-    public void edit(Inscripcion inscripcion) throws NonexistentEntityException, Exception {
+    public void edit(InscripcionC inscripcion) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Inscripcion persistentInscripcion = em.find(Inscripcion.class, inscripcion.getId());
+            InscripcionC persistentInscripcion = em.find(InscripcionC.class, inscripcion.getId());
             Estudiante estudianteOld = persistentInscripcion.getEstudiante();
             Estudiante estudianteNew = inscripcion.getEstudiante();
             CursoSede cursoOld = persistentInscripcion.getCurso();
@@ -118,9 +118,9 @@ public class InscripcionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Inscripcion inscripcion;
+            InscripcionC inscripcion;
             try {
-                inscripcion = em.getReference(Inscripcion.class, id);
+                inscripcion = em.getReference(InscripcionC.class, id);
                 inscripcion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The inscripcion with id " + id + " no longer exists.", enfe);
@@ -143,19 +143,19 @@ public class InscripcionJpaController implements Serializable {
         }
     }
 
-    public List<Inscripcion> findInscripcionEntities() {
+    public List<InscripcionC> findInscripcionEntities() {
         return findInscripcionEntities(true, -1, -1);
     }
 
-    public List<Inscripcion> findInscripcionEntities(int maxResults, int firstResult) {
+    public List<InscripcionC> findInscripcionEntities(int maxResults, int firstResult) {
         return findInscripcionEntities(false, maxResults, firstResult);
     }
 
-    private List<Inscripcion> findInscripcionEntities(boolean all, int maxResults, int firstResult) {
+    private List<InscripcionC> findInscripcionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Inscripcion.class));
+            cq.select(cq.from(InscripcionC.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -166,10 +166,10 @@ public class InscripcionJpaController implements Serializable {
         }
     }
 
-    public Inscripcion findInscripcion(Long id) {
+    public InscripcionC findInscripcion(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Inscripcion.class, id);
+            return em.find(InscripcionC.class, id);
         } finally {
             em.close();
         }
@@ -179,7 +179,7 @@ public class InscripcionJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Inscripcion> rt = cq.from(Inscripcion.class);
+            Root<InscripcionC> rt = cq.from(InscripcionC.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

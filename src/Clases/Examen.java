@@ -6,12 +6,15 @@
 package Clases;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 @Entity
+@DiscriminatorValue("E")
 public class Examen extends Prueba {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date inicioInsripcion;
@@ -19,8 +22,10 @@ public class Examen extends Prueba {
     private Date finInsripcion;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaMuestra;
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     private CursoSede curso;
+    @OneToMany
+    List<InscripcionE> estudiantesInscritos;
 
     public Date getInicioInsripcion() {
         return inicioInsripcion;
@@ -53,5 +58,20 @@ public class Examen extends Prueba {
     public void setCurso(CursoSede curso) {
         this.curso = curso;
     }
+
+    public void setEstudiantesInscritos(List<InscripcionE> estudiantesInscritos) {
+        this.estudiantesInscritos = estudiantesInscritos;
+    }
+
+    public List<InscripcionE> getEstudiantesInscritos() {
+        return estudiantesInscritos;
+    }
     
+    public boolean periodoOK(){
+        Date dia = new Date();
+        if(dia.after(this.inicioInsripcion) && dia.before(this.finInsripcion))
+            return true;
+        else
+            return false;
+    }
 }

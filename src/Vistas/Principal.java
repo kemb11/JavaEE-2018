@@ -20,18 +20,18 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal()  {
         initComponents();
-
         this.setLocationRelativeTo(null); //centrar
-//        Admin_NuevaNoticia a = new Admin_NuevaNoticia();
-//        a.setVisible(true);
+        
     }
 
     public void vaciar() {
         IdTextField.setText("");
         PasswordField.setText("");
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,16 +84,16 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(IdTextField)
                             .addComponent(PasswordField)
-                            .addComponent(IniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel3)))
+                            .addComponent(IniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,20 +133,21 @@ public class Principal extends javax.swing.JFrame {
                 if (control) {
                     Estudiante_MenuPrincipal m = new Estudiante_MenuPrincipal();
                     m.setVisible(true);
-                } 
+                }
             } catch (Exception ex) {
                 try {
                     control = Fabrica.getInstance().getContAdmin().login(id, pass);
                     if (control) {
-                    Admin_menu am = new Admin_menu();
-                    am.setVisible(true);}                
+                        Admin_MenuPrincipal am = new Admin_MenuPrincipal();
+                        am.setVisible(true);
+                    }
                 } catch (Exception ex1) {
                     JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
                     Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex1);
                     ex.printStackTrace();
-                }                
+                }
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
         }

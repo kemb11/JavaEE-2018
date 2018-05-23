@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
 import Clases.Curso;
 import Clases.CursoSede;
 import Clases.Fabrica;
-import Clases.Inscripcion;
+import Clases.InscripcionC;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class CursoSedeJpaController implements Serializable {
 
     public void create(CursoSede cursoSede) {
         if (cursoSede.getInscripciones() == null) {
-            cursoSede.setInscripciones(new ArrayList<Inscripcion>());
+            cursoSede.setInscripciones(new ArrayList<InscripcionC>());
         }
         EntityManager em = null;
         try {
@@ -46,8 +46,8 @@ public class CursoSedeJpaController implements Serializable {
                 curso = em.getReference(curso.getClass(), curso.getId());
                 cursoSede.setCurso(curso);
             }
-            List<Inscripcion> attachedInscripciones = new ArrayList<Inscripcion>();
-            for (Inscripcion inscripcionesInscripcionToAttach : cursoSede.getInscripciones()) {
+            List<InscripcionC> attachedInscripciones = new ArrayList<InscripcionC>();
+            for (InscripcionC inscripcionesInscripcionToAttach : cursoSede.getInscripciones()) {
                 inscripcionesInscripcionToAttach = em.getReference(inscripcionesInscripcionToAttach.getClass(), inscripcionesInscripcionToAttach.getId());
                 attachedInscripciones.add(inscripcionesInscripcionToAttach);
             }
@@ -57,7 +57,7 @@ public class CursoSedeJpaController implements Serializable {
                 curso.getCursoSedes().add(cursoSede);
                 curso = em.merge(curso);
             }
-            for (Inscripcion inscripcionesInscripcion : cursoSede.getInscripciones()) {
+            for (InscripcionC inscripcionesInscripcion : cursoSede.getInscripciones()) {
                 CursoSede oldCursoOfInscripcionesInscripcion = inscripcionesInscripcion.getCurso();
                 inscripcionesInscripcion.setCurso(cursoSede);
                 inscripcionesInscripcion = em.merge(inscripcionesInscripcion);
@@ -81,14 +81,14 @@ public class CursoSedeJpaController implements Serializable {
             CursoSede persistentCursoSede = em.find(CursoSede.class, cursoSede.getId());
             Curso cursoOld = persistentCursoSede.getCurso();
             Curso cursoNew = cursoSede.getCurso();
-            List<Inscripcion> inscripcionesOld = persistentCursoSede.getInscripciones();
-            List<Inscripcion> inscripcionesNew = cursoSede.getInscripciones();
+            List<InscripcionC> inscripcionesOld = persistentCursoSede.getInscripciones();
+            List<InscripcionC> inscripcionesNew = cursoSede.getInscripciones();
             if (cursoNew != null) {
                 cursoNew = em.getReference(cursoNew.getClass(), cursoNew.getId());
                 cursoSede.setCurso(cursoNew);
             }
-            List<Inscripcion> attachedInscripcionesNew = new ArrayList<Inscripcion>();
-            for (Inscripcion inscripcionesNewInscripcionToAttach : inscripcionesNew) {
+            List<InscripcionC> attachedInscripcionesNew = new ArrayList<InscripcionC>();
+            for (InscripcionC inscripcionesNewInscripcionToAttach : inscripcionesNew) {
                 inscripcionesNewInscripcionToAttach = em.getReference(inscripcionesNewInscripcionToAttach.getClass(), inscripcionesNewInscripcionToAttach.getId());
                 attachedInscripcionesNew.add(inscripcionesNewInscripcionToAttach);
             }
@@ -103,13 +103,13 @@ public class CursoSedeJpaController implements Serializable {
                 cursoNew.getCursoSedes().add(cursoSede);
                 cursoNew = em.merge(cursoNew);
             }
-            for (Inscripcion inscripcionesOldInscripcion : inscripcionesOld) {
+            for (InscripcionC inscripcionesOldInscripcion : inscripcionesOld) {
                 if (!inscripcionesNew.contains(inscripcionesOldInscripcion)) {
                     inscripcionesOldInscripcion.setCurso(null);
                     inscripcionesOldInscripcion = em.merge(inscripcionesOldInscripcion);
                 }
             }
-            for (Inscripcion inscripcionesNewInscripcion : inscripcionesNew) {
+            for (InscripcionC inscripcionesNewInscripcion : inscripcionesNew) {
                 if (!inscripcionesOld.contains(inscripcionesNewInscripcion)) {
                     CursoSede oldCursoOfInscripcionesNewInscripcion = inscripcionesNewInscripcion.getCurso();
                     inscripcionesNewInscripcion.setCurso(cursoSede);
@@ -153,8 +153,8 @@ public class CursoSedeJpaController implements Serializable {
                 curso.getCursoSedes().remove(cursoSede);
                 curso = em.merge(curso);
             }
-            List<Inscripcion> inscripciones = cursoSede.getInscripciones();
-            for (Inscripcion inscripcionesInscripcion : inscripciones) {
+            List<InscripcionC> inscripciones = cursoSede.getInscripciones();
+            for (InscripcionC inscripcionesInscripcion : inscripciones) {
                 inscripcionesInscripcion.setCurso(null);
                 inscripcionesInscripcion = em.merge(inscripcionesInscripcion);
             }

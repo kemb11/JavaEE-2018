@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 /**
@@ -19,6 +20,7 @@ import javax.persistence.Temporal;
  * @author root
  */
 @Entity
+@Table(name="periodoinscripcion")
 public class PeriodoInscripcion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,5 +76,11 @@ public class PeriodoInscripcion implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public boolean valido(Date dia){
+        if(dia.after(inicio) && dia.before(fin))
+            return true;
+        return false;
     }
 }

@@ -16,12 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Usuario
  */
 @Entity
+@Table(name="curso")
 public class Curso implements Serializable {
 
     @ManyToOne

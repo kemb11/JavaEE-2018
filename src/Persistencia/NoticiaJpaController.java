@@ -23,7 +23,7 @@ import javax.persistence.criteria.Root;
  */
 public class NoticiaJpaController implements Serializable {
 
-    public NoticiaJpaController(EntityManagerFactory emf) {
+    public NoticiaJpaController() {
     }
 
     public EntityManager getEntityManager() {

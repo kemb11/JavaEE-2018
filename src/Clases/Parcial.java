@@ -5,29 +5,52 @@
  */
 package Clases;
 
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
+@DiscriminatorValue("P")
 public class Parcial extends Prueba {
-    String periodo;
+    String instancia;
     @ManyToOne
     private CursoSede curso;
+    @OneToMany
+    private List<ResultadoP> notasEstudiantes;
 
-    public String getPeriodo() {
-        return periodo;
+    public String getInstancia() {
+        return instancia;
     }
 
     public CursoSede getCurso() {
         return curso;
     }
 
-    public void setPeriodo(String periodo) {
-        this.periodo = periodo;
+    public List<ResultadoP> getNotasEstudiantes() {
+        return notasEstudiantes;
+    }
+
+    public void setNotasEstudiantes(List<ResultadoP> notasEstudiantes) {
+        this.notasEstudiantes = notasEstudiantes;
+    }
+
+    public void setInstancia(String instancia) {
+        this.instancia = instancia;
     }
 
     public void setCurso(CursoSede curso) {
         this.curso = curso;
+    }
+    
+    public ResultadoP getNotaEstudiante(Estudiante est){
+        for (ResultadoP notaEstudiante : this.notasEstudiantes) {
+            if(notaEstudiante.getEstudiante().equals(est)){
+                return notaEstudiante;
+            }
+        }
+        
+        return null;
     }
 }

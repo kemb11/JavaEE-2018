@@ -8,11 +8,16 @@
     <class>Clases.Sede</class>
     <class>Clases.Usuario</class>
     <class>Clases.CursoSede</class>
-    <class>Clases.Inscripcion</class>
     <class>Clases.Noticia</class>
     <class>Clases.Admin</class>
     <class>Clases.PeriodoInscripcion</class>
     <class>Clases.Prueba</class>
+    <class>Clases.Examen</class>
+    <class>Clases.InscripcionC</class>
+    <class>Clases.InscripcionE</class>
+    <class>Clases.ResultadoE</class>
+    <class>Clases.Parcial</class>
+    <class>Clases.ResultadoP</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/javaee2018?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

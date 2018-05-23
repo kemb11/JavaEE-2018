@@ -7,35 +7,36 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import org.hibernate.annotations.DiscriminatorOptions;
 
 /**
  *
  * @author Usuario
  */
 @Entity
-@Table(name="prueba")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Tipo")
-@DiscriminatorOptions(force=true)
-public abstract class Prueba implements Serializable {
+@Table(name="inscripcione")
+public class InscripcionE implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    private Estudiante estudiante;
+    @ManyToOne
+    private Examen examen;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    
+    @OneToOne
+    private ResultadoE nota;
+
     public Long getId() {
         return id;
     }
@@ -44,12 +45,36 @@ public abstract class Prueba implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public void setExamen(Examen examen) {
+        this.examen = examen;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public Examen getExamen() {
+        return examen;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public ResultadoE getNota() {
+        return nota;
+    }
+
+    public void setNota(ResultadoE nota) {
+        this.nota = nota;
     }
 
     @Override
@@ -62,10 +87,10 @@ public abstract class Prueba implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Prueba)) {
+        if (!(object instanceof InscripcionE)) {
             return false;
         }
-        Prueba other = (Prueba) object;
+        InscripcionE other = (InscripcionE) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -74,7 +99,7 @@ public abstract class Prueba implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Prueba[ id=" + id + " ]";
+        return "Clases.InscripcionE[ id=" + id + " ]";
     }
     
 }
