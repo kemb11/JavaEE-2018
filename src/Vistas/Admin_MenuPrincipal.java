@@ -25,6 +25,7 @@ import javax.mail.internet.InternetAddress;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -67,13 +68,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(SedesPanel, "sedes");
         PanelPrincipal.add(NoticiasPanel, "noticias");
         PanelPrincipal.add(Estudiante, "examenes");
-
-        String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
-        String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
-        nombreUsrLabel.setText(nombres+" "+apellidos);
-        
-        //Por defecto que muestre las sedes
-        opcionSeleccionada("sedes");
         
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -189,7 +183,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         panelBorrarSede = new javax.swing.JPanel();
         cb_listaSedes = new javax.swing.JComboBox<>();
-        btn_borrarSede = new javax.swing.JButton();
+        btn_borrarSede_1 = new javax.swing.JButton();
         panelModSede = new javax.swing.JPanel();
         selectSede = new javax.swing.JComboBox<>();
         mod_sede_nombre = new javax.swing.JTextField();
@@ -199,6 +193,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         mod_btn_confirmar = new javax.swing.JButton();
+        btn_borrarSede = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1243,6 +1238,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(Estudiante_Crear, "card7");
 
+        panelNuevaSede.setBackground(new java.awt.Color(73, 202, 114));
+
         sede_btn_crear.setText("Agregar");
         sede_btn_crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1295,12 +1292,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(panelNuevaSede, "card8");
 
+        panelBorrarSede.setBackground(new java.awt.Color(73, 202, 114));
+
         cb_listaSedes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btn_borrarSede.setText("Borrar Sede");
-        btn_borrarSede.addActionListener(new java.awt.event.ActionListener() {
+        btn_borrarSede_1.setText("Borrar Sede");
+        btn_borrarSede_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_borrarSedeActionPerformed(evt);
+                btn_borrarSede_1ActionPerformed(evt);
             }
         });
 
@@ -1315,7 +1314,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorrarSedeLayout.createSequentialGroup()
                         .addGap(291, 291, 291)
-                        .addComponent(btn_borrarSede)))
+                        .addComponent(btn_borrarSede_1)))
                 .addContainerGap(341, Short.MAX_VALUE))
         );
         panelBorrarSedeLayout.setVerticalGroup(
@@ -1324,11 +1323,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
-                .addComponent(btn_borrarSede)
+                .addComponent(btn_borrarSede_1)
                 .addContainerGap(319, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(panelBorrarSede, "card9");
+
+        panelModSede.setBackground(new java.awt.Color(73, 202, 114));
 
         selectSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selectSede.addActionListener(new java.awt.event.ActionListener() {
@@ -1350,6 +1351,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btn_borrarSede.setText("Borrar Sede");
+        btn_borrarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarSedeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelModSedeLayout = new javax.swing.GroupLayout(panelModSede);
         panelModSede.setLayout(panelModSedeLayout);
         panelModSedeLayout.setHorizontalGroup(
@@ -1358,7 +1366,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelModSedeLayout.createSequentialGroup()
                         .addGap(233, 233, 233)
-                        .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_borrarSede))
                     .addGroup(panelModSedeLayout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1370,13 +1380,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(mod_sede_nombre)
                                 .addComponent(mod_sede_direccion)
                                 .addComponent(mod_sede_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))))
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
         panelModSedeLayout.setVerticalGroup(
             panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelModSedeLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_borrarSede))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel27)
                 .addGap(18, 18, 18)
@@ -1391,7 +1403,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(mod_sede_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(mod_btn_confirmar)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(panelModSede, "card10");
@@ -1474,16 +1486,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CursosOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseClicked
-        if (Fabrica.getInstance().getContEdu().getSede() != null) {
-            opcionSeleccionada("cursos");
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
-        }
+            opcionSeleccionada(CursosOpcion,"cursos");
     }//GEN-LAST:event_CursosOpcionMouseClicked
 
     private void SedesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SedesOpcionMouseClicked
         if (Fabrica.getInstance().getContEdu().getSede() != null) {
-            opcionSeleccionada("sedes");
+            opcionSeleccionada(SedesOpcion,"sedes");
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
         }
@@ -1491,7 +1499,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void CarrerasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CarrerasOpcionMouseClicked
         if (Fabrica.getInstance().getContEdu().getSede() != null) {
-            opcionSeleccionada("carreras");
+            opcionSeleccionada(CarrerasOpcion,"carreras");
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
         }
@@ -1660,18 +1668,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void NoticiasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseClicked
         if (Fabrica.getInstance().getContEdu().getSede() != null) {
-            opcionSeleccionada("noticias");
+            opcionSeleccionada(NoticiasOpcion,"noticias");
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
         }
     }//GEN-LAST:event_NoticiasOpcionMouseClicked
 
     private void ExamenesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcionMouseClicked
-        if (Fabrica.getInstance().getContEdu().getSede() != null) {
+        /*if (Fabrica.getInstance().getContEdu().getSede() != null) {
             opcionSeleccionada("examenes");
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
-        }
+        }*/
     }//GEN-LAST:event_ExamenesOpcionMouseClicked
 
     private void ExamenesOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcionMouseEntered
@@ -1832,11 +1840,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SeleccionarSede1ActionPerformed
 
-    private void btn_borrarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarSedeActionPerformed
+    private void btn_borrarSede_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarSede_1ActionPerformed
         // TODO add your handling code here:
         String nombre = cb_listaSedes.getItemAt(cb_listaSedes.getSelectedIndex());
         Fabrica.getInstance().getContAdmin().borrarSede(nombre);
-    }//GEN-LAST:event_btn_borrarSedeActionPerformed
+    }//GEN-LAST:event_btn_borrarSede_1ActionPerformed
 
     private void selectSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSedeActionPerformed
         // TODO add your handling code here:
@@ -1852,71 +1860,71 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mod_btn_confirmarActionPerformed
 
-    void opcionSeleccionada(String opcion) {
-        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+    private void btn_borrarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarSedeActionPerformed
+        // TODO add your handling code here:
+        String nombre = selectSede.getItemAt(selectSede.getSelectedIndex());
+        Fabrica.getInstance().getContAdmin().borrarSede(nombre);
+    }//GEN-LAST:event_btn_borrarSedeActionPerformed
 
+        void opcionSeleccionada(JPanel opcionSelec, String opcion) {
+        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+        
+        if(opcionSelec!=null){
+            resaltarOpcioneleccionada(opcionSelec);
+        }
+        
+        boolean control = true;
         switch (opcion) {
             case "cursos":
                 //Por defecto listar todos
                 TodosRadioButton.setSelected(true);
 
-                CursosOpcion.setBackground(Color.decode("#4a9f6e"));
-                CarrerasOpcion.setBackground(Color.decode("#1d8348"));
-                SedesOpcion.setBackground(Color.decode("#1d8348"));
-                NoticiasOpcion.setBackground(Color.decode("#1d8348"));
-                ExamenesOpcion.setBackground(Color.decode("#1d8348"));
-
                 DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
                 while (modelo.getRowCount() > 0) {
                     modelo.removeRow(0);//limpiar la tabla
                 }
+                
                 //Por defecto que se vea asi
                 BuscarTextField.setText("Buscar por curso, carrera");
                 BuscarTextField.setForeground(Color.GRAY);
                 CursosTable.requestFocus();
 
                 listarCursos("");
-
-                cl.show(PanelPrincipal, "cursos");
+                this.setTitle("Menú: Cursos");
                 break;
             case "carreras":
-                CarrerasOpcion.setBackground(Color.decode("#4a9f6e"));
-                CursosOpcion.setBackground(Color.decode("#1d8348"));
-                SedesOpcion.setBackground(Color.decode("#1d8348"));
-                NoticiasOpcion.setBackground(Color.decode("#1d8348"));
-                ExamenesOpcion.setBackground(Color.decode("#1d8348"));
-                cl.show(PanelPrincipal, "carreras");
-                listarCarreras();
+                this.listarCarreras();
+                this.setTitle("Menú: Carreras");
                 break;
             case "sedes":
-                SedesOpcion.setBackground(Color.decode("#4a9f6e"));
-                CursosOpcion.setBackground(Color.decode("#1d8348"));
-                CarrerasOpcion.setBackground(Color.decode("#1d8348"));
-                NoticiasOpcion.setBackground(Color.decode("#1d8348"));
-                ExamenesOpcion.setBackground(Color.decode("#1d8348"));
                 this.listarSede();
-                cl.show(PanelPrincipal, "sedes");
+                this.setTitle("Menú: Sedes");
                 break;
             case "noticias":
-                NoticiasOpcion.setBackground(Color.decode("#4a9f6e"));
-                CursosOpcion.setBackground(Color.decode("#1d8348"));
-                CarrerasOpcion.setBackground(Color.decode("#1d8348"));
-                SedesOpcion.setBackground(Color.decode("#1d8348"));
-                ExamenesOpcion.setBackground(Color.decode("#1d8348"));
                 this.listarNoticias();
-                cl.show(PanelPrincipal, "noticias");
-                break;
-            case "examenes":
-                ExamenesOpcion.setBackground(Color.decode("#4a9f6e"));
-                NoticiasOpcion.setBackground(Color.decode("#1d8348"));
-                CursosOpcion.setBackground(Color.decode("#1d8348"));
-                CarrerasOpcion.setBackground(Color.decode("#1d8348"));
-                SedesOpcion.setBackground(Color.decode("#1d8348"));
-                this.listarExamenes("");
-                cl.show(PanelPrincipal, "examenes");
+                this.setTitle("Menú: Noticias");
                 break;
         }
+        
+        if(control){
+            cl.show(PanelPrincipal, opcion);
+            Object[] v = {opcion, opcionSelec};
+            volver.add(v);
+        }
     }
+    
+    public void resaltarOpcioneleccionada(JPanel opcionSelec){
+        for (JPanel opcionAux : opciones) {
+            if(opcionAux.equals(opcionSelec)){
+                opcionAux.setBackground(Color.decode("#4a9f6e"));
+            }else{
+                opcionAux.setBackground(Color.decode("#1d8348"));
+            }
+        }
+    }
+    
+    ArrayList<Object[]> volver = new ArrayList<>();
+    ArrayList<JPanel> opciones = new ArrayList<>(); 
 
     public void listarCursos(String buscar) {
 
@@ -2126,6 +2134,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.JButton btn_abrirnuevasede;
     private javax.swing.JButton btn_borrarSede;
+    private javax.swing.JButton btn_borrarSede_1;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.JComboBox<String> cb_listaSedes;

@@ -138,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
                 try {
                     control = Fabrica.getInstance().getContAdmin().login(id, pass);
                     if (control) {
-                        Admin_menu am = new Admin_menu();
+                        Admin_MenuPrincipal am = new Admin_MenuPrincipal();
                         am.setVisible(true);
                     }
                 } catch (Exception ex1) {
