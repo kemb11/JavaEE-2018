@@ -7,75 +7,77 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-
+import javax.persistence.*;
 /**
  *
- * @author Usuario
+ * @author root
  */
 @Entity
-@Table(name="inscripcione")
-public class InscripcionE implements Serializable {
+@Table(name="carreraEstudiante")
+public class CarreraEstudiante implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Estudiante estudiante;
-    @ManyToOne
-    private Examen examen;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fecha;
-    @OneToOne
-    private ResultadoE nota;
 
     public Long getId() {
         return id;
     }
+    
+    @ManyToOne
+    private Estudiante estudiante;
+    @ManyToOne
+    private Carrera carrera;
+    private boolean aprobada;
+    private int creditos;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaInscripcion;
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
-
-    public void setExamen(Examen examen) {
-        this.examen = examen;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public Estudiante getEstudiante() {
         return estudiante;
     }
 
-    public Examen getExamen() {
-        return examen;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Carrera getCarrera() {
+        return carrera;
     }
 
-    public ResultadoE getNota() {
-        return nota;
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
     }
 
-    public void setNota(ResultadoE nota) {
-        this.nota = nota;
+    public boolean isAprobada() {
+        return aprobada;
     }
+
+    public void setAprobada(boolean aprobada) {
+        this.aprobada = aprobada;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+
+    public Date getFechaInscripcion() {
+        return fechaInscripcion;
+    }
+
+    public void setFechaInscripcion(Date fechaInscripcion) {
+        this.fechaInscripcion = fechaInscripcion;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -87,10 +89,10 @@ public class InscripcionE implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InscripcionE)) {
+        if (!(object instanceof CarreraEstudiante)) {
             return false;
         }
-        InscripcionE other = (InscripcionE) object;
+        CarreraEstudiante other = (CarreraEstudiante) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -99,7 +101,7 @@ public class InscripcionE implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.InscripcionE[ id=" + id + " ]";
+        return "Clases.CarreraEstudiante[ id=" + id + " ]";
     }
     
 }

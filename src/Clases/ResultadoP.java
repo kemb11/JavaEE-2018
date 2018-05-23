@@ -7,35 +7,32 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import org.hibernate.annotations.DiscriminatorOptions;
 
 /**
  *
  * @author Usuario
  */
 @Entity
-@Table(name="prueba")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Tipo")
-@DiscriminatorOptions(force=true)
-public abstract class Prueba implements Serializable {
+public class ResultadoP implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private Integer nota;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    
+    @ManyToOne
+    private Parcial parcial;
+    @ManyToOne
+    private Estudiante estudiante;
+
     public Long getId() {
         return id;
     }
@@ -44,13 +41,39 @@ public abstract class Prueba implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public void setNota(Integer nota) {
+        this.nota = nota;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public void setParcial(Parcial parcial) {
+        this.parcial = parcial;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public Integer getNota() {
+        return nota;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public Parcial getParcial() {
+        return parcial;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -62,10 +85,10 @@ public abstract class Prueba implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Prueba)) {
+        if (!(object instanceof ResultadoP)) {
             return false;
         }
-        Prueba other = (Prueba) object;
+        ResultadoP other = (ResultadoP) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -74,7 +97,7 @@ public abstract class Prueba implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Prueba[ id=" + id + " ]";
+        return "Clases.ResultadoP[ id=" + id + " ]";
     }
     
 }

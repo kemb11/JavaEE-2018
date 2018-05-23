@@ -1,6 +1,7 @@
 
 package Clases;
 
+import Persistencia.ParcialJpaController;
 import Persistencia.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,9 +74,10 @@ public class ContEducacion implements IContEducacion{
         }*/
         
         for (CursoSede cursoSede : this.sede.getCursoSedes()) {
-            String nombreC = cursoSede.getCurso().getNombre().toLowerCase();
+            String nombreCurso = cursoSede.getCurso().getNombre().toLowerCase();
+            String nombreCarrera = cursoSede.getCurso().getCarrera().getNombre().toLowerCase();
             buscar = buscar.toLowerCase();
-            if(nombreC.contains(buscar)){
+            if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
                 cursosRetornar.add(cursoSede.getCurso());
             }
         }
@@ -89,9 +91,11 @@ public class ContEducacion implements IContEducacion{
         Estudiante e = Fabrica.getInstance().getContEst().getLogin(); 
         for (Curso c : e.getCursosAprobados()) {
             if(c.estaEnSede(this.sede)){
-                String nombreC = c.getNombre().toLowerCase();
+                String nombreCurso = c.getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                String nombreCarrera = c.getCarrera().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
                     cursosRetornar.add(c);
                 }
             }
@@ -133,9 +137,10 @@ public class ContEducacion implements IContEducacion{
         for (InscripcionC inscripcion : e.getInscripciones()) {
             Curso c = inscripcion.getCurso().getCurso();
             if(c.estaEnSede(this.sede)){
-                String nombreC = c.getNombre().toLowerCase();
+                String nombreCurso = c.getNombre().toLowerCase();
+                String nombreCarrera = c.getCarrera().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
                     cursosRetornar.add(c);
                 }
             }
@@ -151,20 +156,19 @@ public class ContEducacion implements IContEducacion{
         for (CursoSede cursoS : jpa.findCursoSedeEntities()) {
             if(cursoS.getSede().equals(this.sede)){
                 for (Examen e : cursoS.getExmenes()) {
-                    String nombreC = e.getCurso().getCurso().getNombre().toLowerCase();
+                    String nombreC = cursoS.getCurso().getNombre().toLowerCase();
                     buscar = buscar.toLowerCase();
                     if(nombreC.contains(buscar)){
                         examenesRetornar.add(e);
                     }
-
                 }
             }
-        }
-        
+        }        
         return examenesRetornar;
     }
     
-    public List<Examen> listaExamenesEst(String buscar){
+    @Override
+    public List<Examen> listarExamenesEst(String buscar){
         List<Examen> examenesRetornar = new ArrayList<>();
         
         Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
@@ -180,6 +184,56 @@ public class ContEducacion implements IContEducacion{
         }
         
         return examenesRetornar;
+    }
+    
+    @Override
+    public List<Parcial> listarParciales(String buscar){
+        List<Parcial> parcialesRetornar = new ArrayList<>();
+        /*CursoSedeJpaController jpa = new CursoSedeJpaController();
+        for (CursoSede cursoS : jpa.findCursoSedeEntities()) {
+            if(cursoS.getSede().equals(this.sede)){
+                for (Parcial p : cursoS.getParciales()) {
+                    String nombreC = cursoS.getCurso().getNombre().toLowerCase();
+                    buscar = buscar.toLowerCase();
+                    if(nombreC.contains(buscar)){
+                        parcialesRetornar.add(p);
+                    }
+                }
+            }
+        }        */
+        
+        ParcialJpaController jpaP = new ParcialJpaController();
+        for (Parcial parcial : jpaP.findParcialEntities()) {
+            if(parcial.getCurso().getSede().equals(this.sede)){
+                String nombreC = parcial.getCurso().getCurso().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreC.contains(buscar)){
+                    parcialesRetornar.add(parcial);
+                }
+            }
+        }
+        
+        return parcialesRetornar;
+    }
+    
+    @Override
+    public List<Parcial> listarParcialesEst(String buscar){
+        List<Parcial> parcialesRetornar = new ArrayList<>();
+        
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
+        for (ResultadoP rp:  e.getNotasParciales()) {
+            Parcial parcial = rp.getParcial();
+            Sede sedeP = parcial.getCurso().getSede();
+            if(sedeP.equals(this.sede)){
+                String nombreC = parcial.getCurso().getCurso().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreC.contains(buscar)){
+                    parcialesRetornar.add(parcial);
+                }
+            }
+        }
+        
+        return parcialesRetornar;
     }
     
 //    public List<Examen> listarExamenes(String buscar){

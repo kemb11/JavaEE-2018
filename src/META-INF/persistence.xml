@@ -16,6 +16,7 @@
     <class>Clases.Prueba</class>
     <class>Clases.Sede</class>
     <class>Clases.Usuario</class>
+    <class>Clases.CarreraEstudiante</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/javaee2018?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

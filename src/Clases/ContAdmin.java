@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Set;
+import javax.persistence.EntityManager;
 public class ContAdmin implements IContAdmin {
     private static ContAdmin instancia;
     private Admin login;
@@ -92,7 +94,7 @@ public class ContAdmin implements IContAdmin {
         }
         return buffer.toString();
     }
-    
+   
     @Override
     public void crearSedeVar(String nombre, String direccion, String telefono) throws Exception{
         Sede s = new Sede();
@@ -139,4 +141,14 @@ public class ContAdmin implements IContAdmin {
         return hm;
     }
     
+    public void crearDocente(Docente d) throws Exception{
+        EstudianteJpaController ejpa = new EstudianteJpaController();  
+        DocenteJpaController djpa = new DocenteJpaController();
+        if(ejpa.id(d.getId()))
+            throw new Exception("El id está ocupado");
+        if(djpa.id(d.getId()))
+            throw new Exception("El id está ocupado");
+        d.setPass(this.clave());
+        
+    }
 }

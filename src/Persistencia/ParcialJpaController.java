@@ -6,7 +6,8 @@
 package Persistencia;
 
 import Clases.CursoSede;
-import Clases.Examen;
+import Clases.Fabrica;
+import Clases.Parcial;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -21,10 +22,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Usuario
  */
-public class ExamenJpaController implements Serializable {
+public class ParcialJpaController implements Serializable {
 
-    public ExamenJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public ParcialJpaController() {
+        this.emf = Fabrica.getInstance().getEntity().getEntityManagerFactory();
     }
     private EntityManagerFactory emf = null;
 
@@ -32,19 +33,19 @@ public class ExamenJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Examen examen) {
+    public void create(Parcial parcial) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            CursoSede curso = examen.getCurso();
+            CursoSede curso = parcial.getCurso();
             if (curso != null) {
                 curso = em.getReference(curso.getClass(), curso.getId());
-                examen.setCurso(curso);
+                parcial.setCurso(curso);
             }
-            em.persist(examen);
+            em.persist(parcial);
             if (curso != null) {
-                curso.getExmenes().add(examen);
+                curso.getParciales().add(parcial);
                 curso = em.merge(curso);
             }
             em.getTransaction().commit();
@@ -53,39 +54,39 @@ public class ExamenJpaController implements Serializable {
         }
     }
 
-    public void edit(Examen examen) throws NonexistentEntityException, Exception {
+    public void edit(Parcial parcial) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Examen persistentExamen = em.find(Examen.class, examen.getId());
-            CursoSede cursoOld = persistentExamen.getCurso();
-            CursoSede cursoNew = examen.getCurso();
+            Parcial persistentParcial = em.find(Parcial.class, parcial.getId());
+            CursoSede cursoOld = persistentParcial.getCurso();
+            CursoSede cursoNew = parcial.getCurso();
             if (cursoNew != null) {
                 cursoNew = em.getReference(cursoNew.getClass(), cursoNew.getId());
-                examen.setCurso(cursoNew);
+                parcial.setCurso(cursoNew);
             }
-            examen = em.merge(examen);
+            parcial = em.merge(parcial);
             if (cursoOld != null && !cursoOld.equals(cursoNew)) {
-                cursoOld.getExmenes().remove(examen);
+                cursoOld.getParciales().remove(parcial);
                 cursoOld = em.merge(cursoOld);
             }
             if (cursoNew != null && !cursoNew.equals(cursoOld)) {
-                cursoNew.getExmenes().add(examen);
+                cursoNew.getParciales().add(parcial);
                 cursoNew = em.merge(cursoNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = examen.getId();
-                if (findExamen(id) == null) {
-                    throw new NonexistentEntityException("The examen with id " + id + " no longer exists.");
+                Long id = parcial.getId();
+                if (findParcial(id) == null) {
+                    throw new NonexistentEntityException("The parcial with id " + id + " no longer exists.");
                 }
             }
             throw ex;
         } finally {
-           
+            
         }
     }
 
@@ -94,38 +95,38 @@ public class ExamenJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Examen examen;
+            Parcial parcial;
             try {
-                examen = em.getReference(Examen.class, id);
-                examen.getId();
+                parcial = em.getReference(Parcial.class, id);
+                parcial.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The examen with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The parcial with id " + id + " no longer exists.", enfe);
             }
-            CursoSede curso = examen.getCurso();
+            CursoSede curso = parcial.getCurso();
             if (curso != null) {
-                curso.getExmenes().remove(examen);
+                curso.getParciales().remove(parcial);
                 curso = em.merge(curso);
             }
-            em.remove(examen);
+            em.remove(parcial);
             em.getTransaction().commit();
         } finally {
-           
+            
         }
     }
 
-    public List<Examen> findExamenEntities() {
-        return findExamenEntities(true, -1, -1);
+    public List<Parcial> findParcialEntities() {
+        return findParcialEntities(true, -1, -1);
     }
 
-    public List<Examen> findExamenEntities(int maxResults, int firstResult) {
-        return findExamenEntities(false, maxResults, firstResult);
+    public List<Parcial> findParcialEntities(int maxResults, int firstResult) {
+        return findParcialEntities(false, maxResults, firstResult);
     }
 
-    private List<Examen> findExamenEntities(boolean all, int maxResults, int firstResult) {
+    private List<Parcial> findParcialEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Examen.class));
+            cq.select(cq.from(Parcial.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -137,20 +138,20 @@ public class ExamenJpaController implements Serializable {
         }
     }
 
-    public Examen findExamen(Long id) {
+    public Parcial findParcial(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Examen.class, id);
+            return em.find(Parcial.class, id);
         } finally {
             
         }
     }
 
-    public int getExamenCount() {
+    public int getParcialCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Examen> rt = cq.from(Examen.class);
+            Root<Parcial> rt = cq.from(Parcial.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

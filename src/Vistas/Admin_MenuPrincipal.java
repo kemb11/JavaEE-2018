@@ -14,9 +14,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ItemEvent;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
@@ -496,7 +493,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         CursosPanel.setBackground(new java.awt.Color(73, 202, 114));
 
         BuscarTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        BuscarTextField.setText("Buscar por curso, carrera, sede");
+        BuscarTextField.setText("Buscar por curso, carrera");
         BuscarTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 BuscarTextFieldFocusGained(evt);
@@ -1525,7 +1522,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_SedesOpcionMouseEntered
 
     private void BuscarTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarTextFieldFocusGained
-        if (BuscarTextField.getText().equals("Buscar por curso, carrera, sede")) {
+        if (BuscarTextField.getText().equals("Buscar por curso, carrera")) {
             BuscarTextField.setText("");
             BuscarTextField.setForeground(Color.BLACK);
         }
@@ -1533,7 +1530,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void BuscarTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarTextFieldFocusLost
         if (BuscarTextField.getText().isEmpty()) {
-            BuscarTextField.setText("Buscar por curso, carrera, sede");
+            BuscarTextField.setText("Buscar por curso, carrera");
             BuscarTextField.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_BuscarTextFieldFocusLost
@@ -1577,7 +1574,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void BuscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarButtonActionPerformed
         String buscar = BuscarTextField.getText();
-        if (buscar.equals("Buscar por curso, carrera, sede")) {
+        if (buscar.equals("Buscar por curso, carrera")) {
             buscar = "";
         }
         listarCursos(buscar);
@@ -1874,7 +1871,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     modelo.removeRow(0);//limpiar la tabla
                 }
                 //Por defecto que se vea asi
-                BuscarTextField.setText("Buscar por curso, carrera, sede");
+                BuscarTextField.setText("Buscar por curso, carrera");
                 BuscarTextField.setForeground(Color.GRAY);
                 CursosTable.requestFocus();
 

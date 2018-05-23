@@ -6,10 +6,10 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,8 +34,6 @@ public class Carrera implements Serializable {
     private String descripcion;
     private int creditos;
     @ManyToMany
-    private List<Estudiante> estudiantes;
-    @ManyToMany
     private List<Sede> sedes;
     @OneToMany(mappedBy = "carrera")
     private List<Curso> cursos;
@@ -43,6 +41,8 @@ public class Carrera implements Serializable {
     private PeriodoInscripcion primerSemestre;
     @OneToOne
     private PeriodoInscripcion segundoSemestre;
+    @OneToMany(mappedBy = "carrera")
+    private List<CarreraEstudiante> carreraEstudiantes;
 
     public Long getId() {
         return id;
@@ -64,12 +64,19 @@ public class Carrera implements Serializable {
         this.segundoSemestre = segundoSemestre;
     }
 
-    public List<Estudiante> getEstudiantes() {
-        return estudiantes;
+    public List<CarreraEstudiante> getCarreraEstudiantes() {
+        return carreraEstudiantes;
     }
 
-    public void setEstudiantes(List<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
+    public void setCarreraEstudiantes(List<CarreraEstudiante> carreraEstudiantes) {
+        this.carreraEstudiantes = carreraEstudiantes;
+    }
+    
+    public List<Estudiante> getEstudiantes(){
+        List<Estudiante> list = new ArrayList<>();
+        for(CarreraEstudiante e : carreraEstudiantes)
+            list.add(e.getEstudiante());
+        return list;
     }
 
     public List<Sede> getSedes() {
@@ -148,7 +155,10 @@ public class Carrera implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Carrera[ id=" + id + " ]";
+        String texto = "Carrera: "+ this.nombre;
+        texto += "\nDescripcion: "+ this.descripcion;
+        texto += "\nCreditos: "+String.valueOf(creditos);
+        return texto;
     }
     
     public boolean periodo(){
@@ -158,6 +168,10 @@ public class Carrera implements Serializable {
         if(dia.after(this.segundoSemestre.getInicio()) && dia.before(this.segundoSemestre.getFin()))
             return true;
         return false;
+    }
+    
+    public void setEstudiante(CarreraEstudiante ce){
+        this.carreraEstudiantes.add(ce);
     }
     
 }

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,6 +25,8 @@ import javax.persistence.Table;
 @Table(name="cursosede")
 public class CursoSede implements Serializable {
 
+    @ManyToMany(mappedBy = "clases")
+    private List<Docente> docentes;
     @OneToMany(mappedBy = "curso")
     private List<InscripcionC> inscripciones;
     @ManyToOne
@@ -116,5 +119,7 @@ public class CursoSede implements Serializable {
     public void setParciales(List<Parcial> parciales) {
         this.parciales = parciales;
     }
+    
+    
     
 }
