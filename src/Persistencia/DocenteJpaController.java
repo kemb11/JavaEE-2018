@@ -130,4 +130,12 @@ public class DocenteJpaController implements Serializable {
         return false;
     }
     
+    public boolean email(String email){
+        for(Docente d : this.findDocenteEntities()){
+            if(d.getEmail().equals(email))
+                return true;
+        } 
+        return false;
+    }
+    
 }
