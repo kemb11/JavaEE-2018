@@ -5,25 +5,33 @@
  */
 package Vistas;
 
+
+import java.util.Map;
 import Clases.*;
 import java.awt.CardLayout;
-import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
-import java.util.logging.*;
-import javax.mail.internet.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.text.ParseException;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -31,17 +39,20 @@ import java.text.ParseException;
  */
 public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
-    private List<Object[]> volver = new ArrayList<>();
-    private List<JPanel> opciones = new ArrayList<>();
-    private List<Sede> sedesEstudiante;
-    private List<Carrera> carrerasEstudiante;
-
+    /**
+     * Creates new form MenuPrincipal
+     */
+    
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
+    
     public Admin_MenuPrincipal() {
         initComponents();
 
         this.setLocationRelativeTo(null);
+        // Cargar sedes existentes en el CB SEDES
+        llenarListaSedes();
+                
+
 
         CursosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -51,31 +62,24 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         CarreraTable.getColumnModel().removeColumn(CarreraTable.getColumnModel().getColumn(0));
         NoticiasTable.getColumnModel().removeColumn(NoticiasTable.getColumnModel().getColumn(0));
         EstudiantesTable.getColumnModel().removeColumn(EstudiantesTable.getColumnModel().getColumn(0));
-
+        
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
         PanelPrincipal.add(CarrerasPanel, "carreras");
         PanelPrincipal.add(SedesPanel, "sedes");
         PanelPrincipal.add(NoticiasPanel, "noticias");
-        PanelPrincipal.add(Estudiante, "estudiantes");
-        PanelPrincipal.add(Estudiante_Crear, "crear estudiante");
-
-        opciones.add(CursosOpcion);
-        opciones.add(CarrerasOpcion);
-        opciones.add(SedesOpcion);
-        opciones.add(NoticiasOpcion);
-        opciones.add(EstudianteOpcion);
-        opciones.add(DocenteOpcion);
-
+        PanelPrincipal.add(Estudiante, "examenes");
+        
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel text = new JLabel("9");
         text.setForeground(Color.red);
         text.setFont(new Font("Dialog", Font.BOLD, 13));
         notificacionIcono.add(text);
-
+        
     }
-
+    
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,8 +132,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         BuscarSede = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         SedeTable = new javax.swing.JTable();
-        SeleccionarSede = new javax.swing.JButton();
+        btn_abrirnuevasede = new javax.swing.JButton();
         btnBuscarSede = new javax.swing.JButton();
+        SeleccionarSede1 = new javax.swing.JButton();
         NoticiasPanel = new javax.swing.JPanel();
         BuscarNoticia = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -166,6 +171,27 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         est_txt_carrera = new javax.swing.JTextArea();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        panelNuevaSede = new javax.swing.JPanel();
+        sede_txt_nombre = new javax.swing.JTextField();
+        sede_txt_direccion = new javax.swing.JTextField();
+        sede_txt_telefono = new javax.swing.JTextField();
+        sede_btn_crear = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        panelBorrarSede = new javax.swing.JPanel();
+        cb_listaSedes = new javax.swing.JComboBox<>();
+        btn_borrarSede_1 = new javax.swing.JButton();
+        panelModSede = new javax.swing.JPanel();
+        selectSede = new javax.swing.JComboBox<>();
+        mod_sede_nombre = new javax.swing.JTextField();
+        mod_sede_direccion = new javax.swing.JTextField();
+        mod_sede_telefono = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        mod_btn_confirmar = new javax.swing.JButton();
+        btn_borrarSede = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -340,17 +366,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         );
 
         EstudianteOpcion.setBackground(new java.awt.Color(29, 131, 72));
-        EstudianteOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EstudianteOpcionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EstudianteOpcionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                EstudianteOpcionMouseExited(evt);
-            }
-        });
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/avatar.png"))); // NOI18N
 
@@ -380,17 +395,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         );
 
         DocenteOpcion.setBackground(new java.awt.Color(29, 131, 72));
-        DocenteOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DocenteOpcionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                DocenteOpcionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                DocenteOpcionMouseExited(evt);
-            }
-        });
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/avatar.png"))); // NOI18N
 
@@ -596,7 +600,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(AprobadosRadioButton)
                     .addComponent(BuscarButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -691,7 +695,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarCarrera)
                     .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -742,12 +746,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             SedeTable.getColumnModel().getColumn(3).setHeaderValue("Telefono");
         }
 
-        SeleccionarSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SeleccionarSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
-        SeleccionarSede.setText("Seleccionar");
-        SeleccionarSede.addActionListener(new java.awt.event.ActionListener() {
+        btn_abrirnuevasede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_abrirnuevasede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        btn_abrirnuevasede.setText("Nueva Sede");
+        btn_abrirnuevasede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeleccionarSedeActionPerformed(evt);
+                btn_abrirnuevasedeActionPerformed(evt);
             }
         });
 
@@ -759,6 +763,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        SeleccionarSede1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SeleccionarSede1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        SeleccionarSede1.setText("Seleccionar");
+        SeleccionarSede1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeleccionarSede1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SedesPanelLayout = new javax.swing.GroupLayout(SedesPanel);
         SedesPanel.setLayout(SedesPanelLayout);
         SedesPanelLayout.setHorizontalGroup(
@@ -766,16 +779,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(SedesPanelLayout.createSequentialGroup()
                 .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SedesPanelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(SeleccionarSede))
-                    .addGroup(SedesPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(BuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SedesPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SedesPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(SeleccionarSede1)
+                        .addGap(33, 33, 33)
+                        .addComponent(btn_abrirnuevasede)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         SedesPanelLayout.setVerticalGroup(
@@ -786,9 +801,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarSede)
                     .addComponent(BuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(SeleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SeleccionarSede1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_abrirnuevasede, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -878,7 +895,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarNoticia)
                     .addComponent(BuscarNoticia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(SeleccionarNoticia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -889,24 +906,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         Estudiante.setBackground(new java.awt.Color(73, 202, 114));
 
         BuscarEstudiante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        BuscarEstudiante.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                BuscarEstudianteFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                BuscarEstudianteFocusLost(evt);
-            }
-        });
-        BuscarEstudiante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarEstudianteActionPerformed(evt);
-            }
-        });
-        BuscarEstudiante.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                BuscarEstudianteKeyReleased(evt);
-            }
-        });
 
         EstudiantesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -937,20 +936,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         btnBuscarEstudiante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscarEstudiante.setText("Buscar");
-        btnBuscarEstudiante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEstudianteActionPerformed(evt);
-            }
-        });
 
         inscribirEstudiante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         inscribirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion_verde.png"))); // NOI18N
         inscribirEstudiante.setText("Inscribir");
-        inscribirEstudiante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inscribirEstudianteActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout EstudianteLayout = new javax.swing.GroupLayout(Estudiante);
         Estudiante.setLayout(EstudianteLayout);
@@ -997,18 +986,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel3.setText("Selecciona una carrera");
 
         est_sede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        est_sede.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                est_sedeMouseClicked(evt);
-            }
-        });
 
         est_carrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        est_carrera.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                est_carreraMouseClicked(evt);
-            }
-        });
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cédula de identidad:");
@@ -1121,7 +1100,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(Estudiante_CrearLayout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addComponent(est_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 111, Short.MAX_VALUE))
+                .addGap(0, 169, Short.MAX_VALUE))
         );
         Estudiante_CrearLayout.setVerticalGroup(
             Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1174,6 +1153,176 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(Estudiante_Crear, "card7");
 
+        panelNuevaSede.setBackground(new java.awt.Color(73, 202, 114));
+
+        sede_btn_crear.setText("Agregar");
+        sede_btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sede_btn_crearActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setText("Nombre");
+
+        jLabel25.setText("Direción");
+
+        jLabel26.setText("Teléfono");
+
+        javax.swing.GroupLayout panelNuevaSedeLayout = new javax.swing.GroupLayout(panelNuevaSede);
+        panelNuevaSede.setLayout(panelNuevaSedeLayout);
+        panelNuevaSedeLayout.setHorizontalGroup(
+            panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNuevaSedeLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addGroup(panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel24)
+                    .addGroup(panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(sede_txt_nombre)
+                        .addComponent(sede_txt_direccion)
+                        .addComponent(sede_txt_telefono)
+                        .addComponent(sede_btn_crear, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                .addContainerGap(603, Short.MAX_VALUE))
+        );
+        panelNuevaSedeLayout.setVerticalGroup(
+            panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNuevaSedeLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addComponent(sede_txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addGap(18, 18, 18)
+                .addComponent(sede_txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addGap(18, 18, 18)
+                .addComponent(sede_txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sede_btn_crear)
+                .addContainerGap(229, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(panelNuevaSede, "card8");
+
+        panelBorrarSede.setBackground(new java.awt.Color(73, 202, 114));
+
+        cb_listaSedes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btn_borrarSede_1.setText("Borrar Sede");
+        btn_borrarSede_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarSede_1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBorrarSedeLayout = new javax.swing.GroupLayout(panelBorrarSede);
+        panelBorrarSede.setLayout(panelBorrarSedeLayout);
+        panelBorrarSedeLayout.setHorizontalGroup(
+            panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                .addGroup(panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                        .addGap(291, 291, 291)
+                        .addComponent(btn_borrarSede_1)))
+                .addContainerGap(341, Short.MAX_VALUE))
+        );
+        panelBorrarSedeLayout.setVerticalGroup(
+            panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorrarSedeLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(btn_borrarSede_1)
+                .addContainerGap(336, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(panelBorrarSede, "card9");
+
+        panelModSede.setBackground(new java.awt.Color(73, 202, 114));
+
+        selectSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectSedeActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setText("Nombre");
+
+        jLabel28.setText("Dirección");
+
+        jLabel29.setText("Telefono");
+
+        mod_btn_confirmar.setText("Confirmar cambios");
+        mod_btn_confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mod_btn_confirmarActionPerformed(evt);
+            }
+        });
+
+        btn_borrarSede.setText("Borrar Sede");
+        btn_borrarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarSedeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelModSedeLayout = new javax.swing.GroupLayout(panelModSede);
+        panelModSede.setLayout(panelModSedeLayout);
+        panelModSedeLayout.setHorizontalGroup(
+            panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModSedeLayout.createSequentialGroup()
+                .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelModSedeLayout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_borrarSede))
+                    .addGroup(panelModSedeLayout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mod_btn_confirmar)
+                            .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel27)
+                                .addComponent(jLabel28)
+                                .addComponent(jLabel29)
+                                .addComponent(mod_sede_nombre)
+                                .addComponent(mod_sede_direccion)
+                                .addComponent(mod_sede_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))))
+                .addContainerGap(286, Short.MAX_VALUE))
+        );
+        panelModSedeLayout.setVerticalGroup(
+            panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelModSedeLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_borrarSede))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(mod_sede_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addComponent(mod_sede_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel29)
+                .addGap(18, 18, 18)
+                .addComponent(mod_sede_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(mod_btn_confirmar)
+                .addContainerGap(148, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(panelModSede, "card10");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1205,7 +1354,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelCabeceraLayout.setHorizontalGroup(
             PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(notificacionIcono)
@@ -1246,15 +1395,23 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CursosOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseClicked
-        opcionSeleccionada(CursosOpcion, "cursos");
+            opcionSeleccionada(CursosOpcion,"cursos");
     }//GEN-LAST:event_CursosOpcionMouseClicked
 
     private void SedesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SedesOpcionMouseClicked
-        opcionSeleccionada(SedesOpcion, "sedes");
+        if (Fabrica.getInstance().getContEdu().getSede() != null) {
+            opcionSeleccionada(SedesOpcion,"sedes");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
+        }
     }//GEN-LAST:event_SedesOpcionMouseClicked
 
     private void CarrerasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CarrerasOpcionMouseClicked
-        opcionSeleccionada(CarrerasOpcion, "carreras");
+        if (Fabrica.getInstance().getContEdu().getSede() != null) {
+            opcionSeleccionada(CarrerasOpcion,"carreras");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
+        }
     }//GEN-LAST:event_CarrerasOpcionMouseClicked
 
     private void CursosOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseEntered
@@ -1352,19 +1509,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarSedeKeyReleased
 
-    private void SeleccionarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSedeActionPerformed
-        int index = SedeTable.getSelectedRow();
-        if (index != -1) {
-            Sede s = (Sede) SedeTable.getModel().getValueAt(index, 0);
-            Fabrica.getInstance().getContEdu().seleccionSede(s.getId());
-            SedeSelec.setText("<html>Sede: " + s.getNombre() + "</html>");
-        } else {
-            JOptionPane.showMessageDialog(this, "No ha seleccionado una sede");
-        }
-    }//GEN-LAST:event_SeleccionarSedeActionPerformed
+    private void btn_abrirnuevasedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirnuevasedeActionPerformed
+        /*CardLayout cl = (CardLayout) PanelPrincipal.getLayout();
+        cl.addLayoutComponent(panelNuevaSede);
+        panelNuevaSede.setVisible(true);*/
+    }//GEN-LAST:event_btn_abrirnuevasedeActionPerformed
 
     private void BuscarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSedeActionPerformed
-
+        
     }//GEN-LAST:event_BuscarSedeActionPerformed
 
     private void btnBuscarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSedeActionPerformed
@@ -1402,42 +1554,50 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         this.listarCarreras();
     }//GEN-LAST:event_btnBuscarCarreraActionPerformed
     private void AprobadosRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonActionPerformed
-
+        
     }//GEN-LAST:event_AprobadosRadioButtonActionPerformed
 
     private void TodosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TodosRadioButtonItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        if(evt.getStateChange() == ItemEvent.SELECTED){
             listarCursos("");
         }
     }//GEN-LAST:event_TodosRadioButtonItemStateChanged
 
     private void CursandoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CursandoRadioButtonItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        if(evt.getStateChange() == ItemEvent.SELECTED){
             listarCursos("");
         }
     }//GEN-LAST:event_CursandoRadioButtonItemStateChanged
 
     private void AprobadosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
+        if(evt.getStateChange() == ItemEvent.SELECTED){
             listarCursos("");
         }
     }//GEN-LAST:event_AprobadosRadioButtonItemStateChanged
 
     private void NoticiasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseClicked
-        opcionSeleccionada(NoticiasOpcion, "noticias");
+        if (Fabrica.getInstance().getContEdu().getSede() != null) {
+            opcionSeleccionada(NoticiasOpcion,"noticias");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
+        }
     }//GEN-LAST:event_NoticiasOpcionMouseClicked
 
-    private void EstudianteOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseClicked
-        opcionSeleccionada(EstudianteOpcion, "estudiantes");
-    }//GEN-LAST:event_EstudianteOpcionMouseClicked
+    private void ExamenesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcionMouseClicked
+        /*if (Fabrica.getInstance().getContEdu().getSede() != null) {
+            opcionSeleccionada("examenes");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
+        }*/
+    }//GEN-LAST:event_ExamenesOpcionMouseClicked
 
-    private void EstudianteOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseEntered
+    private void ExamenesOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcionMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_EstudianteOpcionMouseEntered
+    }//GEN-LAST:event_ExamenesOpcionMouseEntered
 
-    private void EstudianteOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseExited
+    private void ExamenesOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcionMouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_EstudianteOpcionMouseExited
+    }//GEN-LAST:event_ExamenesOpcionMouseExited
 
     private void BuscarNoticiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarNoticiaFocusGained
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -1463,29 +1623,29 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarNoticiaActionPerformed
 
-    private void BuscarEstudianteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarEstudianteFocusGained
+    private void BuscarExamenTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarExamenTextFieldFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarEstudianteFocusGained
+    }//GEN-LAST:event_BuscarExamenTextFieldFocusGained
 
-    private void BuscarEstudianteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarEstudianteFocusLost
+    private void BuscarExamenTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarExamenTextFieldFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarEstudianteFocusLost
+    }//GEN-LAST:event_BuscarExamenTextFieldFocusLost
 
-    private void BuscarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEstudianteActionPerformed
+    private void BuscarExamenTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarExamenTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarEstudianteActionPerformed
+    }//GEN-LAST:event_BuscarExamenTextFieldActionPerformed
 
-    private void BuscarEstudianteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarEstudianteKeyReleased
+    private void BuscarExamenTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarExamenTextFieldKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarEstudianteKeyReleased
+    }//GEN-LAST:event_BuscarExamenTextFieldKeyReleased
 
     private void SeleccionarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarExamenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SeleccionarExamenActionPerformed
 
-    private void btnBuscarEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEstudianteActionPerformed
-        listarEstudiantes();
-    }//GEN-LAST:event_btnBuscarEstudianteActionPerformed
+    private void btnBuscarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarExamenActionPerformed
+        
+    }//GEN-LAST:event_btnBuscarExamenActionPerformed
 
     private void jLabel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -1504,28 +1664,36 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_notificacionIconoMouseExited
 
     private void NoticiasOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_NoticiasOpcionMouseEntered
 
     private void NoticiasOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseExited
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_NoticiasOpcionMouseExited
 
-    private void inscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirEstudianteActionPerformed
-        opcionSeleccionada(EstudianteOpcion, "crear estudiante");
-    }//GEN-LAST:event_inscribirEstudianteActionPerformed
+    private void InscripcionExButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionExButtonActionPerformed
+        
+    }//GEN-LAST:event_InscripcionExButtonActionPerformed
 
-    private void DocenteOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DocenteOpcionMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DocenteOpcionMouseClicked
+    private void MisExmenesRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MisExmenesRadioButtonItemStateChanged
+        
+    }//GEN-LAST:event_MisExmenesRadioButtonItemStateChanged
 
-    private void DocenteOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DocenteOpcionMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DocenteOpcionMouseEntered
+    private void TodosExRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TodosExRadioButtonItemStateChanged
+       
+    }//GEN-LAST:event_TodosExRadioButtonItemStateChanged
 
-    private void DocenteOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DocenteOpcionMouseExited
+    private void ExamenesOpcion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcion1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_DocenteOpcionMouseExited
+    }//GEN-LAST:event_ExamenesOpcion1MouseClicked
+
+    private void ExamenesOpcion1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcion1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExamenesOpcion1MouseEntered
+
+    private void ExamenesOpcion1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExamenesOpcion1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExamenesOpcion1MouseExited
 
     private void est_ciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_ciActionPerformed
         // TODO add your handling code here:
@@ -1540,42 +1708,62 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_est_apeActionPerformed
 
     private void est_btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_btn_agregarActionPerformed
-        try {
-            this.createEstudiante();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
-        }
+        
     }//GEN-LAST:event_est_btn_agregarActionPerformed
 
-    private void est_sedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_est_sedeMouseClicked
-        int index = est_sede.getSelectedIndex();
-        if (index != -1) {
-            Sede s = sedesEstudiante.get(index);
-            est_txt_sede.setText(s.toString());
-            carrerasEstudiante = s.getCarreras();
-            est_carrera.setEnabled(true);
-            DefaultComboBoxModel model = new DefaultComboBoxModel<>();
-            for (Carrera c : carrerasEstudiante) {
-                model.addElement(c.getNombre());
-            }
+    private void sede_btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sede_btn_crearActionPerformed
+        // TODO add your handling code here:
+        String nombreSede = sede_txt_nombre.getText();
+        String direccionSede = sede_txt_direccion.getText();
+        String telefonoSede = sede_txt_telefono.getText();
+        
+        /*Fabrica f = Fabrica.getInstance();
+        IContAdmin ica = f.getContAdmin();*/
+        try{
+            Fabrica.getInstance().getContAdmin().crearSedeVar(nombreSede, direccionSede, telefonoSede);
+        }catch(Exception e){
+            
         }
-    }//GEN-LAST:event_est_sedeMouseClicked
+        
+    }//GEN-LAST:event_sede_btn_crearActionPerformed
 
-    private void est_carreraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_est_carreraMouseClicked
-        int index = est_carrera.getSelectedIndex();
-        if (index != -1) {
-            Carrera c = carrerasEstudiante.get(index);
-            est_txt_sede.setText(c.toString());
-        }
-    }//GEN-LAST:event_est_carreraMouseClicked
+    private void SeleccionarSede1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSede1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SeleccionarSede1ActionPerformed
 
-    void opcionSeleccionada(JPanel opcionSelec, String opcion) {
+    private void btn_borrarSede_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarSede_1ActionPerformed
+        // TODO add your handling code here:
+        String nombre = cb_listaSedes.getItemAt(cb_listaSedes.getSelectedIndex());
+        Fabrica.getInstance().getContAdmin().borrarSede(nombre);
+    }//GEN-LAST:event_btn_borrarSede_1ActionPerformed
+
+    private void selectSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSedeActionPerformed
+        // TODO add your handling code here:
+       String nombre = this.selectSede.getItemAt(selectSede.getSelectedIndex());
+       Map<String, String> hm = Fabrica.getInstance().getContAdmin().getInfoSedeByNombre(nombre);
+       mod_sede_direccion.setText(hm.get("direccion"));
+       mod_sede_nombre.setText(hm.get("nombre"));
+       mod_sede_telefono.setText(hm.get("telefono"));
+    }//GEN-LAST:event_selectSedeActionPerformed
+
+    private void mod_btn_confirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mod_btn_confirmarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mod_btn_confirmarActionPerformed
+
+    private void btn_borrarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarSedeActionPerformed
+        // TODO add your handling code here:
+        String nombre = selectSede.getItemAt(selectSede.getSelectedIndex());
+        Fabrica.getInstance().getContAdmin().borrarSede(nombre);
+    }//GEN-LAST:event_btn_borrarSedeActionPerformed
+
+        void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
-
-        if (opcionSelec != null) {
+        
+        if(opcionSelec!=null){
             resaltarOpcioneleccionada(opcionSelec);
         }
-
+        
         boolean control = true;
         switch (opcion) {
             case "cursos":
@@ -1586,7 +1774,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 while (modelo.getRowCount() > 0) {
                     modelo.removeRow(0);//limpiar la tabla
                 }
-
+                
                 //Por defecto que se vea asi
                 BuscarTextField.setText("Buscar por curso, carrera");
                 BuscarTextField.setForeground(Color.GRAY);
@@ -1600,66 +1788,50 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 this.setTitle("Menú: Carreras");
                 break;
             case "sedes":
-                this.listarSedes();
+                this.listarSede();
                 this.setTitle("Menú: Sedes");
                 break;
             case "noticias":
                 this.listarNoticias();
                 this.setTitle("Menú: Noticias");
                 break;
-            case "crear estudiante":
-                this.listarCrearEstudiante();
-                this.setTitle("Menú: Estudiantes");
-                break;
-            /*case "verCurso":    
-                modelo = (DefaultTableModel) CursosTable.getModel();
-                Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-                String opt = "No";
-                if(curso.isOptativo()){
-                    opt = "Si";
-                }
-
-                TituloLabel.setText(curso.getNombre());
-                CreditosLabel.setText(String.valueOf(curso.getCreditos()));
-                OptativoLabel.setText(opt);
-                HorariosTextArea.setText(curso.getHorarios());
-                DescTextArea.setText(curso.getDescripcion());
-                this.setTitle("Menú: Ver Curso");
-                break;*/
         }
-
-        if (control) {
+        
+        if(control){
             cl.show(PanelPrincipal, opcion);
             Object[] v = {opcion, opcionSelec};
             volver.add(v);
         }
     }
-
-    public void resaltarOpcioneleccionada(JPanel opcionSelec) {
+    
+    public void resaltarOpcioneleccionada(JPanel opcionSelec){
         for (JPanel opcionAux : opciones) {
-            if (opcionAux.equals(opcionSelec)) {
+            if(opcionAux.equals(opcionSelec)){
                 opcionAux.setBackground(Color.decode("#4a9f6e"));
-            } else {
+            }else{
                 opcionAux.setBackground(Color.decode("#1d8348"));
             }
         }
     }
+    
+    ArrayList<Object[]> volver = new ArrayList<>();
+    ArrayList<JPanel> opciones = new ArrayList<>(); 
 
     public void listarCursos(String buscar) {
 
         IContEducacion contEdu = Fabrica.getInstance().getContEdu();
         List<Curso> lista = new ArrayList<>();
-
-        if (TodosRadioButton.isSelected()) {
+        
+        if(TodosRadioButton.isSelected()){
             lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
-        } else {
-            if (CursandoRadioButton.isSelected()) {
-                lista = contEdu.listarCursosCursando(buscar); // parametro de busqueda, si es vacia lista todo
-            } else {
+        }else{
+            if(CursandoRadioButton.isSelected()){
+                    lista = contEdu.listarCursosCursando(buscar); // parametro de busqueda, si es vacia lista todo
+            }else{
                 lista = contEdu.listarCursosAprobados(buscar); // parametro de busqueda, si es vacia lista todo
             }
-        }
-
+        }        
+        
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
 
         while (modelo.getRowCount() > 0) {
@@ -1718,7 +1890,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }
-
+    
     private void listarNoticias() {
         List<Noticia> noticias;
         if (this.BuscarNoticia.getText().equals("")) {
@@ -1761,79 +1933,22 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void listarEstudiantes() {
-        List<Estudiante> estudiantes;
-        if (this.BuscarEstudiante.getText().equals("")) {
-            estudiantes = Fabrica.getInstance().getContEst().getEstudiantes();
-        } else {
-            estudiantes = Fabrica.getInstance().getContEst().getEstudiantes(this.BuscarEstudiante.getText());
-        }
-        DefaultTableModel modelo = (DefaultTableModel) EstudiantesTable.getModel();
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-        if (estudiantes.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
-        } else {
-            for (Estudiante e : estudiantes) {
-                Object[] datos = {e, e.getCi(), e.getNombres(), e.getApellidos(), dateFormat.format(e.getFechaNac()), e.getEmail()};
-                modelo.addRow(datos);
-            }
-        }
-    }
-
-    private void createEstudiante() throws Exception {
+    
+    private void createEstudiante() throws Exception{
         InternetAddress correo = new InternetAddress(est_ema.getText());
-        try {
+        try{
             correo.validate();
-            if(est_nom.getText().equals("") || est_ape.getText().equals("") || est_fec.getText().equals("")
-                    || est_ema.getText().equals("") || est_ci.getText().equals("")){
-                throw new Exception("Llene los campos");
-            }
-            if(!est_txt_carrera.isEnabled() || est_txt_carrera.getText().equals(""))
-                throw new Exception("Seleccione sede y carrera");
-            try {
-                Estudiante e = new Estudiante();
-                e.setNombres(est_nom.getText());
-                e.setApellidos(est_ape.getText());
-                e.setEmail(est_ema.getText());
-                e.setId(est_ci.getText());
-                e.setCi(est_ci.getText());
-                Date parse = dateFormat.parse(est_fec.getText());
-                int index = est_sede.getSelectedIndex();
-                e.setSedes(new ArrayList<>());
-                e.setSede(this.sedesEstudiante.get(index));
-                index = est_carrera.getSelectedIndex();
-                e.setCarrera(this.carrerasEstudiante.get(index));
-                index = est_carrera.getSelectedIndex();
-                Fabrica.getInstance().getContAdmin().crearEstudiante(e);
-            } catch (ParseException pe) {
-                throw new Exception("La fecha no es correcta");
-            }
-        } catch (AddressException ex) {
+            
+        }catch(AddressException ex){
             throw new Exception("Formato de correo invalido");
         }
-
     }
-
-    private void listarSedes() {
-        List<Sede> sedes;
-        if (this.BuscarSede.getText().equals("")) {
-            sedes = Fabrica.getInstance().getContEdu().listarSedes();
-        } else {
-            sedes = Fabrica.getInstance().getContEdu().listarSedes(this.BuscarSede.getText());
-        }
-        DefaultTableModel modelo = (DefaultTableModel) SedeTable.getModel();
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-        if (sedes.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
-        } else {
-            for (Sede s : sedes) {
-                Object[] datos = {s, s.getNombre(), s.getTelefono(), s.getDireccion()};
-                modelo.addRow(datos);
-            }
+    
+    private void llenarListaSedes(){
+        List<String> ls = Fabrica.getInstance().getContAdmin().getSedes();
+        for (String nombre : ls){
+            cb_listaSedes.addItem(nombre);
+            selectSede.addItem(nombre);
         }
     }
 
@@ -1870,7 +1985,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel SedesPanel;
     private javax.swing.JButton SeleccionarExamen;
     private javax.swing.JButton SeleccionarNoticia;
-    private javax.swing.JButton SeleccionarSede;
+    private javax.swing.JButton SeleccionarSede1;
     private javax.swing.JRadioButton TodosRadioButton;
     private javax.swing.JButton VerCarrera;
     private javax.swing.JButton VerCursoButton;
@@ -1878,8 +1993,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarEstudiante;
     private javax.swing.JButton btnBuscarNoticia;
     private javax.swing.JButton btnBuscarSede;
+    private javax.swing.JButton btn_abrirnuevasede;
+    private javax.swing.JButton btn_borrarSede;
+    private javax.swing.JButton btn_borrarSede_1;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
+    private javax.swing.JComboBox<String> cb_listaSedes;
     private javax.swing.JTextField est_ape;
     private javax.swing.JButton est_btn_agregar;
     private javax.swing.JComboBox<String> est_carrera;
@@ -1907,6 +2026,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1921,22 +2046,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JButton mod_btn_confirmar;
+    private javax.swing.JTextField mod_sede_direccion;
+    private javax.swing.JTextField mod_sede_nombre;
+    private javax.swing.JTextField mod_sede_telefono;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JPanel panelBorrarSede;
+    private javax.swing.JPanel panelModSede;
+    private javax.swing.JPanel panelNuevaSede;
+    private javax.swing.JButton sede_btn_crear;
+    private javax.swing.JTextField sede_txt_direccion;
+    private javax.swing.JTextField sede_txt_nombre;
+    private javax.swing.JTextField sede_txt_telefono;
+    private javax.swing.JComboBox<String> selectSede;
     // End of variables declaration//GEN-END:variables
-
-    private void listarCrearEstudiante() {
-        est_carrera.setModel(new DefaultComboBoxModel<>());
-        est_carrera.setEnabled(false);
-        DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>();
-        sedesEstudiante = Fabrica.getInstance().getContEdu().listarSedes();
-        for (Sede s : sedesEstudiante) {
-            cmbModel.addElement(s.getNombre());
-        }
-        est_sede.setModel(cmbModel);
-        est_nom.setText("");
-        est_ape.setText("");
-        est_ci.setText("");
-        est_ema.setText("");
-        est_fec.setText("");
-    }
 }

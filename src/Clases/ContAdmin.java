@@ -2,9 +2,12 @@
 package Clases;
 
 import Persistencia.*;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
 import javax.persistence.EntityManager;
@@ -91,6 +94,52 @@ public class ContAdmin implements IContAdmin {
             buffer.append((char) randomLimitedInt);
         }
         return buffer.toString();
+    }
+   
+    @Override
+    public void crearSedeVar(String nombre, String direccion, String telefono) throws Exception{
+        Sede s = new Sede();
+        s.setNombre(nombre);
+        s.setTelefono(telefono);
+        s.setDireccion(direccion);
+        s.setCarreras(null);
+        s.setCursoSedes(null);
+        s.setEstudiantes(null);
+        SedeJpaController sjpa = new SedeJpaController();
+        if(sjpa.existeNombre(s.getNombre()))
+            throw new Exception("El nombre de la sede ya existe");
+        sjpa.create(s);
+    }
+    @Override
+    public List<String> getSedes(){
+        SedeJpaController sjpa = new SedeJpaController();
+        List<String> ls = new ArrayList();
+        for( Sede s : sjpa.findSedeEntities() ){
+            ls.add(s.getNombre());
+        }
+        return ls;
+    }
+    @Override
+    public void borrarSede(String nombre){
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(nombre);
+        Long id = s.getId();
+        try{
+            sjpa.destroy(id);
+        }catch(NonexistentEntityException nee){
+            
+        }
+        
+    }
+    @Override
+    public Map<String,String> getInfoSedeByNombre(String nombre){
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(nombre);
+        Map<String, String> hm = new HashMap<String,String>();
+        hm.put("nombre", s.getNombre());
+        hm.put("direccion", s.getDireccion());
+        hm.put("telefono", s.getTelefono());
+        return hm;
     }
     
     public void crearDocente(Docente d) throws Exception{
