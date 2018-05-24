@@ -5,7 +5,7 @@
  */
 package Vistas;
 
-import Clases.*; 
+import Clases.*;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
@@ -23,19 +23,21 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.*;
 import javax.swing.table.*;
+import java.text.ParseException;
 
 /**
  *
  * @author Usuario
  */
 public class Admin_MenuPrincipal extends javax.swing.JFrame {
+
     private List<Object[]> volver = new ArrayList<>();
     private List<JPanel> opciones = new ArrayList<>();
     private List<Sede> sedesEstudiante;
-    private List<Carrera> carrerasEstudiante;    
-    
+    private List<Carrera> carrerasEstudiante;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     public Admin_MenuPrincipal() {
         initComponents();
 
@@ -49,7 +51,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         CarreraTable.getColumnModel().removeColumn(CarreraTable.getColumnModel().getColumn(0));
         NoticiasTable.getColumnModel().removeColumn(NoticiasTable.getColumnModel().getColumn(0));
         EstudiantesTable.getColumnModel().removeColumn(EstudiantesTable.getColumnModel().getColumn(0));
-        
+
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
         PanelPrincipal.add(CarrerasPanel, "carreras");
@@ -58,24 +60,22 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(Estudiante, "estudiantes");
         PanelPrincipal.add(Estudiante_Crear, "crear estudiante");
 
-         
         opciones.add(CursosOpcion);
         opciones.add(CarrerasOpcion);
         opciones.add(SedesOpcion);
         opciones.add(NoticiasOpcion);
         opciones.add(EstudianteOpcion);
         opciones.add(DocenteOpcion);
-        
+
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel text = new JLabel("9");
         text.setForeground(Color.red);
         text.setFont(new Font("Dialog", Font.BOLD, 13));
         notificacionIcono.add(text);
-        
+
     }
-    
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1246,15 +1246,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CursosOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseClicked
-        opcionSeleccionada(CursosOpcion,"cursos");
+        opcionSeleccionada(CursosOpcion, "cursos");
     }//GEN-LAST:event_CursosOpcionMouseClicked
 
     private void SedesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SedesOpcionMouseClicked
-        opcionSeleccionada(SedesOpcion,"sedes");
+        opcionSeleccionada(SedesOpcion, "sedes");
     }//GEN-LAST:event_SedesOpcionMouseClicked
 
     private void CarrerasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CarrerasOpcionMouseClicked
-        opcionSeleccionada(CarrerasOpcion,"carreras");
+        opcionSeleccionada(CarrerasOpcion, "carreras");
     }//GEN-LAST:event_CarrerasOpcionMouseClicked
 
     private void CursosOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CursosOpcionMouseEntered
@@ -1364,7 +1364,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_SeleccionarSedeActionPerformed
 
     private void BuscarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSedeActionPerformed
-        
+
     }//GEN-LAST:event_BuscarSedeActionPerformed
 
     private void btnBuscarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSedeActionPerformed
@@ -1402,29 +1402,29 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         this.listarCarreras();
     }//GEN-LAST:event_btnBuscarCarreraActionPerformed
     private void AprobadosRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonActionPerformed
-        
+
     }//GEN-LAST:event_AprobadosRadioButtonActionPerformed
 
     private void TodosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TodosRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             listarCursos("");
         }
     }//GEN-LAST:event_TodosRadioButtonItemStateChanged
 
     private void CursandoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CursandoRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             listarCursos("");
         }
     }//GEN-LAST:event_CursandoRadioButtonItemStateChanged
 
     private void AprobadosRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AprobadosRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             listarCursos("");
         }
     }//GEN-LAST:event_AprobadosRadioButtonItemStateChanged
 
     private void NoticiasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseClicked
-        opcionSeleccionada(NoticiasOpcion,"noticias");
+        opcionSeleccionada(NoticiasOpcion, "noticias");
     }//GEN-LAST:event_NoticiasOpcionMouseClicked
 
     private void EstudianteOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseClicked
@@ -1504,11 +1504,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_notificacionIconoMouseExited
 
     private void NoticiasOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseEntered
-         setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_NoticiasOpcionMouseEntered
 
     private void NoticiasOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseExited
-         setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_NoticiasOpcionMouseExited
 
     private void inscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirEstudianteActionPerformed
@@ -1540,18 +1540,22 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_est_apeActionPerformed
 
     private void est_btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_btn_agregarActionPerformed
-        
+        try {
+            this.createEstudiante();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_est_btn_agregarActionPerformed
 
     private void est_sedeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_est_sedeMouseClicked
         int index = est_sede.getSelectedIndex();
-        if(index != -1){
+        if (index != -1) {
             Sede s = sedesEstudiante.get(index);
-            est_txt_sede.setText("<html>"+s.toString()+"</html>");
+            est_txt_sede.setText(s.toString());
             carrerasEstudiante = s.getCarreras();
             est_carrera.setEnabled(true);
             DefaultComboBoxModel model = new DefaultComboBoxModel<>();
-            for(Carrera c : carrerasEstudiante){
+            for (Carrera c : carrerasEstudiante) {
                 model.addElement(c.getNombre());
             }
         }
@@ -1559,19 +1563,19 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void est_carreraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_est_carreraMouseClicked
         int index = est_carrera.getSelectedIndex();
-        if(index != -1){
+        if (index != -1) {
             Carrera c = carrerasEstudiante.get(index);
-            est_txt_sede.setText("<html>"+c.toString()+"</html>");
+            est_txt_sede.setText(c.toString());
         }
     }//GEN-LAST:event_est_carreraMouseClicked
 
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
-        
-        if(opcionSelec!=null){
+
+        if (opcionSelec != null) {
             resaltarOpcioneleccionada(opcionSelec);
         }
-        
+
         boolean control = true;
         switch (opcion) {
             case "cursos":
@@ -1582,7 +1586,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 while (modelo.getRowCount() > 0) {
                     modelo.removeRow(0);//limpiar la tabla
                 }
-                
+
                 //Por defecto que se vea asi
                 BuscarTextField.setText("Buscar por curso, carrera");
                 BuscarTextField.setForeground(Color.GRAY);
@@ -1623,19 +1627,19 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 this.setTitle("Menú: Ver Curso");
                 break;*/
         }
-        
-        if(control){
+
+        if (control) {
             cl.show(PanelPrincipal, opcion);
             Object[] v = {opcion, opcionSelec};
             volver.add(v);
         }
     }
-    
-    public void resaltarOpcioneleccionada(JPanel opcionSelec){
+
+    public void resaltarOpcioneleccionada(JPanel opcionSelec) {
         for (JPanel opcionAux : opciones) {
-            if(opcionAux.equals(opcionSelec)){
+            if (opcionAux.equals(opcionSelec)) {
                 opcionAux.setBackground(Color.decode("#4a9f6e"));
-            }else{
+            } else {
                 opcionAux.setBackground(Color.decode("#1d8348"));
             }
         }
@@ -1645,17 +1649,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         IContEducacion contEdu = Fabrica.getInstance().getContEdu();
         List<Curso> lista = new ArrayList<>();
-        
-        if(TodosRadioButton.isSelected()){
+
+        if (TodosRadioButton.isSelected()) {
             lista = contEdu.listarCursos(buscar); // parametro de busqueda, si es vacia lista todo
-        }else{
-            if(CursandoRadioButton.isSelected()){
-                    lista = contEdu.listarCursosCursando(buscar); // parametro de busqueda, si es vacia lista todo
-            }else{
+        } else {
+            if (CursandoRadioButton.isSelected()) {
+                lista = contEdu.listarCursosCursando(buscar); // parametro de busqueda, si es vacia lista todo
+            } else {
                 lista = contEdu.listarCursosAprobados(buscar); // parametro de busqueda, si es vacia lista todo
             }
-        }        
-        
+        }
+
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
 
         while (modelo.getRowCount() > 0) {
@@ -1714,7 +1718,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void listarNoticias() {
         List<Noticia> noticias;
         if (this.BuscarNoticia.getText().equals("")) {
@@ -1777,16 +1781,41 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void createEstudiante() throws Exception{
+
+    private void createEstudiante() throws Exception {
         InternetAddress correo = new InternetAddress(est_ema.getText());
-        try{
+        try {
             correo.validate();
-        }catch(AddressException ex){
+            if(est_nom.getText().equals("") || est_ape.getText().equals("") || est_fec.getText().equals("")
+                    || est_ema.getText().equals("") || est_ci.getText().equals("")){
+                throw new Exception("Llene los campos");
+            }
+            if(!est_txt_carrera.isEnabled() || est_txt_carrera.getText().equals(""))
+                throw new Exception("Seleccione sede y carrera");
+            try {
+                Estudiante e = new Estudiante();
+                e.setNombres(est_nom.getText());
+                e.setApellidos(est_ape.getText());
+                e.setEmail(est_ema.getText());
+                e.setId(est_ci.getText());
+                e.setCi(est_ci.getText());
+                Date parse = dateFormat.parse(est_fec.getText());
+                int index = est_sede.getSelectedIndex();
+                e.setSedes(new ArrayList<>());
+                e.setSede(this.sedesEstudiante.get(index));
+                index = est_carrera.getSelectedIndex();
+                e.setCarrera(this.carrerasEstudiante.get(index));
+                index = est_carrera.getSelectedIndex();
+                Fabrica.getInstance().getContAdmin().crearEstudiante(e);
+            } catch (ParseException pe) {
+                throw new Exception("La fecha no es correcta");
+            }
+        } catch (AddressException ex) {
             throw new Exception("Formato de correo invalido");
         }
+
     }
-    
+
     private void listarSedes() {
         List<Sede> sedes;
         if (this.BuscarSede.getText().equals("")) {
@@ -1900,7 +1929,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         est_carrera.setEnabled(false);
         DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>();
         sedesEstudiante = Fabrica.getInstance().getContEdu().listarSedes();
-        for(Sede s :  sedesEstudiante){
+        for (Sede s : sedesEstudiante) {
             cmbModel.addElement(s.getNombre());
         }
         est_sede.setModel(cmbModel);

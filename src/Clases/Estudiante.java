@@ -212,4 +212,11 @@ public class Estudiante extends Usuario {
             this.carreraEstudiante.add(ce);
         }
     }
+    
+    public void setSede(Sede S){
+        if(!this.sedes.contains(S)){
+            this.sedes.add(S);
+            S.setEstudiante(this);
+        }
+    }
 }

@@ -132,4 +132,8 @@ public class Sede implements Serializable {
         return texto;
     }
     
+    public void setEstudiante(Estudiante e){
+        this.estudiantes.add(e);
+    }
+    
 }
