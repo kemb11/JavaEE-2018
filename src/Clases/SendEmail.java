@@ -77,12 +77,12 @@ public class SendEmail {
   
   
 
-   public static void EnviarPass(String mail,String pass) throws UnsupportedEncodingException {    
+   public static void EnviarMail(String mail, String asunto,String mensaje) throws UnsupportedEncodingException {    
       // Recipient's email ID needs to be mentioned.
       String to = mail;
 
       // Sender's email ID needs to be mentioned
-      String from = "medicomp@gmail.com";
+      String from = "javaee2018@gmail.com";
 
       // Assuming you are sending email from localhost
       String host = "smtp.gmail.com";
@@ -106,7 +106,7 @@ public class SendEmail {
     @Override
     protected PasswordAuthentication getPasswordAuthentication()  {
         try {
-            return new PasswordAuthentication("tucorreo@gmail.com","tupassdecorreo");
+            return new PasswordAuthentication("javaee2018@gmail.com","java2018");
         } catch (Exception ex) {
             Logger.getLogger(SendEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -125,10 +125,10 @@ public class SendEmail {
          message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
          // Set Subject: header field
-         message.setSubject("Contraseña");
+         message.setSubject(asunto);
 
          // Now set the actual message
-         message.setText("Su contraseña es: " + pass);
+         message.setText(mensaje);
 
          // Send message
          Transport.send(message);

@@ -41,7 +41,7 @@ public class ContEstudiante implements IContEstudiante {
    
     @Override
     public boolean inscripcionCurso(Curso curso) throws Exception{
-        if(curso.getCarrera().periodo()){
+        if(curso.periodo()){
             if(this.login.estaInscriptoEnSede(Fabrica.getInstance().getContEdu().getSede())){
                 Sede sede = Fabrica.getInstance().getContEdu().getSede();
                 for (CursoSede cs : curso.getCursoSedes()) {

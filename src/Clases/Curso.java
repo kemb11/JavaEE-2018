@@ -44,7 +44,7 @@ public class Curso implements Serializable {
     private String nombre;
     @Column(columnDefinition = "text")
     private String descripcion;
-    private int creditos;
+    private int creditos, semestre;
     @Column(columnDefinition = "text")
     private String horarios;
     private boolean optativo;
@@ -57,6 +57,14 @@ public class Curso implements Serializable {
         return id;
     }
 
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -149,6 +157,14 @@ public class Curso implements Serializable {
     @Override
     public String toString() {
         return "Clases.Curso[ id=" + id + " ]";
+    }
+
+    public boolean periodo() {
+        if(this.semestre % 2 ==0){
+            return this.carrera.segundoperiodo();
+        }else{
+            return this.carrera.primerperiodo();
+        }
     }
     
 }

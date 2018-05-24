@@ -161,10 +161,15 @@ public class Carrera implements Serializable {
         return texto;
     }
     
-    public boolean periodo(){
+    public boolean primerperiodo(){
         Date dia = new Date();
         if(dia.after(this.primerSemestre.getInicio()) && dia.before(this.primerSemestre.getFin()))
             return true;
+        return false;
+    }
+    
+    public boolean segundoperiodo(){
+        Date dia = new Date();
         if(dia.after(this.segundoSemestre.getInicio()) && dia.before(this.segundoSemestre.getFin()))
             return true;
         return false;

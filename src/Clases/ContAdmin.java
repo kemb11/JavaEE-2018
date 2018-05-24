@@ -3,6 +3,7 @@ package Clases;
 
 import Persistencia.*;
 import Persistencia.exceptions.NonexistentEntityException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,10 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 public class ContAdmin implements IContAdmin {
     private static ContAdmin instancia;
     private Admin login;
@@ -72,15 +76,25 @@ public class ContAdmin implements IContAdmin {
         return noticias;
     }
     
-    public void crearEstudiante(Estudiante e) throws Exception{
-        EstudianteJpaController ejpa = new EstudianteJpaController();  
-        if(ejpa.email(e.getEmail()))
-            throw new Exception("El email está ocupado");
-        if(ejpa.id(e.getId()))
-            throw new Exception("El id está ocupado");
-        e.setPass(clave());
-        SendEmail.EnviarPass(e.getEmail(), e.getPass());
-        ejpa.create(e);
+    public void crearEstudiante(Estudiante e) throws InternalException{
+        try {
+            EstudianteJpaController ejpa = new EstudianteJpaController();
+            if(ejpa.email(e.getEmail()))
+                throw new InternalException("El email está ocupado");
+            if(ejpa.id(e.getId()))
+                throw new InternalException("El id está ocupado");
+            e.setPass(clave());
+            String mensaje = "Bienvenido " +e.getNombres() +" " + e.getApellidos()+
+                    ",\nsu usuario es " + e.getId() + " y contraseña " + e.getPass();
+            SendEmail.EnviarMail(e.getEmail(),"Su usuario ha sido creado", mensaje);
+            try {
+                ejpa.create(e);
+            } catch (Exception ex) {
+                throw new InternalException("Error al persistir");
+            }
+        } catch (UnsupportedEncodingException ex) {
+            throw new InternalException("Error al enviar mail");
+        }
     }
     
     private String clave() {

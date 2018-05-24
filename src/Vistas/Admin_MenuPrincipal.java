@@ -35,6 +35,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 /**
  *
@@ -368,6 +369,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         );
 
         EstudianteOpcion.setBackground(new java.awt.Color(29, 131, 72));
+        EstudianteOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EstudianteOpcionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EstudianteOpcionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EstudianteOpcionMouseExited(evt);
+            }
+        });
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/avatar.png"))); // NOI18N
 
@@ -1803,6 +1815,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         opcionSeleccionada(EstudianteOpcion, "crear estudiante");
     }//GEN-LAST:event_inscribirEstudianteActionPerformed
 
+    private void EstudianteOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseClicked
+            opcionSeleccionada(EstudianteOpcion,"estudiante");
+    }//GEN-LAST:event_EstudianteOpcionMouseClicked
+
+    private void EstudianteOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_EstudianteOpcionMouseEntered
+
+    private void EstudianteOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_EstudianteOpcionMouseExited
+
         void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
         
@@ -1988,14 +2012,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }
 
     
-    private void createEstudiante() throws Exception{
-        InternetAddress correo = new InternetAddress(est_ema.getText());
+    private void createEstudiante() throws InternalException{
         try{
+            InternetAddress correo = new InternetAddress(est_ema.getText());
             correo.validate();
             if(!est_carrera.isEnabled() || est_txt_carrera.getText().isEmpty())
-                throw new Exception("Seleccione sede y carrera");
+                throw new InternalException("Seleccione sede y carrera");
             if(controlCrearEstudiante())
-                throw new Exception("Seleccione sede y carrera");
+                throw new InternalException("Seleccione sede y carrera");
             Date fecha = null;
             try{
                 fecha = dateFormat.parse(est_fec.getText());
@@ -2006,17 +2030,19 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 e.setId(est_ci.getText());
                 e.setEmail(est_ema.getText());
                 e.setApellidos(est_ape.getText());
+                e.setFechaNac(fecha);
                 int index = est_carrera.getSelectedIndex();
                 e.setCarrera(carrerasEstudiante.get(index));
                 index = est_sede.getSelectedIndex();
                 e.setSede(sedesEstudiante.get(index));
                 Fabrica.getInstance().getContAdmin().crearEstudiante(e);
-            }catch(ParseException pe){
-                throw new Exception("Fecha incorrecta");
+            }catch(Exception pe){
+                throw new InternalException("Fecha incorrecta");
             }
             
-        }catch(AddressException ex){
-            throw new Exception("Formato de correo invalido");
+        }catch(Exception ex){
+            if(ex instanceof AddressException)
+            throw new InternalException("Formato de correo inválido");
         }
     }
     
