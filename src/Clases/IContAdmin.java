@@ -14,4 +14,5 @@ public interface IContAdmin {
     public abstract void borrarSede(String nombre);
     
     public abstract Map<String,String> getInfoSedeByNombre(String nombre);
+    public abstract Admin getLogin();
 }

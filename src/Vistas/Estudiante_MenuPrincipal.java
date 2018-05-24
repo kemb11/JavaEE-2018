@@ -205,7 +205,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         nombreUsrLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        VolverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu Principal");
@@ -1467,11 +1467,13 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         nombreUsrLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nombreUsrLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        VolverButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VolverButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/volver.png"))); // NOI18N
+        VolverButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        VolverButton.setContentAreaFilled(false);
+        VolverButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                VolverButtonActionPerformed(evt);
             }
         });
 
@@ -1480,8 +1482,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         PanelCabeceraLayout.setHorizontalGroup(
             PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addContainerGap()
+                .addComponent(VolverButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(nombreUsrLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1493,7 +1495,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         PanelCabeceraLayout.setVerticalGroup(
             PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel15)
                     .addComponent(notificacionIcono)
@@ -1501,7 +1503,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addComponent(VolverButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1852,18 +1854,6 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TodosExRadioButtonItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Si es mayor a 1 porque si solo tiene 1 es el panel actual, no tiene anterior
-        if(volver.size() > 1){
-            CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
-            String ultimaVentana = (String) volver.get(volver.size()-2)[0]; //el 0 tiene el panel principal
-            JPanel ultimaOpcion = (JPanel) volver.get(volver.size()-2)[1]; //el 1 el tiene panel lateral
-            cl.show(PanelPrincipal, ultimaVentana); //la ultima ventana visitada es el anteultimo agregado, el ultimo es el actual
-            resaltarOpcioneleccionada(ultimaOpcion);
-            volver.remove(volver.size()-1); //borrar la ventana actual
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void ParcialesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ParcialesOpcionMouseClicked
         if (Fabrica.getInstance().getContEdu().getSede() != null) {
             opcionSeleccionada(ParcialesOpcion, "parciales");
@@ -1919,6 +1909,18 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             listarParciales("");
         }
     }//GEN-LAST:event_MisParcialesRadioButtonItemStateChanged
+
+    private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
+        // Si es mayor a 1 porque si solo tiene 1 es el panel actual, no tiene anterior
+        if(volver.size() > 1){
+            CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+            String ultimaVentana = (String) volver.get(volver.size()-2)[0]; //el 0 tiene el panel principal
+            JPanel ultimaOpcion = (JPanel) volver.get(volver.size()-2)[1]; //el 1 el tiene panel lateral
+            cl.show(PanelPrincipal, ultimaVentana); //la ultima ventana visitada es el anteultimo agregado, el ultimo es el actual
+            resaltarOpcioneleccionada(ultimaOpcion);
+            volver.remove(volver.size()-1); //borrar la ventana actual
+        }
+    }//GEN-LAST:event_VolverButtonActionPerformed
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -2278,6 +2280,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel VerCursoPanel;
     private javax.swing.JPanel VerExamenPanel;
     private javax.swing.JPanel VerParcialPanel;
+    private javax.swing.JButton VolverButton;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarExamen;
     private javax.swing.JButton btnBuscarNoticia;
@@ -2288,7 +2291,6 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupParciales;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

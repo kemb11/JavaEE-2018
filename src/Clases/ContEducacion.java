@@ -236,6 +236,8 @@ public class ContEducacion implements IContEducacion{
         return parcialesRetornar;
     }
     
+    
+    
 //    public List<Examen> listarExamenes(String buscar){
 //        List<Examen> examenesRetornar = new ArrayList<>();
 //        EstudianteJpaController jpa = new EstudianteJpaController();

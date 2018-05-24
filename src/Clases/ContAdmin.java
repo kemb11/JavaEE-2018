@@ -24,6 +24,10 @@ public class ContAdmin implements IContAdmin {
         }
         return instancia;
     }
+    
+    public Admin getLogin() {
+        return login;
+    }
 
     @Override
     public boolean login(String user, String pass) throws Exception {
