@@ -16,13 +16,16 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
@@ -38,10 +41,8 @@ import javax.swing.table.TableColumnModel;
  * @author Usuario
  */
 public class Admin_MenuPrincipal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenuPrincipal
-     */
+    private List<Sede> sedesEstudiante;
+    private List<Carrera> carrerasEstudiante;
     
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -68,7 +69,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(CarrerasPanel, "carreras");
         PanelPrincipal.add(SedesPanel, "sedes");
         PanelPrincipal.add(NoticiasPanel, "noticias");
-        PanelPrincipal.add(Estudiante, "examenes");
+        PanelPrincipal.add(Estudiante, "estudiante");
+        PanelPrincipal.add(Estudiante_Crear, "crear estudiante");
         
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -940,6 +942,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         inscribirEstudiante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         inscribirEstudiante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion_verde.png"))); // NOI18N
         inscribirEstudiante.setText("Inscribir");
+        inscribirEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inscribirEstudianteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout EstudianteLayout = new javax.swing.GroupLayout(Estudiante);
         Estudiante.setLayout(EstudianteLayout);
@@ -986,8 +993,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel3.setText("Selecciona una carrera");
 
         est_sede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        est_sede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                est_sedeActionPerformed(evt);
+            }
+        });
 
         est_carrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        est_carrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                est_carreraActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cédula de identidad:");
@@ -1708,7 +1725,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_est_apeActionPerformed
 
     private void est_btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_btn_agregarActionPerformed
-        
+        try {
+            this.createEstudiante();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_est_btn_agregarActionPerformed
 
     private void sede_btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sede_btn_crearActionPerformed
@@ -1757,6 +1778,31 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         Fabrica.getInstance().getContAdmin().borrarSede(nombre);
     }//GEN-LAST:event_btn_borrarSedeActionPerformed
 
+    private void est_sedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_sedeActionPerformed
+        int index = est_sede.getSelectedIndex();
+        if(est_sede.getItemCount()>0 && index != -1){
+            Sede s = this.sedesEstudiante.get(index);
+            carrerasEstudiante = s.getCarreras();
+            est_carrera.setEnabled(true);
+            est_carrera.removeAllItems();
+            for(Carrera c : carrerasEstudiante)
+                est_carrera.addItem(c.getNombre());
+            est_txt_sede.setText(s.toString());
+        }
+    }//GEN-LAST:event_est_sedeActionPerformed
+
+    private void est_carreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_est_carreraActionPerformed
+        int index = est_carrera.getSelectedIndex();
+        if(est_carrera.getItemCount()>0 && index != -1){
+            Carrera c = this.carrerasEstudiante.get(index);
+            est_txt_carrera.setText(c.toString());
+        }
+    }//GEN-LAST:event_est_carreraActionPerformed
+
+    private void inscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirEstudianteActionPerformed
+        opcionSeleccionada(EstudianteOpcion, "crear estudiante");
+    }//GEN-LAST:event_inscribirEstudianteActionPerformed
+
         void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
         
@@ -1794,6 +1840,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             case "noticias":
                 this.listarNoticias();
                 this.setTitle("Menú: Noticias");
+                break;
+            case "crear estudiante":
+                this.reiniciarCrearEstudiante();
+                this.setTitle("Menú: Estudiate");
+                break;
+            case "estudiante":
+                this.listarEstudiante();
+                this.setTitle("Menú: Estudiate");
                 break;
         }
         
@@ -1917,7 +1971,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         if (this.BuscarCarrera.getText().equals("")) {
             carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede();
         } else {
-            carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede(this.BuscarSede.getText());
+            carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede(this.BuscarCarrera.getText());
         }
         DefaultTableModel modelo = (DefaultTableModel) CarreraTable.getModel();
         while (modelo.getRowCount() > 0) {
@@ -1938,6 +1992,28 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         InternetAddress correo = new InternetAddress(est_ema.getText());
         try{
             correo.validate();
+            if(!est_carrera.isEnabled() || est_txt_carrera.getText().isEmpty())
+                throw new Exception("Seleccione sede y carrera");
+            if(controlCrearEstudiante())
+                throw new Exception("Seleccione sede y carrera");
+            Date fecha = null;
+            try{
+                fecha = dateFormat.parse(est_fec.getText());
+                Estudiante e = new Estudiante();
+                e.setApellidos(est_ape.getText());
+                e.setNombres(est_nom.getText());
+                e.setCi(est_ci.getText());
+                e.setId(est_ci.getText());
+                e.setEmail(est_ema.getText());
+                e.setApellidos(est_ape.getText());
+                int index = est_carrera.getSelectedIndex();
+                e.setCarrera(carrerasEstudiante.get(index));
+                index = est_sede.getSelectedIndex();
+                e.setSede(sedesEstudiante.get(index));
+                Fabrica.getInstance().getContAdmin().crearEstudiante(e);
+            }catch(ParseException pe){
+                throw new Exception("Fecha incorrecta");
+            }
             
         }catch(AddressException ex){
             throw new Exception("Formato de correo invalido");
@@ -1950,6 +2026,32 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             cb_listaSedes.addItem(nombre);
             selectSede.addItem(nombre);
         }
+    }
+    
+    //retorna true si alguno está vacío
+    private boolean controlCrearEstudiante(){
+        if(est_nom.getText().isEmpty()) return true; 
+        if(est_ape.getText().isEmpty()) return true; 
+        if(est_ema.getText().isEmpty()) return true; 
+        if(est_ci.getText().isEmpty()) return true; 
+        if(est_fec.getText().isEmpty()) return true; 
+        return false; 
+    }
+    
+    private void reiniciarCrearEstudiante(){
+        est_nom.setText("");
+        est_ci.setText("");
+        est_ema.setText("");
+        est_fec.setText("");
+        est_ape.setText("");
+        est_txt_carrera.setText("");
+        est_txt_sede.setText("");
+        est_carrera.removeAllItems();
+        est_carrera.setEnabled(false);
+        est_sede.removeAllItems();
+        sedesEstudiante = Fabrica.getInstance().getContEdu().listarSedes();
+        for(Sede s : sedesEstudiante)
+            est_sede.addItem(s.getNombre());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2060,4 +2162,25 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField sede_txt_telefono;
     private javax.swing.JComboBox<String> selectSede;
     // End of variables declaration//GEN-END:variables
+
+    private void listarEstudiante() {
+        List<Estudiante> estudiante;
+        if (this.BuscarEstudiante.getText().equals("")) {
+            estudiante = Fabrica.getInstance().getContEst().getEstudiantes();
+        } else {
+            estudiante = Fabrica.getInstance().getContEst().getEstudiantes(this.BuscarEstudiante.getText());
+        }
+        DefaultTableModel modelo = (DefaultTableModel) EstudiantesTable.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        if (estudiante.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
+        } else {
+            for (Estudiante e : estudiante) {
+                Object[] datos = {e,e.getCi(), e.getNombres(), e.getApellidos(), dateFormat.format(e.getFechaNac()), e.getEmail()};
+                modelo.addRow(datos);
+            }
+        }
+    }
 }
