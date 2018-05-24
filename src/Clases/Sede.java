@@ -62,6 +62,10 @@ public class Sede implements Serializable {
         this.cursoSedes = cursoSedes;
     }
     
+    public void setCursoSede(CursoSede cursoSedes) {
+        this.cursoSedes.add(cursoSedes);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -130,6 +134,10 @@ public class Sede implements Serializable {
         texto += "\nDirección: "+ this.direccion;
         texto += "\nTeléfono: " + this.telefono;
         return texto;
+    }
+    
+    public void setEstudiante(Estudiante e){
+        this.estudiantes.add(e);
     }
     
 }

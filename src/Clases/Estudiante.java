@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -195,12 +196,15 @@ public class Estudiante extends Usuario {
     
     public List<Carrera> getCarreras(){
         List<Carrera> list = new ArrayList<>();
+        if(carreraEstudiante != null)
         for(CarreraEstudiante c : carreraEstudiante)
             list.add(c.getCarrera());
         return list;
     }
     
     public void setCarrera(Carrera c){
+        if(carreraEstudiante == null)
+            carreraEstudiante = new ArrayList<>();
         if(!estaInscriptoEnCarrera(c)){
             CarreraEstudiante ce = new CarreraEstudiante();
             ce.setEstudiante(this);
@@ -210,6 +214,17 @@ public class Estudiante extends Usuario {
             ce.setAprobada(false);
             c.setEstudiante(ce);
             this.carreraEstudiante.add(ce);
+            Fabrica.getInstance().getEntity().persist(ce);
         }
     }
+    
+    public void setSede(Sede S){
+        if(sedes == null)
+            sedes = new ArrayList<>();
+        if(!this.sedes.contains(S)){
+            this.sedes.add(S);
+            S.setEstudiante(this);
+        }
+    }
+
 }

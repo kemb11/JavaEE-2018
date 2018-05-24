@@ -24,4 +24,5 @@ public interface IContEducacion {
     public abstract List<Examen> listarExamenesEst(String buscar);
     public abstract List<Parcial> listarParciales(String buscar);
     public abstract List<Parcial> listarParcialesEst(String buscar);
+    public abstract void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception;
 }

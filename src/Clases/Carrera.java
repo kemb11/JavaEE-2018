@@ -94,6 +94,10 @@ public class Carrera implements Serializable {
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
     }
+    
+    public void setCurso(Curso cursos) {
+        this.cursos.add(cursos);
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -161,10 +165,15 @@ public class Carrera implements Serializable {
         return texto;
     }
     
-    public boolean periodo(){
+    public boolean primerperiodo(){
         Date dia = new Date();
         if(dia.after(this.primerSemestre.getInicio()) && dia.before(this.primerSemestre.getFin()))
             return true;
+        return false;
+    }
+    
+    public boolean segundoperiodo(){
+        Date dia = new Date();
         if(dia.after(this.segundoSemestre.getInicio()) && dia.before(this.segundoSemestre.getFin()))
             return true;
         return false;

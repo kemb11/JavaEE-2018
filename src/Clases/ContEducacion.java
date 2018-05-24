@@ -119,11 +119,13 @@ public class ContEducacion implements IContEducacion{
         return sjpa.findSede(palabra);
     }
     
+    @Override
     public List<Carrera> listarCarrerasSede(){
         CarreraJpaController cjpa = new CarreraJpaController();
         return cjpa.findCarreraSede(sede.getId());
     }
     
+    @Override
     public List<Carrera> listarCarrerasSede(String palabra){
         CarreraJpaController cjpa = new CarreraJpaController();
         return cjpa.findCarreraSede(sede.getId(), palabra);
@@ -236,7 +238,42 @@ public class ContEducacion implements IContEducacion{
         return parcialesRetornar;
     }
     
-    
+    @Override
+    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception{
+        for (Curso cursoCarrera : carrera.getCursos()) {
+            if(cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())){
+                throw new Exception("Ya existe un curso llamado '"+nombre+"' en la carrera '"+carrera.getNombre()+"'");
+            }
+        }
+        
+        EntityManager em = Fabrica.getInstance().getEntity();
+        em.getTransaction().begin();
+        try {
+            Curso curso = new Curso();
+            curso.setNombre(nombre);curso.setCreditos(creditos);
+            curso.setSemestre(semestre);
+            curso.setDescripcion(descripcion);
+            curso.setHorarios(horario);
+            curso.setCarrera(carrera);
+            curso.setOptativo(optativo);
+            
+            CursoSede cs = new CursoSede();
+            cs.setCurso(curso);
+            cs.setSede(this.sede);
+            this.sede.setCursoSede(cs);    
+            carrera.setCurso(curso);
+            List<CursoSede> cursosedes = new ArrayList<>();
+            cursosedes.add(cs);
+            curso.setCursoSedes(cursosedes);
+            
+            em.persist(cs);
+            em.persist(curso);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
     
 //    public List<Examen> listarExamenes(String buscar){
 //        List<Examen> examenesRetornar = new ArrayList<>();

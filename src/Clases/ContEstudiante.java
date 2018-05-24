@@ -1,9 +1,7 @@
 package Clases;
 
 import Persistencia.EstudianteJpaController;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ContEstudiante implements IContEstudiante {
 
@@ -43,7 +41,7 @@ public class ContEstudiante implements IContEstudiante {
    
     @Override
     public boolean inscripcionCurso(Curso curso) throws Exception{
-        if(curso.getCarrera().periodo()){
+        if(curso.periodo()){
             if(this.login.estaInscriptoEnSede(Fabrica.getInstance().getContEdu().getSede())){
                 Sede sede = Fabrica.getInstance().getContEdu().getSede();
                 for (CursoSede cs : curso.getCursoSedes()) {
@@ -124,5 +122,17 @@ public class ContEstudiante implements IContEstudiante {
         }
         
         return null;
+    }
+
+    @Override
+    public List<Estudiante> getEstudiantes() {
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        return ejpa.findEstudianteEntities();
+    }
+
+    @Override
+    public List<Estudiante> getEstudiantes(String palabra) {
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        return ejpa.findEstudianteEntities(palabra);
     }
 }

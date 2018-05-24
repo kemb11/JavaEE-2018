@@ -196,4 +196,13 @@ public class EstudianteJpaController implements Serializable {
         return false;
     }
     
+    public List<Estudiante> findEstudianteEntities(String palabra){
+        List<Estudiante> estudiantes = this.findEstudianteEntities();
+        for(Estudiante e : estudiantes){
+            if(!e.getCi().contains(palabra) && !e.getNombres().contains(palabra) && !e.getApellidos().contains(palabra) && !e.getEmail().contains(palabra))
+                estudiantes.remove(e);
+                
+        }
+        return estudiantes;
+    }
 }

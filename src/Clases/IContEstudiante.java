@@ -12,4 +12,6 @@ public interface IContEstudiante {
     public abstract void cerrarSesion();
     public abstract boolean inscripcionExamen(Examen examen) throws Exception;
     public abstract InscripcionE getInscripcionExamen(Examen examen);
+    public abstract List<Estudiante> getEstudiantes();
+    public abstract List<Estudiante> getEstudiantes(String palabra);
 }

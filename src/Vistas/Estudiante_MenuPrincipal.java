@@ -2140,7 +2140,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         if (this.BuscarCarrera.getText().equals("")) {
             carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede();
         } else {
-            carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede(this.BuscarSede.getText());
+            carreras = Fabrica.getInstance().getContEdu().listarCarrerasSede(this.BuscarCarrera.getText());
         }
         DefaultTableModel modelo = (DefaultTableModel) CarreraTable.getModel();
         while (modelo.getRowCount() > 0) {
