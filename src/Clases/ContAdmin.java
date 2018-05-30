@@ -1,4 +1,3 @@
-
 package Clases;
 
 import Persistencia.*;
@@ -10,20 +9,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+
 public class ContAdmin implements IContAdmin {
+
     private static ContAdmin instancia;
     private Admin login;
 
     public ContAdmin() {
     }
-    
-    public static ContAdmin getInstance(){
-        if(instancia == null){
+
+    public static ContAdmin getInstance() {
+        if (instancia == null) {
             instancia = new ContAdmin();
         }
         return instancia;
@@ -44,16 +41,15 @@ public class ContAdmin implements IContAdmin {
             }
         }
     }
-    
-    
+
     public Admin getLogin() {
         return login;
     }
-    
+
     @Override
-    public void nuevaNoticia(String titulo, String texto, List<String> etiquetas){
+    public void nuevaNoticia(String titulo, String texto, List<String> etiquetas) {
         Fabrica.getInstance().getEntity().getTransaction().begin();
-        try {             
+        try {
             Noticia noticia = new Noticia();
             noticia.setTitulo(titulo);
             noticia.setTexto(texto);
@@ -66,32 +62,44 @@ public class ContAdmin implements IContAdmin {
             throw e;
         }
     }
-    
+
     @Override
     public List<Noticia> listarNoticias(String buscar) {
         NoticiaJpaController njpa = new NoticiaJpaController();
         List<Noticia> noticias = new ArrayList<>();
-        
+
         for (Noticia noticia : njpa.findNoticiaEntities()) {
-            if(noticia.getTitulo().contains(buscar)){
+            if (noticia.getTitulo().contains(buscar)) {
                 noticias.add(noticia);
             }
         }
-        
+
         return noticias;
     }
-    
-        
-    public void crearEstudiante(Estudiante e) throws Exception{
-        EstudianteJpaController ejpa = new EstudianteJpaController();  
-        if(ejpa.email(e.getEmail()))
-            throw new Exception("El email está ocupado");
-        if(ejpa.id(e.getId()))
-            throw new Exception("El id está ocupado");
-        e.setPass(clave());
-        ejpa.create(e);
+
+    public void crearEstudiante(Estudiante e) throws InternalException {
+        try {
+            EstudianteJpaController ejpa = new EstudianteJpaController();
+            if (ejpa.email(e.getEmail())) {
+                throw new InternalException("El email está ocupado");
+            }
+            if (ejpa.id(e.getId())) {
+                throw new InternalException("El id está ocupado");
+            }
+            e.setPass(clave());
+            String mensaje = "Bienvenido " + e.getNombres() + " " + e.getApellidos()
+                    + ",\nsu usuario es " + e.getId() + " y contraseña " + e.getPass();
+            SendEmail.EnviarMail(e.getEmail(), "Su usuario ha sido creado", mensaje);
+            try {
+                ejpa.create(e);
+            } catch (Exception ex) {
+                throw new InternalException("Error al persistir");
+            }
+        } catch (UnsupportedEncodingException ex) {
+            throw new InternalException("Error al enviar mail");
+        }
     }
-    
+
     private String clave() {
         int leftLimit = 48; // letter 'a'
         int rightLimit = 125; // letter 'z'
@@ -104,9 +112,9 @@ public class ContAdmin implements IContAdmin {
         }
         return buffer.toString();
     }
-   
+
     @Override
-    public void crearSedeVar(String nombre, String direccion, String telefono) throws Exception{
+    public void crearSedeVar(String nombre, String direccion, String telefono) throws Exception {
         Sede s = new Sede();
         s.setNombre(nombre);
         s.setTelefono(telefono);
@@ -115,51 +123,78 @@ public class ContAdmin implements IContAdmin {
         s.setCursoSedes(null);
         s.setEstudiantes(null);
         SedeJpaController sjpa = new SedeJpaController();
-        if(sjpa.existeNombre(s.getNombre()))
+        if (sjpa.existeNombre(s.getNombre())) {
             throw new Exception("El nombre de la sede ya existe");
+        }
         sjpa.create(s);
     }
+
     @Override
-    public List<String> getSedes(){
+    public List<String> getSedes() {
         SedeJpaController sjpa = new SedeJpaController();
         List<String> ls = new ArrayList();
-        for( Sede s : sjpa.findSedeEntities() ){
+        for (Sede s : sjpa.findSedeEntities()) {
             ls.add(s.getNombre());
         }
         return ls;
     }
+
     @Override
-    public void borrarSede(String nombre){
+    public void borrarSede(String nombre) {
         SedeJpaController sjpa = new SedeJpaController();
         Sede s = sjpa.returnByNombre(nombre);
         Long id = s.getId();
-        try{
+        try {
             sjpa.destroy(id);
-        }catch(NonexistentEntityException nee){
-            
+        } catch (NonexistentEntityException nee) {
+
         }
-        
+
     }
+
     @Override
-    public Map<String,String> getInfoSedeByNombre(String nombre){
+    public Map<String, String> getInfoSedeByNombre(String nombre) {
         SedeJpaController sjpa = new SedeJpaController();
         Sede s = sjpa.returnByNombre(nombre);
-        Map<String, String> hm = new HashMap<String,String>();
+        Map<String, String> hm = new HashMap<String, String>();
         hm.put("nombre", s.getNombre());
         hm.put("direccion", s.getDireccion());
         hm.put("telefono", s.getTelefono());
         return hm;
     }
-    
-    public void crearDocente(Docente d) throws Exception{
-        EstudianteJpaController ejpa = new EstudianteJpaController();  
+
+    public void crearDocente(Docente d) throws InternalException {
+        try {
+            DocenteJpaController djpa = new DocenteJpaController();
+            EstudianteJpaController ejpa = new EstudianteJpaController();
+            if (djpa.email(d.getEmail())) {
+                throw new InternalException("El email está ocupado");
+            }
+            d.setPass(clave());
+            d.setId(d.getEmail().substring(0, d.getEmail().indexOf('@')));
+            String mensaje = "Bienvenido " + d.getNombres() + " " + d.getApellidos()
+                    + ",\nsu usuario es " + d.getId() + " y contraseña " + d.getPass();
+            SendEmail.EnviarMail(d.getEmail(), "Su usuario docente ha sido creado", mensaje);
+            try {
+                djpa.create(d);
+            } catch (Exception ex) {
+                throw new InternalException("Error al persistir");
+            }
+        } catch (UnsupportedEncodingException ex) {
+            throw new InternalException("Error al enviar mail");
+        }
+    }
+
+    @Override
+    public List<Docente> getDocentes() {
         DocenteJpaController djpa = new DocenteJpaController();
-        if(ejpa.id(d.getId()))
-            throw new Exception("El id está ocupado");
-        if(djpa.id(d.getId()))
-            throw new Exception("El id está ocupado");
-        d.setPass(this.clave());
-        
+        return djpa.findDocenteEntities();
+    }
+
+    @Override
+    public List<Docente> getDocentes(String palabra) {
+        DocenteJpaController djpa = new DocenteJpaController();
+        return djpa.findDocenteEntities(palabra); 
     }
 
 }
@@ -321,4 +356,4 @@ public class ContAdmin implements IContAdmin {
         
     }
 }
-*/
+ */

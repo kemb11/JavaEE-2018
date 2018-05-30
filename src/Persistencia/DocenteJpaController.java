@@ -96,7 +96,7 @@ public class DocenteJpaController implements Serializable {
             }
             return q.getResultList();
         } finally {
-           
+
         }
     }
 
@@ -105,7 +105,7 @@ public class DocenteJpaController implements Serializable {
         try {
             return em.find(Docente.class, id);
         } finally {
-           
+
         }
     }
 
@@ -118,24 +118,36 @@ public class DocenteJpaController implements Serializable {
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
-           
+
         }
     }
-    
-    public boolean id(String id){
-        for(Docente d : this.findDocenteEntities()){
-            if(d.getId().equals(id))
+
+    public boolean id(String id) {
+        for (Docente d : this.findDocenteEntities()) {
+            if (d.getId().equals(id)) {
                 return true;
-        } 
+            }
+        }
         return false;
     }
-    
-    public boolean email(String email){
-        for(Docente d : this.findDocenteEntities()){
-            if(d.getEmail().equals(email))
+
+    public boolean email(String email) {
+        for (Docente d : this.findDocenteEntities()) {
+            if (d.getEmail().equals(email)) {
                 return true;
-        } 
+            }
+        }
         return false;
     }
-    
+
+    public List<Docente> findDocenteEntities(String palabra) {
+        List<Docente> docentes = this.findDocenteEntities();
+        for (Docente d : docentes) {
+            if (!d.getCi().contains(palabra) && !d.getNombres().contains(palabra) && !d.getApellidos().contains(palabra) && !d.getEmail().contains(palabra)) {
+                docentes.remove(d);
+            }
+        }
+        return docentes;
+    }
+
 }

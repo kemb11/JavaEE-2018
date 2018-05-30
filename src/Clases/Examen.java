@@ -16,10 +16,7 @@ import javax.persistence.Temporal;
 @Entity
 @DiscriminatorValue("E")
 public class Examen extends Prueba {
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date inicioInsripcion;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date finInsripcion;
+    private PeriodoInscripcion inscripcion;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaMuestra;
     @ManyToOne
@@ -28,11 +25,11 @@ public class Examen extends Prueba {
     List<InscripcionE> estudiantesInscritos;
 
     public Date getInicioInsripcion() {
-        return inicioInsripcion;
+        return inscripcion.getInicio();
     }
 
     public Date getFinInsripcion() {
-        return finInsripcion;
+        return inscripcion.getFin();
     }
 
     public Date getFechaMuestra() {
@@ -40,11 +37,11 @@ public class Examen extends Prueba {
     }
 
     public void setInicioInsripcion(Date inicioInsripcion) {
-        this.inicioInsripcion = inicioInsripcion;
+        this.inscripcion.setInicio(inicioInsripcion);
     }
 
     public void setFinInsripcion(Date finInsripcion) {
-        this.finInsripcion = finInsripcion;
+        this.inscripcion.setFin(finInsripcion);
     }
 
     public void setFechaMuestra(Date fechaMuestra) {
@@ -69,9 +66,6 @@ public class Examen extends Prueba {
     
     public boolean periodoOK(){
         Date dia = new Date();
-        if(dia.after(this.inicioInsripcion) && dia.before(this.finInsripcion))
-            return true;
-        else
-            return false;
+        return this.inscripcion.valido(dia);
     }
 }
