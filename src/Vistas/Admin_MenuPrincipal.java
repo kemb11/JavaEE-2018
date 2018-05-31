@@ -56,6 +56,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         llenarListaSedes();
 
         CursosTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        SedeTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        CarreraTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        NoticiasTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        EstudiantesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DocentesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // ocultar la columna del objeto
         CursosTable.getColumnModel().removeColumn(CursosTable.getColumnModel().getColumn(0));
@@ -75,6 +80,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(Docente, "docente");
         PanelPrincipal.add(Docente_Crear, "crear docente");
         PanelPrincipal.add(EditarCursoPanel, "editarCurso");
+        PanelPrincipal.add(ExamenCurso, "crear examen");
+        PanelPrincipal.add(panelNuevaSede, "crear sede");
 
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -1859,7 +1866,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(Docente_CrearLayout.createSequentialGroup()
                         .addGap(230, 230, 230)
                         .addComponent(doc_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 249, Short.MAX_VALUE))
+                .addGap(0, 345, Short.MAX_VALUE))
             .addGroup(Docente_CrearLayout.createSequentialGroup()
                 .addGap(289, 289, 289)
                 .addComponent(jLabel45)
@@ -2008,6 +2015,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         jScrollPane14.setViewportView(exa_list_noselec);
 
+        exa_list_selec.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        exa_list_selec.setToolTipText("");
         jScrollPane15.setViewportView(exa_list_selec);
 
         exa_btn_selec.setText(">>");
@@ -2051,62 +2060,52 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         ExamenCursoLayout.setHorizontalGroup(
             ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ExamenCursoLayout.createSequentialGroup()
-                .addGap(205, 205, 205)
+                .addGap(49, 49, 49)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                    .addComponent(jLabel47)
-                                    .addGap(61, 61, 61))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
-                                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(exa_btn_selec)
-                                        .addComponent(exa_btn_deselec))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                .addComponent(jLabel39)
-                                .addGap(90, 90, 90)))
-                        .addGroup(ExamenCursoLayout.createSequentialGroup()
-                            .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel46)
-                                .addComponent(jLabel49))
-                            .addGap(65, 65, 65)))
                     .addGroup(ExamenCursoLayout.createSequentialGroup()
-                        .addComponent(jLabel50)
-                        .addGap(18, 18, 18)
-                        .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel48)
-                    .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(ExamenCursoLayout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel51)
-                            .addGap(18, 18, 18)
-                            .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                        .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(exa_fecfin, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
-                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
-                        .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))
+                        .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(exa_btn_selec)
+                                    .addComponent(exa_btn_deselec)))
+                            .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                            .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                .addComponent(jLabel50)
+                                .addGap(13, 13, 13)
+                                .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(exa_fecfin)
+                            .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                .addComponent(jLabel51)
+                                .addGap(18, 18, 18)
+                                .addComponent(exa_nota_tot))
+                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                .addComponent(jLabel48)
+                                .addGap(0, 6, Short.MAX_VALUE))))
+                    .addGroup(ExamenCursoLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
                         .addComponent(exa_btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(233, 233, 233))))
+                        .addGap(72, 72, 72)))
+                .addGap(412, 412, 412))
         );
         ExamenCursoLayout.setVerticalGroup(
             ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ExamenCursoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(59, 59, 59)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exa_fec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39))
@@ -2118,28 +2117,27 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exa_fecfin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel47))
-                .addGap(18, 18, 18)
-                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48)
-                    .addComponent(jLabel49))
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(ExamenCursoLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                    .addComponent(jLabel49)
+                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
                         .addComponent(exa_btn_selec)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exa_btn_deselec)))
+                        .addGap(72, 72, 72)
+                        .addComponent(exa_btn_deselec))
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(24, 24, 24)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
                     .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel51)
                     .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(18, 21, Short.MAX_VALUE)
                 .addComponent(exa_btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(108, 108, 108))
         );
 
         PanelPrincipal.add(ExamenCurso, "card15");
@@ -2212,8 +2210,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(PanelLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2762,24 +2761,36 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         opcionSeleccionada(DocenteOpcion, "crear examen");
     }//GEN-LAST:event_NuevoExamenCursoActionPerformed
 
-    private void exa_btn_selecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_selecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exa_btn_selecActionPerformed
-
-    private void exa_btn_deselecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_deselecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exa_btn_deselecActionPerformed
-
-    private void exa_nota_aproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_nota_aproActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exa_nota_aproActionPerformed
-
     private void exa_btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_aceptarActionPerformed
         try {
         } catch (InternalException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_exa_btn_aceptarActionPerformed
+
+    private void exa_nota_aproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_nota_aproActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exa_nota_aproActionPerformed
+
+    private void exa_btn_deselecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_deselecActionPerformed
+        int index = exa_list_selec.getSelectedIndex();
+        if(index != -1){
+        DefaultListModel model2 = (DefaultListModel)exa_list_selec.getModel();
+        DefaultListModel model = (DefaultListModel)exa_list_noselec.getModel();
+        model.addElement(model2.get(index));
+        model2.remove(index);
+        }
+    }//GEN-LAST:event_exa_btn_deselecActionPerformed
+
+    private void exa_btn_selecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_selecActionPerformed
+        int index = exa_list_noselec.getSelectedIndex();
+        if(index != -1){
+        DefaultListModel model = (DefaultListModel)exa_list_selec.getModel();
+        DefaultListModel model2 = (DefaultListModel)exa_list_noselec.getModel();
+        model.addElement(model2.get(index));
+        model2.remove(index);
+        }
+    }//GEN-LAST:event_exa_btn_selecActionPerformed
 
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -2838,6 +2849,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             case "estudiante":
                 this.listarEstudiante();
                 this.setTitle("Menú: Estudiate");
+                break;
+            case "crear sede":
+                this.sede_txt_telefono.setText("");
+                this.sede_txt_nombre.setText("");
+                this.sede_txt_direccion.setText("");
+                this.setTitle("Menú: Sede");
                 break;
             case "nuevoCurso":
                 this.setTitle("Menú: Nuevo Curso");
@@ -2991,6 +3008,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 modelo.addRow(datos);
             }
         }
+        this.resizeColumnWidth(CarreraTable);
     }
 
     private void createEstudiante() throws InternalException {
@@ -3061,6 +3079,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 throw new InternalException("Formato de correo inválido");
             }
         }
+        this.resizeColumnWidth(SedeTable);
     }
 
     private void llenarListaSedes() {
@@ -3354,6 +3373,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 modelo.addRow(datos);
             }
         }
+        this.resizeColumnWidth(EstudiantesTable);
     }
 
     private void listarDocentes() {
@@ -3375,23 +3395,24 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 modelo.addRow(datos);
             }
         }
+        this.resizeColumnWidth(DocentesTable);
     }
     
     private void seleccionarCursoExamen(){
         int index = CursosTable.getSelectedRow();
         if(index != -1){
             Curso c = (Curso)CursosTable.getModel().getValueAt(index, 0);
-            exa_list_noselec.removeAll();
-            exa_list_selec.removeAll();
             exa_fec.setText("");
             exa_fecini.setText("");
             exa_fecfin.setText("");
             exa_nota_apro.setText("");
             exa_nota_tot.setText("");
-            DefaultListModel list = (DefaultListModel) exa_list_noselec.getModel();
+            DefaultListModel list = new DefaultListModel();
+            exa_list_selec.setModel(new DefaultListModel<>());
             for(CursoSede cs : c.getCursoSedes()){
                 list.addElement(cs.getSede().getNombre());
             }
+            exa_list_noselec.setModel(list);
             exa_titulo.setText("Examen de "+ c.getNombre());
         }else{
                 JOptionPane.showMessageDialog(this, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);

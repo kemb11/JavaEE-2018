@@ -72,7 +72,7 @@ public class ContEducacion implements IContEducacion{
             em.getTransaction().rollback();
             e.printStackTrace();
         }*/
-        
+        if(this.sede.getCursoSedes() != null)
         for (CursoSede cursoSede : this.sede.getCursoSedes()) {
             String nombreCurso = cursoSede.getCurso().getNombre().toLowerCase();
             String nombreCarrera = cursoSede.getCurso().getCarrera().getNombre().toLowerCase();
