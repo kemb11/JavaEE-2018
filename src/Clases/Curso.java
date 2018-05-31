@@ -52,6 +52,8 @@ public class Curso implements Serializable {
     private List<CursoSede> cursoSedes;
     @ManyToMany
     private List<Estudiante> estudiantesAprobados;
+    @OneToMany
+    private List<Previa> previas;
 
     public Long getId() {
         return id;
@@ -97,6 +99,14 @@ public class Curso implements Serializable {
         this.estudiantesAprobados = estudiantesAprobados;
     }
 
+    public void setPrevias(List<Previa> previas) {
+        this.previas = previas;
+    }
+
+    public List<Previa> getPrevias() {
+        return previas;
+    }
+
         public String getNombre() {
         return nombre;
     }
@@ -131,6 +141,20 @@ public class Curso implements Serializable {
                 return true;
             }
         }
+        return false;
+    }
+    
+    public boolean tieneComoPrevia(Curso curso){
+        for (Previa previa : this.previas) {
+            if(previa.getCursoPrevia().equals(curso)){
+                return true;
+            }else{
+                if(previa.getCursoPrevia().tieneComoPrevia(curso)){
+                    return true;
+                }
+            }
+        }
+        
         return false;
     }
 

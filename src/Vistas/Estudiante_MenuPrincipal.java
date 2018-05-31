@@ -183,6 +183,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         TituloLabel8 = new javax.swing.JLabel();
         TituloLabel9 = new javax.swing.JLabel();
         TituloLabel4 = new javax.swing.JLabel();
+        TituloLabel12 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        PreviasCurTable = new javax.swing.JTable();
+        TituloLabel13 = new javax.swing.JLabel();
+        carreraCurLabel = new javax.swing.JLabel();
         ParcialesPanel = new javax.swing.JPanel();
         BuscarExamenTextField1 = new javax.swing.JTextField();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -1178,6 +1183,35 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         TituloLabel4.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel4.setText("Descripción:");
 
+        TituloLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel12.setText("Previas:");
+
+        PreviasCurTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Curso", "Tipo de previa"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane14.setViewportView(PreviasCurTable);
+
+        TituloLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel13.setText("Carrera:");
+
+        carreraCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carreraCurLabel.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout VerCursoPanelLayout = new javax.swing.GroupLayout(VerCursoPanel);
         VerCursoPanel.setLayout(VerCursoPanelLayout);
         VerCursoPanelLayout.setHorizontalGroup(
@@ -1185,20 +1219,31 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TituloLabel4)
-                    .addComponent(TituloLabel9)
                     .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel8)
+                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TituloLabel4)
+                            .addComponent(TituloLabel9)
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TituloLabel)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TituloLabel12)))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TituloLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         VerCursoPanelLayout.setVerticalGroup(
             VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1215,14 +1260,24 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(TituloLabel8))
                     .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TituloLabel9)
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TituloLabel13)
+                    .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TituloLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerCursoPanel, "card7");
@@ -2019,6 +2074,21 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 OptativoLabel.setText(opt);
                 HorariosTextArea.setText(curso.getHorarios());
                 DescTextArea.setText(curso.getDescripcion());
+                carreraCurLabel.setText(curso.getCarrera().getNombre());
+                
+                DefaultTableModel modeloPrevias = (DefaultTableModel) PreviasCurTable.getModel();
+                modeloPrevias.setRowCount(0);
+                for (Previa previa : curso.getPrevias()) {
+                    previa.getCursoPrevia();
+                    String tipoP = "Curso";
+                    if(previa.isExamenAprobado()){
+                       tipoP = "Exámen";
+                    }
+                    Object[] datos = {previa.getCursoPrevia().getNombre(), tipoP};
+                    modeloPrevias.addRow(datos);
+                }                
+                resizeColumnWidth(PreviasCurTable);
+                
                 this.setTitle("Menú: Ver Curso");
                 break;
         }
@@ -2252,6 +2322,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel ParcialesOpcion;
     private javax.swing.JPanel ParcialesPanel;
     private javax.swing.JTable ParcialesTable;
+    private javax.swing.JTable PreviasCurTable;
     private javax.swing.JLabel SedeSelec;
     private javax.swing.JTable SedeTable;
     private javax.swing.JPanel SedesOpcion;
@@ -2264,6 +2335,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel TituloLabel1;
     private javax.swing.JLabel TituloLabel10;
     private javax.swing.JLabel TituloLabel11;
+    private javax.swing.JLabel TituloLabel12;
+    private javax.swing.JLabel TituloLabel13;
     private javax.swing.JLabel TituloLabel2;
     private javax.swing.JLabel TituloLabel3;
     private javax.swing.JLabel TituloLabel4;
@@ -2289,6 +2362,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.ButtonGroup buttonGroupParciales;
+    private javax.swing.JLabel carreraCurLabel;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;
     private javax.swing.JLabel jLabel10;
@@ -2305,6 +2379,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

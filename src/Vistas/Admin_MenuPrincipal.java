@@ -44,6 +44,8 @@ import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private List<Sede> sedes = new ArrayList<>();
     private List<Carrera> carreras = new ArrayList<>();
+    private List<Curso> previas = new ArrayList<>();
+    private Carrera carreraSelec;
     
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -64,6 +66,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         CarreraTable.getColumnModel().removeColumn(CarreraTable.getColumnModel().getColumn(0));
         NoticiasTable.getColumnModel().removeColumn(NoticiasTable.getColumnModel().getColumn(0));
         EstudiantesTable.getColumnModel().removeColumn(EstudiantesTable.getColumnModel().getColumn(0));
+        selecPreviaCurTable.getColumnModel().removeColumn(selecPreviaCurTable.getColumnModel().getColumn(0));
+        selecSedeCarrTable.getColumnModel().removeColumn(selecSedeCarrTable.getColumnModel().getColumn(0));
         
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
@@ -72,7 +76,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(NoticiasPanel, "noticias");
         PanelPrincipal.add(Estudiante, "estudiante");
         PanelPrincipal.add(Estudiante_Crear, "crear estudiante");
-        PanelPrincipal.add(EditarCursoPanel, "editarCurso");
+        PanelPrincipal.add(VerCursoPanel, "verCurso");
+        PanelPrincipal.add(CrearCursoPanel, "crearCurso");
+        PanelPrincipal.add(CrearCarreraPanel, "crearCarrera");
+        
+        opciones.add(CursosOpcion);
+        opciones.add(CarrerasOpcion);
+        opciones.add(SedesOpcion);
+        opciones.add(NoticiasOpcion);
+        opciones.add(EstudiantesOpcion);
+        opciones.add(DocentesOpcion);
         
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -109,10 +122,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         NoticiasOpcion = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        EstudianteOpcion = new javax.swing.JPanel();
+        EstudiantesOpcion = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        DocenteOpcion = new javax.swing.JPanel();
+        DocentesOpcion = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         PanelPrincipal = new javax.swing.JPanel();
@@ -132,6 +145,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         btnBuscarCarrera = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         CarreraTable = new javax.swing.JTable();
+        NuevaCarrButton = new javax.swing.JButton();
         SedesPanel = new javax.swing.JPanel();
         BuscarSede = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -208,9 +222,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         TituloLabel8 = new javax.swing.JLabel();
         TituloLabel9 = new javax.swing.JLabel();
         TituloLabel4 = new javax.swing.JLabel();
-        EditarCursoPanel = new javax.swing.JPanel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        PreviasCurTable = new javax.swing.JTable();
+        TituloLabel10 = new javax.swing.JLabel();
+        TituloLabel11 = new javax.swing.JLabel();
+        carreraCurLabel = new javax.swing.JLabel();
+        CrearCursoPanel = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
-        SelecCarrCurComboBox = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
         NombreCurTextField = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
@@ -227,13 +245,34 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         HorarioCurTextArea = new javax.swing.JTextArea();
         ConfirmarCurButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        verCarreraCurButton = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
-        SelecpreviaCurComboBox = new javax.swing.JComboBox<>();
+        SelecPreviaCurComboBox = new javax.swing.JComboBox<>();
         verCursoCurButton = new javax.swing.JButton();
         quitarPreviaCurButton = new javax.swing.JButton();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        selecPreviaCurTable = new javax.swing.JTable();
+        carreraCrearCurLabel = new javax.swing.JLabel();
+        CrearCarreraPanel = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        NombreCarrTextField = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        creditosCarrTextField = new javax.swing.JTextField();
+        jLabel42 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        DescCarrTextArea = new javax.swing.JTextArea();
+        crearCursoButton = new javax.swing.JButton();
+        borrarCursoButton = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        SelecSedeCarrComboBox = new javax.swing.JComboBox<>();
+        verSedeCarrButton = new javax.swing.JButton();
+        quitarSedeCarrButton = new javax.swing.JButton();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        selecSedeCarrTable = new javax.swing.JTable();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        CursosTable1 = new javax.swing.JTable();
+        jLabel47 = new javax.swing.JLabel();
+        confirmarCarrButton = new javax.swing.JButton();
+        cancelarCarrButton = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -408,16 +447,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
-        EstudianteOpcion.setBackground(new java.awt.Color(29, 131, 72));
-        EstudianteOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
+        EstudiantesOpcion.setBackground(new java.awt.Color(29, 131, 72));
+        EstudiantesOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EstudianteOpcionMouseClicked(evt);
+                EstudiantesOpcionMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EstudianteOpcionMouseEntered(evt);
+                EstudiantesOpcionMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                EstudianteOpcionMouseExited(evt);
+                EstudiantesOpcionMouseExited(evt);
             }
         });
 
@@ -427,28 +466,28 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Estudiantes");
 
-        javax.swing.GroupLayout EstudianteOpcionLayout = new javax.swing.GroupLayout(EstudianteOpcion);
-        EstudianteOpcion.setLayout(EstudianteOpcionLayout);
-        EstudianteOpcionLayout.setHorizontalGroup(
-            EstudianteOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstudianteOpcionLayout.createSequentialGroup()
+        javax.swing.GroupLayout EstudiantesOpcionLayout = new javax.swing.GroupLayout(EstudiantesOpcion);
+        EstudiantesOpcion.setLayout(EstudiantesOpcionLayout);
+        EstudiantesOpcionLayout.setHorizontalGroup(
+            EstudiantesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstudiantesOpcionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        EstudianteOpcionLayout.setVerticalGroup(
-            EstudianteOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EstudianteOpcionLayout.createSequentialGroup()
+        EstudiantesOpcionLayout.setVerticalGroup(
+            EstudiantesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstudiantesOpcionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(EstudianteOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(EstudiantesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        DocenteOpcion.setBackground(new java.awt.Color(29, 131, 72));
+        DocentesOpcion.setBackground(new java.awt.Color(29, 131, 72));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/avatar.png"))); // NOI18N
 
@@ -456,22 +495,22 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Docentes");
 
-        javax.swing.GroupLayout DocenteOpcionLayout = new javax.swing.GroupLayout(DocenteOpcion);
-        DocenteOpcion.setLayout(DocenteOpcionLayout);
-        DocenteOpcionLayout.setHorizontalGroup(
-            DocenteOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DocenteOpcionLayout.createSequentialGroup()
+        javax.swing.GroupLayout DocentesOpcionLayout = new javax.swing.GroupLayout(DocentesOpcion);
+        DocentesOpcion.setLayout(DocentesOpcionLayout);
+        DocentesOpcionLayout.setHorizontalGroup(
+            DocentesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DocentesOpcionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        DocenteOpcionLayout.setVerticalGroup(
-            DocenteOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DocenteOpcionLayout.createSequentialGroup()
+        DocentesOpcionLayout.setVerticalGroup(
+            DocentesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DocentesOpcionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(DocenteOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DocentesOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jLabel16))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -485,12 +524,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addComponent(CarrerasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(SedesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(NoticiasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(EstudianteOpcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(EstudiantesOpcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(DocenteOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(DocentesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,9 +543,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NoticiasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EstudianteOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EstudiantesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DocenteOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DocentesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(81, 81, 81)
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -656,7 +695,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(BuscarButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NuevoSurButton))
@@ -723,6 +762,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(CarreraTable);
 
+        NuevaCarrButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        NuevaCarrButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion_verde.png"))); // NOI18N
+        NuevaCarrButton.setText("Nueva Carrera");
+        NuevaCarrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NuevaCarrButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CarrerasPanelLayout = new javax.swing.GroupLayout(CarrerasPanel);
         CarrerasPanel.setLayout(CarrerasPanelLayout);
         CarrerasPanelLayout.setHorizontalGroup(
@@ -731,7 +779,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(VerCarrera))
+                        .addComponent(VerCarrera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(NuevaCarrButton))
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -740,7 +790,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         CarrerasPanelLayout.setVerticalGroup(
             CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -750,9 +800,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarCarrera)
                     .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NuevaCarrButton))
                 .addContainerGap())
         );
 
@@ -846,7 +898,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(SeleccionarSede1)
                         .addGap(33, 33, 33)
                         .addComponent(btn_abrirnuevasede)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         SedesPanelLayout.setVerticalGroup(
             SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -856,8 +908,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarSede)
                     .addComponent(BuscarSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SeleccionarSede1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_abrirnuevasede, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -950,8 +1002,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarNoticia)
                     .addComponent(BuscarNoticia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(SeleccionarNoticia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1017,7 +1069,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(inscribirEstudiante)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SeleccionarExamen)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         EstudianteLayout.setVerticalGroup(
             EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1027,8 +1079,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarEstudiante)
                     .addComponent(BuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SeleccionarExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inscribirEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1170,7 +1222,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(Estudiante_CrearLayout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addComponent(est_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 180, Short.MAX_VALUE))
+                .addGap(0, 256, Short.MAX_VALUE))
         );
         Estudiante_CrearLayout.setVerticalGroup(
             Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1216,7 +1268,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(est_ema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(est_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -1253,7 +1305,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(sede_txt_direccion)
                         .addComponent(sede_txt_telefono)
                         .addComponent(sede_btn_crear, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
-                .addContainerGap(612, Short.MAX_VALUE))
+                .addContainerGap(688, Short.MAX_VALUE))
         );
         panelNuevaSedeLayout.setVerticalGroup(
             panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1272,7 +1324,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(sede_txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sede_btn_crear)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(panelNuevaSede, "card8");
@@ -1300,7 +1352,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(panelBorrarSedeLayout.createSequentialGroup()
                         .addGap(291, 291, 291)
                         .addComponent(btn_borrarSede_1)))
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
         panelBorrarSedeLayout.setVerticalGroup(
             panelBorrarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1309,7 +1361,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(cb_listaSedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addComponent(btn_borrarSede_1)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(panelBorrarSede, "card9");
@@ -1365,7 +1417,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(mod_sede_nombre)
                                 .addComponent(mod_sede_direccion)
                                 .addComponent(mod_sede_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))))
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         panelModSedeLayout.setVerticalGroup(
             panelModSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1388,7 +1440,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(mod_sede_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(mod_btn_confirmar)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(panelModSede, "card10");
@@ -1434,6 +1486,35 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         TituloLabel4.setForeground(new java.awt.Color(255, 255, 255));
         TituloLabel4.setText("Descripción:");
 
+        PreviasCurTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Curso", "Tipo de previa"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane14.setViewportView(PreviasCurTable);
+
+        TituloLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel10.setText("Previas:");
+
+        TituloLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel11.setText("Carrera:");
+
+        carreraCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carreraCurLabel.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout VerCursoPanelLayout = new javax.swing.GroupLayout(VerCursoPanel);
         VerCursoPanel.setLayout(VerCursoPanelLayout);
         VerCursoPanelLayout.setHorizontalGroup(
@@ -1441,20 +1522,34 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TituloLabel4)
-                    .addComponent(TituloLabel9)
+                    .addComponent(jScrollPane8)
                     .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel8)
+                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TituloLabel4)
+                            .addComponent(TituloLabel9)
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TituloLabel)
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(227, 227, 227))
+                    .addComponent(jScrollPane9))
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(TituloLabel10))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TituloLabel)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
         VerCursoPanelLayout.setVerticalGroup(
             VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1471,26 +1566,33 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(TituloLabel8))
                     .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TituloLabel9)
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TituloLabel11)
+                    .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TituloLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel9)
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerCursoPanel, "card7");
 
-        EditarCursoPanel.setBackground(new java.awt.Color(73, 202, 114));
+        CrearCursoPanel.setBackground(new java.awt.Color(73, 202, 114));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setText("Seleccionar carrera:");
-
-        SelecCarrCurComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SelecCarrCurComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        jLabel31.setText("Carrera:");
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
@@ -1522,14 +1624,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel35.setText("Semestre:");
 
         SemestreComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SemestreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        SemestreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setText("¿Es optativo?:");
 
         OptativoComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        OptativoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        OptativoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(255, 255, 255));
@@ -1555,20 +1657,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        verCarreraCurButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        verCarreraCurButton.setText("Ver carrera");
-        verCarreraCurButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verCarreraCurButtonActionPerformed(evt);
-            }
-        });
-
         jLabel38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("Seleccionar previa:");
 
-        SelecpreviaCurComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SelecpreviaCurComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        SelecPreviaCurComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SelecPreviaCurComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        SelecPreviaCurComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelecPreviaCurComboBoxActionPerformed(evt);
+            }
+        });
 
         verCursoCurButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         verCursoCurButton.setText("Ver curso");
@@ -1586,7 +1685,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        selecPreviaCurTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1595,85 +1694,88 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane13.setViewportView(jTable1);
+        jScrollPane13.setViewportView(selecPreviaCurTable);
+        if (selecPreviaCurTable.getColumnModel().getColumnCount() > 0) {
+            selecPreviaCurTable.getColumnModel().getColumn(2).setHeaderValue("Tipo de previa");
+        }
 
-        javax.swing.GroupLayout EditarCursoPanelLayout = new javax.swing.GroupLayout(EditarCursoPanel);
-        EditarCursoPanel.setLayout(EditarCursoPanelLayout);
-        EditarCursoPanelLayout.setHorizontalGroup(
-            EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+        carreraCrearCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carreraCrearCurLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout CrearCursoPanelLayout = new javax.swing.GroupLayout(CrearCursoPanel);
+        CrearCursoPanel.setLayout(CrearCursoPanelLayout);
+        CrearCursoPanelLayout.setHorizontalGroup(
+            CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+                .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                             .addComponent(jLabel32)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(NombreCurTextField))
                         .addComponent(jLabel34)
                         .addComponent(jScrollPane10)
-                        .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+                        .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                             .addComponent(jLabel33)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(creditosCurTextField))
                         .addComponent(jLabel37)
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EditarCursoPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel35)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(SemestreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EditarCursoPanelLayout.createSequentialGroup()
+                        .addGroup(CrearCursoPanelLayout.createSequentialGroup()
+                            .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel36)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(OptativoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel35))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(OptativoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SemestreComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                         .addComponent(ConfirmarCurButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)))
                 .addGap(18, 18, 18)
-                .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+                .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                         .addComponent(jLabel31)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SelecCarrCurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(verCarreraCurButton))
-                    .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+                        .addComponent(carreraCrearCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                         .addComponent(jLabel38)
                         .addGap(14, 14, 14)
-                        .addComponent(SelecpreviaCurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SelecPreviaCurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(verCursoCurButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(quitarPreviaCurButton)
                     .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
-        EditarCursoPanelLayout.setVerticalGroup(
-            EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EditarCursoPanelLayout.createSequentialGroup()
+        CrearCursoPanelLayout.setVerticalGroup(
+            CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EditarCursoPanelLayout.createSequentialGroup()
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearCursoPanelLayout.createSequentialGroup()
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
                             .addComponent(NombreCurTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel33)
                             .addComponent(creditosCurTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel35)
                             .addComponent(SemestreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel36)
                             .addComponent(OptativoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1685,18 +1787,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ConfirmarCurButton)
                             .addComponent(jButton2)))
-                    .addGroup(EditarCursoPanelLayout.createSequentialGroup()
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel31)
-                            .addComponent(SelecCarrCurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(verCarreraCurButton))
-                        .addGap(18, 18, 18)
-                        .addGroup(EditarCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(CrearCursoPanelLayout.createSequentialGroup()
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(carreraCrearCurLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel38)
-                            .addComponent(SelecpreviaCurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SelecPreviaCurComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(verCursoCurButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1705,7 +1806,224 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(55, 55, 55))
         );
 
-        PanelPrincipal.add(EditarCursoPanel, "card12");
+        PanelPrincipal.add(CrearCursoPanel, "card12");
+
+        CrearCarreraPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setText("Nombre:");
+
+        NombreCarrTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel41.setText("Créditos:");
+
+        creditosCarrTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        creditosCarrTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditosCarrTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setText("Descripción:");
+
+        DescCarrTextArea.setColumns(20);
+        DescCarrTextArea.setRows(5);
+        jScrollPane12.setViewportView(DescCarrTextArea);
+
+        crearCursoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        crearCursoButton.setText("Agregar");
+        crearCursoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearCursoButtonActionPerformed(evt);
+            }
+        });
+
+        borrarCursoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        borrarCursoButton.setText("Borrar");
+        borrarCursoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarCursoButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel46.setText("Seleccionar sede:");
+
+        SelecSedeCarrComboBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SelecSedeCarrComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        SelecSedeCarrComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelecSedeCarrComboBoxActionPerformed(evt);
+            }
+        });
+
+        verSedeCarrButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        verSedeCarrButton.setText("Ver sede");
+        verSedeCarrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verSedeCarrButtonActionPerformed(evt);
+            }
+        });
+
+        quitarSedeCarrButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        quitarSedeCarrButton.setText("Quitar");
+        quitarSedeCarrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitarSedeCarrButtonActionPerformed(evt);
+            }
+        });
+
+        selecSedeCarrTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Objeto", "Sede"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane16.setViewportView(selecSedeCarrTable);
+
+        CursosTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ObjCurso", "Nombre", "Creditos", "Optativo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane15.setViewportView(CursosTable1);
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel47.setText("Cursos:");
+
+        confirmarCarrButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        confirmarCarrButton.setText("Confirmar");
+        confirmarCarrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarCarrButtonActionPerformed(evt);
+            }
+        });
+
+        cancelarCarrButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cancelarCarrButton.setText("Cancelar");
+        cancelarCarrButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarCarrButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CrearCarreraPanelLayout = new javax.swing.GroupLayout(CrearCarreraPanel);
+        CrearCarreraPanel.setLayout(CrearCarreraPanelLayout);
+        CrearCarreraPanelLayout.setHorizontalGroup(
+            CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(quitarSedeCarrButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                        .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel40)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(NombreCarrTextField))
+                                .addComponent(jLabel42)
+                                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel41)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(creditosCarrTextField)))
+                            .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel46)
+                                    .addGap(14, 14, 14)
+                                    .addComponent(SelecSedeCarrComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(verSedeCarrButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                            .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                                .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel47)
+                                    .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                                        .addComponent(crearCursoButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(borrarCursoButton)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CrearCarreraPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cancelarCarrButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(confirmarCarrButton)))
+                .addContainerGap())
+        );
+        CrearCarreraPanelLayout.setVerticalGroup(
+            CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel40)
+                    .addComponent(NombreCarrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CrearCarreraPanelLayout.createSequentialGroup()
+                        .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel41)
+                            .addComponent(creditosCarrTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel42)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(SelecSedeCarrComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(verSedeCarrButton)))
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(crearCursoButton)
+                        .addComponent(borrarCursoButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(quitarSedeCarrButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(CrearCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confirmarCarrButton)
+                    .addComponent(cancelarCarrButton))
+                .addContainerGap())
+        );
+
+        PanelPrincipal.add(CrearCarreraPanel, "card12");
 
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
@@ -1759,7 +2077,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelCabeceraLayout.setVerticalGroup(
             PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(VolverButton)
                     .addComponent(jLabel15)
@@ -1783,9 +2101,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
         );
 
         pack();
@@ -1849,10 +2167,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         if (CursosTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un curso", "", WARNING_MESSAGE);
         } else {
-            DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
-            Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-            Estudiante_VerCurso verC = new Estudiante_VerCurso(curso);
-            verC.setVisible(true);
+            opcionSeleccionada(CursosPanel, "verCurso");
         }
     }//GEN-LAST:event_VerCursoButtonActionPerformed
 
@@ -2185,20 +2500,20 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_est_carreraActionPerformed
 
     private void inscribirEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirEstudianteActionPerformed
-        opcionSeleccionada(EstudianteOpcion, "crear estudiante");
+        opcionSeleccionada(EstudiantesOpcion, "crear estudiante");
     }//GEN-LAST:event_inscribirEstudianteActionPerformed
 
-    private void EstudianteOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseClicked
-            opcionSeleccionada(EstudianteOpcion,"estudiante");
-    }//GEN-LAST:event_EstudianteOpcionMouseClicked
+    private void EstudiantesOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudiantesOpcionMouseClicked
+            opcionSeleccionada(EstudiantesOpcion,"estudiante");
+    }//GEN-LAST:event_EstudiantesOpcionMouseClicked
 
-    private void EstudianteOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseEntered
+    private void EstudiantesOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudiantesOpcionMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_EstudianteOpcionMouseEntered
+    }//GEN-LAST:event_EstudiantesOpcionMouseEntered
 
-    private void EstudianteOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudianteOpcionMouseExited
+    private void EstudiantesOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstudiantesOpcionMouseExited
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_EstudianteOpcionMouseExited
+    }//GEN-LAST:event_EstudiantesOpcionMouseExited
 
     private void creditosCurTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditosCurTextFieldActionPerformed
         // TODO add your handling code here:
@@ -2207,8 +2522,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private void ConfirmarCurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCurButtonActionPerformed
         String nombre = NombreCurTextField.getText();
         String creditos = creditosCurTextField.getText();
-        int semestre = SemestreComboBox.getSelectedIndex();
-        int indexCarr = SelecCarrCurComboBox.getSelectedIndex() - 1; // -1 porque el primer iten se "Seleccionar..."
+        int semestre = SemestreComboBox.getSelectedIndex()+1; // +1 porque el index comienza en 0 y el primer item es 1
         String descripcion = DescCurTextArea.getText();
         String horario = HorarioCurTextArea.getText();
         int opt = OptativoComboBox.getSelectedIndex();
@@ -2219,26 +2533,24 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             optativo = true;
         }
 
-        if(indexCarr < 0){
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera", "", WARNING_MESSAGE);
+
+        if(nombre.isEmpty()||descripcion.isEmpty()||horario.isEmpty()||creditos.trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "No pueden quedar campos vacíos", "", WARNING_MESSAGE);
         }else{
-            if(nombre.isEmpty()||descripcion.isEmpty()||horario.isEmpty()||creditos.trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "No pueden quedar campos vacíos", "", WARNING_MESSAGE);
-            }else{
-                try {
-                    Fabrica.getInstance().getContEdu().nuevoCurso(nombre, Integer.valueOf(creditosCurTextField.getText()), semestre, descripcion, horario, optativo, carreras.get(indexCarr));
-                    JOptionPane.showMessageDialog(this, "Se ha creado el curso correctamente");
-                    limpiarPanelEditarCurso();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "", WARNING_MESSAGE);
-                }
+            try {
+                Carrera c = (Carrera) CarreraTable.getModel().getValueAt(CarreraTable.getSelectedRow(), 0);
+                Fabrica.getInstance().getContEdu().nuevoCurso(nombre, Integer.valueOf(creditosCurTextField.getText()), semestre, descripcion, horario, optativo, c);
+                JOptionPane.showMessageDialog(this, "Se ha creado el curso correctamente");
+                limpiarPanelEditarCurso();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "", WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_ConfirmarCurButtonActionPerformed
 
     private void NuevoSurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoSurButtonActionPerformed
         limpiarPanelEditarCurso();
-        opcionSeleccionada(CursosOpcion, "nuevoCurso");
+        opcionSeleccionada(CursosOpcion, "crearCurso");
     }//GEN-LAST:event_NuevoSurButtonActionPerformed
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
@@ -2258,26 +2570,107 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         VolverButton.doClick();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void verCarreraCurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verCarreraCurButtonActionPerformed
-        int indexCarrera = SelecCarrCurComboBox.getSelectedIndex() - 1;        
-        if(indexCarrera < 0){
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera", "", WARNING_MESSAGE);
-        }else{
-            BuscarCarrera.setText(carreras.get(indexCarrera).getNombre());
-            btnBuscarCarrera.doClick();
-            opcionSeleccionada(CursosPanel, "carreras");
-        }
-    }//GEN-LAST:event_verCarreraCurButtonActionPerformed
-
     private void verCursoCurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verCursoCurButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verCursoCurButtonActionPerformed
 
     private void quitarPreviaCurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarPreviaCurButtonActionPerformed
-        // TODO add your handling code here:
+        int fila = selecPreviaCurTable.getSelectedRow();
+        if(fila >= 0){
+            DefaultTableModel modelo = (DefaultTableModel) selecPreviaCurTable.getModel();
+            Fabrica.getInstance().getContEdu().eliminarPreviaSelec((Curso)modelo.getValueAt(fila, 0));
+            modelo.removeRow(fila);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una previa", "", WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_quitarPreviaCurButtonActionPerformed
 
-        void opcionSeleccionada(JPanel opcionSelec, String opcion) {
+    private void SelecPreviaCurComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecPreviaCurComboBoxActionPerformed
+        int indexPrevia = SelecPreviaCurComboBox.getSelectedIndex();
+        if(previas.isEmpty() == false && indexPrevia > 0){
+            indexPrevia = indexPrevia - 1; // -1 porque el primer iten se "Seleccionar..."
+            Curso previa = previas.get(indexPrevia);
+            if(Fabrica.getInstance().getContEdu().esPrevia(previa)){
+                DefaultTableModel modelo = (DefaultTableModel) selecPreviaCurTable.getModel();
+                List<Curso> cursosSonPrevia = Fabrica.getInstance().getContEdu().selecSonPrevia(previa);
+                if(cursosSonPrevia != null){
+                    for (Curso curso : cursosSonPrevia) {
+                        for (int i = 0; i < modelo.getRowCount(); i++) {
+                            if(curso.equals((Curso)modelo.getValueAt(i, 0))){
+                                 modelo.removeRow(i);
+                            }
+                        }
+                        
+                    }
+                }
+                
+                Object[] datos = {previa,previa.getNombre(), "Curso"};
+                modelo.addRow(datos);
+            }
+        }
+    }//GEN-LAST:event_SelecPreviaCurComboBoxActionPerformed
+
+    private void creditosCarrTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditosCarrTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_creditosCarrTextFieldActionPerformed
+
+    private void crearCursoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCursoButtonActionPerformed
+        if(NombreCarrTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un nombre para la carrera", "", WARNING_MESSAGE);
+        }else{
+            opcionSeleccionada(CursosOpcion, "crearCurso");
+        }
+    }//GEN-LAST:event_crearCursoButtonActionPerformed
+
+    private void borrarCursoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarCursoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarCursoButtonActionPerformed
+
+    private void SelecSedeCarrComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecSedeCarrComboBoxActionPerformed
+        int indexSede = SelecSedeCarrComboBox.getSelectedIndex();
+        if(indexSede > 0){
+            indexSede = indexSede - 1; // -1 porque el primer iten se "Seleccionar..."
+            Sede sede = sedes.get(indexSede);
+            if(Fabrica.getInstance().getContEdu().selecSedeCarr(sede)){
+                DefaultTableModel modelo = (DefaultTableModel) selecSedeCarrTable.getModel();
+                Object[] datos = {sede,sede.getNombre()};
+                modelo.addRow(datos);
+            }
+        }
+    }//GEN-LAST:event_SelecSedeCarrComboBoxActionPerformed
+
+    private void quitarSedeCarrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarSedeCarrButtonActionPerformed
+         int fila = selecSedeCarrTable.getSelectedRow();
+        if(fila >= 0){
+            DefaultTableModel modelo = (DefaultTableModel) selecSedeCarrTable.getModel();
+            Fabrica.getInstance().getContEdu().eliminarSedeSelec((Sede)modelo.getValueAt(fila, 0));
+            modelo.removeRow(fila);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede", "", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_quitarSedeCarrButtonActionPerformed
+
+    private void NuevaCarrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaCarrButtonActionPerformed
+        opcionSeleccionada(CarrerasOpcion, "crearCarrera");
+    }//GEN-LAST:event_NuevaCarrButtonActionPerformed
+
+    private void verSedeCarrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSedeCarrButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_verSedeCarrButtonActionPerformed
+
+    private void confirmarCarrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarCarrButtonActionPerformed
+        String nombre = NombreCarrTextField.getText();
+        int creditos = Integer.valueOf(creditosCarrTextField.getText());
+        String descripcion = DescCarrTextArea.getText();
+        
+        
+    }//GEN-LAST:event_confirmarCarrButtonActionPerformed
+
+    private void cancelarCarrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCarrButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelarCarrButtonActionPerformed
+
+    void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
         
         if(opcionSelec!=null){
@@ -2323,20 +2716,57 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 this.listarEstudiante();
                 this.setTitle("Menú: Estudiate");
                 break;
-            case "nuevoCurso":
-                this.setTitle("Menú: Nuevo Curso");
-                
-                DefaultComboBoxModel modeloCombo = (DefaultComboBoxModel) SelecCarrCurComboBox.getModel();
-                modeloCombo.removeAllElements();
-                modeloCombo.addElement("Seleccionar...");
-                carreras.clear(); // limpiar la lista con las carreras
-                List<Carrera> carrerasAux = Fabrica.getInstance().getContEdu().listarCarrerasSede();
-                for (Carrera c : carrerasAux) {
-                    modeloCombo.addElement(c.getNombre());
-                    carreras.add(c);
+            case "verCurso":
+                modelo = (DefaultTableModel) CursosTable.getModel();
+                Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
+                String opt = "No";
+                if(curso.isOptativo()){
+                    opt = "Si";
                 }
+
+                TituloLabel.setText(curso.getNombre());
+                CreditosLabel.setText(String.valueOf(curso.getCreditos()));
+                OptativoLabel.setText(opt);
+                HorariosTextArea.setText(curso.getHorarios());
+                DescTextArea.setText(curso.getDescripcion());
+                carreraCurLabel.setText(curso.getCarrera().getNombre());
                 
-                opcion = "editarCurso"; //usa el mismo panel que editar
+                DefaultTableModel modeloPrevias = (DefaultTableModel) PreviasCurTable.getModel();
+                modeloPrevias.setRowCount(0);
+                for (Previa previa : curso.getPrevias()) {
+                    previa.getCursoPrevia();
+                    String tipoP = "Curso";
+                    if(previa.isExamenAprobado()){
+                       tipoP = "Exámen";
+                    }
+                    Object[] datos = {previa.getCursoPrevia().getNombre(), tipoP};
+                    modeloPrevias.addRow(datos);
+                }                
+                resizeColumnWidth(PreviasCurTable);
+                
+                this.setTitle("Menú: Ver Curso");
+                break;
+            case "crearCurso":
+                if(NombreCarrTextField.getText().isEmpty()){
+                    Carrera c = (Carrera) CarreraTable.getModel().getValueAt(CarreraTable.getSelectedRow(), 0);
+                    carreraCrearCurLabel.setText(c.getNombre());
+                }else{ 
+                    // Si no esta vacio es porque se esta creando la carrera
+                    carreraCrearCurLabel.setText(NombreCarrTextField.getText());
+                }
+                this.setTitle("Menú: Nuevo Curso");
+                break;
+            case "crearCarrera":
+                this.setTitle("Menú: Nuevo Carrera");
+                
+                DefaultComboBoxModel modeloComboSedeCarr = (DefaultComboBoxModel) SelecSedeCarrComboBox.getModel();
+                modeloComboSedeCarr.removeAllElements();
+                modeloComboSedeCarr.addElement("Seleccionar...");
+                sedes.clear(); // limpiar la lista con las carreras
+                sedes = Fabrica.getInstance().getContEdu().listarSedes();
+                for (Sede s : sedes) {
+                    modeloComboSedeCarr.addElement(s.getNombre());
+                }
                 
                 break;
         }
@@ -2391,7 +2821,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     esOptativo = "Si";
                 }
                 Object[] datos = {curso, curso.getNombre(), String.valueOf(curso.getCreditos()), esOptativo, curso.getCarrera().getNombre()};
-                modelo.addRow(datos);
+               modelo.addRow(datos);
             }
         }
 
@@ -2550,10 +2980,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         NombreCurTextField.setText("");
         creditosCurTextField.setText("");
         SemestreComboBox.setSelectedIndex(0);
-        SelecCarrCurComboBox.setSelectedIndex(0);
         DescCurTextArea.setText("");
         HorarioCurTextArea.setText("");
         OptativoComboBox.setSelectedIndex(0);
+    }
+    
+    private void limpiarPanelCrearCarrera(){
+        NombreCarrTextField.setText("");
+        creditosCarrTextField.setText("");
+        DescCarrTextArea.setText("");
+        SelecSedeCarrComboBox.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2568,42 +3004,50 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
     private javax.swing.JButton ConfirmarCurButton;
+    private javax.swing.JPanel CrearCarreraPanel;
+    private javax.swing.JPanel CrearCursoPanel;
     private javax.swing.JLabel CreditosLabel;
     private javax.swing.JRadioButton CursandoRadioButton;
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
     private javax.swing.JTable CursosTable;
+    private javax.swing.JTable CursosTable1;
+    private javax.swing.JTextArea DescCarrTextArea;
     private javax.swing.JTextArea DescCurTextArea;
     private javax.swing.JTextArea DescTextArea;
-    private javax.swing.JPanel DocenteOpcion;
-    private javax.swing.JPanel EditarCursoPanel;
+    private javax.swing.JPanel DocentesOpcion;
     private javax.swing.JPanel Estudiante;
-    private javax.swing.JPanel EstudianteOpcion;
     private javax.swing.JPanel Estudiante_Crear;
+    private javax.swing.JPanel EstudiantesOpcion;
     private javax.swing.JTable EstudiantesTable;
     private javax.swing.JTextArea HorarioCurTextArea;
     private javax.swing.JTextArea HorariosTextArea;
+    private javax.swing.JTextField NombreCarrTextField;
     private javax.swing.JTextField NombreCurTextField;
     private javax.swing.JPanel NoticiasOpcion;
     private javax.swing.JPanel NoticiasPanel;
     private javax.swing.JTable NoticiasTable;
+    private javax.swing.JButton NuevaCarrButton;
     private javax.swing.JButton NuevoSurButton;
     private javax.swing.JComboBox<String> OptativoComboBox;
     private javax.swing.JLabel OptativoLabel;
     private javax.swing.JPanel PanelCabecera;
     private javax.swing.JPanel PanelLateral;
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JTable PreviasCurTable;
     private javax.swing.JLabel SedeSelec;
     private javax.swing.JTable SedeTable;
     private javax.swing.JPanel SedesOpcion;
     private javax.swing.JPanel SedesPanel;
-    private javax.swing.JComboBox<String> SelecCarrCurComboBox;
+    private javax.swing.JComboBox<String> SelecPreviaCurComboBox;
+    private javax.swing.JComboBox<String> SelecSedeCarrComboBox;
     private javax.swing.JButton SeleccionarExamen;
     private javax.swing.JButton SeleccionarNoticia;
     private javax.swing.JButton SeleccionarSede1;
-    private javax.swing.JComboBox<String> SelecpreviaCurComboBox;
     private javax.swing.JComboBox<String> SemestreComboBox;
     private javax.swing.JLabel TituloLabel;
+    private javax.swing.JLabel TituloLabel10;
+    private javax.swing.JLabel TituloLabel11;
     private javax.swing.JLabel TituloLabel4;
     private javax.swing.JLabel TituloLabel7;
     private javax.swing.JLabel TituloLabel8;
@@ -2613,6 +3057,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JPanel VerCursoPanel;
     private javax.swing.JButton VolverButton;
+    private javax.swing.JButton borrarCursoButton;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarEstudiante;
     private javax.swing.JButton btnBuscarNoticia;
@@ -2622,7 +3067,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_borrarSede_1;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
+    private javax.swing.JButton cancelarCarrButton;
+    private javax.swing.JLabel carreraCrearCurLabel;
+    private javax.swing.JLabel carreraCurLabel;
     private javax.swing.JComboBox<String> cb_listaSedes;
+    private javax.swing.JButton confirmarCarrButton;
+    private javax.swing.JButton crearCursoButton;
+    private javax.swing.JTextField creditosCarrTextField;
     private javax.swing.JTextField creditosCurTextField;
     private javax.swing.JTextField est_ape;
     private javax.swing.JButton est_btn_agregar;
@@ -2668,6 +3119,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2676,7 +3132,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2685,7 +3145,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton mod_btn_confirmar;
     private javax.swing.JTextField mod_sede_direccion;
     private javax.swing.JTextField mod_sede_nombre;
@@ -2695,13 +3154,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel panelModSede;
     private javax.swing.JPanel panelNuevaSede;
     private javax.swing.JButton quitarPreviaCurButton;
+    private javax.swing.JButton quitarSedeCarrButton;
     private javax.swing.JButton sede_btn_crear;
     private javax.swing.JTextField sede_txt_direccion;
     private javax.swing.JTextField sede_txt_nombre;
     private javax.swing.JTextField sede_txt_telefono;
+    private javax.swing.JTable selecPreviaCurTable;
+    private javax.swing.JTable selecSedeCarrTable;
     private javax.swing.JComboBox<String> selectSede;
-    private javax.swing.JButton verCarreraCurButton;
     private javax.swing.JButton verCursoCurButton;
+    private javax.swing.JButton verSedeCarrButton;
     // End of variables declaration//GEN-END:variables
 
     private void listarEstudiante() {
