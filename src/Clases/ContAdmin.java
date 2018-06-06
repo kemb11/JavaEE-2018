@@ -214,6 +214,7 @@ public class ContAdmin implements IContAdmin {
         }
         etiquetas.add("Examen");
         etiquetas.add(c.getNombre());
+        etiquetas.add(c.getCarrera().getNombre());
         String texto = "Se marcó para el día " + dateFormat.format(exa.getFecha())+ 
                 ".\nIncripciones desde el "+ dateFormat.format(exa.getInicioInsripcion())+" hasta el "
                 + dateFormat.format(exa.getFinInsripcion())+ ".\nSaludos, muchas gracias.";        

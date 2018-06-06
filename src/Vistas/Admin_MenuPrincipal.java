@@ -2762,7 +2762,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_inscribirDocenteActionPerformed
 
     private void NuevoExamenCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoExamenCursoActionPerformed
-        opcionSeleccionada(CursosOpcion, "crear examen");
+        if(CursosTable.getSelectedRow() != -1)
+            opcionSeleccionada(CursosOpcion, "crear examen");
+        else
+            JOptionPane.showMessageDialog(this, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
+
     }//GEN-LAST:event_NuevoExamenCursoActionPerformed
 
     private void exa_btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_aceptarActionPerformed
