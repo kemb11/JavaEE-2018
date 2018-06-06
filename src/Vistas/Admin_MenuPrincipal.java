@@ -2767,6 +2767,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void exa_btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_aceptarActionPerformed
         try {
+            crearExamen();
         } catch (InternalException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
         }
@@ -3430,13 +3431,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         Date fecha = crearFecha(exa_fec.getText(), " de examen");
         Date fechai = crearFecha(exa_fecini.getText(), " de inicio de inscripcion");
         Date fechaf = crearFecha(exa_fecfin.getText(), " de fin de inscripcion");
-        if(fecha.before(fechai))
-            throw new InternalException("La fecha de inicio deinscripcion debe ser antes del examen");
-        if(fecha.after(fechaf))
-            throw new InternalException("La fecha final de inscripcion debe ser después del examen");
+        DefaultListModel<String> model = (DefaultListModel) exa_list_selec.getModel();
+        if(!fechaf.after(fechai))
+            throw new InternalException("La fecha de inicio deinscripcion debe ser antes de la fecha final de inscripcion");
+        if(!fecha.after(fechaf))
+            throw new InternalException("La fecha final de inscripcion debe ser antes del examen");
         if(((int)exa_nota_tot.getValue()) <= ((int)exa_nota_apro.getValue()))
             throw new InternalException("La nota de aprobación debe ser menor a la nota total");
-        if(exa_list_selec.getComponentCount() == 0)
+        if(model.isEmpty())
             throw new InternalException("Seleccione al menos una sede");
         Examen e = new Examen();
         e.setFecha(fecha);
@@ -3444,8 +3446,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         e.setFinInsripcion(fechaf);
         e.setNotaApro((int)exa_nota_apro.getValue());
         e.setNotaMax((int)exa_nota_tot.getValue());
-        List<Sede> sedes = new ArrayList<>();
-        DefaultListModel<String> model = (DefaultListModel) exa_list_selec.getModel();
+        List<Sede> sedes = new ArrayList<>();        
         for(int i=0; i<model.getSize();i++){
             sedes.add(Fabrica.getInstance().getContEdu().getSede(model.elementAt(i)));
         }

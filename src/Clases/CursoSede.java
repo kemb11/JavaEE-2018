@@ -11,15 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import Persistencia.*;
 
 /**
  *
@@ -126,7 +119,8 @@ public class CursoSede implements Serializable {
     
     public void setExamen(Examen examen) {
         this.exmenes.add(examen);
-        Fabrica.getInstance().getEntity().persist(examen);
+        ExamenJpaController ejpa= new ExamenJpaController();
+        ejpa.create(examen);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         notificarAlumnos("Nuevo examen", "Nuevo examen de "+curso.getNombre()+"\nFecha "+ dateFormat.format(examen.getFecha())+
                 "\nReplicar\nSaludos, gracias");

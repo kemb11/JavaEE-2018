@@ -7,11 +7,12 @@ package Persistencia;
 
 import Clases.CursoSede;
 import Clases.Examen;
+import Clases.Fabrica;
+import Clases.PeriodoInscripcion;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,14 +23,8 @@ import javax.persistence.criteria.Root;
  * @author Usuario
  */
 public class ExamenJpaController implements Serializable {
-
-    public ExamenJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return Fabrica.getInstance().getEntity();
     }
 
     public void create(Examen examen) {
@@ -38,6 +33,12 @@ public class ExamenJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             CursoSede curso = examen.getCurso();
+            PeriodoInscripcion pi = examen.getInscripcion();
+            if (pi !=null){
+                em.persist(pi);
+                pi = em.getReference(pi.getClass(), pi.getId());
+                examen.setInscripcion(pi);
+            }
             if (curso != null) {
                 curso = em.getReference(curso.getClass(), curso.getId());
                 examen.setCurso(curso);

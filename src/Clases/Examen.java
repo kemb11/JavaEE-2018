@@ -11,11 +11,15 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import Persistencia.*;
 
 @Entity
 @DiscriminatorValue("E")
 public class Examen extends Prueba {
+    
+    @OneToOne
     private PeriodoInscripcion inscripcion;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaMuestra;
@@ -37,6 +41,9 @@ public class Examen extends Prueba {
     }
 
     public void setInicioInsripcion(Date inicioInsripcion) {
+        if(inscripcion == null){
+            inscripcion = new PeriodoInscripcion();
+        }
         this.inscripcion.setInicio(inicioInsripcion);
     }
 
@@ -67,5 +74,13 @@ public class Examen extends Prueba {
     public boolean periodoOK(){
         Date dia = new Date();
         return this.inscripcion.valido(dia);
-    }    
+    }
+
+    public PeriodoInscripcion getInscripcion() {
+        return inscripcion;
+    }
+
+    public void setInscripcion(PeriodoInscripcion inscripcion) {
+        this.inscripcion = inscripcion;
+    }
 }
