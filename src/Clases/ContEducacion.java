@@ -4,6 +4,7 @@ package Clases;
 import Persistencia.ParcialJpaController;
 import Persistencia.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +16,10 @@ public class ContEducacion implements IContEducacion{
     private static ContEducacion instancia;
     private Carrera carrera;
     private Sede sede;
+    private List<Curso> previasSelec = new ArrayList<>(); // se usa para el crear curso para controlar las previas
+    private List<Sede> sedesSelec = new ArrayList<>(); // se usa para el crear curso para controlar las previas
+    private List<Curso> cursosCrearCarr = new ArrayList<>(); // se usa para el crear carrera
+    
     private ContEducacion(){
     }
     
@@ -240,39 +245,189 @@ public class ContEducacion implements IContEducacion{
     
     @Override
     public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception{
-        for (Curso cursoCarrera : carrera.getCursos()) {
-            if(cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                throw new Exception("Ya existe un curso llamado '"+nombre+"' en la carrera '"+carrera.getNombre()+"'");
-            }
+        Curso curso = new Curso();
+        curso.setNombre(nombre);
+        curso.setCreditos(creditos);
+        curso.setSemestre(semestre);
+        curso.setDescripcion(descripcion);
+        curso.setHorarios(horario);
+        curso.setOptativo(optativo);
+
+        List<Previa> previasCur = new ArrayList<>();
+        for (Curso cursoPrevia : previasSelec) {
+            Previa p = new Previa();
+            p.setCurso(curso);
+            p.setCursoPrevia(cursoPrevia);
+            p.setExamenAprobado(false);
+            previasCur.add(p);
         }
-        
-        EntityManager em = Fabrica.getInstance().getEntity();
-        em.getTransaction().begin();
-        try {
-            Curso curso = new Curso();
-            curso.setNombre(nombre);curso.setCreditos(creditos);
-            curso.setSemestre(semestre);
-            curso.setDescripcion(descripcion);
-            curso.setHorarios(horario);
+
+        curso.setPrevias(previasCur);
+
+        // es cuando el curso se crea a la vez que se esta creando una carrera, se crea y guarda temporalmente en una lista
+        if(carrera == null){
+            for (Curso cursoCarrera : cursosCrearCarr) {
+                if(cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())){
+                    throw new Exception("Ya existe un curso llamado '"+nombre+"' en la nueva carrera");
+                }
+            }            
+            cursosCrearCarr.add(curso);
+        }else{
+            // en el caso de crear carrera no se setea todavia la relacion carrera-curso ni persiste todavia
             curso.setCarrera(carrera);
-            curso.setOptativo(optativo);
+            carrera.setCurso(curso);
             
             CursoSede cs = new CursoSede();
             cs.setCurso(curso);
             cs.setSede(this.sede);
             this.sede.setCursoSede(cs);    
-            carrera.setCurso(curso);
             List<CursoSede> cursosedes = new ArrayList<>();
             cursosedes.add(cs);
             curso.setCursoSedes(cursosedes);
+
             
-            em.persist(cs);
-            em.persist(curso);
+            for (Curso cursoCarrera : carrera.getCursos()) {
+                if(cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())){
+                    throw new Exception("Ya existe un curso llamado '"+nombre+"' en la carrera '"+carrera.getNombre()+"'");
+                }
+            }
+
+            EntityManager em = Fabrica.getInstance().getEntity();
+            em.getTransaction().begin();
+            try {
+                
+                em.persist(cs);
+                em.persist(curso);
+                for (Previa previa : previasCur) {
+                    em.persist(previa);
+                }            
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public boolean esPrevia(Curso curso){
+        if(previasSelec.contains(curso)){
+            return false; // ya esta como previa
+        }
+        
+        for (Curso c : previasSelec) {
+            if(c.tieneComoPrevia(curso)){
+                return false; // es previa de un curso ya seleccionado como previa, redundante
+            }
+        }   
+        
+        previasSelec.add(curso); // previa seleccionada OK, se guarada en la lista
+        
+        return true;
+    }
+    
+    public List<Curso> selecSonPrevia(Curso curso){
+        List<Curso> listaCur = new ArrayList<>();
+        for (Curso c : previasSelec) {
+            if(curso.tieneComoPrevia(c)){
+                listaCur.add(c);
+            }
+        }
+        
+        previasSelec.removeAll(listaCur);
+        
+        return listaCur;
+    }
+    
+    public void limpiarPreviasSelec(){
+        this.previasSelec.clear();
+    }
+    
+    public void eliminarPreviaSelec(Curso curso){
+        this.previasSelec.remove(curso);
+    }
+    
+    public boolean selecSedeCarr(Sede sede){
+        if(this.sedesSelec.contains(sede)){
+            return false;
+        }else{
+            this.sedesSelec.add(sede);
+            return true;
+        }
+    }
+    
+    public void limpiarSedesSelec(){
+        this.sedesSelec.clear();
+    }
+    
+    @Override
+    public void eliminarSedeSelec(Sede sede){
+        this.sedesSelec.remove(sede);
+    }
+    
+    public void nuevaCarrera(String nombre, int creditos, String descripcion, Date inicioPS, Date finPS, Date inicioSS, Date finSS) throws Exception{
+        CarreraJpaController jpa = new CarreraJpaController();
+        for (Carrera c : jpa.findCarreraEntities()) {
+            if(c.getNombre().equals(nombre)){
+                throw new Exception("Ya existe una carrera con el nombre ingresado");
+            }
+        }
+        
+        PeriodoInscripcion inscPrimerSem = new PeriodoInscripcion();
+        inscPrimerSem.setInicio(inicioPS);
+        inscPrimerSem.setFin(finPS);
+        PeriodoInscripcion inscSegSem = new PeriodoInscripcion();
+        inscSegSem.setInicio(inicioSS);
+        inscSegSem.setFin(finSS);
+        
+        Carrera carr = new Carrera();
+        carr.setNombre(nombre);
+        carr.setCreditos(creditos);
+        carr.setDescripcion(descripcion);
+        carr.setSedes(sedesSelec);
+        carr.setCursos(cursosCrearCarr);  
+        carr.setPrimerSemestre(inscPrimerSem);
+        carr.setSegundoSemestre(inscSegSem);
+        for (Curso curso : cursosCrearCarr) {
+            List<CursoSede> cursosedes = new ArrayList<>();
+            for (Sede s : sedesSelec) {
+                CursoSede cs = new CursoSede();
+                cs.setCurso(curso);
+                cs.setSede(s);
+                s.setCursoSede(cs); 
+                cursosedes.add(cs);
+            }
+            curso.setCarrera(carr);
+            curso.setCursoSedes(cursosedes);
+        }      
+        
+        for (Sede s : sedesSelec) {
+            s.setCarrera(carr);
+        }
+        
+        EntityManager em = Fabrica.getInstance().getEntity();
+        em.getTransaction().begin();
+        try {
+            em.persist(carr);    
+            for (Curso curso : cursosCrearCarr) {
+//                for (CursoSede cursoSede : curso.getCursoSedes()) {
+//                    em.persist(cursoSede);
+//                }
+                em.persist(curso);
+            }
             em.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
             e.printStackTrace();
+            em.getTransaction().rollback();            
+            throw e;
         }
+    }
+    
+    public void borrarCursoNuevaCarrera(int index){
+        this.cursosCrearCarr.remove(index);
+    }
+    
+    public List<Curso> listarCursosCrearCarrera(){
+        return this.cursosCrearCarr;
     }
     
 //    public List<Examen> listarExamenes(String buscar){

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,9 +38,9 @@ public class Carrera implements Serializable {
     private List<Sede> sedes;
     @OneToMany(mappedBy = "carrera")
     private List<Curso> cursos;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PeriodoInscripcion primerSemestre;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PeriodoInscripcion segundoSemestre;
     @OneToMany(mappedBy = "carrera")
     private List<CarreraEstudiante> carreraEstudiantes;

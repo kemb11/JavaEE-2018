@@ -7,6 +7,7 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Sede implements Serializable {
     private List<Estudiante> estudiantes;
     @ManyToMany
     private List<Carrera> carreras;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CursoSede> cursoSedes;
 
     public List<Estudiante> getEstudiantes() {
@@ -52,6 +53,10 @@ public class Sede implements Serializable {
 
     public void setCarreras(List<Carrera> carreras) {
         this.carreras = carreras;
+    }
+    
+    public void setCarrera(Carrera carrera){
+        this.carreras.add(carrera);
     }
 
     public List<CursoSede> getCursoSedes() {

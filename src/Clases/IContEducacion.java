@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IContEducacion {
@@ -28,4 +29,14 @@ public interface IContEducacion {
     public abstract List<Parcial> listarParciales(String buscar);
     public abstract List<Parcial> listarParcialesEst(String buscar);
     public abstract void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception;
+    public abstract boolean esPrevia(Curso curso);
+    public abstract List<Curso> selecSonPrevia(Curso curso);
+    public abstract void eliminarPreviaSelec(Curso curso);
+    public abstract void limpiarPreviasSelec();
+    public abstract boolean selecSedeCarr(Sede sede);
+    public abstract void eliminarSedeSelec(Sede sede);
+    public abstract void limpiarSedesSelec();
+    public abstract void nuevaCarrera(String nombre, int creditos, String descripcion, Date inicioPS, Date finPS, Date inicioSS, Date finSS) throws Exception;
+    public abstract void borrarCursoNuevaCarrera(int index);
+    public abstract List<Curso> listarCursosCrearCarrera();
 }
