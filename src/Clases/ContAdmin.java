@@ -16,6 +16,7 @@ public class ContAdmin implements IContAdmin {
 
     private static ContAdmin instancia;
     private Admin login;
+    private Docente loginDocente;
 
     public ContAdmin() {
     }
@@ -219,6 +220,22 @@ public class ContAdmin implements IContAdmin {
                 ".\nIncripciones desde el "+ dateFormat.format(exa.getInicioInsripcion())+" hasta el "
                 + dateFormat.format(exa.getFinInsripcion())+ ".\nSaludos, muchas gracias.";        
         this.nuevaNoticia("Examen de "+c.getNombre(),texto, etiquetas);
+    }
+
+    @Override
+    public boolean loginDocente(String user, String Pass) throws Exception {
+        DocenteJpaController djpa = new DocenteJpaController();
+        Docente d = djpa.findDocente(user);
+        if (d != null && d.getPass().equals(Pass)) {
+            this.loginDocente = d;
+            return true;
+        } else {
+            if (d != null) {
+                throw new Exception("Contraseña incorrecta");
+            } else {
+                throw new Exception("Usuario y contraseña incorrectos");
+            }
+        }
     }
 }
 /*

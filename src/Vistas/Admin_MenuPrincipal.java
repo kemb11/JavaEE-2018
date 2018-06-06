@@ -87,6 +87,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(panelNuevaSede, "crear sede");
         PanelPrincipal.add(panelBorrarSede, "borrar sede");
         PanelPrincipal.add(panelModSede, "mod sede");
+        PanelPrincipal.add(VerNoticia, "ver noticia");
         
         opcionSeleccionada(SedesOpcion, "sedes");
 
@@ -291,6 +292,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         exa_btn_aceptar = new javax.swing.JButton();
         exa_nota_apro = new javax.swing.JSpinner();
         exa_nota_tot = new javax.swing.JSpinner();
+        VerNoticia = new javax.swing.JPanel();
+        verNoticia_titulo = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        verNoticia_fecha = new javax.swing.JLabel();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        verNoticia_etiquetas = new javax.swing.JList<>();
+        jLabel52 = new javax.swing.JLabel();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        verNoticia_texto = new javax.swing.JTextArea();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1906,7 +1916,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(doc_ema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(doc_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(Docente_Crear, "card7");
@@ -2146,6 +2156,64 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         );
 
         PanelPrincipal.add(ExamenCurso, "card15");
+
+        VerNoticia.setBackground(new java.awt.Color(73, 202, 114));
+
+        verNoticia_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verNoticia_titulo.setToolTipText("");
+        verNoticia_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel30.setText("Fecha de creación:");
+
+        verNoticia_fecha.setText("jLabel3");
+
+        verNoticia_etiquetas.setEnabled(false);
+        jScrollPane16.setViewportView(verNoticia_etiquetas);
+
+        jLabel52.setText("Etiquetas");
+
+        verNoticia_texto.setEditable(false);
+        verNoticia_texto.setColumns(20);
+        verNoticia_texto.setRows(5);
+        jScrollPane17.setViewportView(verNoticia_texto);
+
+        javax.swing.GroupLayout VerNoticiaLayout = new javax.swing.GroupLayout(VerNoticia);
+        VerNoticia.setLayout(VerNoticiaLayout);
+        VerNoticiaLayout.setHorizontalGroup(
+            VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerNoticiaLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel52)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(VerNoticiaLayout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addGap(18, 18, 18)
+                        .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(verNoticia_fecha))))
+                .addContainerGap(315, Short.MAX_VALUE))
+        );
+        VerNoticiaLayout.setVerticalGroup(
+            VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerNoticiaLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(verNoticia_fecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(VerNoticia, "card11");
 
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
@@ -2447,7 +2515,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarNoticiaKeyReleased
 
     private void SeleccionarNoticiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarNoticiaActionPerformed
-        // TODO add your handling code here:
+        MostrarNoticia();
     }//GEN-LAST:event_SeleccionarNoticiaActionPerformed
 
     private void btnBuscarNoticiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNoticiaActionPerformed
@@ -2835,6 +2903,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 this.listarNoticias();
                 this.setTitle("Menú: Noticias");
                 break;
+            case "ver noticia":
+                this.setTitle("Menú: Noticias");
+                break;
             case "crear estudiante":
                 this.reiniciarCrearEstudiante();
                 this.setTitle("Menú: Estudiate");
@@ -3174,6 +3245,24 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         HorarioCurTextArea.setText("");
         OptativoComboBox.setSelectedIndex(0);
     }
+    
+    private void MostrarNoticia(){
+        int index = NoticiasTable.getSelectedRow();
+        if(index != -1){
+            Noticia n = (Noticia) NoticiasTable.getModel().getValueAt(index, 0);
+            verNoticia_titulo.setText(n.getTitulo());
+            verNoticia_fecha.setText(dateFormat.format(n.getFecha()));
+            verNoticia_texto.setText(n.getTexto());
+            DefaultListModel model = new DefaultListModel();
+            for(String etiqueta : n.getEtiquetas()){
+                model.addElement(etiqueta);
+            }
+            verNoticia_etiquetas.setModel(model);
+            opcionSeleccionada(NoticiasPanel, "ver noticia");
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una noticia", "Error", WARNING_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
@@ -3238,6 +3327,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCarrera;
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JPanel VerCursoPanel;
+    private javax.swing.JPanel VerNoticia;
     private javax.swing.JButton VolverButton;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarDocente;
@@ -3304,6 +3394,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -3327,6 +3418,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3338,6 +3430,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -3363,6 +3457,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> selectSede;
     private javax.swing.JButton verCarreraCurButton;
     private javax.swing.JButton verCursoCurButton;
+    private javax.swing.JList<String> verNoticia_etiquetas;
+    private javax.swing.JLabel verNoticia_fecha;
+    private javax.swing.JTextArea verNoticia_texto;
+    private javax.swing.JLabel verNoticia_titulo;
     // End of variables declaration//GEN-END:variables
 
     private void listarEstudiante() {
