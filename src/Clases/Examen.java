@@ -67,5 +67,5 @@ public class Examen extends Prueba {
     public boolean periodoOK(){
         Date dia = new Date();
         return this.inscripcion.valido(dia);
-    }
+    }    
 }

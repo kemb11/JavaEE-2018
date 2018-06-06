@@ -6,7 +6,11 @@
 package Clases;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -120,6 +124,25 @@ public class CursoSede implements Serializable {
         this.parciales = parciales;
     }
     
+    public void setExamen(Examen examen) {
+        this.exmenes.add(examen);
+        Fabrica.getInstance().getEntity().persist(examen);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        notificarAlumnos("Nuevo examen", "Nuevo examen de "+curso.getNombre()+"\nFecha "+ dateFormat.format(examen.getFecha())+
+                "\nReplicar\nSaludos, gracias");
+    }
+    
+    public void notificarAlumnos(String titulo, String mensaje){
+        for(InscripcionC i: inscripciones){
+            if(!i.isAprobado(curso)){
+                try {
+                    SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
     
     
 }

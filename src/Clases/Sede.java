@@ -139,5 +139,15 @@ public class Sede implements Serializable {
     public void setEstudiante(Estudiante e){
         this.estudiantes.add(e);
     }
+    //retorna un cursosede a partir del curso
+    public CursoSede getCurso(Curso c){
+        if(this.cursoSedes!=null){
+            for(CursoSede cs : cursoSedes){
+                if(cs.getCurso().equals(c))
+                    return cs;
+            }
+        }
+        return null;
+    }
     
 }

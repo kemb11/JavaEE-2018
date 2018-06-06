@@ -32,6 +32,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -280,10 +281,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
-        exa_nota_apro = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
-        exa_nota_tot = new javax.swing.JTextField();
         exa_btn_aceptar = new javax.swing.JButton();
+        exa_nota_apro = new javax.swing.JSpinner();
+        exa_nota_tot = new javax.swing.JSpinner();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -2039,12 +2040,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         jLabel50.setText("Nota de aprobación");
 
-        exa_nota_apro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exa_nota_aproActionPerformed(evt);
-            }
-        });
-
         jLabel51.setText("Nota total:");
 
         exa_btn_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
@@ -2054,6 +2049,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 exa_btn_aceptarActionPerformed(evt);
             }
         });
+
+        exa_nota_apro.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        exa_nota_tot.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout ExamenCursoLayout = new javax.swing.GroupLayout(ExamenCurso);
         ExamenCurso.setLayout(ExamenCursoLayout);
@@ -2076,22 +2075,22 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                             .addGroup(ExamenCursoLayout.createSequentialGroup()
                                 .addComponent(jLabel50)
-                                .addGap(13, 13, 13)
-                                .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)
                         .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(exa_fecfin)
                             .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                .addComponent(jLabel51)
-                                .addGap(18, 18, 18)
-                                .addComponent(exa_nota_tot))
                             .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(ExamenCursoLayout.createSequentialGroup()
                                 .addComponent(jLabel48)
-                                .addGap(0, 6, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                .addComponent(jLabel51)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(ExamenCursoLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2121,7 +2120,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
                     .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
@@ -2132,10 +2131,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
-                    .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel51)
+                    .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(exa_btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(108, 108, 108))
         );
@@ -2768,10 +2767,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_exa_btn_aceptarActionPerformed
 
-    private void exa_nota_aproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_nota_aproActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_exa_nota_aproActionPerformed
-
     private void exa_btn_deselecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_deselecActionPerformed
         int index = exa_list_selec.getSelectedIndex();
         if(index != -1){
@@ -3264,8 +3259,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField exa_fecini;
     private javax.swing.JList<String> exa_list_noselec;
     private javax.swing.JList<String> exa_list_selec;
-    private javax.swing.JTextField exa_nota_apro;
-    private javax.swing.JTextField exa_nota_tot;
+    private javax.swing.JSpinner exa_nota_apro;
+    private javax.swing.JSpinner exa_nota_tot;
     private javax.swing.JLabel exa_titulo;
     private javax.swing.JButton inscribirDocente;
     private javax.swing.JButton inscribirEstudiante;
@@ -3405,8 +3400,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             exa_fec.setText("");
             exa_fecini.setText("");
             exa_fecfin.setText("");
-            exa_nota_apro.setText("");
-            exa_nota_tot.setText("");
+            exa_nota_apro.setValue(((SpinnerNumberModel)exa_nota_apro.getModel()).getMinimum());
+            exa_nota_tot.setValue(((SpinnerNumberModel) exa_nota_tot.getModel()).getMinimum());
             DefaultListModel list = new DefaultListModel();
             exa_list_selec.setModel(new DefaultListModel<>());
             for(CursoSede cs : c.getCursoSedes()){
@@ -3416,6 +3411,35 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             exa_titulo.setText("Examen de "+ c.getNombre());
         }else{
                 JOptionPane.showMessageDialog(this, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void crearExamen()throws InternalException{
+        Date fecha = crearFecha(exa_fec.getText(), " de examen");
+        Date fechai = crearFecha(exa_fecini.getText(), " de inicio de inscripcion");
+        Date fechaf = crearFecha(exa_fecfin.getText(), " de fin de inscripcion");
+        if(fecha.before(fechai))
+            throw new InternalException("La fecha de inicio deinscripcion debe ser antes del examen");
+        if(fecha.after(fechaf))
+            throw new InternalException("La fecha final de inscripcion debe ser después del examen");
+        if(((int)exa_nota_tot.getValue()) <= ((int)exa_nota_apro.getValue()))
+            throw new InternalException("La nota de aprobación debe ser menor a la nota total");
+        if(exa_list_selec.getComponentCount() == 0)
+            throw new InternalException("Seleccione al menos una sede");
+        Examen e = new Examen();
+        e.setFecha(fecha);
+        e.setInicioInsripcion(fechai);
+        e.setFinInsripcion(fechaf);
+        
+    }
+    
+    public Date crearFecha(String fecha, String campo)throws InternalException{
+        try {
+            Date retornar = dateFormat.parse(fecha);
+            return retornar;
+        } catch (ParseException ex) {
+            Logger.getLogger(Admin_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            throw new InternalException("Formato de fecha"+campo+" incorrecto");
         }
     }
 }

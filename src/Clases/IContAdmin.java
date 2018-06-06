@@ -3,6 +3,7 @@ package Clases;
 
 import java.util.List;
 import java.util.Map;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 public interface IContAdmin {
     public abstract boolean login(String user, String Pass) throws Exception;    
@@ -19,4 +20,5 @@ public interface IContAdmin {
     public abstract void crearDocente(Docente d )throws Exception ;
     public abstract List<Docente> getDocentes();
     public abstract List<Docente> getDocentes(String palabra);
+    public abstract void crearExamen(Examen exa, List<Sede> sedes, Curso c) throws InternalException;
 }

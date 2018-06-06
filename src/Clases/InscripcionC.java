@@ -92,6 +92,9 @@ public class InscripcionC implements Serializable {
         return "Clases.Inscripcion[ id=" + id + " ]";
     }
     
+    public boolean isAprobado(Curso c){
+        return estudiante.getCursosAprobados().contains(c);    
+    } 
     
     
 }

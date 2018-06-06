@@ -196,7 +196,18 @@ public class ContAdmin implements IContAdmin {
         DocenteJpaController djpa = new DocenteJpaController();
         return djpa.findDocenteEntities(palabra); 
     }
-
+    @Override
+    public void crearExamen(Examen exa, List<Sede> sedes, Curso c) throws InternalException{
+        for(Sede s : sedes){
+            CursoSede cs = s.getCurso(c);
+            Examen examen = new Examen();
+            examen.setCurso(cs);
+            examen.setFecha(exa.getFecha());
+            examen.setInicioInsripcion(exa.getInicioInsripcion());
+            examen.setFinInsripcion(exa.getFinInsripcion());
+            cs.setExamen(examen);
+        }
+    }
 }
 /*
 package Clases;
