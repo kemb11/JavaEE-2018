@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private List<Sede> sedes = new ArrayList<>();
     private List<Carrera> carreras = new ArrayList<>();
+    private Curso cursoExamen;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -3397,6 +3399,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         int index = CursosTable.getSelectedRow();
         if(index != -1){
             Curso c = (Curso)CursosTable.getModel().getValueAt(index, 0);
+            this.cursoExamen = c;
             exa_fec.setText("");
             exa_fecini.setText("");
             exa_fecfin.setText("");
@@ -3430,7 +3433,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         e.setFecha(fecha);
         e.setInicioInsripcion(fechai);
         e.setFinInsripcion(fechaf);
-        
+        List<Sede> sedes = new ArrayList<>();
+        DefaultListModel<String> model = (DefaultListModel) exa_list_selec.getModel();
+        for(int i=0; i<model.getSize();i++){
+            sedes.add(Fabrica.getInstance().getContEdu().getSede(model.elementAt(i)));
+        }
+        Fabrica.getInstance().getContAdmin().crearExamen(e, sedes, cursoExamen);
     }
     
     public Date crearFecha(String fecha, String campo)throws InternalException{

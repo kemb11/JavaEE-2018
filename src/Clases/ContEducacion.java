@@ -294,4 +294,14 @@ public class ContEducacion implements IContEducacion{
 //        
 //        return examenesRetornar;
 //    }
+
+    @Override
+    public Sede getSede(String Nombre) {
+        SedeJpaController sjpa = new SedeJpaController();
+        List<Sede> sedes = sjpa.findSedeEntities();
+        for(Sede s : sedes)
+            if(s.getNombre().equals(Nombre))
+                return s;
+        return null;
+    }
 }

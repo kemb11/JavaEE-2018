@@ -16,6 +16,7 @@ public interface IContEducacion {
     public abstract List<Curso> listarCursosAprobados(String buscar);
     public abstract List<Curso> listarCursosCursando(String buscar);
     public abstract Sede getSede();
+    public abstract Sede getSede(String Nombre);
     public abstract List<Sede> listarSedes();
     public abstract List<Carrera> listarCarrerasSede();
     public abstract List<Sede> listarSedes(String palabra);
