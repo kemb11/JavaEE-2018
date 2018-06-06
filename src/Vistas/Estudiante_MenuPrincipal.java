@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -70,6 +71,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(VerCursoPanel, "verCurso");
         PanelPrincipal.add(VerExamenPanel, "verExamen");
         PanelPrincipal.add(VerParcialPanel, "verParcial");
+        PanelPrincipal.add(VerNoticia, "ver noticia");
 
         String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
         String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
@@ -201,6 +203,15 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         fechaNotaPLabel = new javax.swing.JLabel();
         TituloLabel11 = new javax.swing.JLabel();
         InstanciaLabel = new javax.swing.JLabel();
+        VerNoticia = new javax.swing.JPanel();
+        verNoticia_titulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        verNoticia_fecha = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        verNoticia_etiquetas = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        verNoticia_texto = new javax.swing.JTextArea();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1438,6 +1449,64 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(VerParcialPanel, "card7");
 
+        VerNoticia.setBackground(new java.awt.Color(73, 202, 114));
+
+        verNoticia_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verNoticia_titulo.setToolTipText("");
+        verNoticia_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel1.setText("Fecha de creación:");
+
+        verNoticia_fecha.setText("jLabel3");
+
+        verNoticia_etiquetas.setEnabled(false);
+        jScrollPane9.setViewportView(verNoticia_etiquetas);
+
+        jLabel3.setText("Etiquetas");
+
+        verNoticia_texto.setEditable(false);
+        verNoticia_texto.setColumns(20);
+        verNoticia_texto.setRows(5);
+        jScrollPane10.setViewportView(verNoticia_texto);
+
+        javax.swing.GroupLayout VerNoticiaLayout = new javax.swing.GroupLayout(VerNoticia);
+        VerNoticia.setLayout(VerNoticiaLayout);
+        VerNoticiaLayout.setHorizontalGroup(
+            VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerNoticiaLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(VerNoticiaLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(verNoticia_fecha))))
+                .addContainerGap(310, Short.MAX_VALUE))
+        );
+        VerNoticiaLayout.setVerticalGroup(
+            VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerNoticiaLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(verNoticia_fecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(VerNoticia, "card11");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1765,11 +1834,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarNoticiaKeyReleased
 
     private void SeleccionarNoticiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarNoticiaActionPerformed
-        // TODO add your handling code here:
+        MostrarNoticia();
     }//GEN-LAST:event_SeleccionarNoticiaActionPerformed
 
     private void btnBuscarNoticiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNoticiaActionPerformed
-        // TODO add your handling code here:
+        this.Noticias();
     }//GEN-LAST:event_btnBuscarNoticiaActionPerformed
 
     private void BuscarExamenTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarExamenTextFieldFocusGained
@@ -1958,7 +2027,10 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 this.setTitle("Menú: Sedes");
                 break;
             case "noticias":
-                this.listarNoticias();
+                this.Noticias();
+                this.setTitle("Menú: Noticias");
+                break;
+            case "ver noticia":
                 this.setTitle("Menú: Noticias");
                 break;
             case "examenes":
@@ -2208,6 +2280,47 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void Noticias() {
+        List<Noticia> noticias; 
+        
+        if(BuscarNoticia.getText().equals("")){
+            noticias = Fabrica.getInstance().getContEdu().listarNoticias();
+        }else{
+            noticias = Fabrica.getInstance().getContEdu().listarNoticias(BuscarNoticia.getText());
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) NoticiasTable.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        if (noticias.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
+        } else {
+            for (Noticia n: noticias) {
+                Object[] datos = {n, n.getTitulo(), dateFormat.format(n.getFecha())};
+                modelo.addRow(datos);
+            }
+        }
+    }
+    
+    private void MostrarNoticia(){
+        int index = NoticiasTable.getSelectedRow();
+        if(index != -1){
+            Noticia n = (Noticia) NoticiasTable.getModel().getValueAt(index, 0);
+            verNoticia_titulo.setText(n.getTitulo());
+            verNoticia_fecha.setText(dateFormat.format(n.getFecha()));
+            verNoticia_texto.setText(n.getTexto());
+            DefaultListModel model = new DefaultListModel();
+            for(String etiqueta : n.getEtiquetas()){
+                model.addElement(etiqueta);
+            }
+            verNoticia_etiquetas.setModel(model);
+            opcionSeleccionada(NoticiasPanel, "ver noticia");
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una noticia", "Error", WARNING_MESSAGE);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
@@ -2279,6 +2392,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JPanel VerCursoPanel;
     private javax.swing.JPanel VerExamenPanel;
+    private javax.swing.JPanel VerNoticia;
     private javax.swing.JPanel VerParcialPanel;
     private javax.swing.JButton VolverButton;
     private javax.swing.JButton btnBuscarCarrera;
@@ -2291,6 +2405,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupParciales;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2299,12 +2414,14 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2312,7 +2429,12 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel nombreUsrLabel;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JList<String> verNoticia_etiquetas;
+    private javax.swing.JLabel verNoticia_fecha;
+    private javax.swing.JTextArea verNoticia_texto;
+    private javax.swing.JLabel verNoticia_titulo;
     // End of variables declaration//GEN-END:variables
 }

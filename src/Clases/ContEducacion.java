@@ -304,4 +304,16 @@ public class ContEducacion implements IContEducacion{
                 return s;
         return null;
     }
+
+    @Override
+    public List<Noticia> listarNoticias(String buscar) {
+        NoticiaJpaController njpa = new NoticiaJpaController();
+        return njpa.getNoticias(sede.getNombre(), buscar);
+    }
+
+    @Override
+    public List<Noticia> listarNoticias() {
+        NoticiaJpaController njpa = new NoticiaJpaController();
+        return njpa.getNoticias(sede.getNombre());
+    }
 }

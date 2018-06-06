@@ -3,6 +3,7 @@ package Clases;
 import Persistencia.*;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,9 @@ public class ContAdmin implements IContAdmin {
 
     public ContAdmin() {
     }
-
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    
     public static ContAdmin getInstance() {
         if (instancia == null) {
             instancia = new ContAdmin();
@@ -198,6 +201,7 @@ public class ContAdmin implements IContAdmin {
     }
     @Override
     public void crearExamen(Examen exa, List<Sede> sedes, Curso c) throws InternalException{
+        List<String> etiquetas = new ArrayList<>();
         for(Sede s : sedes){
             CursoSede cs = s.getCurso(c);
             Examen examen = new Examen();
@@ -206,7 +210,14 @@ public class ContAdmin implements IContAdmin {
             examen.setInicioInsripcion(exa.getInicioInsripcion());
             examen.setFinInsripcion(exa.getFinInsripcion());
             cs.setExamen(examen);
+            etiquetas.add(s.getNombre());
         }
+        etiquetas.add("Examen");
+        etiquetas.add(c.getNombre());
+        String texto = "Se marcó para el día " + dateFormat.format(exa.getFecha())+ 
+                ".\nIncripciones desde el "+ dateFormat.format(exa.getInicioInsripcion())+" hasta el "
+                + dateFormat.format(exa.getFinInsripcion())+ ".\nSaludos, muchas gracias.";        
+        this.nuevaNoticia("Examen de "+c.getNombre(),texto, etiquetas);
     }
 }
 /*

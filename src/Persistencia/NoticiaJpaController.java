@@ -9,6 +9,7 @@ import Clases.Fabrica;
 import Clases.Noticia;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -126,6 +127,38 @@ public class NoticiaJpaController implements Serializable {
         } finally {
             
         }
+    }
+    
+    public List<Noticia> getNoticias(String sede){
+        List<Noticia> retornar = this.findNoticiaEntities();
+        for(Noticia n : retornar){
+            if(!n.getEtiquetas().contains(sede)){
+                retornar.remove(n);
+            }
+        }
+        return retornar;
+    }
+    
+    public List<Noticia> getNoticias(String sede, String palabra){
+        List<Noticia> aux = this.getNoticias(sede);
+        List<Noticia> retornar = new ArrayList<>();
+        for(Noticia n : aux){
+            boolean control = false;
+            for(String etiqueta: n.getEtiquetas()){
+                if(etiqueta.contains(palabra)){
+                    control = true;
+                    break;}
+            }
+            if(!control){
+                control = n.getTitulo().contains(palabra);
+            }
+            if(!control){
+                control = n.getTexto().contains(palabra);
+            }
+            if(control)
+                retornar.add(n);
+        }
+        return retornar;
     }
     
 }
