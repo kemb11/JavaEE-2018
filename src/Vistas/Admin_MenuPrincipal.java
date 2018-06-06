@@ -85,6 +85,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(EditarCursoPanel, "editarCurso");
         PanelPrincipal.add(ExamenCurso, "crear examen");
         PanelPrincipal.add(panelNuevaSede, "crear sede");
+        PanelPrincipal.add(panelBorrarSede, "borrar sede");
+        PanelPrincipal.add(panelModSede, "mod sede");
+        
+        opcionSeleccionada(SedesOpcion, "sedes");
 
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -2339,9 +2343,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarSedeKeyReleased
 
     private void btn_abrirnuevasedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_abrirnuevasedeActionPerformed
-        /*CardLayout cl = (CardLayout) PanelPrincipal.getLayout();
-        cl.addLayoutComponent(panelNuevaSede);
-        panelNuevaSede.setVisible(true);*/
+        opcionSeleccionada(SedesOpcion, "crear sede");
     }//GEN-LAST:event_btn_abrirnuevasedeActionPerformed
 
     private void BuscarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarSedeActionPerformed
@@ -2554,10 +2556,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         IContAdmin ica = f.getContAdmin();*/
         try {
             Fabrica.getInstance().getContAdmin().crearSedeVar(nombreSede, direccionSede, telefonoSede);
+            opcionSeleccionada(SedesOpcion, "sedes");
         } catch (Exception e) {
 
         }
-
+        
     }//GEN-LAST:event_sede_btn_crearActionPerformed
 
     private void SeleccionarSede1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSede1ActionPerformed
@@ -2759,7 +2762,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_inscribirDocenteActionPerformed
 
     private void NuevoExamenCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoExamenCursoActionPerformed
-        opcionSeleccionada(DocenteOpcion, "crear examen");
+        opcionSeleccionada(CursosOpcion, "crear examen");
     }//GEN-LAST:event_NuevoExamenCursoActionPerformed
 
     private void exa_btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_aceptarActionPerformed
@@ -2851,6 +2854,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 this.sede_txt_telefono.setText("");
                 this.sede_txt_nombre.setText("");
                 this.sede_txt_direccion.setText("");
+                this.setTitle("Menú: Sede");
+                break;
+            case "borrar sede":
+                this.setTitle("Menú: Sede");
+                break;
+            case "mod sede":
                 this.setTitle("Menú: Sede");
                 break;
             case "nuevoCurso":
@@ -3433,12 +3442,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         e.setFecha(fecha);
         e.setInicioInsripcion(fechai);
         e.setFinInsripcion(fechaf);
+        e.setNotaApro((int)exa_nota_apro.getValue());
+        e.setNotaMax((int)exa_nota_tot.getValue());
         List<Sede> sedes = new ArrayList<>();
         DefaultListModel<String> model = (DefaultListModel) exa_list_selec.getModel();
         for(int i=0; i<model.getSize();i++){
             sedes.add(Fabrica.getInstance().getContEdu().getSede(model.elementAt(i)));
         }
         Fabrica.getInstance().getContAdmin().crearExamen(e, sedes, cursoExamen);
+        JOptionPane.showMessageDialog(this, "Se registró el examen", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        opcionSeleccionada(CursosOpcion, "cursos");
     }
     
     public Date crearFecha(String fecha, String campo)throws InternalException{
