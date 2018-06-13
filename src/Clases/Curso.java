@@ -7,6 +7,7 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,10 +49,12 @@ public class Curso implements Serializable {
     @Column(columnDefinition = "text")
     private String horarios;
     private boolean optativo;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CursoSede> cursoSedes;
     @ManyToMany
     private List<Estudiante> estudiantesAprobados;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Previa> previas;
 
     public Long getId() {
         return id;
@@ -125,12 +128,34 @@ public class Curso implements Serializable {
         return cursoSedes;
     }
     
+    public void setPrevias(List<Previa> previas) {
+        this.previas = previas;
+    }
+
+    public List<Previa> getPrevias() {
+        return previas;
+    }
+    
     public boolean estaEnSede(Sede sede){
         for (CursoSede cursoSede : cursoSedes) {
             if(cursoSede.getSede().equals(sede)){
                 return true;
             }
         }
+        return false;
+    }
+    
+    public boolean tieneComoPrevia(Curso curso){
+        for (Previa previa : this.previas) {
+            if(previa.getCursoPrevia().equals(curso)){
+                return true;
+            }else{
+                if(previa.getCursoPrevia().tieneComoPrevia(curso)){
+                    return true;
+                }
+            }
+        }
+        
         return false;
     }
 
