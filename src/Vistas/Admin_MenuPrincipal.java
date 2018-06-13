@@ -2581,18 +2581,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerNoticiaLayout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VerNoticiaLayout.createSequentialGroup()
-                        .addComponent(jLabel62)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(VerNoticiaLayout.createSequentialGroup()
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(verNoticia_fecha)
-                            .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(412, 412, 412))
+                            .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(VerNoticiaLayout.createSequentialGroup()
+                        .addComponent(jLabel62)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(348, 348, 348))
         );
         VerNoticiaLayout.setVerticalGroup(
             VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2603,13 +2603,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(verNoticia_fecha)
                     .addComponent(jLabel30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel62))
-                .addContainerGap(180, Short.MAX_VALUE))
+                    .addComponent(jLabel62)
+                    .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerNoticia, "card11");
@@ -3278,7 +3278,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         try{
                             Fabrica.getInstance().getContEdu().nuevaCarrera(nombre, creditos, descripcion, inicioPS,finPS,inicioSS,finSS);
                             JOptionPane.showMessageDialog(this, "Se ha creado la carrera correctamente");
-                            //limpiarPanelCrearCarrera();
+                            limpiarPanelCrearCarrera();
                         }catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
                         }
@@ -3817,7 +3817,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         HorarioCurTextArea.setText("");
         OptativoComboBox.setSelectedIndex(0);
     }
-    /*
+    
     private void limpiarPanelCrearCarrera(){
         NombreCarrTextField.setText("");
         creditosCarrTextField.setText("");
@@ -3832,7 +3832,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         modelo.setRowCount(0);
         modelo = (DefaultTableModel) selecSedeCarrTable.getModel();
         modelo.setRowCount(0);
-    }*/
+    }
     
     private void MostrarNoticia(){
         int index = NoticiasTable.getSelectedRow();
