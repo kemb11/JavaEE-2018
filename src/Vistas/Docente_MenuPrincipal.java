@@ -210,18 +210,20 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         verNoticia_texto = new javax.swing.JTextArea();
         SubirNotaExamen = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        subirNota_notas = new javax.swing.JTable();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        InscripcionExButton = new javax.swing.JButton();
+        subirNota_Estudiantes = new javax.swing.JTable();
+        subirNota_btnAgregar = new javax.swing.JButton();
         btn_aceptar_subirNotaExamen = new javax.swing.JButton();
         InscripcionExButton2 = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        subirNota_nota = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         subirNota_notaMax = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         subirNota_notaApro = new javax.swing.JLabel();
+        subirNota_Titulo = new javax.swing.JLabel();
+        btn_aceptar_subirNotaExamen1 = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1506,7 +1508,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         SubirNotaExamen.setBackground(new java.awt.Color(73, 202, 114));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        subirNota_notas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1517,9 +1519,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane11.setViewportView(jTable1);
+        jScrollPane11.setViewportView(subirNota_notas);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        subirNota_Estudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1530,14 +1532,14 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane12.setViewportView(jTable2);
+        jScrollPane12.setViewportView(subirNota_Estudiantes);
 
-        InscripcionExButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        InscripcionExButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion_verde.png"))); // NOI18N
-        InscripcionExButton.setText("Inscribirse");
-        InscripcionExButton.addActionListener(new java.awt.event.ActionListener() {
+        subirNota_btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        subirNota_btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/nota.png"))); // NOI18N
+        subirNota_btnAgregar.setText("Agregar");
+        subirNota_btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InscripcionExButtonActionPerformed(evt);
+                subirNota_btnAgregarActionPerformed(evt);
             }
         });
 
@@ -1559,6 +1561,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        subirNota_nota.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         jLabel4.setText("Nota del estudiante:");
 
         jLabel17.setText("Nota máxima del examen:");
@@ -1569,47 +1573,65 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         subirNota_notaApro.setText("jLabel18");
 
+        subirNota_Titulo.setText("jLabel19");
+
+        btn_aceptar_subirNotaExamen1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_aceptar_subirNotaExamen1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion_verde.png"))); // NOI18N
+        btn_aceptar_subirNotaExamen1.setText("Inscribirse");
+        btn_aceptar_subirNotaExamen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptar_subirNotaExamen1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout SubirNotaExamenLayout = new javax.swing.GroupLayout(SubirNotaExamen);
         SubirNotaExamen.setLayout(SubirNotaExamenLayout);
         SubirNotaExamenLayout.setHorizontalGroup(
             SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                        .addComponent(InscripcionExButton2)
-                        .addGap(26, 26, 26)
-                        .addComponent(btn_aceptar_subirNotaExamen))
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
                         .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(InscripcionExButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_aceptar_subirNotaExamen)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_aceptar_subirNotaExamen1))
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(SubirNotaExamenLayout.createSequentialGroup()
+                                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel18))
-                                .addGap(50, 50, 50)
-                                .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(subirNota_notaApro)
-                                    .addComponent(subirNota_notaMax)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaExamenLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(InscripcionExButton)))))
+                                    .addGroup(SubirNotaExamenLayout.createSequentialGroup()
+                                        .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel17)
+                                            .addComponent(jLabel18))
+                                        .addGap(50, 50, 50)
+                                        .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(subirNota_notaApro)
+                                            .addComponent(subirNota_notaMax)
+                                            .addComponent(subirNota_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(subirNota_btnAgregar)))))
+                    .addGroup(SubirNotaExamenLayout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(subirNota_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(193, Short.MAX_VALUE))
         );
         SubirNotaExamenLayout.setVerticalGroup(
             SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaExamenLayout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(subirNota_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaExamenLayout.createSequentialGroup()
                         .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subirNota_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
@@ -1619,13 +1641,14 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel18)
                             .addComponent(subirNota_notaApro))
                         .addGap(34, 34, 34)
-                        .addComponent(InscripcionExButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(subirNota_btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_aceptar_subirNotaExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InscripcionExButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(InscripcionExButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_aceptar_subirNotaExamen1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89))
         );
 
@@ -2097,7 +2120,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VolverButtonActionPerformed
 
-    private void InscripcionExButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionExButtonActionPerformed
+    private void subirNota_btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirNota_btnAgregarActionPerformed
         if (ExamenesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un exámen", "", WARNING_MESSAGE);
         } else {
@@ -2113,7 +2136,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "", WARNING_MESSAGE);
             }
         }
-    }//GEN-LAST:event_InscripcionExButtonActionPerformed
+    }//GEN-LAST:event_subirNota_btnAgregarActionPerformed
 
     private void btn_aceptar_subirNotaExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptar_subirNotaExamenActionPerformed
         // TODO add your handling code here:
@@ -2122,6 +2145,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private void InscripcionExButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionExButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InscripcionExButton2ActionPerformed
+
+    private void btn_aceptar_subirNotaExamen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptar_subirNotaExamen1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_aceptar_subirNotaExamen1ActionPerformed
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -2481,7 +2508,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel FechaParcialLabel;
     private javax.swing.JTextArea HorariosTextArea;
     private javax.swing.JButton InscripcionCButton;
-    private javax.swing.JButton InscripcionExButton;
     private javax.swing.JButton InscripcionExButton2;
     private javax.swing.JLabel InstanciaLabel;
     private javax.swing.JRadioButton MisExmenesRadioButton;
@@ -2535,6 +2561,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarParcial;
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.JButton btn_aceptar_subirNotaExamen;
+    private javax.swing.JButton btn_aceptar_subirNotaExamen1;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.ButtonGroup buttonGroupParciales;
@@ -2570,13 +2597,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel nombreUsrLabel;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JTable subirNota_Estudiantes;
+    private javax.swing.JLabel subirNota_Titulo;
+    private javax.swing.JButton subirNota_btnAgregar;
+    private javax.swing.JSpinner subirNota_nota;
     private javax.swing.JLabel subirNota_notaApro;
     private javax.swing.JLabel subirNota_notaMax;
+    private javax.swing.JTable subirNota_notas;
     private javax.swing.JList<String> verNoticia_etiquetas;
     private javax.swing.JLabel verNoticia_fecha;
     private javax.swing.JTextArea verNoticia_texto;
