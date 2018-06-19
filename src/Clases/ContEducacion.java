@@ -244,7 +244,7 @@ public class ContEducacion implements IContEducacion{
     }
     
     @Override
-    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception{
+    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera, int notaExonEx, int notaAprobacion) throws Exception{
         Curso curso = new Curso();
         curso.setNombre(nombre);
         curso.setCreditos(creditos);
@@ -252,6 +252,8 @@ public class ContEducacion implements IContEducacion{
         curso.setDescripcion(descripcion);
         curso.setHorarios(horario);
         curso.setOptativo(optativo);
+        curso.setNotaExonerarEx(notaExonEx);
+        curso.setNotaAprobacion(notaAprobacion);
 
         List<Previa> previasCur = new ArrayList<>();
         for (Curso cursoPrevia : previasSelec) {
@@ -470,5 +472,24 @@ public class ContEducacion implements IContEducacion{
     public List<Noticia> listarNoticias() {
         NoticiaJpaController njpa = new NoticiaJpaController();
         return njpa.getNoticias(sede.getNombre());
+    }
+    
+    @Override
+    public List<Curso> listarCursosDictando(String buscar){
+        List<Curso> cursosRetornar = new ArrayList<>();
+        
+        Docente docente = Fabrica.getInstance().getContAdmin().getLoginDocente();
+        for (CursoSede cursoS : docente.getClases()) {
+            if(cursoS.getSede().equals(this.sede)){
+                String nombreCurso = cursoS.getCurso().getNombre().toLowerCase();
+                String nombreCarrera = cursoS.getCurso().getCarrera().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
+                    cursosRetornar.add(cursoS.getCurso());
+                } 
+            }
+        }
+        
+        return cursosRetornar;
     }
 }
