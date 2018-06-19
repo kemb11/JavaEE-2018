@@ -46,8 +46,14 @@ public class ContAdmin implements IContAdmin {
         }
     }
 
-    public Admin getLogin() {
+    @Override
+    public Admin getLoginAdmin() {
         return login;
+    }
+    
+    @Override
+    public Docente getLoginDocente() {
+        return loginDocente;
     }
 
     @Override

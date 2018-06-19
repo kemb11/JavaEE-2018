@@ -23,7 +23,8 @@ public class Principal extends javax.swing.JFrame {
     public Principal()  {
         initComponents();
         this.setLocationRelativeTo(null); //centrar
-        
+        Docente_MenuPrincipal d = new Docente_MenuPrincipal();
+        d.setVisible(true);
     }
 
     public void vaciar() {
