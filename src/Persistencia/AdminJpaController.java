@@ -133,5 +133,42 @@ public class AdminJpaController implements Serializable {
             
         }
     }
+    public boolean verificarUser(String user){
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM admin where id = '"+ user +"' or email = '"+ user +"';", Admin.class);
+            if(q.getResultList().size() > 0)
+                return true;
+            else
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean login(String user, String pass){
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM admin where (id = '"+ user +"' or email = '"+ user +"') and pass = '"+pass+"';", Admin.class);
+            if(q.getResultList().size() > 0)
+                return true;
+            else
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public Admin getAdmin(String id) {
+        EntityManager em = Fabrica.getInstance().getEntity();
+        List<Admin> admins = this.findAdminEntities();
+        for(Admin a : admins){
+            if(a.getId().equals(id) || a.getEmail().equals(id))
+                return a;
+        }
+        return null;
+    }
     
 }

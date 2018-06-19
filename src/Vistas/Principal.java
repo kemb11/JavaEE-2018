@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 /**
  *
@@ -127,27 +128,25 @@ public class Principal extends javax.swing.JFrame {
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
         if (!(id.isEmpty() && pass.isEmpty())) {
-            boolean control;
             try {
-                control = Fabrica.getInstance().getContEst().login(id, pass);
-                if (control) {
-                    Estudiante_MenuPrincipal m = new Estudiante_MenuPrincipal();
-                    m.setVisible(true);
-                }
-            } catch (Exception ex) {
-                try {
-                    control = Fabrica.getInstance().getContAdmin().login(id, pass);
-                    if (control) {
+                String tipo = Fabrica.getInstance().getContAdmin().login(id, pass);
+                switch(tipo){
+                    case "estudiante":
+                        Estudiante_MenuPrincipal em = new Estudiante_MenuPrincipal();
+                        em.setVisible(true);
+                        break;
+                    case "docente":
+                        Docente_MenuPrincipal dm = new Docente_MenuPrincipal();
+                        dm.setVisible(true);
+                        break;
+                    case "admin":
                         Admin_MenuPrincipal am = new Admin_MenuPrincipal();
                         am.setVisible(true);
-                    }
-                } catch (Exception ex1) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex1);
-                    ex.printStackTrace();
+                        break;
                 }
+            } catch (InternalException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
         }

@@ -268,6 +268,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         exa_btn_aceptar = new javax.swing.JButton();
         exa_nota_apro = new javax.swing.JSpinner();
         exa_nota_tot = new javax.swing.JSpinner();
+        jLabel63 = new javax.swing.JLabel();
         VerCursoPanel = new javax.swing.JPanel();
         CreditosLabel = new javax.swing.JLabel();
         OptativoLabel = new javax.swing.JLabel();
@@ -1755,10 +1756,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         exa_titulo.setText("Examen de ");
 
         try {
-            exa_fec.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            exa_fec.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####-##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        exa_fec.setText("DD/MM/AAAA-hh:mm");
 
         jLabel39.setText("Fecha de realización:");
 
@@ -1818,6 +1820,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         exa_nota_tot.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        jLabel63.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel63.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel63.setText("DD/MM/AAAA-hh:mm");
+
         javax.swing.GroupLayout ExamenCursoLayout = new javax.swing.GroupLayout(ExamenCurso);
         ExamenCurso.setLayout(ExamenCursoLayout);
         ExamenCursoLayout.setHorizontalGroup(
@@ -1825,42 +1831,44 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(ExamenCursoLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ExamenCursoLayout.createSequentialGroup()
-                        .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(exa_btn_selec)
-                                    .addComponent(exa_btn_deselec)))
-                            .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-                            .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                .addComponent(jLabel50)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(exa_fecfin)
-                            .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                .addComponent(jLabel48)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(ExamenCursoLayout.createSequentialGroup()
-                                .addComponent(jLabel51)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                                .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(ExamenCursoLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExamenCursoLayout.createSequentialGroup()
                         .addComponent(exa_btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)))
+                        .addGap(72, 72, 72))
+                    .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ExamenCursoLayout.createSequentialGroup()
+                            .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(33, 33, 33)
+                                    .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(exa_btn_selec)
+                                        .addComponent(exa_btn_deselec)))
+                                .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel46, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                                .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                    .addComponent(jLabel50)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(exa_nota_apro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(39, 39, 39)
+                            .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(exa_fecfin)
+                                .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                                .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                    .addComponent(jLabel51)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                                    .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(ExamenCursoLayout.createSequentialGroup()
+                                    .addComponent(jLabel48)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel63, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ExamenCursoLayout.createSequentialGroup()
+                            .addGap(1, 1, 1)
+                            .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(412, 412, 412))
         );
         ExamenCursoLayout.setVerticalGroup(
@@ -1868,7 +1876,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(ExamenCursoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(exa_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel63)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ExamenCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exa_fec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel39))
@@ -4037,6 +4047,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -4182,7 +4193,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     
     public Date crearFecha(String fecha, String campo)throws InternalException{
         try {
-            Date retornar = dateFormat.parse(fecha);
+            Date retornar = null;
+            SimpleDateFormat dateFormatAux = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+            if(campo.equals(" de examen"))
+                retornar = dateFormatAux.parse(fecha);
+            else
+                retornar = dateFormat.parse(fecha);
             return retornar;
         } catch (ParseException ex) {
             Logger.getLogger(Admin_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);

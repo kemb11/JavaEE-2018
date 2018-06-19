@@ -6,8 +6,7 @@ import java.util.Map;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 public interface IContAdmin {
-    public abstract boolean login(String user, String Pass) throws Exception;    
-    public abstract boolean loginDocente(String user, String Pass) throws Exception;    
+    public abstract String login(String user, String Pass) throws InternalException;     
     public abstract void nuevaNoticia(String titulo, String texto, List<String> etiquetas);
     public abstract List<Noticia> listarNoticias(String buscar);
     

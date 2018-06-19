@@ -5,6 +5,7 @@
  */
 package Persistencia;
 
+import Clases.Docente;
 import Clases.Estudiante;
 import Clases.Fabrica;
 import java.io.Serializable;
@@ -166,6 +167,16 @@ public class EstudianteJpaController implements Serializable {
         } finally {
         }
     }
+    
+    public Estudiante getEstudiante(String id) {
+        EntityManager em = getEntityManager();
+        List<Estudiante> estudiantes = this.findEstudianteEntities();
+        for(Estudiante e : estudiantes){
+            if(e.getId().equals(id) || e.getEmail().equals(id))
+                return e;
+        }
+        return null;
+    }
 
     public int getEstudianteCount() {
         EntityManager em = getEntityManager();
@@ -205,4 +216,33 @@ public class EstudianteJpaController implements Serializable {
         }
         return estudiantes;
     }
+    
+    public boolean verificarUser(String user){
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM estudiante where id = '"+ user +"' or email = '"+ user +"';", Estudiante.class);
+            if(q.getResultList().size() > 0)
+                return true;
+            else
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean login(String user, String pass){
+        EntityManager em = getEntityManager();
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM estudiante where (id = '"+ user +"' or email = '"+ user +"') and pass = '"+pass+"';", Estudiante.class);
+            if(q.getResultList().size() > 0)
+                return true;
+            else
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
 }
