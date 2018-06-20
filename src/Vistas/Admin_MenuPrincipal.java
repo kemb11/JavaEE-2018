@@ -56,7 +56,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     public Admin_MenuPrincipal() {
         initComponents();
-
+        DefaultListModel listaSedes = new DefaultListModel();
+        DefaultListModel listaCarreras = new DefaultListModel();
+        list_aec_carreras.setModel(listaSedes);
+        list_aec_carreras.setModel(listaCarreras);
+        
         this.setLocationRelativeTo(null);
         // Cargar sedes existentes en el CB SEDES
         llenarListaSedes();
@@ -354,6 +358,19 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         estudianteCIBuscar = new javax.swing.JFormattedTextField();
         buscarEstEditar = new javax.swing.JButton();
+        agregarEstudianteSede = new javax.swing.JPanel();
+        txt_aes_cedula = new javax.swing.JFormattedTextField();
+        btn_aes_buscar = new javax.swing.JButton();
+        cb_aes_sedes = new javax.swing.JComboBox<>();
+        btn_aes_agregar = new javax.swing.JButton();
+        agregarEstudianteCarrera = new javax.swing.JPanel();
+        txt_aec_cedula = new javax.swing.JFormattedTextField();
+        btn_aec_buscar = new javax.swing.JButton();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        list_aec_sedes = new javax.swing.JList<>();
+        jScrollPane20 = new javax.swing.JScrollPane();
+        list_aec_carreras = new javax.swing.JList<>();
+        btn_aec_agregarCarrera = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -2667,6 +2684,118 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(estudianteEditar, "card17");
 
+        agregarEstudianteSede.setBackground(new java.awt.Color(73, 202, 114));
+
+        try {
+            txt_aes_cedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        btn_aes_buscar.setText("Buscar");
+        btn_aes_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aes_buscarActionPerformed(evt);
+            }
+        });
+
+        cb_aes_sedes.setEnabled(false);
+
+        btn_aes_agregar.setText("Agregar");
+        btn_aes_agregar.setEnabled(false);
+        btn_aes_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aes_agregarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout agregarEstudianteSedeLayout = new javax.swing.GroupLayout(agregarEstudianteSede);
+        agregarEstudianteSede.setLayout(agregarEstudianteSedeLayout);
+        agregarEstudianteSedeLayout.setHorizontalGroup(
+            agregarEstudianteSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarEstudianteSedeLayout.createSequentialGroup()
+                .addGap(263, 263, 263)
+                .addGroup(agregarEstudianteSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_aes_sedes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txt_aes_cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(agregarEstudianteSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_aes_buscar)
+                    .addComponent(btn_aes_agregar))
+                .addContainerGap(301, Short.MAX_VALUE))
+        );
+        agregarEstudianteSedeLayout.setVerticalGroup(
+            agregarEstudianteSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarEstudianteSedeLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addGroup(agregarEstudianteSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_aes_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_aes_buscar))
+                .addGap(45, 45, 45)
+                .addGroup(agregarEstudianteSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_aes_sedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_aes_agregar))
+                .addContainerGap(399, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(agregarEstudianteSede, "card18");
+
+        try {
+            txt_aec_cedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        btn_aec_buscar.setText("Buscar");
+        btn_aec_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aec_buscarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane19.setViewportView(list_aec_sedes);
+
+        jScrollPane20.setViewportView(list_aec_carreras);
+
+        btn_aec_agregarCarrera.setText("Agregar Carrera");
+
+        javax.swing.GroupLayout agregarEstudianteCarreraLayout = new javax.swing.GroupLayout(agregarEstudianteCarrera);
+        agregarEstudianteCarrera.setLayout(agregarEstudianteCarreraLayout);
+        agregarEstudianteCarreraLayout.setHorizontalGroup(
+            agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_aec_agregarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
+                            .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
+                            .addComponent(txt_aec_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btn_aec_buscar))))
+                .addContainerGap(485, Short.MAX_VALUE))
+        );
+        agregarEstudianteCarreraLayout.setVerticalGroup(
+            agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_aec_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_aec_buscar))
+                .addGap(18, 18, 18)
+                .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_aec_agregarCarrera)
+                .addContainerGap(292, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(agregarEstudianteCarrera, "card19");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -3468,6 +3597,37 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         FechaNacEditar.setText(fechaNac);
     }//GEN-LAST:event_buscarEstEditarActionPerformed
 
+    private void btn_aes_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aes_buscarActionPerformed
+        // TODO add your handling code here:
+        HashMap<String,String> map = Fabrica.getInstance().getContEst().getInfoEstudiante(txt_aes_cedula.getText());
+        
+        if(map != null){
+            List<String> sedes = Fabrica.getInstance().getContAdmin().getSedes();
+            while(sedes.iterator().hasNext()){
+             cb_aes_sedes.addItem(this.getName());
+            }
+            cb_aes_sedes.setEnabled(true);
+            btn_aes_agregar.setEnabled(true);
+        }
+    }//GEN-LAST:event_btn_aes_buscarActionPerformed
+
+    private void btn_aes_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aes_agregarActionPerformed
+        // TODO add your handling code here:
+        String sede = cb_aes_sedes.getItemAt(cb_aes_sedes.getSelectedIndex());
+        String ci = txt_aes_cedula.getText();
+        if(!ci.isEmpty() && !sede.isEmpty())
+            Fabrica.getInstance().getContAdmin().agregarEstudianteSede(sede, ci);
+        
+    }//GEN-LAST:event_btn_aes_agregarActionPerformed
+
+    private void btn_aec_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aec_buscarActionPerformed
+        // TODO add your handling code here:
+        HashMap<String,String> map = Fabrica.getInstance().getContEst().getInfoEstudiante(txt_aec_cedula.getText());
+        if(!map.isEmpty()){
+            
+        }
+    }//GEN-LAST:event_btn_aec_buscarActionPerformed
+
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
 
@@ -3982,6 +4142,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JPanel VerCursoPanel;
     private javax.swing.JButton VolverButton;
+    private javax.swing.JPanel agregarEstudianteCarrera;
+    private javax.swing.JPanel agregarEstudianteSede;
     private javax.swing.JButton borrarCursoButton;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarDocente;
@@ -3989,6 +4151,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarNoticia;
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.JButton btn_abrirnuevasede;
+    private javax.swing.JButton btn_aec_agregarCarrera;
+    private javax.swing.JButton btn_aec_buscar;
+    private javax.swing.JButton btn_aes_agregar;
+    private javax.swing.JButton btn_aes_buscar;
     private javax.swing.JButton btn_borrarSede;
     private javax.swing.JButton btn_borrarSede_1;
     private javax.swing.JButton buscarEstEditar;
@@ -3997,6 +4163,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton cancelarCarrButton;
     private javax.swing.JLabel carreraCrearCurLabel;
     private javax.swing.JLabel carreraCurLabel;
+    private javax.swing.JComboBox<String> cb_aes_sedes;
     private javax.swing.JComboBox<String> cb_listaSedes;
     private javax.swing.JButton confirmarCarrButton;
     private javax.swing.JButton crearCursoButton;
@@ -4115,7 +4282,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
+    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4124,6 +4293,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JList<String> list_aec_carreras;
+    private javax.swing.JList<String> list_aec_sedes;
     private javax.swing.JButton mod_btn_confirmar;
     private javax.swing.JTextField mod_sede_direccion;
     private javax.swing.JTextField mod_sede_nombre;
@@ -4141,6 +4312,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable selecPreviaCurTable;
     private javax.swing.JTable selecSedeCarrTable;
     private javax.swing.JComboBox<String> selectSede;
+    private javax.swing.JFormattedTextField txt_aec_cedula;
+    private javax.swing.JFormattedTextField txt_aes_cedula;
     private javax.swing.JButton verCursoCurButton;
     private javax.swing.JButton verSedeCarrButton;
     // End of variables declaration//GEN-END:variables

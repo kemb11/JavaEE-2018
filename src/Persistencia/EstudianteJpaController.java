@@ -24,8 +24,8 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author rodri
  */
-public class EstudianteJpaController implements Serializable {
-
+public class EstudianteJpaController implements Serializable {    
+    
     public EstudianteJpaController() {
     }
     public EntityManager getEntityManager() {

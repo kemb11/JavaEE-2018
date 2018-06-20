@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 public class ContAdmin implements IContAdmin {
@@ -218,6 +220,19 @@ public class ContAdmin implements IContAdmin {
                 ".\nIncripciones desde el "+ dateFormat.format(exa.getInicioInsripcion())+" hasta el "
                 + dateFormat.format(exa.getFinInsripcion())+ ".\nSaludos, muchas gracias.";        
         this.nuevaNoticia("Examen de "+c.getNombre(),texto, etiquetas);
+    }
+    @Override
+    public void agregarEstudianteSede(String sede, String ci){
+        SedeJpaController sjpa = new SedeJpaController();
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        Estudiante e = ejpa.findEstudianteCedula(ci);
+        Sede s = sjpa.returnByNombre(sede);
+        e.getSedes().add(s);
+        try {
+            ejpa.edit(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ContAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 /*

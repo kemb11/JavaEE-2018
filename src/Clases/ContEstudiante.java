@@ -129,6 +129,13 @@ public class ContEstudiante implements IContEstudiante {
     }
 
     @Override
+    public Estudiante getEstudiante(String ci){
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        return ejpa.findEstudianteCedula(ci);
+    }
+    
+    
+    @Override
     public List<Estudiante> getEstudiantes() {
         EstudianteJpaController ejpa = new EstudianteJpaController();
         return ejpa.findEstudianteEntities();
