@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -339,6 +340,20 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         selecPreviaCurTable = new javax.swing.JTable();
         carreraCrearCurLabel = new javax.swing.JLabel();
+        estudianteEditar = new javax.swing.JPanel();
+        jLabel64 = new javax.swing.JLabel();
+        jLabel65 = new javax.swing.JLabel();
+        jLabel66 = new javax.swing.JLabel();
+        jLabel67 = new javax.swing.JLabel();
+        NombreEditar = new javax.swing.JTextField();
+        ApellidoEditar = new javax.swing.JTextField();
+        EmailEditar = new javax.swing.JTextField();
+        FechaNacEditar = new javax.swing.JFormattedTextField();
+        jLabel68 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        estudianteCIBuscar = new javax.swing.JFormattedTextField();
+        buscarEstEditar = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -2544,6 +2559,114 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(CrearCursoPanel, "card12");
 
+        jLabel64.setText("Nombre: ");
+
+        jLabel65.setText("Apellido: ");
+
+        jLabel66.setText("Fecha Nacimiento: ");
+
+        jLabel67.setText("Email: ");
+
+        try {
+            FechaNacEditar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel68.setText("Datos del estudiante");
+
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Inhabilitar");
+
+        try {
+            estudianteCIBuscar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        buscarEstEditar.setText("Buscar");
+        buscarEstEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarEstEditarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout estudianteEditarLayout = new javax.swing.GroupLayout(estudianteEditar);
+        estudianteEditar.setLayout(estudianteEditarLayout);
+        estudianteEditarLayout.setHorizontalGroup(
+            estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(estudianteEditarLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(estudianteEditarLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addGroup(estudianteEditarLayout.createSequentialGroup()
+                        .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel64)
+                            .addComponent(jLabel65)
+                            .addComponent(jLabel66)
+                            .addComponent(jLabel67))
+                        .addGap(36, 36, 36)
+                        .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmailEditar)
+                            .addComponent(FechaNacEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(NombreEditar)
+                            .addComponent(ApellidoEditar))))
+                .addGap(610, 610, 610))
+            .addGroup(estudianteEditarLayout.createSequentialGroup()
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(estudianteEditarLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(estudianteCIBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscarEstEditar))
+                    .addGroup(estudianteEditarLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jLabel68)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        estudianteEditarLayout.setVerticalGroup(
+            estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(estudianteEditarLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(estudianteCIBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarEstEditar))
+                .addGap(93, 93, 93)
+                .addComponent(jLabel68)
+                .addGap(18, 18, 18)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel64)
+                    .addComponent(NombreEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel65)
+                    .addComponent(ApellidoEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel66)
+                    .addComponent(FechaNacEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel67)
+                    .addComponent(EmailEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(estudianteEditar, "card17");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -3319,6 +3442,32 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         crearCarrera = true;
     }//GEN-LAST:event_NuevaCarrButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String ci, nombre, apellido, fechanac, email;
+        nombre = NombreEditar.getText();
+        ci = estudianteCIBuscar.getText();
+        apellido = ApellidoEditar.getText();
+        fechanac = FechaNacEditar.getText();
+        email = EmailEditar.getText();
+        Fabrica.getInstance().getContEst().confirmarMod(ci, nombre, apellido, email, fechanac);
+        /*Confirmar modificar*/
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buscarEstEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEstEditarActionPerformed
+        // TODO add your handling code here:
+        String ci = estudianteCIBuscar.getText();
+        HashMap<String,String> map = Fabrica.getInstance().getContEst().getInfoEstudiante(ci);
+        String nombre = map.get("nombre");
+        String apellido = map.get("apellido");
+        String email = map.get("email");
+        String fechaNac = map.get("fechaNac");
+        NombreEditar.setText(nombre);
+        ApellidoEditar.setText(apellido);
+        EmailEditar.setText(email);
+        FechaNacEditar.setText(fechaNac);
+    }//GEN-LAST:event_buscarEstEditarActionPerformed
+
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
 
@@ -3758,6 +3907,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ApellidoEditar;
     private javax.swing.JRadioButton AprobadosRadioButton;
     private javax.swing.JButton BuscarButton;
     private javax.swing.JTextField BuscarCarrera;
@@ -3785,15 +3935,18 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Docente_Crear;
     private javax.swing.JPanel DocentesOpcion;
     private javax.swing.JTable DocentesTable;
+    private javax.swing.JTextField EmailEditar;
     private javax.swing.JPanel Estudiante;
     private javax.swing.JPanel Estudiante_Crear;
     private javax.swing.JPanel EstudiantesOpcion;
     private javax.swing.JTable EstudiantesTable;
     private javax.swing.JPanel ExamenCurso;
+    private javax.swing.JFormattedTextField FechaNacEditar;
     private javax.swing.JTextArea HorarioCurTextArea;
     private javax.swing.JTextArea HorariosTextArea;
     private javax.swing.JTextField NombreCarrTextField;
     private javax.swing.JTextField NombreCurTextField;
+    private javax.swing.JTextField NombreEditar;
     private javax.swing.JPanel NoticiasOpcion;
     private javax.swing.JPanel NoticiasPanel;
     private javax.swing.JTable NoticiasTable;
@@ -3838,6 +3991,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_abrirnuevasede;
     private javax.swing.JButton btn_borrarSede;
     private javax.swing.JButton btn_borrarSede_1;
+    private javax.swing.JButton buscarEstEditar;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.JButton cancelarCarrButton;
@@ -3864,6 +4018,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> est_sede;
     private javax.swing.JTextArea est_txt_carrera;
     private javax.swing.JTextArea est_txt_sede;
+    private javax.swing.JFormattedTextField estudianteCIBuscar;
+    private javax.swing.JPanel estudianteEditar;
     private javax.swing.JButton exa_btn_aceptar;
     private javax.swing.JButton exa_btn_deselec;
     private javax.swing.JButton exa_btn_selec;
@@ -3881,7 +4037,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField inicioSegundoSemestre;
     private javax.swing.JButton inscribirDocente;
     private javax.swing.JButton inscribirEstudiante;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3939,6 +4097,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -4085,4 +4248,5 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             throw new InternalException("Formato de fecha"+campo+" incorrecto");
         }
     }
+    
 }

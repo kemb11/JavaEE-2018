@@ -1,6 +1,7 @@
 
 package Clases;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface IContEstudiante {
@@ -14,4 +15,6 @@ public interface IContEstudiante {
     public abstract InscripcionE getInscripcionExamen(Examen examen);
     public abstract List<Estudiante> getEstudiantes();
     public abstract List<Estudiante> getEstudiantes(String palabra);
+    public abstract HashMap<String,String> getInfoEstudiante(String ci);
+    public abstract void confirmarMod(String ci, String nombre, String apellido, String email, String fechaNac);
 }
