@@ -25,6 +25,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
@@ -57,6 +58,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         NoticiasTable.getColumnModel().removeColumn(NoticiasTable.getColumnModel().getColumn(0));
         ExamenesTable.getColumnModel().removeColumn(ExamenesTable.getColumnModel().getColumn(0));
         ParcialesTable.getColumnModel().removeColumn(ParcialesTable.getColumnModel().getColumn(0));
+        subirNota_Estudiantes.getColumnModel().removeColumn(subirNota_Estudiantes.getColumnModel().getColumn(0));
+        subirNota_notas.getColumnModel().removeColumn(subirNota_notas.getColumnModel().getColumn(0));
         
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
@@ -69,6 +72,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(VerExamenPanel, "verExamen");
         PanelPrincipal.add(VerParcialPanel, "verParcial");
         PanelPrincipal.add(VerNoticia, "ver noticia");
+        PanelPrincipal.add(SubirNotaExamen, "subir nota examen");
 
         String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
         String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
@@ -1510,28 +1514,36 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         subirNota_notas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Objeto", "CI", "Nombre", "Nota", "Aprobado"
             }
         ));
         jScrollPane11.setViewportView(subirNota_notas);
 
         subirNota_Estudiantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Objeto", "CI", "Nombre"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane12.setViewportView(subirNota_Estudiantes);
 
         subirNota_btnAgregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1623,7 +1635,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         SubirNotaExamenLayout.setVerticalGroup(
             SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaExamenLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(subirNota_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2121,20 +2133,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverButtonActionPerformed
 
     private void subirNota_btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirNota_btnAgregarActionPerformed
-        if (ExamenesTable.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un exámen", "", WARNING_MESSAGE);
+        if (subirNota_Estudiantes.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno", "", WARNING_MESSAGE);
         } else {
-            DefaultTableModel modelo = (DefaultTableModel) ExamenesTable.getModel();
-            Examen examen = (Examen) modelo.getValueAt(ExamenesTable.getSelectedRow(), 0);
-
-            IContEstudiante contEst = Fabrica.getInstance().getContEst();
-            try {
-                contEst.inscripcionExamen(examen);
-                JOptionPane.showMessageDialog(this, "Se ha inscrito correctamente al exámen");
-            } catch (Exception ex) {
-                Logger.getLogger(Estudiante_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "", WARNING_MESSAGE);
-            }
+            DefaultTableModel modelo = (DefaultTableModel) subirNota_Estudiantes.getModel();
+            InscripcionE estudiante = (InscripcionE) modelo.getValueAt(subirNota_Estudiantes.getSelectedRow(), 0);
+            ResultadoE res;            
         }
     }//GEN-LAST:event_subirNota_btnAgregarActionPerformed
 
@@ -2191,6 +2195,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 break;
             case "ver noticia":
                 this.setTitle("Menú: Noticias");
+                break;
+            case "subir nota examen":
+                this.setTitle("Menú: Exámenes");
                 break;
             case "examenes":
                 this.listarExamenes("");
@@ -2479,6 +2486,28 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Debe seleccionar una noticia", "Error", WARNING_MESSAGE);
         }
+    }
+    
+    public void subirNotaExamen(){
+        Examen e = (Examen)ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
+        //if(docente examen distinto de loggueado) excepcion
+        subirNota_Titulo.setText("Examen de "+e.getCurso().getCurso().getNombre()+" del dia "+dateFormat.format(e.getFecha()));
+        subirNota_notaApro.setText(String.valueOf(e.getNotaApro()));
+        subirNota_notaMax.setText(String.valueOf(e.getNotaMax()));
+        subirNota_nota.setValue(((SpinnerNumberModel)subirNota_nota.getModel()).getMinimum());
+        DefaultTableModel modelo = (DefaultTableModel) subirNota_Estudiantes.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        for(InscripcionE ie : e.getEstudiantesInscritos()){
+            Object[] datos = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres()+" "+ie.getEstudiante().getApellidos()};
+            modelo.addRow(datos);
+        }
+        modelo = (DefaultTableModel) subirNota_notas.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        resizeColumnWidth(subirNota_Estudiantes);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
