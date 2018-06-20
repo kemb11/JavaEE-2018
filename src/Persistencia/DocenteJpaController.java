@@ -149,5 +149,42 @@ public class DocenteJpaController implements Serializable {
         }
         return docentes;
     }
-
+    
+    public boolean verificarUser(String user){
+        EntityManager em = Fabrica.getInstance().getEntity();
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM docente where id = '"+ user +"' or email = '"+ user +"';", Docente.class);
+            if(q.getResultList().size() > 0)
+                return true;
+            else
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean login(String user, String pass){
+        EntityManager em = Fabrica.getInstance().getEntity();
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM docente where (id = '"+ user +"' or email = '"+ user +"') and pass = '"+pass+"';", Docente.class);
+            if(q.getResultList().size() > 0)
+                return true;
+            else
+                return false;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public Docente getDocente(String id) {
+        EntityManager em = Fabrica.getInstance().getEntity();
+        List<Docente> docentes = this.findDocenteEntities();
+        for(Docente d : docentes){
+            if(d.getId().equals(id) || d.getEmail().equals(id))
+                return d;
+        }
+        return null;
+    }
 }

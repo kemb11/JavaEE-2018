@@ -1,0 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Clases;
+
+/**
+ *
+ * @author Usuario
+ */
+public interface IContDocente {
+    public abstract boolean subirMaterial(String titulo, String descripcion, String rutaArchivo, Curso curso);    
+    public abstract boolean dictaCurso(Curso curso);
+    public abstract void login(Docente docente);
+    public abstract Docente getLogin();
+    public abstract boolean isEditableExamen(Examen e);
+    public abstract void subirNotasExamen(Examen e);
+    public abstract void subirNotasParcial(Parcial p);
+}

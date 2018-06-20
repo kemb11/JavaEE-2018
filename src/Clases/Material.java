@@ -7,52 +7,29 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
-import org.hibernate.annotations.DiscriminatorOptions;
 
 /**
  *
  * @author Usuario
  */
 @Entity
-@Table(name="prueba")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Tipo")
-@DiscriminatorOptions(force=true)
-public abstract class Prueba implements Serializable {
+public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date fecha;
-    private int notaMax, notaApro;
+    private String titulo;
+    private String descripcion;
+    private String rutaArchivo;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaSubida;
 
-    public int getNotaMax() {
-        return notaMax;
-    }
-
-    public void setNotaMax(int notaMax) {
-        this.notaMax = notaMax;
-    }
-
-    public int getNotaApro() {
-        return notaApro;
-    }
-
-    public void setNotaApro(int notaApro) {
-        this.notaApro = notaApro;
-    }
-    
     public Long getId() {
         return id;
     }
@@ -61,12 +38,36 @@ public abstract class Prueba implements Serializable {
         this.id = id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getRutaArchivo() {
+        return rutaArchivo;
+    }
+
+    public void setRutaArchivo(String rutaArchivo) {
+        this.rutaArchivo = rutaArchivo;
+    }
+
+    public Date getFechaSubida() {
+        return fechaSubida;
+    }
+
+    public void setFechaSubida(Date fechaSubida) {
+        this.fechaSubida = fechaSubida;
     }
 
     @Override
@@ -79,10 +80,10 @@ public abstract class Prueba implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Prueba)) {
+        if (!(object instanceof Material)) {
             return false;
         }
-        Prueba other = (Prueba) object;
+        Material other = (Material) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -91,7 +92,7 @@ public abstract class Prueba implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Prueba[ id=" + id + " ]";
+        return "Clases.Material[ id=" + id + " ]";
     }
     
 }

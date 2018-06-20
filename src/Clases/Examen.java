@@ -18,7 +18,7 @@ import Persistencia.*;
 @Entity
 @DiscriminatorValue("E")
 public class Examen extends Prueba {
-    
+
     @OneToOne
     private PeriodoInscripcion inscripcion;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -41,7 +41,7 @@ public class Examen extends Prueba {
     }
 
     public void setInicioInsripcion(Date inicioInsripcion) {
-        if(inscripcion == null){
+        if (inscripcion == null) {
             inscripcion = new PeriodoInscripcion();
         }
         this.inscripcion.setInicio(inicioInsripcion);
@@ -70,8 +70,8 @@ public class Examen extends Prueba {
     public List<InscripcionE> getEstudiantesInscritos() {
         return estudiantesInscritos;
     }
-    
-    public boolean periodoOK(){
+
+    public boolean periodoOK() {
         Date dia = new Date();
         return this.inscripcion.valido(dia);
     }
@@ -82,5 +82,16 @@ public class Examen extends Prueba {
 
     public void setInscripcion(PeriodoInscripcion inscripcion) {
         this.inscripcion = inscripcion;
+    }
+
+    public boolean editable() {
+        if(this.fechaMuestra != null)
+            return false;
+        for (InscripcionE ie : this.estudiantesInscritos) {
+            if (ie.getNota() != null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

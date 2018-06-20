@@ -16,13 +16,12 @@ public class ContAdmin implements IContAdmin {
 
     private static ContAdmin instancia;
     private Admin login;
-    private Docente loginDocente;
 
     public ContAdmin() {
     }
-    
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    
+
     public static ContAdmin getInstance() {
         if (instancia == null) {
             instancia = new ContAdmin();
@@ -31,22 +30,7 @@ public class ContAdmin implements IContAdmin {
     }
 
     @Override
-    public boolean login(String user, String pass) throws Exception {
-        AdminJpaController ajpa = new AdminJpaController();
-        Admin a = ajpa.findAdmin(user);
-        if (a != null && a.getPass().equals(pass)) {
-            this.login = a;
-            return true;
-        } else {
-            if (a != null) {
-                throw new Exception("Contraseña incorrecta");
-            } else {
-                throw new Exception("Usuario y contraseña incorrectos");
-            }
-        }
-    }
-
-    public Admin getLogin() {
+    public Admin getLoginAdmin() {
         return login;
     }
 
@@ -198,12 +182,14 @@ public class ContAdmin implements IContAdmin {
     @Override
     public List<Docente> getDocentes(String palabra) {
         DocenteJpaController djpa = new DocenteJpaController();
-        return djpa.findDocenteEntities(palabra); 
+        return djpa.findDocenteEntities(palabra);
     }
+
     @Override
-    public void crearExamen(Examen exa, List<Sede> sedes, Curso c) throws InternalException{
+    public void crearExamen(Examen exa, List<Sede> sedes, Curso c) throws InternalException {
         List<String> etiquetas = new ArrayList<>();
-        for(Sede s : sedes){
+        SimpleDateFormat dateFormatAux = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        for (Sede s : sedes) {
             CursoSede cs = s.getCurso(c);
             Examen examen = new Examen();
             examen.setCurso(cs);
@@ -216,26 +202,47 @@ public class ContAdmin implements IContAdmin {
         etiquetas.add("Examen");
         etiquetas.add(c.getNombre());
         etiquetas.add(c.getCarrera().getNombre());
-        String texto = "Se marcó para el día " + dateFormat.format(exa.getFecha())+ 
-                ".\nIncripciones desde el "+ dateFormat.format(exa.getInicioInsripcion())+" hasta el "
-                + dateFormat.format(exa.getFinInsripcion())+ ".\nSaludos, muchas gracias.";        
-        this.nuevaNoticia("Examen de "+c.getNombre(),texto, etiquetas);
+        String texto = "Se marcó para el día " + dateFormatAux.format(exa.getFecha())
+                + ".\nIncripciones desde el " + dateFormat.format(exa.getInicioInsripcion()) + " hasta el "
+                + dateFormat.format(exa.getFinInsripcion()) + ".\nSaludos, muchas gracias.";
+        this.nuevaNoticia("Examen de " + c.getNombre(), texto, etiquetas);
     }
 
     @Override
-    public boolean loginDocente(String user, String Pass) throws Exception {
+    public String login(String user, String pass) throws InternalException {
+        String tipo = "";
         DocenteJpaController djpa = new DocenteJpaController();
-        Docente d = djpa.findDocente(user);
-        if (d != null && d.getPass().equals(Pass)) {
-            this.loginDocente = d;
-            return true;
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        AdminJpaController ajpa = new AdminJpaController();
+        if (ejpa.login(user, pass)) {
+            tipo = "estudiante";
+            Fabrica.getInstance().getContEst().login(user);
         } else {
-            if (d != null) {
-                throw new Exception("Contraseña incorrecta");
+            if (ejpa.verificarUser(user)) {
+                throw new InternalException("Contraseña incorrecta");
             } else {
-                throw new Exception("Usuario y contraseña incorrectos");
+                if (djpa.login(user, pass)) {
+                    tipo = "docente";
+                    Fabrica.getInstance().getContDocente().login(djpa.getDocente(user));
+                } else {
+                    if (djpa.verificarUser(user)) {
+                        throw new InternalException("Contraseña incorrecta");
+                    } else {
+                        if (ajpa.login(user, pass)) {
+                            tipo = "admin";
+                            login = ajpa.getAdmin(user);
+                        } else {
+                            if (ajpa.verificarUser(user)) {
+                                throw new InternalException("Contraseña incorrecta");
+                            } else {
+                                throw new InternalException("Usuario y contraseña incorrecto");
+                            }
+                        }
+                    }
+                }
             }
         }
+        return tipo;
     }
 }
 /*
