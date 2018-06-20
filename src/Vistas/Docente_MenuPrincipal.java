@@ -87,7 +87,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         opciones.add(ParcialesOpcion);
         
         //Por defecto que muestre las sedes
-        opcionSeleccionada(CursosOpcion, "subirMaterial");
+        opcionSeleccionada(SedesOpcion, "sedes");
         
         notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -135,7 +135,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         CursosTable = new javax.swing.JTable();
         VerCursoButton = new javax.swing.JButton();
-        InscripcionCButton = new javax.swing.JButton();
+        SubirMaterialButton = new javax.swing.JButton();
         TodosRadioButton = new javax.swing.JRadioButton();
         DictandoRadioButton = new javax.swing.JRadioButton();
         BuscarButton = new javax.swing.JButton();
@@ -217,13 +217,13 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         subirNota_Titulo = new javax.swing.JLabel();
         btn_aceptar_subirNotaExamen1 = new javax.swing.JButton();
         SubirMaterialPanel = new javax.swing.JPanel();
-        CursoCarrLabel = new javax.swing.JLabel();
+        CursoMaterialLabel = new javax.swing.JLabel();
         TituloLabel20 = new javax.swing.JLabel();
         TituloLabel21 = new javax.swing.JLabel();
         jScrollPane21 = new javax.swing.JScrollPane();
         descArchTextArea = new javax.swing.JTextArea();
         TituloArchivoTextField = new javax.swing.JTextField();
-        crearCursoButton1 = new javax.swing.JButton();
+        SelecArchivoButton = new javax.swing.JButton();
         TituloLabel22 = new javax.swing.JLabel();
         confirmarSubirMButton = new javax.swing.JButton();
         VerCursoPanel = new javax.swing.JPanel();
@@ -584,12 +584,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        InscripcionCButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        InscripcionCButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/inscripcion_verde.png"))); // NOI18N
-        InscripcionCButton.setText("Inscribirse");
-        InscripcionCButton.addActionListener(new java.awt.event.ActionListener() {
+        SubirMaterialButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SubirMaterialButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/subir.png"))); // NOI18N
+        SubirMaterialButton.setText("Subir Material");
+        SubirMaterialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InscripcionCButtonActionPerformed(evt);
+                SubirMaterialButtonActionPerformed(evt);
             }
         });
 
@@ -647,7 +647,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CursosPanelLayout.createSequentialGroup()
                         .addComponent(VerCursoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(InscripcionCButton))
+                        .addComponent(SubirMaterialButton))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -665,7 +665,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(InscripcionCButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SubirMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1570,9 +1570,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         SubirMaterialPanel.setBackground(new java.awt.Color(73, 202, 114));
 
-        CursoCarrLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        CursoCarrLabel.setForeground(new java.awt.Color(255, 255, 255));
-        CursoCarrLabel.setText("Curso");
+        CursoMaterialLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        CursoMaterialLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CursoMaterialLabel.setText("Curso");
 
         TituloLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TituloLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -1593,11 +1593,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        crearCursoButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        crearCursoButton1.setText("Seleccionar...");
-        crearCursoButton1.addActionListener(new java.awt.event.ActionListener() {
+        SelecArchivoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SelecArchivoButton.setText("Seleccionar...");
+        SelecArchivoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearCursoButton1ActionPerformed(evt);
+                SelecArchivoButtonActionPerformed(evt);
             }
         });
 
@@ -1621,11 +1621,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CursoCarrLabel)
-                    .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
+                    .addComponent(CursoMaterialLabel)
+                    .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SubirMaterialPanelLayout.createSequentialGroup()
                             .addComponent(TituloLabel20)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(TituloArchivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
                             .addComponent(TituloLabel21)
@@ -1633,7 +1633,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
                         .addComponent(TituloLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(crearCursoButton1))
+                        .addComponent(SelecArchivoButton))
                     .addComponent(confirmarSubirMButton))
                 .addContainerGap(654, Short.MAX_VALUE))
         );
@@ -1641,7 +1641,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(CursoCarrLabel)
+                .addComponent(CursoMaterialLabel)
                 .addGap(18, 18, 18)
                 .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TituloLabel20)
@@ -1652,7 +1652,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearCursoButton1)
+                    .addComponent(SelecArchivoButton)
                     .addComponent(TituloLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(confirmarSubirMButton)
@@ -1996,23 +1996,19 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_VerCursoButtonActionPerformed
 
-    private void InscripcionCButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionCButtonActionPerformed
+    private void SubirMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubirMaterialButtonActionPerformed
         if (CursosTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un curso", "", WARNING_MESSAGE);
         } else {
             DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
             Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-
-            IContEstudiante contEst = Fabrica.getInstance().getContEst();
-            try {
-                contEst.inscripcionCurso(curso);
-                JOptionPane.showMessageDialog(this, "Se ha inscrito correctamente al curso");
-            } catch (Exception ex) {
-                Logger.getLogger(Docente_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "", WARNING_MESSAGE);
+            if(Fabrica.getInstance().getContDocente().dictaCurso(curso)){
+                opcionSeleccionada(CursosOpcion, "subirMaterial");
+            }else{
+                JOptionPane.showMessageDialog(this, "No dicta este curso, no puede subir material");
             }
         }
-    }//GEN-LAST:event_InscripcionCButtonActionPerformed
+    }//GEN-LAST:event_SubirMaterialButtonActionPerformed
 
     private void DictandoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DictandoRadioButtonActionPerformed
         // TODO add your handling code here:
@@ -2320,7 +2316,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TituloArchivoTextFieldActionPerformed
 
-    private void crearCursoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCursoButton1ActionPerformed
+    private void SelecArchivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecArchivoButtonActionPerformed
         JFileChooser selecArchivo = new JFileChooser();
 
         //        selecArchivo.setFont(new java.awt.Font("Segoe UI", 1, 14));
@@ -2344,17 +2340,20 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
 
         }
-    }//GEN-LAST:event_crearCursoButton1ActionPerformed
+    }//GEN-LAST:event_SelecArchivoButtonActionPerformed
 
     private void confirmarSubirMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarSubirMButtonActionPerformed
         String titulo = TituloArchivoTextField.getText();
         String desc = descArchTextArea.getText();        
         if(ruta != null){
-            String[] extension = ruta.split(".");
-            JOptionPane.showMessageDialog(this, "Extension: "+extension[1]);
             DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
             Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-            Fabrica.getInstance().getContDocente().subirMaterial(titulo, desc, ruta, curso);
+            
+            if(Fabrica.getInstance().getContDocente().subirMaterial(titulo, desc, ruta, curso)){
+                JOptionPane.showMessageDialog(this, "El material se subió correctamente");
+            }else{
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un problema al subir el material", "", WARNING_MESSAGE);
+            }
         }else{
             JOptionPane.showMessageDialog(this, "Debe seleccionar un archivo");
         }
@@ -2463,6 +2462,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 this.setTitle("Menú: Ver Curso");
                 break;
             case "subirMaterial":
+                modelo = (DefaultTableModel) CursosTable.getModel();
+                Curso cursoM = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
+                CursoMaterialLabel.setText(cursoM.getNombre());
                 break;
         }
         
@@ -2703,7 +2705,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel CreditosLabel;
     private javax.swing.JLabel CurExamenLabel;
     private javax.swing.JLabel CurParcialLabel;
-    private javax.swing.JLabel CursoCarrLabel;
+    private javax.swing.JLabel CursoMaterialLabel;
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
     private javax.swing.JTable CursosTable;
@@ -2715,7 +2717,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel FechaInscLabel;
     private javax.swing.JLabel FechaParcialLabel;
     private javax.swing.JTextArea HorariosTextArea;
-    private javax.swing.JButton InscripcionCButton;
     private javax.swing.JButton InscripcionExButton2;
     private javax.swing.JLabel InstanciaLabel;
     private javax.swing.JRadioButton MisExmenesRadioButton;
@@ -2737,10 +2738,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable SedeTable;
     private javax.swing.JPanel SedesOpcion;
     private javax.swing.JPanel SedesPanel;
+    private javax.swing.JButton SelecArchivoButton;
     private javax.swing.JButton SeleccionarExamen;
     private javax.swing.JButton SeleccionarNoticia;
     private javax.swing.JButton SeleccionarParcial;
     private javax.swing.JButton SeleccionarSede;
+    private javax.swing.JButton SubirMaterialButton;
     private javax.swing.JPanel SubirMaterialPanel;
     private javax.swing.JPanel SubirNotaExamen;
     private javax.swing.JTextField TituloArchivoTextField;
@@ -2785,7 +2788,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupParciales;
     private javax.swing.JLabel carreraCurLabel;
     private javax.swing.JButton confirmarSubirMButton;
-    private javax.swing.JButton crearCursoButton1;
     private javax.swing.JTextArea descArchTextArea;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;

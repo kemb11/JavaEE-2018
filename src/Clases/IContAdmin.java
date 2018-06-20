@@ -16,7 +16,6 @@ public interface IContAdmin {
     
     public abstract Map<String,String> getInfoSedeByNombre(String nombre);
     public abstract Admin getLoginAdmin();
-    public abstract Docente getLoginDocente();
     public abstract void crearEstudiante(Estudiante e) throws Exception;
     public abstract void crearDocente(Docente d )throws Exception ;
     public abstract List<Docente> getDocentes();

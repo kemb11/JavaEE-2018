@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.persistence.*;
 import Persistencia.*;
 import java.text.ParseException;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,6 +37,8 @@ public class CursoSede implements Serializable {
     private List<Examen> exmenes;
     @OneToMany(mappedBy = "curso")
     private List<Parcial> parciales;
+    @ManyToOne
+    private Docente docente;
     
     private static final long serialVersionUID = 1L;
     @Id
@@ -120,6 +121,24 @@ public class CursoSede implements Serializable {
     public void setParciales(List<Parcial> parciales) {
         this.parciales = parciales;
     }
+
+    public List<Docente> getDocentes() {
+        return docentes;
+    }
+
+    public void setDocentes(List<Docente> docentes) {
+        this.docentes = docentes;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+    
+    
     
     public void setExamen(Examen examen) {
         this.exmenes.add(examen);

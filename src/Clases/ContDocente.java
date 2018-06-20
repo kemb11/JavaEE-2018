@@ -23,6 +23,7 @@ import org.apache.commons.io.FilenameUtils;
 public class ContDocente implements IContDocente{
 
     private static ContDocente instancia;
+    private Docente login;
     
     public ContDocente() {
     }    
@@ -64,7 +65,7 @@ public class ContDocente implements IContDocente{
                 em.getTransaction().rollback();
             }
 
-            String rutaDestino = "MaterialDeEstudio/"+cursoSede.getId()+"/"+material.getId()+extension;
+            String rutaDestino = "MaterialDeEstudio/"+cursoSede.getId()+"/"+material.getId()+"."+extension;
             if(copiarArchivo(rutaArchivo, rutaDestino)){            
                 return true;
             }else{
@@ -102,5 +103,28 @@ public class ContDocente implements IContDocente{
 
             return false; // Error, no se pudo copiar la imagen
         }
+    }
+    
+    @Override
+    public boolean dictaCurso(Curso curso){
+        Sede sedeSelec = Fabrica.getInstance().getContEdu().getSede();
+        for (CursoSede cursoS : curso.getCursoSedes()) {
+            if(cursoS.getSede().equals(sedeSelec)){
+                if(login.getClases().contains(cursoS)){
+                    return true;
+                }
+            }
+        }         
+        return false;
+    }
+    
+    @Override
+    public void login(Docente docente){
+        login = docente;
+    }
+    
+    @Override
+    public Docente getLogin(){
+        return login;
     }
 }

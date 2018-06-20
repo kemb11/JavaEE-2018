@@ -11,4 +11,7 @@ package Clases;
  */
 public interface IContDocente {
     public abstract boolean subirMaterial(String titulo, String descripcion, String rutaArchivo, Curso curso);    
+    public abstract boolean dictaCurso(Curso curso);
+    public abstract void login(Docente docente);
+    public abstract Docente getLogin();
 }

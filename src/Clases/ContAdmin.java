@@ -16,7 +16,6 @@ public class ContAdmin implements IContAdmin {
 
     private static ContAdmin instancia;
     private Admin login;
-    private Docente loginDocente;
 
     public ContAdmin() {
     }
@@ -33,11 +32,6 @@ public class ContAdmin implements IContAdmin {
     @Override
     public Admin getLoginAdmin() {
         return login;
-    }
-    
-    @Override
-    public Docente getLoginDocente() {
-        return loginDocente;
     }
 
     @Override
@@ -229,7 +223,7 @@ public class ContAdmin implements IContAdmin {
             } else {
                 if (djpa.login(user, pass)) {
                     tipo = "docente";
-                    loginDocente = djpa.getDocente(user);
+                    Fabrica.getInstance().getContDocente().login(djpa.getDocente(user));
                 } else {
                     if (djpa.verificarUser(user)) {
                         throw new InternalException("Contraseña incorrecta");
