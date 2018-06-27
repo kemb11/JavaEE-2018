@@ -40,4 +40,5 @@ public interface IContEducacion {
     public abstract void borrarCursoNuevaCarrera(int index);
     public abstract List<Curso> listarCursosCrearCarrera();
     public abstract List<Curso> listarCursosDictando(String buscar);
+    public abstract List<Examen> listarExamenesDoc(String buscar);
 }

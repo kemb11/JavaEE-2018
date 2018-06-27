@@ -1003,8 +1003,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }
 
         SeleccionarExamen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SeleccionarExamen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
-        SeleccionarExamen.setText("Ver detalles");
+        SeleccionarExamen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/crear.png"))); // NOI18N
+        SeleccionarExamen.setText("Subir notas");
         SeleccionarExamen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SeleccionarExamenActionPerformed(evt);
@@ -1199,8 +1199,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         jScrollPane8.setViewportView(ParcialesTable);
 
         SeleccionarParcial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SeleccionarParcial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
-        SeleccionarParcial.setText("Ver detalles");
+        SeleccionarParcial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/crear.png"))); // NOI18N
+        SeleccionarParcial.setText("Subir notas");
         SeleccionarParcial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SeleccionarParcialActionPerformed(evt);
@@ -2688,7 +2688,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         if (TodosExRadioButton.isSelected()) {
             examenes = Fabrica.getInstance().getContEdu().listarExamenes(buscar);
         } else {
-            examenes = Fabrica.getInstance().getContEdu().listarExamenesEst(buscar);
+            examenes = Fabrica.getInstance().getContEdu().listarExamenesDoc(buscar);
         }
 
         DefaultTableModel modelo = (DefaultTableModel) ExamenesTable.getModel();

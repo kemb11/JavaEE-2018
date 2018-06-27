@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import Persistencia.ExamenJpaController;
+import Persistencia.InscripcionEJpaController;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -130,14 +132,21 @@ public class ContDocente implements IContDocente{
 
     @Override
     public boolean isEditableExamen(Examen e) {
-        if(e.getCurso().getDocente().equals(this.login))
-            return true;
-        return false;
+        return e.getCurso().getDocente().equals(this.login);
     }
 
     @Override
     public void subirNotasExamen(Examen e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ExamenJpaController ejpa = new ExamenJpaController();
+            ejpa.edit(e);
+            InscripcionEJpaController iejpa = new InscripcionEJpaController();
+            for(InscripcionE ie : e.getEstudiantesInscritos()){
+                iejpa.edit(ie);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

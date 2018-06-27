@@ -3,6 +3,7 @@ package Clases;
 
 import Persistencia.ParcialJpaController;
 import Persistencia.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -491,5 +492,21 @@ public class ContEducacion implements IContEducacion{
         }
         
         return cursosRetornar;
+    }
+
+    @Override
+    public List<Examen> listarExamenesDoc(String buscar) {
+        Docente d = Fabrica.getInstance().getContDocente().getLogin();
+        List<Examen> retornar = new ArrayList<>();
+        buscar = buscar.toLowerCase();
+        for(CursoSede cs : d.getClases()){
+            String NombreCurso = cs.getCurso().getNombre().toLowerCase();
+            String NombreSede = cs.getSede().getNombre().toLowerCase();
+            String NombreCarrera = cs.getCurso().getCarrera().getNombre().toLowerCase();
+            if(buscar.contains(NombreCurso) ||buscar.contains(NombreSede) ||buscar.contains(NombreCarrera)){
+                retornar.addAll(cs.getExmenes());
+            }
+        }
+        return retornar;
     }
 }
