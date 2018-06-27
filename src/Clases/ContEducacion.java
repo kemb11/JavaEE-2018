@@ -1,4 +1,3 @@
-
 package Clases;
 
 import Persistencia.ParcialJpaController;
@@ -11,20 +10,20 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+public class ContEducacion implements IContEducacion {
 
-public class ContEducacion implements IContEducacion{
     private static ContEducacion instancia;
     private Carrera carrera;
     private Sede sede;
     private List<Curso> previasSelec = new ArrayList<>(); // se usa para el crear curso para controlar las previas
     private List<Sede> sedesSelec = new ArrayList<>(); // se usa para el crear curso para controlar las previas
     private List<Curso> cursosCrearCarr = new ArrayList<>(); // se usa para el crear carrera
-    
-    private ContEducacion(){
+
+    private ContEducacion() {
     }
-    
-    public static ContEducacion getInstance(){
-        if(instancia == null){
+
+    public static ContEducacion getInstance() {
+        if (instancia == null) {
             instancia = new ContEducacion();
         }
         return instancia;
@@ -46,13 +45,14 @@ public class ContEducacion implements IContEducacion{
     public boolean cursoApto(long carrera, long sede, long id) throws Exception {
         CursoSedeJpaController csjpa = new CursoSedeJpaController();
         CursoSede curso = csjpa.findCursoSedeEntities(id, sede);
-        if(curso != null && curso.getCurso().getCarrera().getId() == carrera)
+        if (curso != null && curso.getCurso().getCarrera().getId() == carrera) {
             return true;
-        else{
-            if(curso == null)
+        } else {
+            if (curso == null) {
                 throw new Exception("El curso no pertenece a la sede seleccionada");
-            else
+            } else {
                 throw new Exception("El curso no pertenece a la carrera seleccionada");
+            }
         }
     }
 
@@ -61,8 +61,8 @@ public class ContEducacion implements IContEducacion{
         carrera = null;
         sede = null;
     }
-    
-    public List<Curso> listarCursos(String buscar){
+
+    public List<Curso> listarCursos(String buscar) {
         List<Curso> cursosRetornar = new ArrayList<>();
         /*EntityManager em = Fabrica.getInstance().getEntity();
         em.getTransaction().begin();
@@ -77,30 +77,31 @@ public class ContEducacion implements IContEducacion{
             em.getTransaction().rollback();
             e.printStackTrace();
         }*/
-        if(this.sede.getCursoSedes() != null)
-        for (CursoSede cursoSede : this.sede.getCursoSedes()) {
-            String nombreCurso = cursoSede.getCurso().getNombre().toLowerCase();
-            String nombreCarrera = cursoSede.getCurso().getCarrera().getNombre().toLowerCase();
-            buscar = buscar.toLowerCase();
-            if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
-                cursosRetornar.add(cursoSede.getCurso());
+        if (this.sede.getCursoSedes() != null) {
+            for (CursoSede cursoSede : this.sede.getCursoSedes()) {
+                String nombreCurso = cursoSede.getCurso().getNombre().toLowerCase();
+                String nombreCarrera = cursoSede.getCurso().getCarrera().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if (nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)) {
+                    cursosRetornar.add(cursoSede.getCurso());
+                }
             }
         }
-        
+
         return cursosRetornar;
     }
-    
+
     @Override
-    public List<Curso> listarCursosAprobados(String buscar){
+    public List<Curso> listarCursosAprobados(String buscar) {
         List<Curso> cursosRetornar = new ArrayList<>();
-        Estudiante e = Fabrica.getInstance().getContEst().getLogin(); 
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();
         for (Curso c : e.getCursosAprobados()) {
-            if(c.estaEnSede(this.sede)){
+            if (c.estaEnSede(this.sede)) {
                 String nombreCurso = c.getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
                 String nombreCarrera = c.getCarrera().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
+                if (nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)) {
                     cursosRetornar.add(c);
                 }
             }
@@ -118,83 +119,83 @@ public class ContEducacion implements IContEducacion{
         SedeJpaController sjpa = new SedeJpaController();
         return sjpa.findSedeEntities();
     }
-    
+
     public List<Sede> listarSedes(String palabra) {
         SedeJpaController sjpa = new SedeJpaController();
         return sjpa.findSede(palabra);
     }
-    
+
     @Override
-    public List<Carrera> listarCarrerasSede(){
+    public List<Carrera> listarCarrerasSede() {
         CarreraJpaController cjpa = new CarreraJpaController();
         return cjpa.findCarreraSede(sede.getId());
     }
-    
+
     @Override
-    public List<Carrera> listarCarrerasSede(String palabra){
+    public List<Carrera> listarCarrerasSede(String palabra) {
         CarreraJpaController cjpa = new CarreraJpaController();
         return cjpa.findCarreraSede(sede.getId(), palabra);
     }
-    
+
     @Override
-    public List<Curso> listarCursosCursando(String buscar){
+    public List<Curso> listarCursosCursando(String buscar) {
         List<Curso> cursosRetornar = new ArrayList<>();
-        
-        Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
+
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();
         for (InscripcionC inscripcion : e.getInscripciones()) {
             Curso c = inscripcion.getCurso().getCurso();
-            if(c.estaEnSede(this.sede)){
+            if (c.estaEnSede(this.sede)) {
                 String nombreCurso = c.getNombre().toLowerCase();
                 String nombreCarrera = c.getCarrera().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
+                if (nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)) {
                     cursosRetornar.add(c);
                 }
             }
         }
-        
+
         return cursosRetornar;
     }
-    
+
     @Override
-    public List<Examen> listarExamenes(String buscar){
+    public List<Examen> listarExamenes(String buscar) {
         List<Examen> examenesRetornar = new ArrayList<>();
         CursoSedeJpaController jpa = new CursoSedeJpaController();
         for (CursoSede cursoS : jpa.findCursoSedeEntities()) {
-            if(cursoS.getSede().equals(this.sede)){
+            if (cursoS.getSede().equals(this.sede)) {
                 for (Examen e : cursoS.getExmenes()) {
                     String nombreC = cursoS.getCurso().getNombre().toLowerCase();
                     buscar = buscar.toLowerCase();
-                    if(nombreC.contains(buscar)){
+                    if (nombreC.contains(buscar)) {
                         examenesRetornar.add(e);
                     }
                 }
             }
-        }        
+        }
         return examenesRetornar;
     }
-    
+
     @Override
-    public List<Examen> listarExamenesEst(String buscar){
+    public List<Examen> listarExamenesEst(String buscar) {
         List<Examen> examenesRetornar = new ArrayList<>();
-        
-        Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
-        for (InscripcionE insEx:  e.getExamenes()) {
+
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();
+        for (InscripcionE insEx : e.getExamenes()) {
             Sede sedeEx = insEx.getExamen().getCurso().getSede();
-            if(sedeEx.equals(this.sede)){
+            if (sedeEx.equals(this.sede)) {
                 String nombreC = insEx.getExamen().getCurso().getCurso().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                if (nombreC.contains(buscar)) {
                     examenesRetornar.add(insEx.getExamen());
                 }
             }
         }
-        
+
         return examenesRetornar;
     }
-    
+
     @Override
-    public List<Parcial> listarParciales(String buscar){
+    public List<Parcial> listarParciales(String buscar) {
         List<Parcial> parcialesRetornar = new ArrayList<>();
         /*CursoSedeJpaController jpa = new CursoSedeJpaController();
         for (CursoSede cursoS : jpa.findCursoSedeEntities()) {
@@ -208,43 +209,63 @@ public class ContEducacion implements IContEducacion{
                 }
             }
         }        */
-        
+
         ParcialJpaController jpaP = new ParcialJpaController();
         for (Parcial parcial : jpaP.findParcialEntities()) {
-            if(parcial.getCurso().getSede().equals(this.sede)){
+            if (parcial.getCurso().getSede().equals(this.sede)) {
                 String nombreC = parcial.getCurso().getCurso().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                if (nombreC.contains(buscar)) {
                     parcialesRetornar.add(parcial);
                 }
             }
         }
-        
+
         return parcialesRetornar;
     }
-    
+
     @Override
-    public List<Parcial> listarParcialesEst(String buscar){
+    public List<Parcial> listarParcialesEst(String buscar) {
         List<Parcial> parcialesRetornar = new ArrayList<>();
-        
-        Estudiante e = Fabrica.getInstance().getContEst().getLogin();   
-        for (ResultadoP rp:  e.getNotasParciales()) {
+
+        Estudiante e = Fabrica.getInstance().getContEst().getLogin();
+        for (ResultadoP rp : e.getNotasParciales()) {
             Parcial parcial = rp.getParcial();
             Sede sedeP = parcial.getCurso().getSede();
-            if(sedeP.equals(this.sede)){
+            if (sedeP.equals(this.sede)) {
                 String nombreC = parcial.getCurso().getCurso().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreC.contains(buscar)){
+                if (nombreC.contains(buscar)) {
                     parcialesRetornar.add(parcial);
                 }
             }
         }
-        
+
         return parcialesRetornar;
     }
-    
+
     @Override
-    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera, int notaExonEx, int notaAprobacion) throws Exception{
+    public List<Parcial> listarParcialesDoc(String buscar) {
+        List<Parcial> parcialesRetornar = new ArrayList<>();
+        Docente d = Fabrica.getInstance().getContDocente().getLogin();
+        for (CursoSede cs : d.getClases()) {
+            for (Parcial parcial : cs.getParciales()) {
+                if (cs.getSede().equals(this.sede)) {
+                    String nombreC = parcial.getCurso().getCurso().getNombre().toLowerCase();
+                    String nombreCa = parcial.getCurso().getCurso().getCarrera().getNombre().toLowerCase();
+                    buscar = buscar.toLowerCase();
+                    if (nombreC.contains(buscar) || nombreCa.contains(buscar)) {
+                        parcialesRetornar.add(parcial);
+                    }
+                }
+            }
+        }
+
+        return parcialesRetornar;
+    }
+
+    @Override
+    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera, int notaExonEx, int notaAprobacion) throws Exception {
         Curso curso = new Curso();
         curso.setNombre(nombre);
         curso.setCreditos(creditos);
@@ -267,42 +288,41 @@ public class ContEducacion implements IContEducacion{
         curso.setPrevias(previasCur);
 
         // es cuando el curso se crea a la vez que se esta creando una carrera, se crea y guarda temporalmente en una lista
-        if(carrera == null){
+        if (carrera == null) {
             for (Curso cursoCarrera : cursosCrearCarr) {
-                if(cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                    throw new Exception("Ya existe un curso llamado '"+nombre+"' en la nueva carrera");
+                if (cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+                    throw new Exception("Ya existe un curso llamado '" + nombre + "' en la nueva carrera");
                 }
-            }            
+            }
             cursosCrearCarr.add(curso);
-        }else{
+        } else {
             // en el caso de crear carrera no se setea todavia la relacion carrera-curso ni persiste todavia
             curso.setCarrera(carrera);
             carrera.setCurso(curso);
-            
+
             CursoSede cs = new CursoSede();
             cs.setCurso(curso);
             cs.setSede(this.sede);
-            this.sede.setCursoSede(cs);    
+            this.sede.setCursoSede(cs);
             List<CursoSede> cursosedes = new ArrayList<>();
             cursosedes.add(cs);
             curso.setCursoSedes(cursosedes);
 
-            
             for (Curso cursoCarrera : carrera.getCursos()) {
-                if(cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                    throw new Exception("Ya existe un curso llamado '"+nombre+"' en la carrera '"+carrera.getNombre()+"'");
+                if (cursoCarrera.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+                    throw new Exception("Ya existe un curso llamado '" + nombre + "' en la carrera '" + carrera.getNombre() + "'");
                 }
             }
 
             EntityManager em = Fabrica.getInstance().getEntity();
             em.getTransaction().begin();
             try {
-                
+
                 em.persist(cs);
                 em.persist(curso);
                 for (Previa previa : previasCur) {
                     em.persist(previa);
-                }            
+                }
                 em.getTransaction().commit();
             } catch (Exception e) {
                 em.getTransaction().rollback();
@@ -310,83 +330,83 @@ public class ContEducacion implements IContEducacion{
             }
         }
     }
-    
-    public boolean esPrevia(Curso curso){
-        if(previasSelec.contains(curso)){
+
+    public boolean esPrevia(Curso curso) {
+        if (previasSelec.contains(curso)) {
             return false; // ya esta como previa
         }
-        
+
         for (Curso c : previasSelec) {
-            if(c.tieneComoPrevia(curso)){
+            if (c.tieneComoPrevia(curso)) {
                 return false; // es previa de un curso ya seleccionado como previa, redundante
             }
-        }   
-        
+        }
+
         previasSelec.add(curso); // previa seleccionada OK, se guarada en la lista
-        
+
         return true;
     }
-    
-    public List<Curso> selecSonPrevia(Curso curso){
+
+    public List<Curso> selecSonPrevia(Curso curso) {
         List<Curso> listaCur = new ArrayList<>();
         for (Curso c : previasSelec) {
-            if(curso.tieneComoPrevia(c)){
+            if (curso.tieneComoPrevia(c)) {
                 listaCur.add(c);
             }
         }
-        
+
         previasSelec.removeAll(listaCur);
-        
+
         return listaCur;
     }
-    
-    public void limpiarPreviasSelec(){
+
+    public void limpiarPreviasSelec() {
         this.previasSelec.clear();
     }
-    
-    public void eliminarPreviaSelec(Curso curso){
+
+    public void eliminarPreviaSelec(Curso curso) {
         this.previasSelec.remove(curso);
     }
-    
-    public boolean selecSedeCarr(Sede sede){
-        if(this.sedesSelec.contains(sede)){
+
+    public boolean selecSedeCarr(Sede sede) {
+        if (this.sedesSelec.contains(sede)) {
             return false;
-        }else{
+        } else {
             this.sedesSelec.add(sede);
             return true;
         }
     }
-    
-    public void limpiarSedesSelec(){
+
+    public void limpiarSedesSelec() {
         this.sedesSelec.clear();
     }
-    
+
     @Override
-    public void eliminarSedeSelec(Sede sede){
+    public void eliminarSedeSelec(Sede sede) {
         this.sedesSelec.remove(sede);
     }
-    
-    public void nuevaCarrera(String nombre, int creditos, String descripcion, Date inicioPS, Date finPS, Date inicioSS, Date finSS) throws Exception{
+
+    public void nuevaCarrera(String nombre, int creditos, String descripcion, Date inicioPS, Date finPS, Date inicioSS, Date finSS) throws Exception {
         CarreraJpaController jpa = new CarreraJpaController();
         for (Carrera c : jpa.findCarreraEntities()) {
-            if(c.getNombre().equals(nombre)){
+            if (c.getNombre().equals(nombre)) {
                 throw new Exception("Ya existe una carrera con el nombre ingresado");
             }
         }
-        
+
         PeriodoInscripcion inscPrimerSem = new PeriodoInscripcion();
         inscPrimerSem.setInicio(inicioPS);
         inscPrimerSem.setFin(finPS);
         PeriodoInscripcion inscSegSem = new PeriodoInscripcion();
         inscSegSem.setInicio(inicioSS);
         inscSegSem.setFin(finSS);
-        
+
         Carrera carr = new Carrera();
         carr.setNombre(nombre);
         carr.setCreditos(creditos);
         carr.setDescripcion(descripcion);
         carr.setSedes(sedesSelec);
-        carr.setCursos(cursosCrearCarr);  
+        carr.setCursos(cursosCrearCarr);
         carr.setPrimerSemestre(inscPrimerSem);
         carr.setSegundoSemestre(inscSegSem);
         for (Curso curso : cursosCrearCarr) {
@@ -395,21 +415,21 @@ public class ContEducacion implements IContEducacion{
                 CursoSede cs = new CursoSede();
                 cs.setCurso(curso);
                 cs.setSede(s);
-                s.setCursoSede(cs); 
+                s.setCursoSede(cs);
                 cursosedes.add(cs);
             }
             curso.setCarrera(carr);
             curso.setCursoSedes(cursosedes);
-        }      
-        
+        }
+
         for (Sede s : sedesSelec) {
             s.setCarrera(carr);
         }
-        
+
         EntityManager em = Fabrica.getInstance().getEntity();
         em.getTransaction().begin();
         try {
-            em.persist(carr);    
+            em.persist(carr);
             for (Curso curso : cursosCrearCarr) {
 //                for (CursoSede cursoSede : curso.getCursoSedes()) {
 //                    em.persist(cursoSede);
@@ -419,19 +439,19 @@ public class ContEducacion implements IContEducacion{
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();            
+            em.getTransaction().rollback();
             throw e;
         }
     }
-    
-    public void borrarCursoNuevaCarrera(int index){
+
+    public void borrarCursoNuevaCarrera(int index) {
         this.cursosCrearCarr.remove(index);
     }
-    
-    public List<Curso> listarCursosCrearCarrera(){
+
+    public List<Curso> listarCursosCrearCarrera() {
         return this.cursosCrearCarr;
     }
-    
+
 //    public List<Examen> listarExamenes(String buscar){
 //        List<Examen> examenesRetornar = new ArrayList<>();
 //        EstudianteJpaController jpa = new EstudianteJpaController();
@@ -451,14 +471,15 @@ public class ContEducacion implements IContEducacion{
 //        
 //        return examenesRetornar;
 //    }
-
     @Override
     public Sede getSede(String Nombre) {
         SedeJpaController sjpa = new SedeJpaController();
         List<Sede> sedes = sjpa.findSedeEntities();
-        for(Sede s : sedes)
-            if(s.getNombre().equals(Nombre))
+        for (Sede s : sedes) {
+            if (s.getNombre().equals(Nombre)) {
                 return s;
+            }
+        }
         return null;
     }
 
@@ -473,23 +494,40 @@ public class ContEducacion implements IContEducacion{
         NoticiaJpaController njpa = new NoticiaJpaController();
         return njpa.getNoticias(sede.getNombre());
     }
-    
+
     @Override
-    public List<Curso> listarCursosDictando(String buscar){
+    public List<Curso> listarCursosDictando(String buscar) {
         List<Curso> cursosRetornar = new ArrayList<>();
-        
+
         Docente docente = Fabrica.getInstance().getContDocente().getLogin();
         for (CursoSede cursoS : docente.getClases()) {
-            if(cursoS.getSede().equals(this.sede)){
+            if (cursoS.getSede().equals(this.sede)) {
                 String nombreCurso = cursoS.getCurso().getNombre().toLowerCase();
                 String nombreCarrera = cursoS.getCurso().getCarrera().getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();
-                if(nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)){
+                if (nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)) {
                     cursosRetornar.add(cursoS.getCurso());
-                } 
+                }
             }
         }
-        
+
         return cursosRetornar;
+    }
+
+    @Override
+    public List<Examen> listarExamenesDoc(String buscar) {
+        List<Examen> retornar = new ArrayList<>();
+        Docente docente = Fabrica.getInstance().getContDocente().getLogin();
+        for(CursoSede cs : docente.getClases()){
+            if(cs.getSede().equals(this.sede)){
+                String nombreCurso = cs.getCurso().getNombre().toLowerCase();
+                String nombreCarrera = cs.getCurso().getCarrera().getNombre().toLowerCase();
+                buscar = buscar.toLowerCase();
+                if (nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)) {
+                    retornar.addAll(cs.getExmenes());
+                }
+            }
+        }
+        return retornar;
     }
 }

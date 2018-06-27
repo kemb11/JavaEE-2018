@@ -75,6 +75,7 @@ public class InscripcionE implements Serializable {
 
     public void setNota(ResultadoE nota) {
         this.nota = nota;
+        Fabrica.getInstance().getEntity().merge(this);
     }
 
     @Override

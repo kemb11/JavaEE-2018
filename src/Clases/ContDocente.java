@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import Persistencia.ExamenJpaController;
+import Persistencia.ParcialJpaController;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -137,11 +139,21 @@ public class ContDocente implements IContDocente{
 
     @Override
     public void subirNotasExamen(Examen e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ExamenJpaController exjpa = new ExamenJpaController();
+        try {
+            exjpa.edit(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void subirNotasParcial(Parcial p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ParcialJpaController pjpa = new ParcialJpaController();
+        try {
+            pjpa.edit(p);
+        } catch (Exception ex) {
+            Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

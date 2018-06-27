@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.persistence.*;
 import Persistencia.*;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ import java.util.Date;
  * @author Usuario
  */
 @Entity
-@Table(name="cursosede")
+@Table(name = "cursosede")
 public class CursoSede implements Serializable {
 
     @ManyToMany(mappedBy = "clases")
@@ -39,7 +40,7 @@ public class CursoSede implements Serializable {
     private List<Parcial> parciales;
     @ManyToOne
     private Docente docente;
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -101,10 +102,10 @@ public class CursoSede implements Serializable {
     public void setSede(Sede sede) {
         this.sede = sede;
     }
-    
-    public void setInscripcion(InscripcionC ins){
+
+    public void setInscripcion(InscripcionC ins) {
         this.inscripciones.add(ins);
-    }    
+    }
 
     public List<Examen> getExmenes() {
         return exmenes;
@@ -137,24 +138,22 @@ public class CursoSede implements Serializable {
     public void setDocente(Docente docente) {
         this.docente = docente;
     }
-    
-    
-    
+
     public void setExamen(Examen examen) {
         this.exmenes.add(examen);
-        ExamenJpaController ejpa= new ExamenJpaController();
+        ExamenJpaController ejpa = new ExamenJpaController();
         ejpa.create(examen);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        notificarAlumnos("Nuevo examen", "Nuevo examen de "+curso.getNombre()+"\nFecha "+ dateFormat.format(examen.getFecha())+
-                "\nReplicar\nSaludos, gracias");
+        notificarAlumnos("Nuevo examen", "Nuevo examen de " + curso.getNombre() + "\nFecha " + dateFormat.format(examen.getFecha())
+                + "\nReplicar\nSaludos, gracias");
     }
-    
-    public void notificarAlumnos(String titulo, String mensaje){
-        for(InscripcionC i: inscripciones){
+
+    public void notificarAlumnos(String titulo, String mensaje) {
+        for (InscripcionC i : inscripciones) {
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date año = dateFormat.parse("01/01/"+String.valueOf(Calendar.YEAR));
-                if(!i.isAprobado(curso) || i.getFecha().after(año)){
+                Date año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
+                if (!i.isAprobado(curso) || i.getFecha().after(año)) {
                     try {
                         SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
                     } catch (UnsupportedEncodingException ex) {
@@ -166,6 +165,23 @@ public class CursoSede implements Serializable {
             }
         }
     }
-    
-    
+
+    public List<InscripcionC> getEstudiantesActuales() {
+        List<InscripcionC> retornar = new ArrayList<>();
+        if(inscripciones != null)
+        for (InscripcionC i : inscripciones) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date año;
+            try {
+                año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
+                if (i.getFecha().after(año)) {
+                    retornar.add(i);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return retornar;
+    }
+
 }

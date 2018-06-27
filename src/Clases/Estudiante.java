@@ -226,5 +226,12 @@ public class Estudiante extends Usuario {
             S.setEstudiante(this);
         }
     }
+    
+    public void CursoAprobado(Curso c){
+        if(!this.cursosAprobados.contains(c)){
+            this.cursosAprobados.add(c);
+            Fabrica.getInstance().getEntity().merge(this);
+        }
+    }
 
 }
