@@ -2920,7 +2920,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     p.setNota(nota);
                     if (p.getInstancia().equals("Segundo")) {
                         ResultadoP notaAnterior = nota.getEstudiante().AprobacionParcial(p);
-                        if (notaAnterior.getNota() + nota.getNota() > p.getNotaApro()) {
+                        if (notaAnterior.getNota() + nota.getNota() > p.getCurso().getAproParciales()) {
                             nota.getEstudiante().CursoAprobado(p.getCurso().getCurso());
                         }
                     }

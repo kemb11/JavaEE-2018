@@ -42,7 +42,26 @@ public class CursoSede implements Serializable {
     private Docente docente;
     @OneToMany(mappedBy = "curso")
     private List<Material> materiales;
+    private int maxParciales, aproParciales;
 
+    public int getMaxParciales() {
+        return maxParciales;
+    }
+
+    public void setMaxParciales(int maxParciales) {
+        this.maxParciales = maxParciales;
+    }
+
+    public int getAproParciales() {
+        return aproParciales;
+    }
+
+    public void setAproParciales(int aproParciales) {
+        this.aproParciales = aproParciales;
+    }
+    
+    
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,7 +70,8 @@ public class CursoSede implements Serializable {
     public Long getId() {
         return id;
     }
-
+    
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -118,6 +138,7 @@ public class CursoSede implements Serializable {
     }
 
     public void setInscripcion(InscripcionC ins) {
+        if(this.inscripciones == null) inscripciones = new ArrayList<>();
         this.inscripciones.add(ins);
     }
 

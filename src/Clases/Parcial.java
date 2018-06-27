@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -55,6 +56,8 @@ public class Parcial extends Prueba {
     }
 
     public void setNota(ResultadoP resultadoP) {
+        if(this.notasEstudiantes == null)
+            this.notasEstudiantes = new ArrayList<>();
         this.notasEstudiantes.add(resultadoP);
     }
     
