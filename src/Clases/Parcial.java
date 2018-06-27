@@ -53,4 +53,10 @@ public class Parcial extends Prueba {
         
         return null;
     }
+
+    public void setNota(ResultadoP resultadoP) {
+        this.notasEstudiantes.add(resultadoP);
+    }
+    
+    
 }

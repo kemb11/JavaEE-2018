@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import java.util.List;
+
 /**
  *
  * @author Usuario

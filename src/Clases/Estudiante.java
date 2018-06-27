@@ -226,5 +226,24 @@ public class Estudiante extends Usuario {
             S.setEstudiante(this);
         }
     }
+    
+    public void CursoAprobado(Curso c){
+        if(!this.cursosAprobados.contains(c)){
+            this.cursosAprobados.add(c);
+            Fabrica.getInstance().getEntity().merge(this);
+        }
+    }
+    
+    public ResultadoP AprobacionParcial(Parcial parcial){
+        for(ResultadoP rp: this.notasParciales){
+            if(rp.getParcial().getCurso().equals(parcial.getCurso())){
+                int dias=(int) ((parcial.getFecha().getTime()-rp.getParcial().getFecha().getTime())/86400000);
+                if(!rp.getParcial().getInstancia().equals(parcial.getInstancia()) && dias < 120){
+                    return rp;
+                }
+            }
+        }
+        return null;
+    }
 
 }
