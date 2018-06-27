@@ -40,6 +40,8 @@ public class CursoSede implements Serializable {
     private List<Parcial> parciales;
     @ManyToOne
     private Docente docente;
+    @OneToMany(mappedBy = "curso")
+    private List<Material> materiales;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,6 +54,18 @@ public class CursoSede implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Material> getMateriales() {
+        return materiales;
+    }
+
+    public void setMateriales(List<Material> materiales) {
+        this.materiales = materiales;
+    }
+    
+    public void setMaterial(Material material) {
+        this.materiales.add(material);
     }
 
     @Override

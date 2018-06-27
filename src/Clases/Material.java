@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -29,6 +30,10 @@ public class Material implements Serializable {
     private String rutaArchivo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaSubida;
+    @ManyToOne
+    private Docente docente;
+    @ManyToOne
+    private CursoSede curso;
 
     public Long getId() {
         return id;
@@ -68,6 +73,22 @@ public class Material implements Serializable {
 
     public void setFechaSubida(Date fechaSubida) {
         this.fechaSubida = fechaSubida;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+
+    public CursoSede getCurso() {
+        return curso;
+    }
+
+    public void setCurso(CursoSede curso) {
+        this.curso = curso;
     }
 
     @Override

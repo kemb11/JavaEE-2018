@@ -41,5 +41,7 @@ public interface IContEducacion {
     public abstract List<Curso> listarCursosCrearCarrera();
     public abstract List<Curso> listarCursosDictando(String buscar);
     public abstract List<Parcial> listarParcialesDoc(String buscar);
+    public abstract List<Material> listarMaterialCurso(Curso curso);
     public abstract List<Examen> listarExamenesDoc(String buscar);
+    public abstract boolean descargarMaterial(String carpetaDestino, Material material);
 }

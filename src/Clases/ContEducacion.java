@@ -2,14 +2,21 @@ package Clases;
 
 import Persistencia.ParcialJpaController;
 import Persistencia.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import org.apache.commons.io.FilenameUtils;
 
 public class ContEducacion implements IContEducacion {
 
@@ -515,20 +522,67 @@ public class ContEducacion implements IContEducacion {
         return cursosRetornar;
     }
 
+    public List<Material> listarMaterialCurso(Curso curso){
+        List<Material> materialRetornar = new ArrayList<>();
+        
+        for (CursoSede cursoS : curso.getCursoSedes()) {
+            if(cursoS.getSede().equals(this.sede)){
+                materialRetornar = cursoS.getMateriales();
+            }
+        }
+        
+        return materialRetornar;
+    }
+    
     @Override
-    public List<Examen> listarExamenesDoc(String buscar) {
-        List<Examen> retornar = new ArrayList<>();
-        Docente docente = Fabrica.getInstance().getContDocente().getLogin();
-        for(CursoSede cs : docente.getClases()){
-            if(cs.getSede().equals(this.sede)){
-                String nombreCurso = cs.getCurso().getNombre().toLowerCase();
-                String nombreCarrera = cs.getCurso().getCarrera().getNombre().toLowerCase();
-                buscar = buscar.toLowerCase();
-                if (nombreCurso.contains(buscar) || nombreCarrera.contains(buscar)) {
-                    retornar.addAll(cs.getExmenes());
+    public List<Examen> listarExamenesDoc(String buscar){
+        List<Examen> examenesRetornar = new ArrayList<>();
+        
+        Docente docente = Fabrica.getInstance().getContDocente().getLogin();   
+        for (CursoSede cursoSClase:  docente.getClases()) {
+            if(cursoSClase.getSede().equals(this.sede)){
+                for (Examen examen: cursoSClase.getExmenes()) {
+                    String nombreC = cursoSClase.getCurso().getNombre().toLowerCase();
+                    buscar = buscar.toLowerCase();
+                    if(nombreC.contains(buscar)){
+                        examenesRetornar.add(examen);
+                    }
                 }
             }
         }
-        return retornar;
+        
+        return examenesRetornar;
+    }
+    
+    public boolean descargarMaterial(String carpetaDestino, Material material) {        
+        String extension = FilenameUtils.getExtension(material.getRutaArchivo());
+        String rutaDestino = carpetaDestino + "/" + material.getTitulo() + " - " + material.getFechaSubida()+"."+extension;
+
+        return copiarArchivo(material.getRutaArchivo(), rutaDestino);
+    }
+    
+    ////
+    public boolean copiarArchivo(String rutaOrigenArchivo, String rutaDestino) {
+        try {
+            File archivoOrigen = new File(rutaOrigenArchivo);
+
+            //Archivo de destino auxiliar
+            File dest = new File(rutaDestino);
+
+            //Crea las carpetas en donde va a ser guardado el tema si no estaban creadas todavia
+            dest.getParentFile().mkdirs();
+
+            //Crea el archivo auxiliar primero para despues sobreescribirlo, sino da error
+            dest.createNewFile();
+
+            //Copiar el archivo seleccionado al destino
+            Files.copy(archivoOrigen.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            return true; // Se pudo copiar la imagen correctamente
+        } catch (IOException ex) {
+            Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
+
+            return false; // Error, no se pudo copiar la imagen
+        }
     }
 }

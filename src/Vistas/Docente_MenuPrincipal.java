@@ -13,6 +13,7 @@ import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,6 +72,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         subirNota_EstudiantesParcial.getColumnModel().removeColumn(subirNota_EstudiantesParcial.getColumnModel().getColumn(0));
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(0));
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(1));
+        MaterialesSubidosTable.getColumnModel().removeColumn(MaterialesSubidosTable.getColumnModel().getColumn(0));
 
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
@@ -86,6 +88,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(SubirMaterialPanel, "subirMaterial");
         PanelPrincipal.add(SubirNotaExamen, "subir nota examen");
         PanelPrincipal.add(SubirNotaParcial, "subir nota parcial");
+        PanelPrincipal.add(SubirMaterialPanel, "subirMaterial");
+        PanelPrincipal.add(VerPerfilPanel, "verPerfil");
+        PanelPrincipal.add(MaterialesSubidosPanel, "verMaterial");
 
 //        String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
 //        String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
@@ -230,6 +235,35 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         subirNota_chkFecha = new javax.swing.JCheckBox();
         subirNota_fechaMuestra = new javax.swing.JFormattedTextField();
         jLabel19 = new javax.swing.JLabel();
+        SubirNotaParcial = new javax.swing.JPanel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        subirNota_notasParcial = new javax.swing.JTable();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        subirNota_EstudiantesParcial = new javax.swing.JTable();
+        subirNota_btnAgregarParcial = new javax.swing.JButton();
+        btn_cancelar_subirNotaParcial = new javax.swing.JButton();
+        subirNota_EliminarParcial = new javax.swing.JButton();
+        subirNota_notaParcial = new javax.swing.JSpinner();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        subirNota_notaMaxParcial = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        subirNota_notaAproParcial = new javax.swing.JLabel();
+        subirNota_TituloParcial = new javax.swing.JLabel();
+        btn_aceptar_subirNotaParcial = new javax.swing.JButton();
+        VerPerfilPanel = new javax.swing.JPanel();
+        nombrePerfilLabel = new javax.swing.JLabel();
+        AuxLabel = new javax.swing.JLabel();
+        idPerfilLabel = new javax.swing.JLabel();
+        AuxLabel2 = new javax.swing.JLabel();
+        fechaNacPerfilLabel = new javax.swing.JLabel();
+        AuxLabel3 = new javax.swing.JLabel();
+        ciPefilLabel = new javax.swing.JLabel();
+        AuxLabel1 = new javax.swing.JLabel();
+        emailPerfilLabel = new javax.swing.JLabel();
+        VerCursosPerfilButton = new javax.swing.JButton();
+        VerExamenesPerfilButton = new javax.swing.JButton();
+        VerParcialesPerfilButton = new javax.swing.JButton();
         SubirMaterialPanel = new javax.swing.JPanel();
         CursoMaterialLabel = new javax.swing.JLabel();
         TituloLabel20 = new javax.swing.JLabel();
@@ -240,6 +274,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         SelecArchivoButton = new javax.swing.JButton();
         TituloLabel22 = new javax.swing.JLabel();
         confirmarSubirMButton = new javax.swing.JButton();
+        rutaArchivoLabel = new javax.swing.JLabel();
+        MaterialesSubidosPanel = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        MaterialesSubidosTable = new javax.swing.JTable();
+        TituloLabel14 = new javax.swing.JLabel();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        DescMaterialTextArea = new javax.swing.JTextArea();
+        DescargarMaterialButton = new javax.swing.JButton();
+        tituloMateriales = new javax.swing.JLabel();
         VerCursoPanel = new javax.swing.JPanel();
         CreditosLabel = new javax.swing.JLabel();
         OptativoLabel = new javax.swing.JLabel();
@@ -261,22 +304,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         TituloLabel18 = new javax.swing.JLabel();
         notaExonExLabel = new javax.swing.JLabel();
         notaAprobCurLabel = new javax.swing.JLabel();
-        SubirNotaParcial = new javax.swing.JPanel();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        subirNota_notasParcial = new javax.swing.JTable();
-        jScrollPane16 = new javax.swing.JScrollPane();
-        subirNota_EstudiantesParcial = new javax.swing.JTable();
-        subirNota_btnAgregarParcial = new javax.swing.JButton();
-        btn_cancelar_subirNotaParcial = new javax.swing.JButton();
-        subirNota_EliminarParcial = new javax.swing.JButton();
-        subirNota_notaParcial = new javax.swing.JSpinner();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        subirNota_notaMaxParcial = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        subirNota_notaAproParcial = new javax.swing.JLabel();
-        subirNota_TituloParcial = new javax.swing.JLabel();
-        btn_aceptar_subirNotaParcial = new javax.swing.JButton();
+        VerMaterialSubidoButton = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1634,267 +1662,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(SubirNotaExamen, "card12");
 
-        SubirMaterialPanel.setBackground(new java.awt.Color(73, 202, 114));
-
-        CursoMaterialLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        CursoMaterialLabel.setForeground(new java.awt.Color(255, 255, 255));
-        CursoMaterialLabel.setText("Curso");
-
-        TituloLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel20.setText("Título:");
-
-        TituloLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel21.setText("Descripción:");
-
-        descArchTextArea.setColumns(20);
-        descArchTextArea.setRows(5);
-        jScrollPane21.setViewportView(descArchTextArea);
-
-        TituloArchivoTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        TituloArchivoTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TituloArchivoTextFieldActionPerformed(evt);
-            }
-        });
-
-        SelecArchivoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SelecArchivoButton.setText("Seleccionar...");
-        SelecArchivoButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelecArchivoButtonActionPerformed(evt);
-            }
-        });
-
-        TituloLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel22.setText("Archivo:");
-
-        confirmarSubirMButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        confirmarSubirMButton.setText("Confirmar");
-        confirmarSubirMButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmarSubirMButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout SubirMaterialPanelLayout = new javax.swing.GroupLayout(SubirMaterialPanel);
-        SubirMaterialPanel.setLayout(SubirMaterialPanelLayout);
-        SubirMaterialPanelLayout.setHorizontalGroup(
-            SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CursoMaterialLabel)
-                    .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SubirMaterialPanelLayout.createSequentialGroup()
-                            .addComponent(TituloLabel20)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(TituloArchivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
-                            .addComponent(TituloLabel21)
-                            .addGap(212, 212, 212)))
-                    .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelecArchivoButton))
-                    .addComponent(confirmarSubirMButton))
-                .addContainerGap(658, Short.MAX_VALUE))
-        );
-        SubirMaterialPanelLayout.setVerticalGroup(
-            SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(CursoMaterialLabel)
-                .addGap(18, 18, 18)
-                .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloLabel20)
-                    .addComponent(TituloArchivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TituloLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SelecArchivoButton)
-                    .addComponent(TituloLabel22))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addComponent(confirmarSubirMButton)
-                .addContainerGap())
-        );
-
-        PanelPrincipal.add(SubirMaterialPanel, "card18");
-
-        VerCursoPanel.setBackground(new java.awt.Color(73, 202, 114));
-
-        CreditosLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        CreditosLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        OptativoLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        OptativoLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        DescTextArea.setEditable(false);
-        DescTextArea.setColumns(20);
-        DescTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        DescTextArea.setLineWrap(true);
-        DescTextArea.setRows(5);
-        jScrollPane13.setViewportView(DescTextArea);
-
-        HorariosTextArea.setEditable(false);
-        HorariosTextArea.setColumns(20);
-        HorariosTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        HorariosTextArea.setLineWrap(true);
-        jScrollPane14.setViewportView(HorariosTextArea);
-
-        TituloLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        TituloLabel.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel.setText("Nombre");
-
-        TituloLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel7.setText("Créditos:");
-
-        TituloLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel8.setText("Optativo:");
-
-        TituloLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel9.setText("Horarios:");
-
-        TituloLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel4.setText("Descripción:");
-
-        PreviasCurTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Curso", "Tipo de previa"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane22.setViewportView(PreviasCurTable);
-
-        TituloLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel12.setText("Previas:");
-
-        TituloLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel13.setText("Carrera:");
-
-        carreraCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        carreraCurLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        TituloLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel16.setText("Nota aprobación:");
-
-        TituloLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel18.setText("Nota exoneración exámen:");
-
-        notaExonExLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        notaExonExLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        notaAprobCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        notaAprobCurLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout VerCursoPanelLayout = new javax.swing.GroupLayout(VerCursoPanel);
-        VerCursoPanel.setLayout(VerCursoPanelLayout);
-        VerCursoPanelLayout.setHorizontalGroup(
-            VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane13)
-                    .addComponent(jScrollPane14)
-                    .addComponent(TituloLabel4)
-                    .addComponent(TituloLabel9)
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TituloLabel)
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notaAprobCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(notaExonExLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
-                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TituloLabel12)
-                    .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        VerCursoPanelLayout.setVerticalGroup(
-            VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel)
-                        .addGap(18, 18, 18)
-                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TituloLabel7)
-                                    .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TituloLabel8))
-                            .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TituloLabel13)
-                            .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
-                                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(TituloLabel18)
-                                    .addComponent(notaExonExLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TituloLabel16))
-                            .addComponent(notaAprobCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TituloLabel9)
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TituloLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        PanelPrincipal.add(VerCursoPanel, "card7");
-
         SubirNotaParcial.setBackground(new java.awt.Color(73, 202, 114));
 
         subirNota_notasParcial.setModel(new javax.swing.table.DefaultTableModel(
@@ -2051,6 +1818,505 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(SubirNotaParcial, "card12");
 
+        VerPerfilPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        nombrePerfilLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        nombrePerfilLabel.setForeground(new java.awt.Color(255, 255, 255));
+        nombrePerfilLabel.setText("Nombre");
+
+        AuxLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AuxLabel.setForeground(new java.awt.Color(255, 255, 255));
+        AuxLabel.setText("Id:");
+
+        idPerfilLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        idPerfilLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        AuxLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AuxLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        AuxLabel2.setText("Fecha de nacimiento");
+
+        fechaNacPerfilLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fechaNacPerfilLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        AuxLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AuxLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        AuxLabel3.setText("CI:");
+
+        ciPefilLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ciPefilLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        AuxLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AuxLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        AuxLabel1.setText("Email:");
+
+        emailPerfilLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailPerfilLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        VerCursosPerfilButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerCursosPerfilButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
+        VerCursosPerfilButton.setText("Mis Cursos");
+        VerCursosPerfilButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        VerCursosPerfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerCursosPerfilButtonActionPerformed(evt);
+            }
+        });
+
+        VerExamenesPerfilButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerExamenesPerfilButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/examenes.png"))); // NOI18N
+        VerExamenesPerfilButton.setText("Mis Exámenes");
+        VerExamenesPerfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerExamenesPerfilButtonActionPerformed(evt);
+            }
+        });
+
+        VerParcialesPerfilButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerParcialesPerfilButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/examenes.png"))); // NOI18N
+        VerParcialesPerfilButton.setText("Mis Parciales");
+        VerParcialesPerfilButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        VerParcialesPerfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerParcialesPerfilButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout VerPerfilPanelLayout = new javax.swing.GroupLayout(VerPerfilPanel);
+        VerPerfilPanel.setLayout(VerPerfilPanelLayout);
+        VerPerfilPanelLayout.setHorizontalGroup(
+            VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerPerfilPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nombrePerfilLabel)
+                    .addGroup(VerPerfilPanelLayout.createSequentialGroup()
+                        .addComponent(AuxLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaNacPerfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerPerfilPanelLayout.createSequentialGroup()
+                        .addComponent(AuxLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(idPerfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerPerfilPanelLayout.createSequentialGroup()
+                        .addComponent(AuxLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(emailPerfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerPerfilPanelLayout.createSequentialGroup()
+                        .addComponent(AuxLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ciPefilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(VerParcialesPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerCursosPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerExamenesPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(738, Short.MAX_VALUE))
+        );
+        VerPerfilPanelLayout.setVerticalGroup(
+            VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerPerfilPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(nombrePerfilLabel)
+                .addGap(18, 18, 18)
+                .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AuxLabel)
+                    .addComponent(idPerfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AuxLabel2)
+                    .addComponent(fechaNacPerfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AuxLabel3)
+                    .addComponent(ciPefilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AuxLabel1)
+                    .addComponent(emailPerfilLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(VerCursosPerfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VerExamenesPerfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(VerParcialesPerfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(VerPerfilPanel, "card14");
+
+        SubirMaterialPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        CursoMaterialLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        CursoMaterialLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CursoMaterialLabel.setText("Curso");
+
+        TituloLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel20.setText("Título:");
+
+        TituloLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel21.setText("Descripción:");
+
+        descArchTextArea.setColumns(20);
+        descArchTextArea.setRows(5);
+        jScrollPane21.setViewportView(descArchTextArea);
+
+        TituloArchivoTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloArchivoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TituloArchivoTextFieldActionPerformed(evt);
+            }
+        });
+
+        SelecArchivoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SelecArchivoButton.setText("Seleccionar...");
+        SelecArchivoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelecArchivoButtonActionPerformed(evt);
+            }
+        });
+
+        TituloLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel22.setText("Archivo:");
+
+        confirmarSubirMButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        confirmarSubirMButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        confirmarSubirMButton.setText("Confirmar");
+        confirmarSubirMButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmarSubirMButtonActionPerformed(evt);
+            }
+        });
+
+        rutaArchivoLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rutaArchivoLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout SubirMaterialPanelLayout = new javax.swing.GroupLayout(SubirMaterialPanel);
+        SubirMaterialPanel.setLayout(SubirMaterialPanelLayout);
+        SubirMaterialPanelLayout.setHorizontalGroup(
+            SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CursoMaterialLabel)
+                    .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SubirMaterialPanelLayout.createSequentialGroup()
+                            .addComponent(TituloLabel20)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TituloArchivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
+                            .addComponent(TituloLabel21)
+                            .addGap(212, 212, 212)))
+                    .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rutaArchivoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(confirmarSubirMButton)
+                    .addComponent(SelecArchivoButton))
+                .addContainerGap(658, Short.MAX_VALUE))
+        );
+        SubirMaterialPanelLayout.setVerticalGroup(
+            SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SubirMaterialPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(CursoMaterialLabel)
+                .addGap(18, 18, 18)
+                .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel20)
+                    .addComponent(TituloArchivoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TituloLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TituloLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rutaArchivoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SelecArchivoButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addComponent(confirmarSubirMButton)
+                .addContainerGap())
+        );
+
+        PanelPrincipal.add(SubirMaterialPanel, "card18");
+
+        MaterialesSubidosPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        MaterialesSubidosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Objeto", "Título", "Subido", "Docente"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        MaterialesSubidosTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MaterialesSubidosTableMouseClicked(evt);
+            }
+        });
+        MaterialesSubidosTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                MaterialesSubidosTablePropertyChange(evt);
+            }
+        });
+        MaterialesSubidosTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                MaterialesSubidosTableKeyReleased(evt);
+            }
+        });
+        jScrollPane7.setViewportView(MaterialesSubidosTable);
+
+        TituloLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel14.setText("Descripción:");
+
+        DescMaterialTextArea.setEditable(false);
+        DescMaterialTextArea.setColumns(20);
+        DescMaterialTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DescMaterialTextArea.setLineWrap(true);
+        jScrollPane17.setViewportView(DescMaterialTextArea);
+
+        DescargarMaterialButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DescargarMaterialButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/descargar.png"))); // NOI18N
+        DescargarMaterialButton.setText("Descargar");
+        DescargarMaterialButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        DescargarMaterialButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DescargarMaterialButtonActionPerformed(evt);
+            }
+        });
+
+        tituloMateriales.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tituloMateriales.setForeground(new java.awt.Color(255, 255, 255));
+        tituloMateriales.setText("Material subido para Curso");
+
+        javax.swing.GroupLayout MaterialesSubidosPanelLayout = new javax.swing.GroupLayout(MaterialesSubidosPanel);
+        MaterialesSubidosPanel.setLayout(MaterialesSubidosPanelLayout);
+        MaterialesSubidosPanelLayout.setHorizontalGroup(
+            MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MaterialesSubidosPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DescargarMaterialButton)
+                    .addGroup(MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane17)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                        .addComponent(TituloLabel14, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(tituloMateriales))
+                .addContainerGap(238, Short.MAX_VALUE))
+        );
+        MaterialesSubidosPanelLayout.setVerticalGroup(
+            MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MaterialesSubidosPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(tituloMateriales)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TituloLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DescargarMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(MaterialesSubidosPanel, "card15");
+
+        VerCursoPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        CreditosLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CreditosLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        OptativoLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        OptativoLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        DescTextArea.setEditable(false);
+        DescTextArea.setColumns(20);
+        DescTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DescTextArea.setLineWrap(true);
+        DescTextArea.setRows(5);
+        jScrollPane13.setViewportView(DescTextArea);
+
+        HorariosTextArea.setEditable(false);
+        HorariosTextArea.setColumns(20);
+        HorariosTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        HorariosTextArea.setLineWrap(true);
+        jScrollPane14.setViewportView(HorariosTextArea);
+
+        TituloLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        TituloLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel.setText("Nombre");
+
+        TituloLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel7.setText("Créditos:");
+
+        TituloLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel8.setText("Optativo:");
+
+        TituloLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel9.setText("Horarios:");
+
+        TituloLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel4.setText("Descripción:");
+
+        PreviasCurTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Curso", "Tipo de previa"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane22.setViewportView(PreviasCurTable);
+
+        TituloLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel12.setText("Previas:");
+
+        TituloLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel13.setText("Carrera:");
+
+        carreraCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carreraCurLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        TituloLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel16.setText("Nota aprobación:");
+
+        TituloLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel18.setText("Nota exoneración exámen:");
+
+        notaExonExLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        notaExonExLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        notaAprobCurLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        notaAprobCurLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        VerMaterialSubidoButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerMaterialSubidoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/material.png"))); // NOI18N
+        VerMaterialSubidoButton.setText("Material del Curso");
+        VerMaterialSubidoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerMaterialSubidoButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout VerCursoPanelLayout = new javax.swing.GroupLayout(VerCursoPanel);
+        VerCursoPanel.setLayout(VerCursoPanelLayout);
+        VerCursoPanelLayout.setHorizontalGroup(
+            VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                    .addComponent(jScrollPane14)
+                    .addComponent(TituloLabel4)
+                    .addComponent(TituloLabel9)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TituloLabel)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(notaAprobCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(notaExonExLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel12)
+                    .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VerMaterialSubidoButton))
+                .addContainerGap(179, Short.MAX_VALUE))
+        );
+        VerCursoPanelLayout.setVerticalGroup(
+            VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(TituloLabel)
+                        .addGap(18, 18, 18)
+                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TituloLabel7)
+                                    .addComponent(CreditosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TituloLabel8))
+                            .addComponent(OptativoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TituloLabel13)
+                            .addComponent(carreraCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TituloLabel18)
+                                    .addComponent(notaExonExLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TituloLabel16))
+                            .addComponent(notaAprobCurLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel9)
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(TituloLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(VerCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(VerMaterialSubidoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(VerCursoPanel, "card7");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -2069,6 +2335,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/perfil2.png"))); // NOI18N
         jLabel15.setToolTipText("Ver Perfil");
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel15MouseEntered(evt);
             }
@@ -2587,51 +2856,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_aceptar_subirNotaExamenActionPerformed
 
-    private void TituloArchivoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloArchivoTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TituloArchivoTextFieldActionPerformed
-
-    private void SelecArchivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecArchivoButtonActionPerformed
-        JFileChooser selecArchivo = new JFileChooser();
-
-        //        selecArchivo.setFont(new java.awt.Font("Segoe UI", 1, 14));
-        //        pestaniaCosnfig.setBackground(new java.awt.Color(255, 255, 255));
-        //        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xlsx)", "xlsx"));
-        //        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xls)", "xls"));
-        //        selecArchivo.setAcceptAllFileFilterUsed(false);
-        String titulo = TituloArchivoTextField.getText();
-        String desc = descArchTextArea.getText();
-
-        if (selecArchivo.showDialog(null, "Seleccionar archivo") == JFileChooser.APPROVE_OPTION) {
-            ruta = selecArchivo.getSelectedFile().getPath();
-            File archivo = new File(ruta);
-            if (archivo.exists()) {
-
-            } else {
-                ruta = null;
-                JOptionPane.showMessageDialog(this, "Archivo incorrecto. Seleccione un archivo válido", "", WARNING_MESSAGE);
-            }
-
-        }
-    }//GEN-LAST:event_SelecArchivoButtonActionPerformed
-
-    private void confirmarSubirMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarSubirMButtonActionPerformed
-        String titulo = TituloArchivoTextField.getText();
-        String desc = descArchTextArea.getText();
-        if (ruta != null) {
-            DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
-            Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-
-            if (Fabrica.getInstance().getContDocente().subirMaterial(titulo, desc, ruta, curso)) {
-                JOptionPane.showMessageDialog(this, "El material se subió correctamente");
-            } else {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un problema al subir el material", "", WARNING_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un archivo");
-        }
-    }//GEN-LAST:event_confirmarSubirMButtonActionPerformed
-
     private void subirNota_chkFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirNota_chkFechaActionPerformed
         if (subirNota_chkFecha.isSelected()) {
             subirNota_fechaMuestra.setEditable(true);
@@ -2709,6 +2933,128 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private void MisExmenesRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MisExmenesRadioButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MisExmenesRadioButtonActionPerformed
+
+    private void VerCursosPerfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerCursosPerfilButtonActionPerformed
+        opcionSeleccionada(CursosOpcion, "cursos");
+        DictandoRadioButton.setSelected(true);
+    }//GEN-LAST:event_VerCursosPerfilButtonActionPerformed
+
+    private void VerExamenesPerfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerExamenesPerfilButtonActionPerformed
+        opcionSeleccionada(ExamenesOpcion, "examenes");
+        MisExmenesRadioButton.setSelected(true);
+    }//GEN-LAST:event_VerExamenesPerfilButtonActionPerformed
+
+    private void VerParcialesPerfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerParcialesPerfilButtonActionPerformed
+        opcionSeleccionada(ParcialesOpcion, "parciales");
+        MisParcialesRadioButton.setSelected(true);
+    }//GEN-LAST:event_VerParcialesPerfilButtonActionPerformed
+
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+        if (Fabrica.getInstance().getContEdu().getSede() != null) {
+            opcionSeleccionada(null, "verPerfil");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
+        }
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void MaterialesSubidosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaterialesSubidosTableMouseClicked
+        int row = MaterialesSubidosTable.getSelectedRow();
+        DefaultTableModel modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
+        Material material = (Material) modelo.getValueAt(row, 0);
+        DescMaterialTextArea.setText(material.getDescripcion());
+    }//GEN-LAST:event_MaterialesSubidosTableMouseClicked
+
+    private void MaterialesSubidosTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_MaterialesSubidosTablePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaterialesSubidosTablePropertyChange
+
+    private void MaterialesSubidosTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaterialesSubidosTableKeyReleased
+        // Si presionó la tecla arriba o abajo
+        if(evt.getKeyCode()== KeyEvent.VK_DOWN || evt.getKeyCode()== KeyEvent.VK_UP){
+            int row = MaterialesSubidosTable.getSelectedRow();
+            DefaultTableModel modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
+            Material material = (Material) modelo.getValueAt(row, 0);
+            DescMaterialTextArea.setText(material.getDescripcion());
+        }
+    }//GEN-LAST:event_MaterialesSubidosTableKeyReleased
+
+    private void DescargarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescargarMaterialButtonActionPerformed
+        if(MaterialesSubidosTable.getSelectedRow()>-1){
+            Material material = (Material) MaterialesSubidosTable.getModel().getValueAt(MaterialesSubidosTable.getSelectedRow(), 0);
+            if(material.getRutaArchivo() != null){
+                JFileChooser elegirArchivo = new JFileChooser();
+                elegirArchivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                elegirArchivo.setAcceptAllFileFilterUsed(false);
+                elegirArchivo.setDialogTitle("Seleccionar carpeta");
+
+                int a= elegirArchivo.showDialog(this, "Seleccionar"); // guarda la accion que se realiza en el filechooser
+
+                if(a == JFileChooser.APPROVE_OPTION){ // la accion si se le da a abrir
+                    //            File archivo = elegirarchivo.getSelectedFile(); // capturar el nombre y ruta
+                    //            String RutaArchivo = archivo.getPath();
+                    String carpetaDestino = elegirArchivo.getSelectedFile().toString();
+
+                    if(Fabrica.getInstance().getContEdu().descargarMaterial(carpetaDestino, material)){
+                        JOptionPane.showMessageDialog(this,"Se ha descargado el material correctamente","Descarga completa",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(this,"Ha ocurrido un error al decargar el material, la descarga ha sido cancelada","Descarga cancelada",javax.swing.JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"El tema seleccionado no tiene archivo","Aviso",javax.swing.JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_DescargarMaterialButtonActionPerformed
+
+    private void TituloArchivoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloArchivoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TituloArchivoTextFieldActionPerformed
+
+    private void SelecArchivoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecArchivoButtonActionPerformed
+        JFileChooser selecArchivo = new JFileChooser();
+
+        //        selecArchivo.setFont(new java.awt.Font("Segoe UI", 1, 14));
+
+        //        pestaniaCosnfig.setBackground(new java.awt.Color(255, 255, 255));
+
+        //        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xlsx)", "xlsx"));
+        //        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xls)", "xls"));
+        //        selecArchivo.setAcceptAllFileFilterUsed(false);
+        if(selecArchivo.showDialog(null, "Seleccionar archivo")==JFileChooser.APPROVE_OPTION){
+            ruta = selecArchivo.getSelectedFile().getPath();
+            File archivo = new File(ruta);
+            if(archivo.exists()){
+                rutaArchivoLabel.setText(ruta);
+            }else{
+                ruta = null;
+                JOptionPane.showMessageDialog(this, "Archivo incorrecto. Seleccione un archivo válido", "", WARNING_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_SelecArchivoButtonActionPerformed
+
+    private void confirmarSubirMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarSubirMButtonActionPerformed
+        String titulo = TituloArchivoTextField.getText();
+        String desc = descArchTextArea.getText();
+        if(ruta != null){
+            DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
+            Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
+
+            if(Fabrica.getInstance().getContDocente().subirMaterial(titulo, desc, ruta, curso)){
+                JOptionPane.showMessageDialog(this, "El material se subió correctamente");
+                VolverButton.doClick();
+                limpiarPanelSubirMaterial();
+            }else{
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un problema al subir el material", "", WARNING_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un archivo");
+        }
+    }//GEN-LAST:event_confirmarSubirMButtonActionPerformed
+
+    private void VerMaterialSubidoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerMaterialSubidoButtonActionPerformed
+        opcionSeleccionada(CursosOpcion, "verMaterial");
+    }//GEN-LAST:event_VerMaterialSubidoButtonActionPerformed
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -2819,9 +3165,23 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 this.setTitle("Menú: Ver Curso");
                 break;
             case "subirMaterial":
+                limpiarPanelSubirMaterial();
                 modelo = (DefaultTableModel) CursosTable.getModel();
                 Curso cursoM = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
                 CursoMaterialLabel.setText(cursoM.getNombre());
+                break;
+            case "verPerfil":    
+                Docente docente = Fabrica.getInstance().getContDocente().getLogin();
+                nombrePerfilLabel.setText(docente.getNombres()+" "+docente.getApellidos());
+                idPerfilLabel.setText(docente.getId());
+                fechaNacPerfilLabel.setText(dateFormat.format(docente.getFechaNac()));
+                ciPefilLabel.setText(docente.getCi());
+                emailPerfilLabel.setText(docente.getEmail());
+                this.setTitle("Menú: Ver Perfil");
+                break;
+            case "verMaterial":  
+                listarMateriales();
+                this.setTitle("Menú: Material Subido");
                 break;
         }
 
@@ -3100,8 +3460,48 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             throw new InternalException("No puede editar el parcial");
         }
     }
+    
+    private void limpiarPanelSubirMaterial() {
+        TituloArchivoTextField.setText("");
+        descArchTextArea.setText("");
+        rutaArchivoLabel.setText("");
+        ruta = null;
+        CursoMaterialLabel.setText("");
+    }
+    
+    public void listarMateriales() {
+        DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
+        Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
+        
+        List<Material> lista = Fabrica.getInstance().getContEdu().listarMaterialCurso(curso);
+        
+        modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
+        
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        DescMaterialTextArea.setText("");
+        tituloMateriales.setText("");
+
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
+        } else {
+            for (Material material : lista) {
+                tituloMateriales.setText("Material subido para "+curso.getNombre());
+                String nombreDocente = material.getDocente().getNombres()+" "+material.getDocente().getApellidos();
+                Object[] datos = {material, material.getTitulo(), dateFormat.format(material.getFechaSubida()), nombreDocente};
+                modelo.addRow(datos);
+            }
+        }
+
+        resizeColumnWidth(MaterialesSubidosTable);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AuxLabel;
+    private javax.swing.JLabel AuxLabel1;
+    private javax.swing.JLabel AuxLabel2;
+    private javax.swing.JLabel AuxLabel3;
     private javax.swing.JButton BuscarButton;
     private javax.swing.JTextField BuscarCarrera;
     private javax.swing.JTextField BuscarExamenTextField;
@@ -3119,7 +3519,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
     private javax.swing.JTable CursosTable;
+    private javax.swing.JTextArea DescMaterialTextArea;
     private javax.swing.JTextArea DescTextArea;
+    private javax.swing.JButton DescargarMaterialButton;
     private javax.swing.JRadioButton DictandoRadioButton;
     private javax.swing.JPanel ExamenesOpcion;
     private javax.swing.JPanel ExamenesPanel;
@@ -3128,6 +3530,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel FechaParcialLabel;
     private javax.swing.JTextArea HorariosTextArea;
     private javax.swing.JLabel InstanciaLabel;
+    private javax.swing.JPanel MaterialesSubidosPanel;
+    private javax.swing.JTable MaterialesSubidosTable;
     private javax.swing.JRadioButton MisExmenesRadioButton;
     private javax.swing.JRadioButton MisParcialesRadioButton;
     private javax.swing.JLabel NotaLabel;
@@ -3162,6 +3566,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel TituloLabel11;
     private javax.swing.JLabel TituloLabel12;
     private javax.swing.JLabel TituloLabel13;
+    private javax.swing.JLabel TituloLabel14;
     private javax.swing.JLabel TituloLabel16;
     private javax.swing.JLabel TituloLabel18;
     private javax.swing.JLabel TituloLabel2;
@@ -3181,9 +3586,14 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCarrera;
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JPanel VerCursoPanel;
+    private javax.swing.JButton VerCursosPerfilButton;
     private javax.swing.JPanel VerExamenPanel;
+    private javax.swing.JButton VerExamenesPerfilButton;
+    private javax.swing.JButton VerMaterialSubidoButton;
     private javax.swing.JPanel VerNoticia;
     private javax.swing.JPanel VerParcialPanel;
+    private javax.swing.JButton VerParcialesPerfilButton;
+    private javax.swing.JPanel VerPerfilPanel;
     private javax.swing.JButton VolverButton;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarExamen;
@@ -3198,10 +3608,14 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.ButtonGroup buttonGroupParciales;
     private javax.swing.JLabel carreraCurLabel;
+    private javax.swing.JLabel ciPefilLabel;
     private javax.swing.JButton confirmarSubirMButton;
     private javax.swing.JTextArea descArchTextArea;
+    private javax.swing.JLabel emailPerfilLabel;
+    private javax.swing.JLabel fechaNacPerfilLabel;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;
+    private javax.swing.JLabel idPerfilLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3231,6 +3645,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
@@ -3238,12 +3653,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel nombrePerfilLabel;
     private javax.swing.JLabel nombreUsrLabel;
     private javax.swing.JLabel notaAprobCurLabel;
     private javax.swing.JLabel notaExonExLabel;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JLabel rutaArchivoLabel;
     private javax.swing.JButton subirNota_Eliminar;
     private javax.swing.JButton subirNota_EliminarParcial;
     private javax.swing.JTable subirNota_Estudiantes;
@@ -3263,6 +3681,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JSpinner subirNota_notaParcial;
     private javax.swing.JTable subirNota_notas;
     private javax.swing.JTable subirNota_notasParcial;
+    private javax.swing.JLabel tituloMateriales;
     private javax.swing.JList<String> verNoticia_etiquetas;
     private javax.swing.JLabel verNoticia_fecha;
     private javax.swing.JTextArea verNoticia_texto;
