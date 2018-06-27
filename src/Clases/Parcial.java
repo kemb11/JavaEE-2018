@@ -58,5 +58,12 @@ public class Parcial extends Prueba {
         this.notasEstudiantes.add(resultadoP);
     }
     
+    public boolean editable() {
+        if(this.notasEstudiantes != null) {
+                return false;
+        }
+        return true;
+    }
+    
     
 }

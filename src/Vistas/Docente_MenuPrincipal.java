@@ -3050,7 +3050,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
     public void subirNotaExamen() throws InternalException{
         Examen e = (Examen) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
-        if (Fabrica.getInstance().getContDocente().isEditableExamen(e)) {
+        if (Fabrica.getInstance().getContDocente().isEditableExamen(e) && e.editable()) {
         subirNota_Titulo.setText("Examen de " + e.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(e.getFecha()));
         subirNota_notaApro.setText(String.valueOf(e.getNotaApro()));
         subirNota_notaMax.setText(String.valueOf(e.getNotaMax()));
@@ -3075,7 +3075,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
     public void subirNotaParcial() throws InternalException{
         p = (Parcial) ParcialesTable.getModel().getValueAt(ParcialesTable.getSelectedRow(), 0);
-        if (Fabrica.getInstance().getContDocente().isEditableParcial(p)) {
+        if (Fabrica.getInstance().getContDocente().isEditableParcial(p) && p.editable()) {
             subirNota_TituloParcial.setText(p.getInstancia() + " parcial de " + p.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(p.getFecha()));
             subirNota_notaAproParcial.setText(String.valueOf(p.getNotaApro()));
             subirNota_notaMaxParcial.setText(String.valueOf(p.getNotaMax()));
