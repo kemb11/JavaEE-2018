@@ -133,7 +133,20 @@ public class ContDocente implements IContDocente{
 
     @Override
     public boolean isEditableExamen(Examen e) {
-        return e.getCurso().getDocente().equals(this.login);
+        int dias=(int) (((new Date()).getTime() - e.getFecha().getTime())/86400000);
+        if(e.getCurso().getDocente().equals(this.login))
+            if(e.getFecha().before(new Date()) && dias < 20)
+                return true;
+        return false;
+    }
+    
+    @Override
+    public boolean isEditableParcial(Parcial p) {
+        int dias=(int) (((new Date()).getTime() - p.getFecha().getTime())/86400000);
+        if(p.getCurso().getDocente().equals(this.login))
+            if(p.getFecha().before(new Date()) && dias < 20)
+                return true;
+        return false;
     }
 
     @Override

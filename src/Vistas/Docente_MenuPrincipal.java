@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JFileChooser;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 /**
  *
@@ -2391,8 +2392,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         if (ExamenesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un exámen", "", WARNING_MESSAGE);
         } else {
-            opcionSeleccionada(ExamenesOpcion, "subir notas examen");
-            subirNotaExamen();
+            try{
+                subirNotaExamen();
+                opcionSeleccionada(ExamenesOpcion, "subir notas examen");
+            }catch(InternalException e){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "", WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_subirNota_examen_btnActionPerformed
 
@@ -2472,8 +2477,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         if (ParcialesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial", "", WARNING_MESSAGE);
         } else {
-            opcionSeleccionada(ParcialesOpcion, "subir nota parcial");
-            subirNotaParcial();
+            try{
+                subirNotaParcial();
+                opcionSeleccionada(ParcialesOpcion, "subir notas parcial");
+            }catch(InternalException e){
+                JOptionPane.showMessageDialog(this, e.getMessage(), "", WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_SubirNotasParcialActionPerformed
 
@@ -2553,27 +2562,28 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         int dialogResult = JOptionPane.showConfirmDialog(this, "¿Estás seguro de guardar las notas?"
                 + "\nLuego no se podrán editar", "", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
-           DefaultTableModel modelo = (DefaultTableModel) subirNota_notas.getModel();
-           if(modelo.getRowCount()>0){
-               try {
-                   Examen e = ((InscripcionE) modelo.getValueAt(0, 1)).getExamen();
-                   for(int i = 0; i < modelo.getRowCount();i++){
-                       InscripcionE ie = ((InscripcionE) modelo.getValueAt(i, 1));
-                       ResultadoE re = (ResultadoE) modelo.getValueAt(i, 0);
-                       ie.setNota(re);
-                       if(e.getNotaApro() <= re.getNota())
-                           ie.getEstudiante().CursoAprobado(e.getCurso().getCurso());                       
-                   }
-                   if(subirNota_chkFecha.isSelected()){
-                   SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
-                   Date fecha = date.parse(subirNota_fechaMuestra.getText());
-                   e.setFecha(fecha);
-                   }
-                   Fabrica.getInstance().getContDocente().subirNotasExamen(e);
-               } catch (ParseException ex) {
-                        JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto", "Error", WARNING_MESSAGE);
-               }
-           }
+            DefaultTableModel modelo = (DefaultTableModel) subirNota_notas.getModel();
+            if (modelo.getRowCount() > 0) {
+                try {
+                    Examen e = ((InscripcionE) modelo.getValueAt(0, 1)).getExamen();
+                    for (int i = 0; i < modelo.getRowCount(); i++) {
+                        InscripcionE ie = ((InscripcionE) modelo.getValueAt(i, 1));
+                        ResultadoE re = (ResultadoE) modelo.getValueAt(i, 0);
+                        ie.setNota(re);
+                        if (e.getNotaApro() <= re.getNota()) {
+                            ie.getEstudiante().CursoAprobado(e.getCurso().getCurso());
+                        }
+                    }
+                    if (subirNota_chkFecha.isSelected()) {
+                        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+                        Date fecha = date.parse(subirNota_fechaMuestra.getText());
+                        e.setFecha(fecha);
+                    }
+                    Fabrica.getInstance().getContDocente().subirNotasExamen(e);
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto", "Error", WARNING_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btn_aceptar_subirNotaExamenActionPerformed
 
@@ -2623,8 +2633,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmarSubirMButtonActionPerformed
 
     private void subirNota_chkFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirNota_chkFechaActionPerformed
-        if(subirNota_chkFecha.isSelected()) subirNota_fechaMuestra.setEditable(true);
-        else subirNota_fechaMuestra.setEditable(false);
+        if (subirNota_chkFecha.isSelected()) {
+            subirNota_fechaMuestra.setEditable(true);
+        } else {
+            subirNota_fechaMuestra.setEditable(false);
+        }
     }//GEN-LAST:event_subirNota_chkFechaActionPerformed
 
     private void subirNota_btnAgregarParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirNota_btnAgregarParcialActionPerformed
@@ -2676,19 +2689,20 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         int dialogResult = JOptionPane.showConfirmDialog(this, "¿Estás seguro de guardar las notas?"
                 + "\nLuego no se podrán editar", "", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
-           DefaultTableModel modelo = (DefaultTableModel) subirNota_notas.getModel();
-           if(modelo.getRowCount()>0){
-                for(int i = 0; i < modelo.getRowCount();i++){
+            DefaultTableModel modelo = (DefaultTableModel) subirNota_notas.getModel();
+            if (modelo.getRowCount() > 0) {
+                for (int i = 0; i < modelo.getRowCount(); i++) {
                     ResultadoP nota = (ResultadoP) modelo.getValueAt(i, 0);
                     p.setNota(nota);
-                    if(p.getInstancia().equals("Segundo")){
+                    if (p.getInstancia().equals("Segundo")) {
                         ResultadoP notaAnterior = nota.getEstudiante().AprobacionParcial(p);
-                        if(notaAnterior.getNota() + nota.getNota() > p.getNotaApro())
+                        if (notaAnterior.getNota() + nota.getNota() > p.getNotaApro()) {
                             nota.getEstudiante().CursoAprobado(p.getCurso().getCurso());
+                        }
                     }
                 }
                 Fabrica.getInstance().getContDocente().subirNotasParcial(p);
-           }
+            }
         }
     }//GEN-LAST:event_btn_aceptar_subirNotaParcialActionPerformed
 
@@ -3034,9 +3048,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void subirNotaExamen() {
+    public void subirNotaExamen() throws InternalException{
         Examen e = (Examen) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
-        //if(docente examen distinto de loggueado) excepcion
+        if (Fabrica.getInstance().getContDocente().isEditableExamen(e)) {
         subirNota_Titulo.setText("Examen de " + e.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(e.getFecha()));
         subirNota_notaApro.setText(String.valueOf(e.getNotaApro()));
         subirNota_notaMax.setText(String.valueOf(e.getNotaMax()));
@@ -3054,30 +3068,37 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             modelo.removeRow(0);
         }
         resizeColumnWidth(subirNota_Estudiantes);
+        }else{
+            throw new InternalException("No puede editar el examen");
+        }
     }
-    
-    public void subirNotaParcial() {
+
+    public void subirNotaParcial() throws InternalException{
         p = (Parcial) ParcialesTable.getModel().getValueAt(ParcialesTable.getSelectedRow(), 0);
-        //if(docente examen distinto de loggueado) excepcion
-        subirNota_TituloParcial.setText(p.getInstancia() + " parcial de " + p.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(p.getFecha()));
-        subirNota_notaAproParcial.setText(String.valueOf(p.getNotaApro()));
-        subirNota_notaMaxParcial.setText(String.valueOf(p.getNotaMax()));
-        subirNota_notaParcial.setValue(((SpinnerNumberModel) subirNota_notaParcial.getModel()).getMinimum());
-        DefaultTableModel modelo = (DefaultTableModel) subirNota_EstudiantesParcial.getModel();
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
+        if (Fabrica.getInstance().getContDocente().isEditableParcial(p)) {
+            subirNota_TituloParcial.setText(p.getInstancia() + " parcial de " + p.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(p.getFecha()));
+            subirNota_notaAproParcial.setText(String.valueOf(p.getNotaApro()));
+            subirNota_notaMaxParcial.setText(String.valueOf(p.getNotaMax()));
+            subirNota_notaParcial.setValue(((SpinnerNumberModel) subirNota_notaParcial.getModel()).getMinimum());
+            DefaultTableModel modelo = (DefaultTableModel) subirNota_EstudiantesParcial.getModel();
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            for (InscripcionC ic : p.getCurso().getEstudiantesActuales()) {
+                Object[] datos = {ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos()};
+                modelo.addRow(datos);
+            }
+            modelo = (DefaultTableModel) subirNota_notasParcial.getModel();
+            if (p.getInstancia().equals("Primer")) {
+                subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(5));
+            }
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            resizeColumnWidth(subirNota_EstudiantesParcial);
+        } else {
+            throw new InternalException("No puede editar el parcial");
         }
-        for (InscripcionC ic : p.getCurso().getEstudiantesActuales()) {
-            Object[] datos = {ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos()};
-            modelo.addRow(datos);
-        }
-        modelo = (DefaultTableModel) subirNota_notasParcial.getModel();
-        if(p.getInstancia().equals("Primer"))
-            subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(5));
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-        resizeColumnWidth(subirNota_EstudiantesParcial);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

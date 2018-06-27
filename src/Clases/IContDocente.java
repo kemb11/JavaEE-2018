@@ -17,6 +17,7 @@ public interface IContDocente {
     public abstract void login(Docente docente);
     public abstract Docente getLogin();
     public abstract boolean isEditableExamen(Examen e);
+    public abstract boolean isEditableParcial(Parcial p);
     public abstract void subirNotasExamen(Examen e);
     public abstract void subirNotasParcial(Parcial p);
 }
