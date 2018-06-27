@@ -2695,6 +2695,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 for(int i = 0; i < modelo.getRowCount();i++){
                     ResultadoP nota = (ResultadoP) modelo.getValueAt(i, 0);
                     p.setNota(nota);
+                    if(p.getInstancia().equals("Segundo"))
+                    nota.getEstudiante().AprobacionParcial(p);
                 }
                 Fabrica.getInstance().getContDocente().subirNotasParcial(p);
            }

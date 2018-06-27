@@ -233,5 +233,17 @@ public class Estudiante extends Usuario {
             Fabrica.getInstance().getEntity().merge(this);
         }
     }
+    
+    public void AprobacionParcial(Parcial parcial){
+        for(ResultadoP rp: this.notasParciales){
+            if(rp.getParcial().getCurso().equals(parcial.getCurso())){
+                int dias=(int) ((parcial.getFecha().getTime()-rp.getParcial().getFecha().getTime())/86400000);
+                if(!rp.getParcial().getInstancia().equals(parcial.getInstancia()) && dias < 120){
+                    rp.getEstudiante().CursoAprobado(parcial.getCurso().getCurso());
+                    break;
+                }
+            }
+        }
+    }
 
 }
