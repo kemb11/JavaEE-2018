@@ -73,7 +73,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(0));
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(1));
         MaterialesSubidosTable.getColumnModel().removeColumn(MaterialesSubidosTable.getColumnModel().getColumn(0));
-
+        verExamen_tabla.getColumnModel().removeColumn(verExamen_tabla.getColumnModel().getColumn(0));
+        
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
         PanelPrincipal.add(CarrerasPanel, "carreras");
@@ -181,14 +182,19 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         btnBuscarExamen = new javax.swing.JButton();
         TodosExRadioButton = new javax.swing.JRadioButton();
         MisExmenesRadioButton = new javax.swing.JRadioButton();
+        verExamen = new javax.swing.JButton();
         VerExamenPanel = new javax.swing.JPanel();
-        CurExamenLabel = new javax.swing.JLabel();
-        TituloLabel1 = new javax.swing.JLabel();
-        TituloLabel2 = new javax.swing.JLabel();
-        FechaInscLabel = new javax.swing.JLabel();
-        NotaLabel = new javax.swing.JLabel();
-        TituloLabel3 = new javax.swing.JLabel();
-        fechaNotaLabel = new javax.swing.JLabel();
+        verExamen_titulo = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        verExamen_fecha = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        verExamen_notaAprobacion = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        verExamen_notaTotal = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        verExamen_tabla = new javax.swing.JTable();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        verExamen_datosEstudiante = new javax.swing.JTextArea();
         ParcialesPanel = new javax.swing.JPanel();
         BuscarParcialTextField = new javax.swing.JTextField();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -197,16 +203,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         btnBuscarParcial = new javax.swing.JButton();
         TodosParRadioButton = new javax.swing.JRadioButton();
         MisParcialesRadioButton = new javax.swing.JRadioButton();
-        VerParcialPanel = new javax.swing.JPanel();
-        CurParcialLabel = new javax.swing.JLabel();
-        TituloLabel5 = new javax.swing.JLabel();
-        TituloLabel6 = new javax.swing.JLabel();
-        FechaParcialLabel = new javax.swing.JLabel();
-        NotaPLabel = new javax.swing.JLabel();
-        TituloLabel10 = new javax.swing.JLabel();
-        fechaNotaPLabel = new javax.swing.JLabel();
-        TituloLabel11 = new javax.swing.JLabel();
-        InstanciaLabel = new javax.swing.JLabel();
+        verParcial = new javax.swing.JButton();
         VerNoticia = new javax.swing.JPanel();
         verNoticia_titulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -305,6 +302,16 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         notaExonExLabel = new javax.swing.JLabel();
         notaAprobCurLabel = new javax.swing.JLabel();
         VerMaterialSubidoButton = new javax.swing.JButton();
+        VerParcialPanel = new javax.swing.JPanel();
+        verParcial_titulo = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        verParcial_fecha = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        verParcial_notaTotal = new javax.swing.JLabel();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        verParcial_tabla = new javax.swing.JTable();
+        jScrollPane20 = new javax.swing.JScrollPane();
+        verExamen_datosEstudiante1 = new javax.swing.JTextArea();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1098,28 +1105,36 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        verExamen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        verExamen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/escolaridad.png"))); // NOI18N
+        verExamen.setText("Ver examen");
+        verExamen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verExamenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ExamenesPanelLayout = new javax.swing.GroupLayout(ExamenesPanel);
         ExamenesPanel.setLayout(ExamenesPanelLayout);
         ExamenesPanelLayout.setHorizontalGroup(
             ExamenesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ExamenesPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(ExamenesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ExamenesPanelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(subirNota_examen_btn))
+                        .addComponent(subirNota_examen_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(verExamen))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ExamenesPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(ExamenesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(ExamenesPanelLayout.createSequentialGroup()
-                                .addComponent(BuscarExamenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TodosExRadioButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(MisExmenesRadioButton)))))
-                .addGap(25, 25, 25))
+                        .addComponent(BuscarExamenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TodosExRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(MisExmenesRadioButton)))
+                .addContainerGap())
         );
         ExamenesPanelLayout.setVerticalGroup(
             ExamenesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1131,9 +1146,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(MisExmenesRadioButton)
                     .addComponent(TodosExRadioButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(subirNota_examen_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ExamenesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(verExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subirNota_examen_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1141,75 +1158,101 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         VerExamenPanel.setBackground(new java.awt.Color(73, 202, 114));
 
-        CurExamenLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        CurExamenLabel.setForeground(new java.awt.Color(255, 255, 255));
-        CurExamenLabel.setText("Nombre");
+        verExamen_titulo.setText("jLabel23");
 
-        TituloLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel1.setText("Fecha de inscipción:");
+        jLabel23.setText("Fecha de realización:");
 
-        TituloLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel2.setText("Nota:");
+        verExamen_fecha.setText("jLabel24");
 
-        FechaInscLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        FechaInscLabel.setForeground(new java.awt.Color(255, 255, 255));
-        FechaInscLabel.setText("-");
+        jLabel24.setText("Nota de aprobación:");
 
-        NotaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        NotaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        NotaLabel.setText("-");
+        verExamen_notaAprobacion.setText("jLabel25");
 
-        TituloLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel3.setText("Fecha de nota:");
+        jLabel26.setText("Nota total del examen:");
 
-        fechaNotaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        fechaNotaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        fechaNotaLabel.setText("-");
+        verExamen_notaTotal.setText("jLabel25");
+
+        verExamen_tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Objeto", "CI", "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        verExamen_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verExamen_tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(verExamen_tabla);
+
+        verExamen_datosEstudiante.setEditable(false);
+        verExamen_datosEstudiante.setColumns(20);
+        verExamen_datosEstudiante.setRows(5);
+        jScrollPane18.setViewportView(verExamen_datosEstudiante);
 
         javax.swing.GroupLayout VerExamenPanelLayout = new javax.swing.GroupLayout(VerExamenPanel);
         VerExamenPanel.setLayout(VerExamenPanelLayout);
         VerExamenPanelLayout.setHorizontalGroup(
             VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(70, 70, 70)))
+                                .addGap(18, 18, 18)
+                                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(verExamen_notaAprobacion)
+                                    .addComponent(verExamen_notaTotal)
+                                    .addComponent(verExamen_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                            .addComponent(jScrollPane18)))
                     .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FechaInscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(CurExamenLabel)
-                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fechaNotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(714, Short.MAX_VALUE))
+                        .addGap(96, 96, 96)
+                        .addComponent(verExamen_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
         VerExamenPanelLayout.setVerticalGroup(
             VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(CurExamenLabel)
                 .addGap(35, 35, 35)
-                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                        .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TituloLabel1)
-                            .addComponent(FechaInscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(TituloLabel2))
-                    .addComponent(NotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(verExamen_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloLabel3)
-                    .addComponent(fechaNotaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(291, Short.MAX_VALUE))
+                    .addComponent(jLabel23)
+                    .addComponent(verExamen_fecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(verExamen_notaAprobacion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(verExamen_notaTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerExamenPanel, "card7");
@@ -1294,6 +1337,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        verParcial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        verParcial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/escolaridad.png"))); // NOI18N
+        verParcial.setText("Ver parcial");
+        verParcial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verParcialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ParcialesPanelLayout = new javax.swing.GroupLayout(ParcialesPanel);
         ParcialesPanel.setLayout(ParcialesPanelLayout);
         ParcialesPanelLayout.setHorizontalGroup(
@@ -1301,7 +1353,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(ParcialesPanelLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(ParcialesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SubirNotasParcial)
+                    .addGroup(ParcialesPanelLayout.createSequentialGroup()
+                        .addComponent(SubirNotasParcial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(verParcial))
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ParcialesPanelLayout.createSequentialGroup()
                         .addComponent(BuscarParcialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1325,101 +1380,13 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SubirNotasParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ParcialesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SubirNotasParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(verParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
         PanelPrincipal.add(ParcialesPanel, "cardSedes");
-
-        VerParcialPanel.setBackground(new java.awt.Color(73, 202, 114));
-
-        CurParcialLabel.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        CurParcialLabel.setForeground(new java.awt.Color(255, 255, 255));
-        CurParcialLabel.setText("Nombre");
-
-        TituloLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel5.setText("Fecha:");
-
-        TituloLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel6.setText("Nota:");
-
-        FechaParcialLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        FechaParcialLabel.setForeground(new java.awt.Color(255, 255, 255));
-        FechaParcialLabel.setText("-");
-
-        NotaPLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        NotaPLabel.setForeground(new java.awt.Color(255, 255, 255));
-        NotaPLabel.setText("-");
-
-        TituloLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel10.setText("Fecha de nota:");
-
-        fechaNotaPLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        fechaNotaPLabel.setForeground(new java.awt.Color(255, 255, 255));
-        fechaNotaPLabel.setText("-");
-
-        TituloLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        TituloLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        TituloLabel11.setText("Instancia:");
-
-        InstanciaLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        InstanciaLabel.setForeground(new java.awt.Color(255, 255, 255));
-        InstanciaLabel.setText("-");
-
-        javax.swing.GroupLayout VerParcialPanelLayout = new javax.swing.GroupLayout(VerParcialPanel);
-        VerParcialPanel.setLayout(VerParcialPanelLayout);
-        VerParcialPanelLayout.setHorizontalGroup(
-            VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FechaParcialLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(CurParcialLabel)
-                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fechaNotaPLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(InstanciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                        .addComponent(TituloLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NotaPLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(758, Short.MAX_VALUE))
-        );
-        VerParcialPanelLayout.setVerticalGroup(
-            VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(CurParcialLabel)
-                .addGap(35, 35, 35)
-                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloLabel5)
-                    .addComponent(FechaParcialLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloLabel11)
-                    .addComponent(InstanciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TituloLabel6)
-                    .addComponent(NotaPLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TituloLabel10)
-                    .addComponent(fechaNotaPLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(256, Short.MAX_VALUE))
-        );
-
-        PanelPrincipal.add(VerParcialPanel, "card7");
 
         VerNoticia.setBackground(new java.awt.Color(73, 202, 114));
 
@@ -2317,6 +2284,97 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(VerCursoPanel, "card7");
 
+        VerParcialPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        verParcial_titulo.setText("jLabel23");
+
+        jLabel25.setText("Fecha de realización:");
+
+        verParcial_fecha.setText("jLabel24");
+
+        jLabel28.setText("Nota total del parcial:");
+
+        verParcial_notaTotal.setText("jLabel25");
+
+        verParcial_tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Objeto", "CI", "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        verParcial_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verParcial_tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane19.setViewportView(verParcial_tabla);
+
+        verExamen_datosEstudiante1.setEditable(false);
+        verExamen_datosEstudiante1.setColumns(20);
+        verExamen_datosEstudiante1.setRows(5);
+        jScrollPane20.setViewportView(verExamen_datosEstudiante1);
+
+        javax.swing.GroupLayout VerParcialPanelLayout = new javax.swing.GroupLayout(VerParcialPanel);
+        VerParcialPanel.setLayout(VerParcialPanelLayout);
+        VerParcialPanelLayout.setHorizontalGroup(
+            VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(70, 70, 70)))
+                                .addGap(18, 18, 18)
+                                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(verParcial_notaTotal)
+                                    .addComponent(verParcial_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                            .addComponent(jScrollPane20)))
+                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(verParcial_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(499, Short.MAX_VALUE))
+        );
+        VerParcialPanelLayout.setVerticalGroup(
+            VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(verParcial_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(verParcial_fecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(verParcial_notaTotal)
+                    .addComponent(jLabel28))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(VerParcialPanel, "card7");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -2533,7 +2591,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         int index = SedeTable.getSelectedRow();
         if (index != -1) {
             Sede s = (Sede) SedeTable.getModel().getValueAt(index, 0);
-            System.out.println(s.toString());
             Fabrica.getInstance().getContEdu().seleccionSede(s.getId());
             opcionSeleccionada(CursosOpcion, "cursos");
             SedeSelec.setText("<html>Sede: " + s.getNombre() + "</html>");
@@ -3056,6 +3113,36 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         opcionSeleccionada(CursosOpcion, "verMaterial");
     }//GEN-LAST:event_VerMaterialSubidoButtonActionPerformed
 
+    private void verExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verExamenActionPerformed
+        if (ExamenesTable.getSelectedRow() != -1) {
+            opcionSeleccionada(ExamenesOpcion, "verExamen");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un examen");
+        }
+    }//GEN-LAST:event_verExamenActionPerformed
+
+    private void verExamen_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verExamen_tablaMouseClicked
+        if(verExamen_tabla.getSelectedRow() != -1){
+            InscripcionE ie = (InscripcionE) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(),0);
+            verExamen_datosEstudiante.setText(ie.toString());
+        }
+    }//GEN-LAST:event_verExamen_tablaMouseClicked
+
+    private void verParcial_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verParcial_tablaMouseClicked
+        if(verExamen_tabla.getSelectedRow() != -1){
+            ResultadoP rp = (ResultadoP) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(),0);
+            verExamen_datosEstudiante.setText(rp.toString());
+        }
+    }//GEN-LAST:event_verParcial_tablaMouseClicked
+
+    private void verParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verParcialActionPerformed
+        if (ParcialesTable.getSelectedRow() != -1) {
+            opcionSeleccionada(ParcialesOpcion, "verParcial");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial");
+        }
+    }//GEN-LAST:event_verParcialActionPerformed
+
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -3113,41 +3200,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 this.setTitle("Menú: Parciales");
                 break;
             case "verExamen":
-                modelo = (DefaultTableModel) ExamenesTable.getModel();
-                Examen examen = (Examen) modelo.getValueAt(ExamenesTable.getSelectedRow(), 0);
-                CurExamenLabel.setText(examen.getCurso().getCurso().getNombre());
-
-                InscripcionE insEx = Fabrica.getInstance().getContEst().getInscripcionExamen(examen);
-                if (insEx == null) {
-                    JOptionPane.showMessageDialog(this, "No está inscrito a este exámen", "", WARNING_MESSAGE);
-                    control = false;
-                } else {
-                    FechaInscLabel.setText(dateFormat.format(insEx.getFecha()));
-
-                    if (insEx.getNota() != null) {
-                        NotaLabel.setText(String.valueOf(insEx.getNota().getNota()));
-                        fechaNotaLabel.setText(dateFormat.format(insEx.getNota().getFecha()));
-                    }
-
-                    this.setTitle("Menú: Ver Exámen");
-                }
+                this.MostrarExamen();
+                this.setTitle("Menú: Exámenes");
                 break;
             case "verParcial":
-                modelo = (DefaultTableModel) ParcialesTable.getModel();
-                Parcial parcial = (Parcial) modelo.getValueAt(ParcialesTable.getSelectedRow(), 0);
-                ResultadoP rp = parcial.getNotaEstudiante(Fabrica.getInstance().getContEst().getLogin());
-                if (rp != null) {
-                    CurParcialLabel.setText(parcial.getCurso().getCurso().getNombre());
-                    InstanciaLabel.setText(String.valueOf(parcial.getInstancia()));
-                    FechaParcialLabel.setText(dateFormat.format(parcial.getFecha()));
-                    NotaPLabel.setText(String.valueOf(rp.getNota()));
-                    fechaNotaPLabel.setText(dateFormat.format(rp.getFecha()));
-                    this.setTitle("Menú: Ver Parcial");
-                } else {
-                    JOptionPane.showMessageDialog(this, "No hay datos de resultado de este parcial para ti", "", WARNING_MESSAGE);
-                    control = false;
-                }
-
+                this.MostrarParcial();
+                this.setTitle("Menú: Exámenes");
                 break;
             case "verCurso":
                 modelo = (DefaultTableModel) CursosTable.getModel();
@@ -3496,6 +3554,42 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         resizeColumnWidth(MaterialesSubidosTable);
     }
+    
+    void MostrarExamen(){
+        Examen e = (Examen) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
+        verExamen_titulo.setText("Examen de "+e.getCurso().getCurso().getNombre()+" de la carrera "
+                +e.getCurso().getCurso().getCarrera().getNombre());
+        verExamen_fecha.setText(dateFormat.format(e.getFecha()));
+        verExamen_notaAprobacion.setText(String.valueOf(e.getNotaApro()));
+        verExamen_notaTotal.setText(String.valueOf(e.getNotaMax()));
+        DefaultTableModel modelo = (DefaultTableModel) verExamen_tabla.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        for(InscripcionE ie : e.getEstudiantesInscritos()){
+            Object[] o = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() +" "+ ie.getEstudiante().getApellidos()};
+            modelo.addRow(o);
+        }
+        resizeColumnWidth(verExamen_tabla);
+    }
+    
+    void MostrarParcial(){
+        Parcial p = (Parcial) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
+        verParcial_titulo.setText(p.getInstancia() + " parcial de "+p.getCurso().getCurso().getNombre()+" de la carrera "
+                +p.getCurso().getCurso().getCarrera().getNombre());
+        verParcial_fecha.setText(dateFormat.format(p.getFecha()));
+        verParcial_notaTotal.setText(String.valueOf(p.getNotaMax()));
+        DefaultTableModel modelo = (DefaultTableModel) verExamen_tabla.getModel();
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        if(p.getNotasEstudiantes() != null)
+        for(ResultadoP rp : p.getNotasEstudiantes()){
+            Object[] o = {rp, rp.getEstudiante().getCi(), rp.getEstudiante().getNombres() +" "+ rp.getEstudiante().getApellidos()};
+            modelo.addRow(o);
+        }
+        resizeColumnWidth(verParcial_tabla);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AuxLabel;
@@ -3513,8 +3607,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
     private javax.swing.JLabel CreditosLabel;
-    private javax.swing.JLabel CurExamenLabel;
-    private javax.swing.JLabel CurParcialLabel;
     private javax.swing.JLabel CursoMaterialLabel;
     private javax.swing.JPanel CursosOpcion;
     private javax.swing.JPanel CursosPanel;
@@ -3526,16 +3618,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel ExamenesOpcion;
     private javax.swing.JPanel ExamenesPanel;
     private javax.swing.JTable ExamenesTable;
-    private javax.swing.JLabel FechaInscLabel;
-    private javax.swing.JLabel FechaParcialLabel;
     private javax.swing.JTextArea HorariosTextArea;
-    private javax.swing.JLabel InstanciaLabel;
     private javax.swing.JPanel MaterialesSubidosPanel;
     private javax.swing.JTable MaterialesSubidosTable;
     private javax.swing.JRadioButton MisExmenesRadioButton;
     private javax.swing.JRadioButton MisParcialesRadioButton;
-    private javax.swing.JLabel NotaLabel;
-    private javax.swing.JLabel NotaPLabel;
     private javax.swing.JPanel NoticiasOpcion;
     private javax.swing.JPanel NoticiasPanel;
     private javax.swing.JTable NoticiasTable;
@@ -3561,22 +3648,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton SubirNotasParcial;
     private javax.swing.JTextField TituloArchivoTextField;
     private javax.swing.JLabel TituloLabel;
-    private javax.swing.JLabel TituloLabel1;
-    private javax.swing.JLabel TituloLabel10;
-    private javax.swing.JLabel TituloLabel11;
     private javax.swing.JLabel TituloLabel12;
     private javax.swing.JLabel TituloLabel13;
     private javax.swing.JLabel TituloLabel14;
     private javax.swing.JLabel TituloLabel16;
     private javax.swing.JLabel TituloLabel18;
-    private javax.swing.JLabel TituloLabel2;
     private javax.swing.JLabel TituloLabel20;
     private javax.swing.JLabel TituloLabel21;
     private javax.swing.JLabel TituloLabel22;
-    private javax.swing.JLabel TituloLabel3;
     private javax.swing.JLabel TituloLabel4;
-    private javax.swing.JLabel TituloLabel5;
-    private javax.swing.JLabel TituloLabel6;
     private javax.swing.JLabel TituloLabel7;
     private javax.swing.JLabel TituloLabel8;
     private javax.swing.JLabel TituloLabel9;
@@ -3613,8 +3693,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea descArchTextArea;
     private javax.swing.JLabel emailPerfilLabel;
     private javax.swing.JLabel fechaNacPerfilLabel;
-    private javax.swing.JLabel fechaNotaLabel;
-    private javax.swing.JLabel fechaNotaPLabel;
     private javax.swing.JLabel idPerfilLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -3631,6 +3709,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3638,6 +3721,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
@@ -3646,7 +3730,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
+    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane3;
@@ -3682,9 +3769,22 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable subirNota_notas;
     private javax.swing.JTable subirNota_notasParcial;
     private javax.swing.JLabel tituloMateriales;
+    private javax.swing.JButton verExamen;
+    private javax.swing.JTextArea verExamen_datosEstudiante;
+    private javax.swing.JTextArea verExamen_datosEstudiante1;
+    private javax.swing.JLabel verExamen_fecha;
+    private javax.swing.JLabel verExamen_notaAprobacion;
+    private javax.swing.JLabel verExamen_notaTotal;
+    private javax.swing.JTable verExamen_tabla;
+    private javax.swing.JLabel verExamen_titulo;
     private javax.swing.JList<String> verNoticia_etiquetas;
     private javax.swing.JLabel verNoticia_fecha;
     private javax.swing.JTextArea verNoticia_texto;
     private javax.swing.JLabel verNoticia_titulo;
+    private javax.swing.JButton verParcial;
+    private javax.swing.JLabel verParcial_fecha;
+    private javax.swing.JLabel verParcial_notaTotal;
+    private javax.swing.JTable verParcial_tabla;
+    private javax.swing.JLabel verParcial_titulo;
     // End of variables declaration//GEN-END:variables
 }

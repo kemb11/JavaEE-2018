@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import javax.persistence.Temporal;
  * @author Usuario
  */
 @Entity
-@Table(name="inscripcione")
+@Table(name = "inscripcione")
 public class InscripcionE implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -100,7 +101,20 @@ public class InscripcionE implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.InscripcionE[ id=" + id + " ]";
+        if (nota != null) {
+            String retornar = "Estudiante : " + this.estudiante.getNombres() + " " + this.estudiante.getApellidos() + " (" + this.estudiante.getCi() + ")";
+            retornar.concat("\nNota : " + String.valueOf((int) this.nota.getNota()));
+            SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            retornar.concat("\nFecha de corrección : " + date.format(nota.getFecha()));
+            String aprobado = "Sí";
+            if (nota.getNota() < this.getExamen().getNotaApro()) {
+                aprobado = "No";
+            }
+            retornar.concat("\nAprobado : " + aprobado);
+            return retornar;
+        } else {
+            return "No se ha corregido";
+        }
     }
-    
+
 }

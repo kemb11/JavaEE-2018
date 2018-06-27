@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,8 +73,6 @@ public class ResultadoP implements Serializable {
     public Estudiante getEstudiante() {
         return estudiante;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -97,7 +96,11 @@ public class ResultadoP implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.ResultadoP[ id=" + id + " ]";
+        String retornar = "Estudiante : " + this.estudiante.getNombres() + " " + this.estudiante.getApellidos() + " (" + this.estudiante.getCi() + ")";
+        retornar.concat("\nNota : " + String.valueOf((int) this.nota));
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        retornar.concat("\nFecha de corrección : " + date.format(this.fecha));
+        return retornar;
     }
-    
+
 }
