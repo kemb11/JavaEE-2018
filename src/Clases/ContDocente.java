@@ -172,4 +172,29 @@ public class ContDocente implements IContDocente{
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void asociarACurso(Curso curso, Docente docente) throws Exception{
+        for (CursoSede cursoSede : curso.getCursoSedes()) {
+            if(cursoSede.getSede().equals(Fabrica.getInstance().getContEdu().getSede())){
+                Docente docAnt = cursoSede.getDocente();
+                if(docAnt.equals(docente)){
+                    throw new Exception("El docente ya esta a cargo de este curso en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre());
+                }
+                docAnt.quitarClase(cursoSede);
+                cursoSede.setDocente(docente);
+                docente.setClase(cursoSede);
+                EntityManager em = Fabrica.getInstance().getEntity();
+                em.getTransaction().begin();
+                try {
+                    em.merge(docente);
+                    em.merge(docAnt);
+                    em.merge(cursoSede);
+                    em.getTransaction().commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    em.getTransaction().rollback();
+                }
+            }
+        }
+    }
 }

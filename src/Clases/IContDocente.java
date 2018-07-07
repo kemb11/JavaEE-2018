@@ -20,4 +20,5 @@ public interface IContDocente {
     public abstract boolean isEditableParcial(Parcial p);
     public abstract void subirNotasExamen(Examen e);
     public abstract void subirNotasParcial(Parcial p);
+    public abstract void asociarACurso(Curso curso, Docente docente) throws Exception;
 }

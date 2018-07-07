@@ -3215,6 +3215,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     opt = "Si";
                 }
 
+                notaAprobCurLabel.setText(String.valueOf(curso.getNotaAprobacion()));
+                notaExonExLabel.setText(String.valueOf(curso.getNotaExonerarEx()));
                 TituloLabel.setText(curso.getNombre());
                 CreditosLabel.setText(String.valueOf(curso.getCreditos()));
                 OptativoLabel.setText(opt);
