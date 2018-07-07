@@ -228,6 +228,7 @@ public class Estudiante extends Usuario {
     }
     
     public void CursoAprobado(Curso c){
+        if(this.cursosAprobados == null) this.cursosAprobados = new ArrayList<>();
         if(!this.cursosAprobados.contains(c)){
             this.cursosAprobados.add(c);
             Fabrica.getInstance().getEntity().merge(this);

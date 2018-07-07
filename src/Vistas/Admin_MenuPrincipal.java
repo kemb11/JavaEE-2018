@@ -5118,6 +5118,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             p2.setFecha(this.crearFecha(fecha2, " de segundo parcial"));
             p1.setInstancia("Primer");
             p2.setInstancia("Segundo");
+            p1.setNotaMaxima(nota1);
+            p2.setNotaMaxima(nota2);
             Fabrica.getInstance().getContAdmin().crearParciales(cursoParcial, p1, p2, notaApro, notaExa); 
             JOptionPane.showMessageDialog(this, "Se han marcado con éxito");
             this.Volver();

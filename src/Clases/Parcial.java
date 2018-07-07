@@ -20,6 +20,15 @@ public class Parcial extends Prueba {
     private CursoSede curso;
     @OneToMany
     private List<ResultadoP> notasEstudiantes;
+    private int notaMaxima;
+
+    public int getNotaMaxima() {
+        return notaMaxima;
+    }
+
+    public void setNotaMaxima(int notaMaxima) {
+        this.notaMaxima = notaMaxima;
+    }
 
     public String getInstancia() {
         return instancia;

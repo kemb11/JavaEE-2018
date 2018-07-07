@@ -3575,7 +3575,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         verParcial_titulo.setText(p.getInstancia() + " parcial de " + p.getCurso().getCurso().getNombre() + " de la carrera "
                 + p.getCurso().getCurso().getCarrera().getNombre());
         verParcial_fecha.setText(dateFormat.format(p.getFecha()));
-        verParcial_notaTotal.setText(String.valueOf(p.getNotaMax()));
+        verParcial_notaTotal.setText(String.valueOf(p.getNotaMaxima()));
         DefaultTableModel modelo = (DefaultTableModel) verParcial_tabla.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
