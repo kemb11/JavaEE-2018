@@ -42,12 +42,20 @@ public class CursoSede implements Serializable {
     private Docente docente;
     @OneToMany(mappedBy = "curso")
     private List<Material> materiales;
-    private int maxParciales, aproParciales;
+    private int maxParciales, aproParciales, derechoExamen;
 
     public int getMaxParciales() {
         return maxParciales;
     }
 
+    public int getDerechoExamen() {
+        return derechoExamen;
+    }
+
+    public void setDerechoExamen(int derechoExamen) {
+        this.derechoExamen = derechoExamen;
+    }
+    
     public void setMaxParciales(int maxParciales) {
         this.maxParciales = maxParciales;
     }
@@ -217,6 +225,28 @@ public class CursoSede implements Serializable {
             }
         }
         return retornar;
+    }
+
+    void setParcial(Parcial p) {
+        if(this.parciales == null)
+            this.parciales = new ArrayList<>();
+        this.parciales.add(p);
+    }
+
+    boolean parcialesMarcados() {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date año;
+            año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
+            if(this.parciales != null)
+                for(Parcial p : this.parciales)
+                    if(año.before(p.getFecha()))
+                        return true;
+            return false;
+        } catch (ParseException ex) {
+            Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
 }

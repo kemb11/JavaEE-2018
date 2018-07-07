@@ -273,7 +273,7 @@ public class ContEducacion implements IContEducacion {
     }
 
     @Override
-    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera, int notaExonEx, int notaAprobacion) throws Exception {
+    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception {
         Curso curso = new Curso();
         curso.setNombre(nombre);
         curso.setCreditos(creditos);
@@ -281,8 +281,6 @@ public class ContEducacion implements IContEducacion {
         curso.setDescripcion(descripcion);
         curso.setHorarios(horario);
         curso.setOptativo(optativo);
-        curso.setNotaExonerarEx(notaExonEx);
-        curso.setNotaAprobacion(notaAprobacion);
 
         List<Previa> previasCur = new ArrayList<>();
         for (Curso cursoPrevia : previasSelec) {
@@ -372,10 +370,12 @@ public class ContEducacion implements IContEducacion {
         this.previasSelec.clear();
     }
 
+    @Override
     public void eliminarPreviaSelec(Curso curso) {
         this.previasSelec.remove(curso);
     }
 
+    @Override
     public boolean selecSedeCarr(Sede sede) {
         if (this.sedesSelec.contains(sede)) {
             return false;
@@ -387,6 +387,14 @@ public class ContEducacion implements IContEducacion {
 
     public void limpiarSedesSelec() {
         this.sedesSelec.clear();
+    }
+    
+    public boolean seleccionoAlgunaSede(){
+        if(this.sedesSelec.isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     @Override
@@ -400,6 +408,19 @@ public class ContEducacion implements IContEducacion {
             if (c.getNombre().equals(nombre)) {
                 throw new Exception("Ya existe una carrera con el nombre ingresado");
             }
+        }
+        
+        if(cursosCrearCarr.isEmpty()){
+            throw new Exception("Debe ingresar al menos un curso para la carrera");
+        }
+        
+        int creditosCursos = 0;
+        for (Curso curso : cursosCrearCarr) {
+            creditosCursos += curso.getCreditos();
+        }
+        
+        if(creditosCursos < creditos){
+            throw new Exception("La suma total de créditos de los cursos ingresados \nes menor a los creditos necesarios para la carrera");
         }
 
         PeriodoInscripcion inscPrimerSem = new PeriodoInscripcion();

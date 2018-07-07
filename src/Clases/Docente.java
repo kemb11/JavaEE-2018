@@ -57,8 +57,12 @@ public class Docente extends Usuario {
         this.clases = clases;
     }
 
-    public void setClases(CursoSede clase) {
+    public void setClase(CursoSede clase) {
         this.clases.add(clase);
+    }
+    
+    public void quitarClase(CursoSede clase) {
+        this.clases.remove(clase);
     }
     
 }

@@ -2461,8 +2461,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                         modelo.addRow(row);
                     }
                 }
-                notaAprobCurLabel.setText(String.valueOf(curso.getNotaAprobacion()));
-                notaExonExLabel.setText(String.valueOf(curso.getNotaExonerarEx()));
+                notaAprobCurLabel.setText(String.valueOf(Fabrica.getInstance().getContEdu().getSede().getCurso(curso).getAproParciales()));
+                notaExonExLabel.setText(String.valueOf(Fabrica.getInstance().getContEdu().getSede().getCurso(curso).getDerechoExamen()));
                 TituloLabel.setText(curso.getNombre());
                 CreditosLabel.setText(String.valueOf(curso.getCreditos()));
                 OptativoLabel.setText(opt);

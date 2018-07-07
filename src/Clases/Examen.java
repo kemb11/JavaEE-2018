@@ -27,7 +27,24 @@ public class Examen extends Prueba {
     private CursoSede curso;
     @OneToMany
     List<InscripcionE> estudiantesInscritos;
+    private int notaMax, notaApro;
 
+    public int getNotaMax() {
+        return notaMax;
+    }
+
+    public void setNotaMax(int notaMax) {
+        this.notaMax = notaMax;
+    }
+
+    public int getNotaApro() {
+        return notaApro;
+    }
+
+    public void setNotaApro(int notaApro) {
+        this.notaApro = notaApro;
+    }
+    
     public Date getInicioInsripcion() {
         return inscripcion.getInicio();
     }

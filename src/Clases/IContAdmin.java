@@ -21,4 +21,6 @@ public interface IContAdmin {
     public abstract List<Docente> getDocentes();
     public abstract List<Docente> getDocentes(String palabra);
     public abstract void crearExamen(Examen exa, List<Sede> sedes, Curso c) throws InternalException;
+
+    public abstract void crearParciales(Curso cursoParcial, Parcial p1, Parcial p2, int notaApro, int notaDerExa);
 }

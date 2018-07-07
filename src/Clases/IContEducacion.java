@@ -28,7 +28,7 @@ public interface IContEducacion {
     public abstract List<Examen> listarExamenesEst(String buscar);
     public abstract List<Parcial> listarParciales(String buscar);
     public abstract List<Parcial> listarParcialesEst(String buscar);
-    public abstract void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera, int notaExonEx, int notaAprobacion) throws Exception;
+    public abstract void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception;
     public abstract boolean esPrevia(Curso curso);
     public abstract List<Curso> selecSonPrevia(Curso curso);
     public abstract void eliminarPreviaSelec(Curso curso);
@@ -44,4 +44,5 @@ public interface IContEducacion {
     public abstract List<Material> listarMaterialCurso(Curso curso);
     public abstract List<Examen> listarExamenesDoc(String buscar);
     public abstract boolean descargarMaterial(String carpetaDestino, Material material);
+    public abstract boolean seleccionoAlgunaSede();
 }

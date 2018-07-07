@@ -244,6 +244,22 @@ public class ContAdmin implements IContAdmin {
         }
         return tipo;
     }
+
+    @Override
+    public void crearParciales(Curso cursoParcial, Parcial p1, Parcial p2, int notaApro, int notaDerExa) {
+        CursoSede cs = Fabrica.getInstance().getContEdu().getSede().getCurso(cursoParcial);
+        if(!cs.parcialesMarcados()){
+        cs.setAproParciales(notaApro);
+        cs.setDerechoExamen(notaDerExa);
+        Fabrica.getInstance().getEntity().persist(p1);
+        Fabrica.getInstance().getEntity().persist(p2);
+        cs.setParcial(p1);
+        cs.setParcial(p2);
+        Fabrica.getInstance().getEntity().merge(cs);
+        }else{
+            throw new InternalException("Los parciales de este año ya fueron marcados");
+        }
+    }
 }
 /*
 package Clases;

@@ -55,8 +55,6 @@ public class Curso implements Serializable {
     private List<Estudiante> estudiantesAprobados;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Previa> previas;
-    private int notaExonerarEx;
-    private int notaAprobacion;
 
     public Long getId() {
         return id;
@@ -136,22 +134,6 @@ public class Curso implements Serializable {
 
     public List<Previa> getPrevias() {
         return previas;
-    }
-    
-    public int getNotaExonerarEx() {
-        return notaExonerarEx;
-    }
-
-    public int getNotaAprobacion() {
-        return notaAprobacion;
-    }
-
-    public void setNotaExonerarEx(int notaExonerarEx) {
-        this.notaExonerarEx = notaExonerarEx;
-    }
-
-    public void setNotaAprobacion(int notaAprobacion) {
-        this.notaAprobacion = notaAprobacion;
     }
     
     public boolean estaEnSede(Sede sede){

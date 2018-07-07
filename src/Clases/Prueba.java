@@ -35,23 +35,7 @@ public abstract class Prueba implements Serializable {
     private Long id;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fecha;
-    private int notaMax, notaApro;
-
-    public int getNotaMax() {
-        return notaMax;
-    }
-
-    public void setNotaMax(int notaMax) {
-        this.notaMax = notaMax;
-    }
-
-    public int getNotaApro() {
-        return notaApro;
-    }
-
-    public void setNotaApro(int notaApro) {
-        this.notaApro = notaApro;
-    }
+    
     
     public Long getId() {
         return id;
