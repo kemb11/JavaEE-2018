@@ -63,6 +63,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         ExamenesTable.getColumnModel().removeColumn(ExamenesTable.getColumnModel().getColumn(0));
         ParcialesTable.getColumnModel().removeColumn(ParcialesTable.getColumnModel().getColumn(0));
         MaterialesSubidosTable.getColumnModel().removeColumn(MaterialesSubidosTable.getColumnModel().getColumn(0));
+        NotificacionesTable.getColumnModel().removeColumn(NotificacionesTable.getColumnModel().getColumn(0));
 
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
@@ -76,6 +77,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(VerParcialPanel, "verParcial");
         PanelPrincipal.add(VerNoticia, "ver noticia");
         PanelPrincipal.add(MaterialesSubidosPanel, "verMaterial");
+        PanelPrincipal.add(NotificacionesPanel, "notificaciones");
+        PanelPrincipal.add(VerNotificacion, "verNotificacion");
 
         String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
         String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
@@ -244,6 +247,18 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         DescMaterialTextArea = new javax.swing.JTextArea();
         DescargarMaterialButton = new javax.swing.JButton();
         tituloMateriales = new javax.swing.JLabel();
+        NotificacionesPanel = new javax.swing.JPanel();
+        BuscarNotifiacion = new javax.swing.JTextField();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        NotificacionesTable = new javax.swing.JTable();
+        VerNotificacionButton = new javax.swing.JButton();
+        btnBuscarNotificacion = new javax.swing.JButton();
+        VerNotificacion = new javax.swing.JPanel();
+        tituloVerNotificacion = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        fechaVerNotificacion = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        textoVerNotificacion = new javax.swing.JTextArea();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -820,6 +835,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(SedeTable);
         if (SedeTable.getColumnModel().getColumnCount() > 0) {
+            SedeTable.getColumnModel().getColumn(2).setHeaderValue("Direccion");
             SedeTable.getColumnModel().getColumn(3).setHeaderValue("Telefono");
         }
 
@@ -1393,17 +1409,25 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         VerNoticia.setBackground(new java.awt.Color(73, 202, 114));
 
+        verNoticia_titulo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        verNoticia_titulo.setForeground(new java.awt.Color(255, 255, 255));
         verNoticia_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         verNoticia_titulo.setToolTipText("");
         verNoticia_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha de creación:");
 
+        verNoticia_fecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        verNoticia_fecha.setForeground(new java.awt.Color(255, 255, 255));
         verNoticia_fecha.setText("jLabel3");
 
         verNoticia_etiquetas.setEnabled(false);
         jScrollPane9.setViewportView(verNoticia_etiquetas);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Etiquetas");
 
         verNoticia_texto.setEditable(false);
@@ -1416,35 +1440,34 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         VerNoticiaLayout.setHorizontalGroup(
             VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerNoticiaLayout.createSequentialGroup()
-                .addGap(273, 273, 273)
-                .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(VerNoticiaLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(verNoticia_fecha))))
-                .addContainerGap(189, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(verNoticia_fecha))
+                    .addComponent(verNoticia_titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9))
+                .addContainerGap(452, Short.MAX_VALUE))
         );
         VerNoticiaLayout.setVerticalGroup(
             VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerNoticiaLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerNoticiaLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(verNoticia_fecha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(65, 65, 65))
         );
 
         PanelPrincipal.add(VerNoticia, "card11");
@@ -1813,6 +1836,150 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(MaterialesSubidosPanel, "card15");
 
+        NotificacionesPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        BuscarNotifiacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BuscarNotifiacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                BuscarNotifiacionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                BuscarNotifiacionFocusLost(evt);
+            }
+        });
+        BuscarNotifiacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarNotifiacionActionPerformed(evt);
+            }
+        });
+        BuscarNotifiacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarNotifiacionKeyReleased(evt);
+            }
+        });
+
+        NotificacionesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Objeto", "Título", "Fecha"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane12.setViewportView(NotificacionesTable);
+
+        VerNotificacionButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerNotificacionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
+        VerNotificacionButton.setText("Ver Notificación");
+        VerNotificacionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerNotificacionButtonActionPerformed(evt);
+            }
+        });
+
+        btnBuscarNotificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBuscarNotificacion.setText("Buscar");
+        btnBuscarNotificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarNotificacionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout NotificacionesPanelLayout = new javax.swing.GroupLayout(NotificacionesPanel);
+        NotificacionesPanel.setLayout(NotificacionesPanelLayout);
+        NotificacionesPanelLayout.setHorizontalGroup(
+            NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                .addGroup(NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(VerNotificacionButton))
+                    .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(BuscarNotifiacion, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarNotificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
+        );
+        NotificacionesPanelLayout.setVerticalGroup(
+            NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NotificacionesPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarNotificacion)
+                    .addComponent(BuscarNotifiacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(VerNotificacionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        PanelPrincipal.add(NotificacionesPanel, "cardSedes");
+
+        VerNotificacion.setBackground(new java.awt.Color(73, 202, 114));
+
+        tituloVerNotificacion.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tituloVerNotificacion.setForeground(new java.awt.Color(255, 255, 255));
+        tituloVerNotificacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloVerNotificacion.setToolTipText("");
+        tituloVerNotificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Fecha:");
+
+        fechaVerNotificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fechaVerNotificacion.setForeground(new java.awt.Color(255, 255, 255));
+        fechaVerNotificacion.setText("-");
+
+        textoVerNotificacion.setEditable(false);
+        textoVerNotificacion.setColumns(20);
+        textoVerNotificacion.setRows(5);
+        jScrollPane15.setViewportView(textoVerNotificacion);
+
+        javax.swing.GroupLayout VerNotificacionLayout = new javax.swing.GroupLayout(VerNotificacion);
+        VerNotificacion.setLayout(VerNotificacionLayout);
+        VerNotificacionLayout.setHorizontalGroup(
+            VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerNotificacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                    .addGroup(VerNotificacionLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaVerNotificacion))
+                    .addComponent(tituloVerNotificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(452, Short.MAX_VALUE))
+        );
+        VerNotificacionLayout.setVerticalGroup(
+            VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerNotificacionLayout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(tituloVerNotificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(fechaVerNotificacion))
+                .addGap(186, 186, 186))
+        );
+
+        PanelPrincipal.add(VerNotificacion, "card11");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1820,6 +1987,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         notificacionIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/notification.png"))); // NOI18N
         notificacionIcono.setToolTipText("Notifiaciones");
         notificacionIcono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notificacionIconoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 notificacionIconoMouseEntered(evt);
             }
@@ -2266,7 +2436,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
     private void SeleccionarParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarParcialActionPerformed
         if (ParcialesTable.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial", "", WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial", "Advertencia", WARNING_MESSAGE);
         } else {
             opcionSeleccionada(ParcialesOpcion, "verParcial");
         }
@@ -2356,6 +2526,38 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_DescargarMaterialButtonActionPerformed
+
+    private void BuscarNotifiacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarNotifiacionFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionFocusGained
+
+    private void BuscarNotifiacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarNotifiacionFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionFocusLost
+
+    private void BuscarNotifiacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNotifiacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionActionPerformed
+
+    private void BuscarNotifiacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarNotifiacionKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionKeyReleased
+
+    private void VerNotificacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerNotificacionButtonActionPerformed
+        if(NotificacionesTable.getSelectedRow()>-1){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una notificación", "Advertencia", WARNING_MESSAGE);
+        }else{
+            opcionSeleccionada(null, "verNotificacion");
+        }
+    }//GEN-LAST:event_VerNotificacionButtonActionPerformed
+
+    private void btnBuscarNotificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNotificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarNotificacionActionPerformed
+
+    private void notificacionIconoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificacionIconoMouseClicked
+        opcionSeleccionada(null, "notificaciones");
+    }//GEN-LAST:event_notificacionIconoMouseClicked
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -2481,8 +2683,32 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 break;
             case "verMaterial":  
                 listarMateriales();
-                this.setTitle("Menú: Material Subido");
+                this.setTitle("Menú: Material del curso");
                 break;
+            case "notificaciones":  
+                List<Notificacion> notificaciones = Fabrica.getInstance().getContEst().getLogin().getNotificaciones();
+                DefaultTableModel modeloNotif = (DefaultTableModel) NotificacionesTable.getModel();
+
+                while (modeloNotif.getRowCount() > 0) {
+                    modeloNotif.removeRow(0);
+                }
+
+                if (notificaciones.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No tienes notificaciones");
+                } else {
+                    for (Notificacion notif : notificaciones) {
+                        Object[] datos = {notif, notif.getTitulo(), dateFormat.format(notif.getFecha())};
+                        modeloNotif.addRow(datos);
+                    }
+                }
+                
+                this.setTitle("Menú: Notificaciones");
+                break;
+            case "verNotificacion":
+                Notificacion notificacion = (Notificacion) NotificacionesTable.getModel().getValueAt(NotificacionesTable.getSelectedRow(), 0);
+                tituloVerNotificacion.setText(notificacion.getTitulo());
+                textoVerNotificacion.setText(notificacion.getTexto());
+                fechaVerNotificacion.setText(dateFormat.format(notificacion.getFecha()));
         }
         
         if(control){
@@ -2756,6 +2982,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField BuscarExamenTextField;
     private javax.swing.JTextField BuscarExamenTextField1;
     private javax.swing.JTextField BuscarNoticia;
+    private javax.swing.JTextField BuscarNotifiacion;
     private javax.swing.JTextField BuscarSede;
     private javax.swing.JTextField BuscarTextField;
     private javax.swing.JTable CarreraTable;
@@ -2789,6 +3016,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel NoticiasOpcion;
     private javax.swing.JPanel NoticiasPanel;
     private javax.swing.JTable NoticiasTable;
+    private javax.swing.JPanel NotificacionesPanel;
+    private javax.swing.JTable NotificacionesTable;
     private javax.swing.JLabel OptativoLabel;
     private javax.swing.JPanel PanelCabecera;
     private javax.swing.JPanel PanelLateral;
@@ -2831,12 +3060,15 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel VerExamenPanel;
     private javax.swing.JButton VerMaterialSubidoButton;
     private javax.swing.JPanel VerNoticia;
+    private javax.swing.JPanel VerNotificacion;
+    private javax.swing.JButton VerNotificacionButton;
     private javax.swing.JPanel VerParcialPanel;
     private javax.swing.JPanel VerPerfilPanel;
     private javax.swing.JButton VolverButton;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarExamen;
     private javax.swing.JButton btnBuscarNoticia;
+    private javax.swing.JButton btnBuscarNotificacion;
     private javax.swing.JButton btnBuscarParcial;
     private javax.swing.JButton btnBuscarSede;
     private javax.swing.ButtonGroup buttonGroupCursos;
@@ -2848,6 +3080,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel fechaNacLabel;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;
+    private javax.swing.JLabel fechaVerNotificacion;
     private javax.swing.JLabel idEstLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2859,14 +3092,17 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane22;
@@ -2882,7 +3118,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel notaAprobCurLabel;
     private javax.swing.JLabel notaExonExLabel;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JTextArea textoVerNotificacion;
     private javax.swing.JLabel tituloMateriales;
+    private javax.swing.JLabel tituloVerNotificacion;
     private javax.swing.JList<String> verNoticia_etiquetas;
     private javax.swing.JLabel verNoticia_fecha;
     private javax.swing.JTextArea verNoticia_texto;

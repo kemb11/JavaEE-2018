@@ -227,11 +227,14 @@ public class Estudiante extends Usuario {
         }
     }
     
-    public void CursoAprobado(Curso c){
+    public void CursoAprobado(Curso curso, int nota){
         if(this.cursosAprobados == null) this.cursosAprobados = new ArrayList<>();
-        if(!this.cursosAprobados.contains(c)){
-            this.cursosAprobados.add(c);
+        if(!this.cursosAprobados.contains(curso)){
+            this.cursosAprobados.add(curso);
             Fabrica.getInstance().getEntity().merge(this);
+            String texto = "Felicitanciones, ha aprobado el curso "+curso.getNombre()+" pertenecienta a la carrera "+
+                    curso.getCarrera().getNombre()+" con nota "+nota;
+            Fabrica.getInstance().getContAdmin().enviarNotificacion("Curso aprobado", texto, this);
         }
     }
     

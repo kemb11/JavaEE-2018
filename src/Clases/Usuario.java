@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -23,6 +24,7 @@ public abstract class Usuario implements Serializable {
     @Id
     protected String id;
     protected String pass, email;
+    protected List<Notificacion> notificaciones;
     
 
     public String getId() {
@@ -48,6 +50,18 @@ public abstract class Usuario implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public List<Notificacion> getNotificaciones() {
+        return notificaciones;
+    }
+
+    public void setNotificaciones(List<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
+    
+    public void setNotificacion(Notificacion notificacion) {
+        this.notificaciones.add(notificacion);
     }
 
 

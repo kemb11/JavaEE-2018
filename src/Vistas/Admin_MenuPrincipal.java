@@ -1774,7 +1774,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         AsociarDocenteCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         AsociarDocenteCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/crear.png"))); // NOI18N
-        AsociarDocenteCurso.setText("Asociar a Curso");
+        AsociarDocenteCurso.setText("Asignar a Curso");
         AsociarDocenteCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AsociarDocenteCursoActionPerformed(evt);
@@ -3087,7 +3087,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         AsociarDocentePanelLayout.setVerticalGroup(
             AsociarDocentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AsociarDocentePanelLayout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(tituloAsociarDocente)
                 .addGap(18, 18, 18)
                 .addGroup(AsociarDocentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -3106,7 +3106,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         MarcarParciales.setBackground(new java.awt.Color(73, 202, 114));
 
-        marcarparciales_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        marcarparciales_titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        marcarparciales_titulo.setForeground(new java.awt.Color(255, 255, 255));
+        marcarparciales_titulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         marcarparciales_titulo.setText("jLabel66");
 
         try {
@@ -3114,35 +3116,55 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        marcarparciales_fecha1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         try {
             marcarparciales_fecha2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####-##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        marcarparciales_fecha2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel66.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel66.setForeground(new java.awt.Color(255, 255, 255));
         jLabel66.setText("Fecha primer parcial :");
 
+        jLabel67.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel67.setForeground(new java.awt.Color(255, 255, 255));
         jLabel67.setText("Fecha segundo parcial :");
 
+        marcarparciales_notaMax1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaMax1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        marcarparciales_notaMax2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaMax2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jLabel68.setText("Nota maxima del pardial :");
+        jLabel68.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel68.setText("Nota máxima del parcial :");
 
-        jLabel69.setText("Nota maxima del pardial :");
+        jLabel69.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel69.setText("Nota máxima del parcial :");
 
+        jLabel70.setForeground(new java.awt.Color(255, 255, 255));
         jLabel70.setText("DD/MM/AAAA-hh:mm");
 
+        jLabel71.setForeground(new java.awt.Color(255, 255, 255));
         jLabel71.setText("DD/MM/AAAA-hh:mm");
 
+        jLabel72.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(255, 255, 255));
         jLabel72.setText("Nota para ganar derecho de examen :");
 
+        marcarparciales_notaExa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaExa.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jLabel73.setText("Nota de aprobacion del curso :");
+        jLabel73.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel73.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel73.setText("Nota de aprobación del curso :");
 
+        marcarparciales_notaApro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaApro.setModel(new javax.swing.SpinnerNumberModel());
 
         marcarparciales_aceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -3159,12 +3181,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         MarcarParcialesLayout.setHorizontalGroup(
             MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MarcarParcialesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(marcarparciales_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(MarcarParcialesLayout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(marcarparciales_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MarcarParcialesLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(MarcarParcialesLayout.createSequentialGroup()
                                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -3177,11 +3197,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(marcarparciales_fecha1)
                                     .addComponent(marcarparciales_notaMax1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))
+                                    .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(MarcarParcialesLayout.createSequentialGroup()
                                 .addComponent(jLabel72)
                                 .addGap(18, 18, 18)
-                                .addComponent(marcarparciales_notaExa, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(marcarparciales_notaExa, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(marcarparciales_aceptar))
                         .addGap(105, 105, 105)
                         .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(MarcarParcialesLayout.createSequentialGroup()
@@ -3197,18 +3218,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                     .addComponent(marcarparciales_notaMax2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(marcarparciales_fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel71))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MarcarParcialesLayout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(marcarparciales_aceptar)
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         MarcarParcialesLayout.setVerticalGroup(
             MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MarcarParcialesLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(marcarparciales_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel70)
                     .addComponent(jLabel71))
@@ -3232,7 +3249,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel73))
                 .addGap(27, 27, 27)
                 .addComponent(marcarparciales_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(MarcarParciales, "card21");
@@ -4105,7 +4122,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 Fabrica.getInstance().getContDocente().asociarACurso(curso, docente);
                 String nomDoc = docente.getNombres()+" "+docente.getApellidos();                
                 JOptionPane.showMessageDialog(this, "El docente "+nomDoc+" ahora esta a cargo del curso "+curso.getNombre()+
-                        " en la sede "+Fabrica.getInstance().getContEdu().getSede(), "", JOptionPane.INFORMATION_MESSAGE);
+                        " en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre(), "", JOptionPane.INFORMATION_MESSAGE);
                 VolverButton.doClick();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
@@ -4310,7 +4327,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
                 Docente docente = (Docente) DocentesTable.getModel().getValueAt(DocentesTable.getSelectedRow(), 0);
                 String nomDoc = docente.getNombres()+" "+docente.getApellidos();
-                tituloAsociarDocente.setText("Asociar al docente "+nomDoc+" a un curso");
+                tituloAsociarDocente.setText("Asignar al docente "+nomDoc+" a un curso");
                 modelo = (DefaultTableModel) CursosTableAsociarDoc.getModel();
 
                 while (modelo.getRowCount() > 0) {

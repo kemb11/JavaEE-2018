@@ -160,6 +160,7 @@ public class ContDocente implements IContDocente{
             InscripcionEJpaController iejpa = new InscripcionEJpaController();
             for(InscripcionE ie : e.getEstudiantesInscritos()){
                 iejpa.edit(ie);
+                //Fabrica.getInstance().getContAdmin().enviarNotificacion(titulo,texto,destinatario);   
             }
             ejpa.edit(e);
         } catch (Exception ex) {
@@ -172,6 +173,11 @@ public class ContDocente implements IContDocente{
         ParcialJpaController pjpa = new ParcialJpaController();
         try {
             pjpa.edit(p);
+            for (InscripcionC estudiante : p.getCurso().getEstudiantesActuales()) {
+                Curso curso = p.getCurso().getCurso();
+                String texto = "Se ha subido tu resultado para el parcial "+curso.getNombre()+" de la carrera "+curso.getCarrera().getNombre();
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Resultado de parcial", texto, estudiante.getEstudiante());   
+            }
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,19 +187,40 @@ public class ContDocente implements IContDocente{
         for (CursoSede cursoSede : curso.getCursoSedes()) {
             if(cursoSede.getSede().equals(Fabrica.getInstance().getContEdu().getSede())){
                 Docente docAnt = cursoSede.getDocente();
-                if(docAnt.equals(docente)){
-                    throw new Exception("El docente ya esta a cargo de este curso en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre());
+                if(docAnt != null){
+                    if(docAnt.equals(docente)){
+                        throw new Exception("El docente ya esta a cargo de este curso en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre());
+                    }
+                    docAnt.quitarClase(cursoSede);
                 }
-                docAnt.quitarClase(cursoSede);
                 cursoSede.setDocente(docente);
                 docente.setClase(cursoSede);
                 EntityManager em = Fabrica.getInstance().getEntity();
                 em.getTransaction().begin();
                 try {
+                    if(docAnt!=null){
+                        em.merge(docAnt);
+                    }
                     em.merge(docente);
-                    em.merge(docAnt);
                     em.merge(cursoSede);
                     em.getTransaction().commit();
+                    
+                    if(docAnt!=null){
+                        String texto = "Ya no esta a cargo del curso "+curso.getNombre()+" de a la carrera "+
+                        curso.getCarrera().getNombre()+", dictado en la sede "+cursoSede.getSede().getNombre();
+                        Fabrica.getInstance().getContAdmin().enviarNotificacion("Cambio de docente", texto, docAnt);
+                    }
+                    
+                    String texto = "Ha sido asignado al curso "+curso.getNombre()+" pertenecienta a la carrera "+
+                    curso.getCarrera().getNombre()+", a dictarse en la sede "+cursoSede.getSede().getNombre();
+                    Fabrica.getInstance().getContAdmin().enviarNotificacion("Ha sido asignado a un nuevo curso", texto, docente);
+                    
+                    for (InscripcionC inscripcion : cursoSede.getEstudiantesActuales()) {
+                        String nomDoc = docente.getNombres()+" "+docente.getApellidos();
+                        texto = "El docente del curso "+curso.getNombre()+" de la carrera "+curso.getCarrera().getNombre()+"ha sido cambiado, "
+                                + "su nuevo docente es "+nomDoc;
+                        Fabrica.getInstance().getContAdmin().enviarNotificacion("Cambio de docente", texto, inscripcion.getEstudiante());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     em.getTransaction().rollback();

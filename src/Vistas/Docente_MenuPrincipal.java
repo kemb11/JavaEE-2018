@@ -2867,7 +2867,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         ResultadoE re = (ResultadoE) modelo.getValueAt(i, 0);
                         ie.setNota(re);
                         if (e.getNotaApro() <= re.getNota()) {
-                            ie.getEstudiante().CursoAprobado(e.getCurso().getCurso());
+                            ie.getEstudiante().CursoAprobado(e.getCurso().getCurso(), re.getNota());
                         }
                     }
                     if (subirNota_chkFecha.isSelected()) {
@@ -2963,7 +2963,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     if (p.getInstancia().equals("Segundo")) {
                         ResultadoP notaAnterior = nota.getEstudiante().AprobacionParcial(p);
                         if (notaAnterior.getNota() + nota.getNota() > p.getCurso().getAproParciales()) {
-                            nota.getEstudiante().CursoAprobado(p.getCurso().getCurso());
+                            Curso cursoParcial = p.getCurso().getCurso();
+                            nota.getEstudiante().CursoAprobado(cursoParcial, nota.getNota());
                         }
                     }
                 }
