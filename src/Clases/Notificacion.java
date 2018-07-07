@@ -31,6 +31,7 @@ public class Notificacion implements Serializable {
     private Date fecha;
     @ManyToOne
     private Usuario usuario;
+    boolean vista;
 
     public Long getId() {
         return id;
@@ -70,6 +71,14 @@ public class Notificacion implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public boolean isVista() {
+        return vista;
+    }
+
+    public void setVista(boolean vista) {
+        this.vista = vista;
     }
 
     @Override

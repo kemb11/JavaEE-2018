@@ -21,4 +21,6 @@ public interface IContDocente {
     public abstract void subirNotasExamen(Examen e);
     public abstract void subirNotasParcial(Parcial p);
     public abstract void asociarACurso(Curso curso, Docente docente) throws Exception;
+    public abstract void notificacionVista(Notificacion notif);
+    public abstract void configEnviarMails(boolean opocion);
 }

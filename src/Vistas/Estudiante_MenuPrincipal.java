@@ -23,11 +23,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -78,6 +80,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(VerNoticia, "ver noticia");
         PanelPrincipal.add(MaterialesSubidosPanel, "verMaterial");
         PanelPrincipal.add(NotificacionesPanel, "notificaciones");
+        PanelPrincipal.add(VerPerfilPanel, "verPerfil");
         PanelPrincipal.add(VerNotificacion, "verNotificacion");
 
         String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
@@ -94,12 +97,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         //Por defecto que muestre las sedes
         opcionSeleccionada(SedesOpcion, "sedes");
         
-        notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        JLabel text = new JLabel("9");
-        text.setForeground(Color.red);
-        text.setFont(new Font("Dialog", Font.BOLD, 13));
-        notificacionIcono.add(text);
+        setCantidadNotif();
     }
 
     /**
@@ -217,6 +215,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         fechaNacLabel = new javax.swing.JLabel();
         ciEstLabel = new javax.swing.JLabel();
         AuxLabel3 = new javax.swing.JLabel();
+        AuxLabel4 = new javax.swing.JLabel();
+        enviarMailsCheckBox = new javax.swing.JCheckBox();
+        VerCursosPerfilButton = new javax.swing.JButton();
+        VerExamenesPerfilButton = new javax.swing.JButton();
+        VerParcialesPerfilButton = new javax.swing.JButton();
         VerCursoPanel = new javax.swing.JPanel();
         CreditosLabel = new javax.swing.JLabel();
         OptativoLabel = new javax.swing.JLabel();
@@ -614,6 +617,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         TodosRadioButton.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TodosRadioButtonItemStateChanged(evt);
+            }
+        });
+        TodosRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TodosRadioButtonActionPerformed(evt);
             }
         });
 
@@ -1510,6 +1518,50 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         AuxLabel3.setForeground(new java.awt.Color(255, 255, 255));
         AuxLabel3.setText("CI:");
 
+        AuxLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AuxLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        AuxLabel4.setText("Configuración de notificaciones:");
+
+        enviarMailsCheckBox.setBackground(new java.awt.Color(73, 202, 114));
+        enviarMailsCheckBox.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        enviarMailsCheckBox.setForeground(new java.awt.Color(255, 255, 255));
+        enviarMailsCheckBox.setText("Enviar notificaciones a mi email");
+        enviarMailsCheckBox.setFocusPainted(false);
+        enviarMailsCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                enviarMailsCheckBoxItemStateChanged(evt);
+            }
+        });
+
+        VerCursosPerfilButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerCursosPerfilButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
+        VerCursosPerfilButton.setText("Mis Cursos");
+        VerCursosPerfilButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        VerCursosPerfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerCursosPerfilButtonActionPerformed(evt);
+            }
+        });
+
+        VerExamenesPerfilButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerExamenesPerfilButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/examenes.png"))); // NOI18N
+        VerExamenesPerfilButton.setText("Mis Exámenes");
+        VerExamenesPerfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerExamenesPerfilButtonActionPerformed(evt);
+            }
+        });
+
+        VerParcialesPerfilButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerParcialesPerfilButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/examenes.png"))); // NOI18N
+        VerParcialesPerfilButton.setText("Mis Parciales");
+        VerParcialesPerfilButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        VerParcialesPerfilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerParcialesPerfilButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout VerPerfilPanelLayout = new javax.swing.GroupLayout(VerPerfilPanel);
         VerPerfilPanel.setLayout(VerPerfilPanelLayout);
         VerPerfilPanelLayout.setHorizontalGroup(
@@ -1533,7 +1585,13 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(VerPerfilPanelLayout.createSequentialGroup()
                         .addComponent(AuxLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ciEstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ciEstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AuxLabel4)
+                    .addComponent(enviarMailsCheckBox)
+                    .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(VerParcialesPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerCursosPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerExamenesPerfilButton, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addContainerGap(617, Short.MAX_VALUE))
         );
         VerPerfilPanelLayout.setVerticalGroup(
@@ -1557,7 +1615,17 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AuxLabel1)
                     .addComponent(emailEstLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(AuxLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(enviarMailsCheckBox)
+                .addGap(18, 18, 18)
+                .addComponent(VerCursosPerfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VerExamenesPerfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(VerParcialesPerfilButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerPerfilPanel, "card12");
@@ -1932,7 +2000,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         tituloVerNotificacion.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         tituloVerNotificacion.setForeground(new java.awt.Color(255, 255, 255));
-        tituloVerNotificacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloVerNotificacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         tituloVerNotificacion.setToolTipText("");
         tituloVerNotificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -1946,6 +2014,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         textoVerNotificacion.setEditable(false);
         textoVerNotificacion.setColumns(20);
+        textoVerNotificacion.setLineWrap(true);
         textoVerNotificacion.setRows(5);
         jScrollPane15.setViewportView(textoVerNotificacion);
 
@@ -1967,7 +2036,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         VerNotificacionLayout.setVerticalGroup(
             VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerNotificacionLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(tituloVerNotificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2391,13 +2460,15 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_InscripcionExButtonActionPerformed
 
     private void MisExmenesRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MisExmenesRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        JRadioButton radioB = (JRadioButton) evt.getSource();
+        if(evt.getStateChange() == ItemEvent.SELECTED && radioB.isEnabled()){
             listarExamenes("");
         }
     }//GEN-LAST:event_MisExmenesRadioButtonItemStateChanged
 
     private void TodosExRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TodosExRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        JRadioButton radioB = (JRadioButton) evt.getSource();
+        if(evt.getStateChange() == ItemEvent.SELECTED && radioB.isEnabled()){
             listarExamenes("");
         }
     }//GEN-LAST:event_TodosExRadioButtonItemStateChanged
@@ -2447,13 +2518,15 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarParcialActionPerformed
 
     private void TodosParRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TodosParRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        JRadioButton radioB = (JRadioButton) evt.getSource();
+        if(evt.getStateChange() == ItemEvent.SELECTED && radioB.isEnabled()){
             listarParciales("");
         }
     }//GEN-LAST:event_TodosParRadioButtonItemStateChanged
 
     private void MisParcialesRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MisParcialesRadioButtonItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED){
+        JRadioButton radioB = (JRadioButton) evt.getSource();
+        if(evt.getStateChange() == ItemEvent.SELECTED && radioB.isEnabled()){
             listarParciales("");
         }
     }//GEN-LAST:event_MisParcialesRadioButtonItemStateChanged
@@ -2544,7 +2617,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarNotifiacionKeyReleased
 
     private void VerNotificacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerNotificacionButtonActionPerformed
-        if(NotificacionesTable.getSelectedRow()>-1){
+        if(NotificacionesTable.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Debe seleccionar una notificación", "Advertencia", WARNING_MESSAGE);
         }else{
             opcionSeleccionada(null, "verNotificacion");
@@ -2558,6 +2631,42 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private void notificacionIconoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificacionIconoMouseClicked
         opcionSeleccionada(null, "notificaciones");
     }//GEN-LAST:event_notificacionIconoMouseClicked
+
+    private void TodosRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TodosRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TodosRadioButtonActionPerformed
+
+    private void VerCursosPerfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerCursosPerfilButtonActionPerformed
+        CursandoRadioButton.setEnabled(false); // es para evitar el evento ItemStateChange, sino lista dos veces
+        CursandoRadioButton.setSelected(true);
+        CursandoRadioButton.setEnabled(true);
+        opcionSeleccionada(CursosOpcion, "cursos");
+    }//GEN-LAST:event_VerCursosPerfilButtonActionPerformed
+
+    private void VerExamenesPerfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerExamenesPerfilButtonActionPerformed
+        MisExmenesRadioButton.setEnabled(false); // es para evitar el evento ItemStateChange, sino lista dos veces
+        MisExmenesRadioButton.setSelected(true);
+        MisExmenesRadioButton.setEnabled(true);
+        opcionSeleccionada(ExamenesOpcion, "examenes");
+        
+    }//GEN-LAST:event_VerExamenesPerfilButtonActionPerformed
+
+    private void VerParcialesPerfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerParcialesPerfilButtonActionPerformed
+        MisParcialesRadioButton.setEnabled(false); // es para evitar el evento ItemStateChange, sino lista dos veces
+        MisParcialesRadioButton.setSelected(true);
+        MisParcialesRadioButton.setEnabled(true);
+        opcionSeleccionada(ParcialesOpcion, "parciales");
+    }//GEN-LAST:event_VerParcialesPerfilButtonActionPerformed
+
+    private void enviarMailsCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_enviarMailsCheckBoxItemStateChanged
+        JCheckBox checkB = (JCheckBox) evt.getSource();
+        if(evt.getStateChange() == ItemEvent.SELECTED && checkB.isEnabled()){
+            
+        }else{
+            
+        }
+
+    }//GEN-LAST:event_enviarMailsCheckBoxItemStateChanged
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -2678,7 +2787,12 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 idEstLabel.setText(est.getId());
                 fechaNacLabel.setText(dateFormat.format(est.getFechaNac()));
                 ciEstLabel.setText(est.getCi());
-                emailEstLabel.setText(est.getEmail());
+                emailEstLabel.setText(est.getEmail());      
+                
+                enviarMailsCheckBox.setEnabled(false); //es para evitar el evento ItemStateChanged
+                enviarMailsCheckBox.setSelected(est.isEnviarMails()); 
+                enviarMailsCheckBox.setEnabled(true);
+                
                 this.setTitle("Menú: Ver Perfil");
                 break;
             case "verMaterial":  
@@ -2697,7 +2811,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No tienes notificaciones");
                 } else {
                     for (Notificacion notif : notificaciones) {
-                        Object[] datos = {notif, notif.getTitulo(), dateFormat.format(notif.getFecha())};
+                        Object[] datos = {notif, notif.getTitulo(), dateFormat.format(notif.getFecha()), notif.isVista()};
                         modeloNotif.addRow(datos);
                     }
                 }
@@ -2709,6 +2823,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 tituloVerNotificacion.setText(notificacion.getTitulo());
                 textoVerNotificacion.setText(notificacion.getTexto());
                 fechaVerNotificacion.setText(dateFormat.format(notificacion.getFecha()));
+                Fabrica.getInstance().getContEst().notificacionVista(notificacion);
+                setCantidadNotif();
         }
         
         if(control){
@@ -2970,6 +3086,20 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         resizeColumnWidth(MaterialesSubidosTable);
     }
+    
+    public void setCantidadNotif(){
+        int cant = Fabrica.getInstance().getContEst().getLogin().cantNotifNoVista();
+        notificacionIcono.removeAll();
+        notificacionIcono.revalidate();
+        notificacionIcono.repaint();
+        if(cant > 0){
+            notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
+            JLabel text = new JLabel(String.valueOf(cant));
+            text.setForeground(Color.red);
+            text.setFont(new Font("Dialog", Font.BOLD, 13));
+            notificacionIcono.add(text);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AprobadosRadioButton;
@@ -2977,6 +3107,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel AuxLabel1;
     private javax.swing.JLabel AuxLabel2;
     private javax.swing.JLabel AuxLabel3;
+    private javax.swing.JLabel AuxLabel4;
     private javax.swing.JButton BuscarButton;
     private javax.swing.JTextField BuscarCarrera;
     private javax.swing.JTextField BuscarExamenTextField;
@@ -3057,12 +3188,15 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerCarrera;
     private javax.swing.JButton VerCursoButton;
     private javax.swing.JPanel VerCursoPanel;
+    private javax.swing.JButton VerCursosPerfilButton;
     private javax.swing.JPanel VerExamenPanel;
+    private javax.swing.JButton VerExamenesPerfilButton;
     private javax.swing.JButton VerMaterialSubidoButton;
     private javax.swing.JPanel VerNoticia;
     private javax.swing.JPanel VerNotificacion;
     private javax.swing.JButton VerNotificacionButton;
     private javax.swing.JPanel VerParcialPanel;
+    private javax.swing.JButton VerParcialesPerfilButton;
     private javax.swing.JPanel VerPerfilPanel;
     private javax.swing.JButton VolverButton;
     private javax.swing.JButton btnBuscarCarrera;
@@ -3077,6 +3211,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel carreraCurLabel;
     private javax.swing.JLabel ciEstLabel;
     private javax.swing.JLabel emailEstLabel;
+    private javax.swing.JCheckBox enviarMailsCheckBox;
     private javax.swing.JLabel fechaNacLabel;
     private javax.swing.JLabel fechaNotaLabel;
     private javax.swing.JLabel fechaNotaPLabel;

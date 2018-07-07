@@ -36,6 +36,7 @@ public class Estudiante extends Usuario {
     private List<InscripcionE> examenes;
     @OneToMany
     private List<ResultadoP> notasParciales;
+    private boolean enviarMails;
 
     public void setCi(String ci) {
         this.ci = ci;
@@ -226,6 +227,14 @@ public class Estudiante extends Usuario {
             S.setEstudiante(this);
         }
     }
+
+    public boolean isEnviarMails() {
+        return enviarMails;
+    }
+
+    public void setEnviarMails(boolean enviarMails) {
+        this.enviarMails = enviarMails;
+    }
     
     public void CursoAprobado(Curso curso, int nota){
         if(this.cursosAprobados == null) this.cursosAprobados = new ArrayList<>();
@@ -248,6 +257,16 @@ public class Estudiante extends Usuario {
             }
         }
         return null;
+    }
+    
+    public int cantNotifNoVista(){
+        int cant = 0;
+        for (Notificacion notif : notificaciones) {
+            if(notif.isVista() == false){
+                cant += 1;
+            }
+        }
+        return cant;
     }
 
 }

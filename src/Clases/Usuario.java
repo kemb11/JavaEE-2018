@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -24,6 +25,7 @@ public abstract class Usuario implements Serializable {
     @Id
     protected String id;
     protected String pass, email;
+    @OneToMany(mappedBy = "usuario")
     protected List<Notificacion> notificaciones;
     
 
@@ -64,6 +66,10 @@ public abstract class Usuario implements Serializable {
         this.notificaciones.add(notificacion);
     }
 
+    // Solo la utilizan docentes y estudiantes, en sus clases se sobreescribe el metodo
+    public boolean isEnviarMails(){
+        return false;
+    }
 
     @Override
     public boolean equals(Object object) {

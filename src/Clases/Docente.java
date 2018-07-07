@@ -16,6 +16,7 @@ public class Docente extends Usuario {
     private Date FechaNac;
     @ManyToMany
     private List<CursoSede> clases;
+    private boolean enviarMails;
 
     public String getCi() {
         return ci;
@@ -64,5 +65,12 @@ public class Docente extends Usuario {
     public void quitarClase(CursoSede clase) {
         this.clases.remove(clase);
     }
-    
+
+    public boolean isEnviarMails() {
+        return enviarMails;
+    }
+
+    public void setEnviarMails(boolean enviarMails) {
+        this.enviarMails = enviarMails;
+    }
 }
