@@ -68,13 +68,13 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         ParcialesTable.getColumnModel().removeColumn(ParcialesTable.getColumnModel().getColumn(0));
         subirNota_Estudiantes.getColumnModel().removeColumn(subirNota_Estudiantes.getColumnModel().getColumn(0));
         subirNota_notas.getColumnModel().removeColumn(subirNota_notas.getColumnModel().getColumn(0));
-        subirNota_notas.getColumnModel().removeColumn(subirNota_notas.getColumnModel().getColumn(1));
+        subirNota_notas.getColumnModel().removeColumn(subirNota_notas.getColumnModel().getColumn(0));
         subirNota_EstudiantesParcial.getColumnModel().removeColumn(subirNota_EstudiantesParcial.getColumnModel().getColumn(0));
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(0));
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(1));
         MaterialesSubidosTable.getColumnModel().removeColumn(MaterialesSubidosTable.getColumnModel().getColumn(0));
         verExamen_tabla.getColumnModel().removeColumn(verExamen_tabla.getColumnModel().getColumn(0));
-        
+
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
         PanelPrincipal.add(CarrerasPanel, "carreras");
@@ -242,10 +242,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         subirNota_EliminarParcial = new javax.swing.JButton();
         subirNota_notaParcial = new javax.swing.JSpinner();
         jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        subirNota_notaMaxParcial = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        subirNota_notaAproParcial = new javax.swing.JLabel();
         subirNota_TituloParcial = new javax.swing.JLabel();
         btn_aceptar_subirNotaParcial = new javax.swing.JButton();
         VerPerfilPanel = new javax.swing.JPanel();
@@ -1696,14 +1692,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         jLabel20.setText("Nota del estudiante:");
 
-        jLabel21.setText("Nota máxima del examen:");
-
-        subirNota_notaMaxParcial.setText("jLabel18");
-
-        jLabel22.setText("Nota de aprobación:");
-
-        subirNota_notaAproParcial.setText("jLabel18");
-
         subirNota_TituloParcial.setText("jLabel19");
 
         btn_aceptar_subirNotaParcial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1730,15 +1718,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(SubirNotaParcialLayout.createSequentialGroup()
-                                        .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel20)
-                                            .addComponent(jLabel21)
-                                            .addComponent(jLabel22))
-                                        .addGap(50, 50, 50)
-                                        .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(subirNota_notaAproParcial)
-                                            .addComponent(subirNota_notaMaxParcial)
-                                            .addComponent(subirNota_notaParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel20)
+                                        .addGap(76, 76, 76)
+                                        .addComponent(subirNota_notaParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(subirNota_btnAgregarParcial)))
                             .addGroup(SubirNotaParcialLayout.createSequentialGroup()
                                 .addComponent(subirNota_EliminarParcial)
@@ -1763,15 +1745,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
                             .addComponent(subirNota_notaParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21)
-                            .addComponent(subirNota_notaMaxParcial))
-                        .addGap(26, 26, 26)
-                        .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel22)
-                            .addComponent(subirNota_notaAproParcial))
-                        .addGap(34, 34, 34)
+                        .addGap(106, 106, 106)
                         .addComponent(subirNota_btnAgregarParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2718,10 +2692,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         if (ExamenesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un exámen", "", WARNING_MESSAGE);
         } else {
-            try{
+            try {
                 subirNotaExamen();
-                opcionSeleccionada(ExamenesOpcion, "subir notas examen");
-            }catch(InternalException e){
+                opcionSeleccionada(ExamenesOpcion, "subir nota examen");
+            } catch (InternalException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "", WARNING_MESSAGE);
             }
         }
@@ -2803,10 +2777,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         if (ParcialesTable.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial", "", WARNING_MESSAGE);
         } else {
-            try{
+            try {
                 subirNotaParcial();
-                opcionSeleccionada(ParcialesOpcion, "subir notas parcial");
-            }catch(InternalException e){
+                opcionSeleccionada(ParcialesOpcion, "subir nota parcial");
+            } catch (InternalException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "", WARNING_MESSAGE);
             }
         }
@@ -2830,14 +2804,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
     private void VolverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverButtonActionPerformed
         // Si es mayor a 1 porque si solo tiene 1 es el panel actual, no tiene anterior
-        if (volver.size() > 1) {
-            CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
-            String ultimaVentana = (String) volver.get(volver.size() - 2)[0]; //el 0 tiene el panel principal
-            JPanel ultimaOpcion = (JPanel) volver.get(volver.size() - 2)[1]; //el 1 el tiene panel lateral
-            cl.show(PanelPrincipal, ultimaVentana); //la ultima ventana visitada es el anteultimo agregado, el ultimo es el actual
-            resaltarOpcioneleccionada(ultimaOpcion);
-            volver.remove(volver.size() - 1); //borrar la ventana actual
-        }
+        this.Volver();
     }//GEN-LAST:event_VolverButtonActionPerformed
 
     private void subirNota_btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirNota_btnAgregarActionPerformed
@@ -2855,7 +2822,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 aprobado = "Reprobado";
             }
             Object[] datos = {res, ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos(), res.getNota(), aprobado};
+            modelo2.addRow(datos);
             resizeColumnWidth(subirNota_notas);
+            subirNota_nota.setValue(((SpinnerNumberModel) subirNota_nota.getModel()).getMinimum());
             modelo.removeRow(subirNota_Estudiantes.getSelectedRow());
         }
     }//GEN-LAST:event_subirNota_btnAgregarActionPerformed
@@ -2879,6 +2848,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             InscripcionE ie = (InscripcionE) modelo.getValueAt(subirNota_notas.getSelectedRow(), 1);
             DefaultTableModel modelo2 = (DefaultTableModel) subirNota_Estudiantes.getModel();
             Object[] datos = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos()};
+            modelo2.addRow(datos);
             resizeColumnWidth(subirNota_notas);
             modelo.removeRow(subirNota_notas.getSelectedRow());
         }
@@ -2893,7 +2863,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 try {
                     Examen e = ((InscripcionE) modelo.getValueAt(0, 1)).getExamen();
                     for (int i = 0; i < modelo.getRowCount(); i++) {
-                        InscripcionE ie = ((InscripcionE) modelo.getValueAt(i, 1));
+                        InscripcionE ie = (InscripcionE) modelo.getValueAt(i, 1);
                         ResultadoE re = (ResultadoE) modelo.getValueAt(i, 0);
                         ie.setNota(re);
                         if (e.getNotaApro() <= re.getNota()) {
@@ -2906,6 +2876,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         e.setFecha(fecha);
                     }
                     Fabrica.getInstance().getContDocente().subirNotasExamen(e);
+                    this.Volver();
                 } catch (ParseException ex) {
                     JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto", "Error", WARNING_MESSAGE);
                 }
@@ -2932,13 +2903,26 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             res.setNota((int) subirNota_notaParcial.getValue());
             res.setEstudiante(ic.getEstudiante());
             DefaultTableModel modelo2 = (DefaultTableModel) subirNota_notasParcial.getModel();
-            String aprobado = "Aprobado";
-            if (res.getNota() < ((int) Integer.valueOf(subirNota_notaAproParcial.getText()))) {
-                aprobado = "Reprobado";
+            Object[] datos = { null};
+            if (res.getParcial().getInstancia().equals("Segundo")) {
+                String aprobado = "Aprobado";
+                if (res.getNota()+res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getCurso().getNotaExonerarEx()) {
+                    aprobado = "Reprobado";
+                }else{ 
+                    if(res.getNota()+res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getAproParciales())
+                        aprobado = "Derecho a Examen";
+                }
+                Object[] aux = {res, ic , ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota(), aprobado};
+                datos = aux;
+            } else {
+                subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(subirNota_notasParcial.getColumnModel().getColumnCount()-1));
+                Object[] aux = {res, ic , ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota()};
+                datos = aux;
             }
-            Object[] datos = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota(), aprobado};
+            modelo2.addRow(datos);
             resizeColumnWidth(subirNota_notasParcial);
             modelo.removeRow(subirNota_EstudiantesParcial.getSelectedRow());
+            subirNota_notaParcial.setValue(((SpinnerNumberModel) subirNota_notaParcial.getModel()).getMinimum());
         }
     }//GEN-LAST:event_subirNota_btnAgregarParcialActionPerformed
 
@@ -2962,6 +2946,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             DefaultTableModel modelo2 = (DefaultTableModel) subirNota_EstudiantesParcial.getModel();
             Object[] datos = {ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos()};
             resizeColumnWidth(subirNota_notasParcial);
+            modelo2.addRow(datos);
             modelo.removeRow(subirNota_notasParcial.getSelectedRow());
         }
     }//GEN-LAST:event_subirNota_EliminarParcialActionPerformed
@@ -2983,6 +2968,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     }
                 }
                 Fabrica.getInstance().getContDocente().subirNotasParcial(p);
+                this.Volver();
             }
         }
     }//GEN-LAST:event_btn_aceptar_subirNotaParcialActionPerformed
@@ -3027,7 +3013,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
     private void MaterialesSubidosTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaterialesSubidosTableKeyReleased
         // Si presionó la tecla arriba o abajo
-        if(evt.getKeyCode()== KeyEvent.VK_DOWN || evt.getKeyCode()== KeyEvent.VK_UP){
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
             int row = MaterialesSubidosTable.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
             Material material = (Material) modelo.getValueAt(row, 0);
@@ -3036,29 +3022,29 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MaterialesSubidosTableKeyReleased
 
     private void DescargarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescargarMaterialButtonActionPerformed
-        if(MaterialesSubidosTable.getSelectedRow()>-1){
+        if (MaterialesSubidosTable.getSelectedRow() > -1) {
             Material material = (Material) MaterialesSubidosTable.getModel().getValueAt(MaterialesSubidosTable.getSelectedRow(), 0);
-            if(material.getRutaArchivo() != null){
+            if (material.getRutaArchivo() != null) {
                 JFileChooser elegirArchivo = new JFileChooser();
                 elegirArchivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 elegirArchivo.setAcceptAllFileFilterUsed(false);
                 elegirArchivo.setDialogTitle("Seleccionar carpeta");
 
-                int a= elegirArchivo.showDialog(this, "Seleccionar"); // guarda la accion que se realiza en el filechooser
+                int a = elegirArchivo.showDialog(this, "Seleccionar"); // guarda la accion que se realiza en el filechooser
 
-                if(a == JFileChooser.APPROVE_OPTION){ // la accion si se le da a abrir
+                if (a == JFileChooser.APPROVE_OPTION) { // la accion si se le da a abrir
                     //            File archivo = elegirarchivo.getSelectedFile(); // capturar el nombre y ruta
                     //            String RutaArchivo = archivo.getPath();
                     String carpetaDestino = elegirArchivo.getSelectedFile().toString();
 
-                    if(Fabrica.getInstance().getContEdu().descargarMaterial(carpetaDestino, material)){
-                        JOptionPane.showMessageDialog(this,"Se ha descargado el material correctamente","Descarga completa",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    }else{
-                        JOptionPane.showMessageDialog(this,"Ha ocurrido un error al decargar el material, la descarga ha sido cancelada","Descarga cancelada",javax.swing.JOptionPane.ERROR_MESSAGE);
+                    if (Fabrica.getInstance().getContEdu().descargarMaterial(carpetaDestino, material)) {
+                        JOptionPane.showMessageDialog(this, "Se ha descargado el material correctamente", "Descarga completa", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al decargar el material, la descarga ha sido cancelada", "Descarga cancelada", javax.swing.JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }else{
-                JOptionPane.showMessageDialog(this,"El tema seleccionado no tiene archivo","Aviso",javax.swing.JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "El tema seleccionado no tiene archivo", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_DescargarMaterialButtonActionPerformed
@@ -3071,18 +3057,16 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         JFileChooser selecArchivo = new JFileChooser();
 
         //        selecArchivo.setFont(new java.awt.Font("Segoe UI", 1, 14));
-
         //        pestaniaCosnfig.setBackground(new java.awt.Color(255, 255, 255));
-
         //        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xlsx)", "xlsx"));
         //        selecArchivo.setFileFilter(new FileNameExtensionFilter("Excel (*.xls)", "xls"));
         //        selecArchivo.setAcceptAllFileFilterUsed(false);
-        if(selecArchivo.showDialog(null, "Seleccionar archivo")==JFileChooser.APPROVE_OPTION){
+        if (selecArchivo.showDialog(null, "Seleccionar archivo") == JFileChooser.APPROVE_OPTION) {
             ruta = selecArchivo.getSelectedFile().getPath();
             File archivo = new File(ruta);
-            if(archivo.exists()){
+            if (archivo.exists()) {
                 rutaArchivoLabel.setText(ruta);
-            }else{
+            } else {
                 ruta = null;
                 JOptionPane.showMessageDialog(this, "Archivo incorrecto. Seleccione un archivo válido", "", WARNING_MESSAGE);
             }
@@ -3093,25 +3077,21 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private void confirmarSubirMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarSubirMButtonActionPerformed
         String titulo = TituloArchivoTextField.getText();
         String desc = descArchTextArea.getText();
-        if(ruta != null){
+        if (ruta != null) {
             DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
             Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
 
-            if(Fabrica.getInstance().getContDocente().subirMaterial(titulo, desc, ruta, curso)){
+            if (Fabrica.getInstance().getContDocente().subirMaterial(titulo, desc, ruta, curso)) {
                 JOptionPane.showMessageDialog(this, "El material se subió correctamente");
                 VolverButton.doClick();
                 limpiarPanelSubirMaterial();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Ha ocurrido un problema al subir el material", "", WARNING_MESSAGE);
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un archivo");
         }
     }//GEN-LAST:event_confirmarSubirMButtonActionPerformed
-
-    private void VerMaterialSubidoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerMaterialSubidoButtonActionPerformed
-        opcionSeleccionada(CursosOpcion, "verMaterial");
-    }//GEN-LAST:event_VerMaterialSubidoButtonActionPerformed
 
     private void verExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verExamenActionPerformed
         if (ExamenesTable.getSelectedRow() != -1) {
@@ -3122,15 +3102,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_verExamenActionPerformed
 
     private void verExamen_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verExamen_tablaMouseClicked
-        if(verExamen_tabla.getSelectedRow() != -1){
-            InscripcionE ie = (InscripcionE) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(),0);
+        if (verExamen_tabla.getSelectedRow() != -1) {
+            InscripcionE ie = (InscripcionE) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(), 0);
             verExamen_datosEstudiante.setText(ie.toString());
         }
     }//GEN-LAST:event_verExamen_tablaMouseClicked
 
     private void verParcial_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verParcial_tablaMouseClicked
-        if(verExamen_tabla.getSelectedRow() != -1){
-            ResultadoP rp = (ResultadoP) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(),0);
+        if (verExamen_tabla.getSelectedRow() != -1) {
+            ResultadoP rp = (ResultadoP) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(), 0);
             verExamen_datosEstudiante.setText(rp.toString());
         }
     }//GEN-LAST:event_verParcial_tablaMouseClicked
@@ -3142,6 +3122,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un parcial");
         }
     }//GEN-LAST:event_verParcialActionPerformed
+
+    private void VerMaterialSubidoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerMaterialSubidoButtonActionPerformed
+        opcionSeleccionada(CursosOpcion, "verMaterial");
+    }//GEN-LAST:event_VerMaterialSubidoButtonActionPerformed
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -3214,7 +3198,22 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 if (curso.isOptativo()) {
                     opt = "Si";
                 }
-
+                modelo = (DefaultTableModel) PreviasCurTable.getModel();
+                while (modelo.getRowCount() > 0) {
+                    modelo.removeRow(0);//limpiar la tabla
+                }
+                if (curso.getPrevias() != null && !curso.getPrevias().isEmpty()) {
+                    for (Previa p : curso.getPrevias()) {
+                        String aprobacion = "Con derecho a examen";
+                        if (p.isExamenAprobado()) {
+                            aprobacion = "Curso Aprobado";
+                        }
+                        Object[] row = {p.getCursoPrevia().getNombre(), aprobacion};
+                        modelo.addRow(row);
+                    }
+                }
+                notaAprobCurLabel.setText(String.valueOf(curso.getNotaAprobacion()));
+                notaExonExLabel.setText(String.valueOf(curso.getNotaExonerarEx()));
                 TituloLabel.setText(curso.getNombre());
                 CreditosLabel.setText(String.valueOf(curso.getCreditos()));
                 OptativoLabel.setText(opt);
@@ -3228,16 +3227,16 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 Curso cursoM = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
                 CursoMaterialLabel.setText(cursoM.getNombre());
                 break;
-            case "verPerfil":    
+            case "verPerfil":
                 Docente docente = Fabrica.getInstance().getContDocente().getLogin();
-                nombrePerfilLabel.setText(docente.getNombres()+" "+docente.getApellidos());
+                nombrePerfilLabel.setText(docente.getNombres() + " " + docente.getApellidos());
                 idPerfilLabel.setText(docente.getId());
                 fechaNacPerfilLabel.setText(dateFormat.format(docente.getFechaNac()));
                 ciPefilLabel.setText(docente.getCi());
                 emailPerfilLabel.setText(docente.getEmail());
                 this.setTitle("Menú: Ver Perfil");
                 break;
-            case "verMaterial":  
+            case "verMaterial":
                 listarMateriales();
                 this.setTitle("Menú: Material Subido");
                 break;
@@ -3466,37 +3465,35 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void subirNotaExamen() throws InternalException{
+    public void subirNotaExamen() throws InternalException {
         Examen e = (Examen) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
         if (Fabrica.getInstance().getContDocente().isEditableExamen(e) && e.editable()) {
-        subirNota_Titulo.setText("Examen de " + e.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(e.getFecha()));
-        subirNota_notaApro.setText(String.valueOf(e.getNotaApro()));
-        subirNota_notaMax.setText(String.valueOf(e.getNotaMax()));
-        subirNota_nota.setValue(((SpinnerNumberModel) subirNota_nota.getModel()).getMinimum());
-        DefaultTableModel modelo = (DefaultTableModel) subirNota_Estudiantes.getModel();
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-        for (InscripcionE ie : e.getEstudiantesInscritos()) {
-            Object[] datos = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos()};
-            modelo.addRow(datos);
-        }
-        modelo = (DefaultTableModel) subirNota_notas.getModel();
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-        resizeColumnWidth(subirNota_Estudiantes);
-        }else{
+            subirNota_Titulo.setText("Examen de " + e.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(e.getFecha()));
+            subirNota_notaApro.setText(String.valueOf(e.getNotaApro()));
+            subirNota_notaMax.setText(String.valueOf(e.getNotaMax()));
+            subirNota_nota.setValue(((SpinnerNumberModel) subirNota_nota.getModel()).getMinimum());
+            DefaultTableModel modelo = (DefaultTableModel) subirNota_Estudiantes.getModel();
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            for (InscripcionE ie : e.getEstudiantesInscritos()) {
+                Object[] datos = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos()};
+                modelo.addRow(datos);
+            }
+            modelo = (DefaultTableModel) subirNota_notas.getModel();
+            while (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            resizeColumnWidth(subirNota_Estudiantes);
+        } else {
             throw new InternalException("No puede editar el examen");
         }
     }
 
-    public void subirNotaParcial() throws InternalException{
+    public void subirNotaParcial() throws InternalException {
         p = (Parcial) ParcialesTable.getModel().getValueAt(ParcialesTable.getSelectedRow(), 0);
         if (Fabrica.getInstance().getContDocente().isEditableParcial(p) && p.editable()) {
             subirNota_TituloParcial.setText(p.getInstancia() + " parcial de " + p.getCurso().getCurso().getNombre() + " del dia " + dateFormat.format(p.getFecha()));
-            subirNota_notaAproParcial.setText(String.valueOf(p.getNotaApro()));
-            subirNota_notaMaxParcial.setText(String.valueOf(p.getNotaMax()));
             subirNota_notaParcial.setValue(((SpinnerNumberModel) subirNota_notaParcial.getModel()).getMinimum());
             DefaultTableModel modelo = (DefaultTableModel) subirNota_EstudiantesParcial.getModel();
             while (modelo.getRowCount() > 0) {
@@ -3518,7 +3515,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             throw new InternalException("No puede editar el parcial");
         }
     }
-    
+
     private void limpiarPanelSubirMaterial() {
         TituloArchivoTextField.setText("");
         descArchTextArea.setText("");
@@ -3526,15 +3523,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         ruta = null;
         CursoMaterialLabel.setText("");
     }
-    
+
     public void listarMateriales() {
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-        
+
         List<Material> lista = Fabrica.getInstance().getContEdu().listarMaterialCurso(curso);
-        
+
         modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
-        
+
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
@@ -3545,8 +3542,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
         } else {
             for (Material material : lista) {
-                tituloMateriales.setText("Material subido para "+curso.getNombre());
-                String nombreDocente = material.getDocente().getNombres()+" "+material.getDocente().getApellidos();
+                tituloMateriales.setText("Material subido para " + curso.getNombre());
+                String nombreDocente = material.getDocente().getNombres() + " " + material.getDocente().getApellidos();
                 Object[] datos = {material, material.getTitulo(), dateFormat.format(material.getFechaSubida()), nombreDocente};
                 modelo.addRow(datos);
             }
@@ -3554,11 +3551,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         resizeColumnWidth(MaterialesSubidosTable);
     }
-    
-    void MostrarExamen(){
+
+    void MostrarExamen() {
         Examen e = (Examen) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
-        verExamen_titulo.setText("Examen de "+e.getCurso().getCurso().getNombre()+" de la carrera "
-                +e.getCurso().getCurso().getCarrera().getNombre());
+        verExamen_titulo.setText("Examen de " + e.getCurso().getCurso().getNombre() + " de la carrera "
+                + e.getCurso().getCurso().getCarrera().getNombre());
         verExamen_fecha.setText(dateFormat.format(e.getFecha()));
         verExamen_notaAprobacion.setText(String.valueOf(e.getNotaApro()));
         verExamen_notaTotal.setText(String.valueOf(e.getNotaMax()));
@@ -3566,29 +3563,41 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
-        for(InscripcionE ie : e.getEstudiantesInscritos()){
-            Object[] o = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() +" "+ ie.getEstudiante().getApellidos()};
+        for (InscripcionE ie : e.getEstudiantesInscritos()) {
+            Object[] o = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos()};
             modelo.addRow(o);
         }
         resizeColumnWidth(verExamen_tabla);
     }
-    
-    void MostrarParcial(){
-        Parcial p = (Parcial) ExamenesTable.getModel().getValueAt(ExamenesTable.getSelectedRow(), 0);
-        verParcial_titulo.setText(p.getInstancia() + " parcial de "+p.getCurso().getCurso().getNombre()+" de la carrera "
-                +p.getCurso().getCurso().getCarrera().getNombre());
+
+    void MostrarParcial() {
+        Parcial p = (Parcial) ParcialesTable.getModel().getValueAt(ParcialesTable.getSelectedRow(), 0);
+        verParcial_titulo.setText(p.getInstancia() + " parcial de " + p.getCurso().getCurso().getNombre() + " de la carrera "
+                + p.getCurso().getCurso().getCarrera().getNombre());
         verParcial_fecha.setText(dateFormat.format(p.getFecha()));
         verParcial_notaTotal.setText(String.valueOf(p.getNotaMax()));
-        DefaultTableModel modelo = (DefaultTableModel) verExamen_tabla.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) verParcial_tabla.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
-        if(p.getNotasEstudiantes() != null)
-        for(ResultadoP rp : p.getNotasEstudiantes()){
-            Object[] o = {rp, rp.getEstudiante().getCi(), rp.getEstudiante().getNombres() +" "+ rp.getEstudiante().getApellidos()};
-            modelo.addRow(o);
+        if (p.getNotasEstudiantes() != null) {
+            for (ResultadoP rp : p.getNotasEstudiantes()) {
+                Object[] o = {rp, rp.getEstudiante().getCi(), rp.getEstudiante().getNombres() + " " + rp.getEstudiante().getApellidos()};
+                modelo.addRow(o);
+            }
         }
         resizeColumnWidth(verParcial_tabla);
+    }
+
+    void Volver() {
+        if (volver.size() > 1) {
+            CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+            String ultimaVentana = (String) volver.get(volver.size() - 2)[0]; //el 0 tiene el panel principal
+            JPanel ultimaOpcion = (JPanel) volver.get(volver.size() - 2)[1]; //el 1 el tiene panel lateral
+            cl.show(PanelPrincipal, ultimaVentana); //la ultima ventana visitada es el anteultimo agregado, el ultimo es el actual
+            resaltarOpcioneleccionada(ultimaOpcion);
+            volver.remove(volver.size() - 1); //borrar la ventana actual
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3707,8 +3716,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -3762,9 +3769,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField subirNota_fechaMuestra;
     private javax.swing.JSpinner subirNota_nota;
     private javax.swing.JLabel subirNota_notaApro;
-    private javax.swing.JLabel subirNota_notaAproParcial;
     private javax.swing.JLabel subirNota_notaMax;
-    private javax.swing.JLabel subirNota_notaMaxParcial;
     private javax.swing.JSpinner subirNota_notaParcial;
     private javax.swing.JTable subirNota_notas;
     private javax.swing.JTable subirNota_notasParcial;

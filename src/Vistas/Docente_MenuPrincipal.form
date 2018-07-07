@@ -2062,17 +2062,9 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="subirNota_notaAproParcial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="subirNota_notaMaxParcial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="subirNota_notaParcial" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                                              </Group>
+                                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                                              <Component id="subirNota_notaParcial" min="-2" pref="63" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="subirNota_btnAgregarParcial" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -2108,17 +2100,7 @@
                                   <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="subirNota_notaParcial" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="subirNota_notaMaxParcial" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="subirNota_notaAproParcial" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                               <Component id="subirNota_btnAgregarParcial" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -2231,26 +2213,6 @@
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nota del estudiante:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel21">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nota m&#xe1;xima del examen:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="subirNota_notaMaxParcial">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel18"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel22">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nota de aprobaci&#xf3;n:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="subirNota_notaAproParcial">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel18"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="subirNota_TituloParcial">

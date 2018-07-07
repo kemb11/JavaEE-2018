@@ -63,7 +63,7 @@ public class Parcial extends Prueba {
     
     public boolean editable() {
         if(this.notasEstudiantes != null) {
-                return false;
+            return false;
         }
         return true;
     }

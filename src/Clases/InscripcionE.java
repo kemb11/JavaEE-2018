@@ -75,7 +75,8 @@ public class InscripcionE implements Serializable {
     }
 
     public void setNota(ResultadoE nota) {
-        this.nota = nota;
+        this.nota = nota;  
+        Fabrica.getInstance().getEntity().persist(nota);
         Fabrica.getInstance().getEntity().merge(this);
     }
 
@@ -103,14 +104,14 @@ public class InscripcionE implements Serializable {
     public String toString() {
         if (nota != null) {
             String retornar = "Estudiante : " + this.estudiante.getNombres() + " " + this.estudiante.getApellidos() + " (" + this.estudiante.getCi() + ")";
-            retornar.concat("\nNota : " + String.valueOf((int) this.nota.getNota()));
+            retornar = retornar.concat("\nNota : " + String.valueOf((int) this.nota.getNota()));
             SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-            retornar.concat("\nFecha de corrección : " + date.format(nota.getFecha()));
+            retornar = retornar.concat("\nFecha de corrección : " + date.format(nota.getFecha()));
             String aprobado = "Sí";
             if (nota.getNota() < this.getExamen().getNotaApro()) {
                 aprobado = "No";
             }
-            retornar.concat("\nAprobado : " + aprobado);
+            retornar = retornar.concat("\nAprobado : " + aprobado);
             return retornar;
         } else {
             return "No se ha corregido";

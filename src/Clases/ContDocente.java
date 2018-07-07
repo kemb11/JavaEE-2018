@@ -56,6 +56,8 @@ public class ContDocente implements IContDocente{
             material.setDescripcion(descripcion);
             material.setRutaArchivo("");
             material.setFechaSubida(new Date());
+            material.setCurso(cursoSede);
+            material.setDocente(login);
 
             // Lo persisto antes para obtener el id autogenerado
             EntityManager em = Fabrica.getInstance().getEntity();
@@ -69,7 +71,9 @@ public class ContDocente implements IContDocente{
             }
 
             String rutaDestino = "MaterialDeEstudio/"+cursoSede.getId()+"/"+material.getId()+"."+extension;
-            if(copiarArchivo(rutaArchivo, rutaDestino)){            
+            if(copiarArchivo(rutaArchivo, rutaDestino)){
+                material.setRutaArchivo(rutaDestino);
+                em.merge(material);
                 return true;
             }else{
                 try {
@@ -134,7 +138,7 @@ public class ContDocente implements IContDocente{
     @Override
     public boolean isEditableExamen(Examen e) {
         int dias=(int) (((new Date()).getTime() - e.getFecha().getTime())/86400000);
-        if(e.getCurso().getDocente().equals(this.login))
+        if(e.getCurso().getDocente()!=null && e.getCurso().getDocente().equals(this.login))
             if(e.getFecha().before(new Date()) && dias < 20)
                 return true;
         return false;
@@ -142,7 +146,7 @@ public class ContDocente implements IContDocente{
     
     @Override
     public boolean isEditableParcial(Parcial p) {
-        int dias=(int) (((new Date()).getTime() - p.getFecha().getTime())/86400000);
+        int dias = (int) (((new Date()).getTime() - p.getFecha().getTime())/86400000);
         if(p.getCurso().getDocente().equals(this.login))
             if(p.getFecha().before(new Date()) && dias < 20)
                 return true;
@@ -153,11 +157,11 @@ public class ContDocente implements IContDocente{
     public void subirNotasExamen(Examen e) {
         try {
             ExamenJpaController ejpa = new ExamenJpaController();
-            ejpa.edit(e);
             InscripcionEJpaController iejpa = new InscripcionEJpaController();
             for(InscripcionE ie : e.getEstudiantesInscritos()){
                 iejpa.edit(ie);
             }
+            ejpa.edit(e);
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
