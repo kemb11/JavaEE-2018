@@ -2961,7 +2961,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         int dialogResult = JOptionPane.showConfirmDialog(this, "¿Estás seguro de guardar las notas?"
                 + "\nLuego no se podrán editar", "", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
-            DefaultTableModel modelo = (DefaultTableModel) subirNota_notas.getModel();
+            DefaultTableModel modelo = (DefaultTableModel) subirNota_notasParcial.getModel();
             if (modelo.getRowCount() > 0) {
                 for (int i = 0; i < modelo.getRowCount(); i++) {
                     ResultadoP nota = (ResultadoP) modelo.getValueAt(i, 0);
@@ -2977,6 +2977,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
                             nota.getEstudiante().CursoAprobado(ca, notaEst);
                         }else{
+                            if(notaAnterior.getNota() + nota.getNota() > p.getCurso().getDerechoExamen()){
                             CursoAprobado ca = new CursoAprobado();
                             ca.setCurso(p.getCurso().getCurso());
                             ca.setFecha(new Date());
@@ -2984,7 +2985,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             ca.setEstudiante(nota.getEstudiante());
                             String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
                             nota.getEstudiante().CursoAprobado(ca, notaEst);
-                        }
+                        }}
                     }
                 }
                 Fabrica.getInstance().getContDocente().subirNotasParcial(p);
