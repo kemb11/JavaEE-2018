@@ -290,6 +290,36 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         TituloLabel40 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        EstadisticasCarreraPanel = new javax.swing.JPanel();
+        TituloEstadisticasTotales1 = new javax.swing.JLabel();
+        TituloLabel41 = new javax.swing.JLabel();
+        TituloLabel44 = new javax.swing.JLabel();
+        TituloLabel45 = new javax.swing.JLabel();
+        TituloLabel46 = new javax.swing.JLabel();
+        TituloLabel53 = new javax.swing.JLabel();
+        TituloLabel54 = new javax.swing.JLabel();
+        TituloLabel56 = new javax.swing.JLabel();
+        TituloLabel57 = new javax.swing.JLabel();
+        TituloLabel58 = new javax.swing.JLabel();
+        TituloLabel59 = new javax.swing.JLabel();
+        TituloLabel60 = new javax.swing.JLabel();
+        TituloLabel61 = new javax.swing.JLabel();
+        TituloLabel62 = new javax.swing.JLabel();
+        TituloLabel63 = new javax.swing.JLabel();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        EstadisticasCursoPanel = new javax.swing.JPanel();
+        TituloEstadisticasTotales2 = new javax.swing.JLabel();
+        TituloLabel42 = new javax.swing.JLabel();
+        TituloLabel47 = new javax.swing.JLabel();
+        TituloLabel48 = new javax.swing.JLabel();
+        TituloLabel49 = new javax.swing.JLabel();
+        TituloLabel55 = new javax.swing.JLabel();
+        TituloLabel64 = new javax.swing.JLabel();
+        TituloLabel65 = new javax.swing.JLabel();
+        TituloLabel66 = new javax.swing.JLabel();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -2185,9 +2215,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton1.setText("Para sede seleccionada");
+        jRadioButton1.setFocusPainted(false);
 
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton2.setText("Para todas las sedes");
+        jRadioButton2.setFocusPainted(false);
 
         javax.swing.GroupLayout EstadisticasPanelLayout = new javax.swing.GroupLayout(EstadisticasPanel);
         EstadisticasPanel.setLayout(EstadisticasPanelLayout);
@@ -2197,6 +2229,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
                         .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TituloLabel24)
                             .addComponent(TituloLabel25)
@@ -2204,7 +2241,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(TituloLabel27)
                             .addComponent(TituloLabel28)
                             .addComponent(TituloLabel29))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TituloLabel35)
                             .addComponent(TituloLabel36)
@@ -2240,11 +2277,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(TituloLabel34)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TituloEstadisticasTotales)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2)
-                        .addGap(227, 227, 227))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         EstadisticasPanelLayout.setVerticalGroup(
             EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2254,10 +2287,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(TituloLabel34)
                     .addGroup(EstadisticasPanelLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TituloEstadisticasTotales)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))))
+                        .addComponent(TituloEstadisticasTotales)))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
                 .addGap(18, 18, 18)
                 .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EstadisticasPanelLayout.createSequentialGroup()
@@ -2280,7 +2314,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TituloLabel23)
                             .addComponent(TituloLabel30))))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EstadisticasPanelLayout.createSequentialGroup()
                         .addComponent(TituloLabel24)
@@ -2306,10 +2340,268 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(TituloLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TituloLabel40)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         PanelPrincipal.add(EstadisticasPanel, "card16");
+
+        EstadisticasCarreraPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        TituloEstadisticasTotales1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        TituloEstadisticasTotales1.setForeground(new java.awt.Color(255, 255, 255));
+        TituloEstadisticasTotales1.setText("Estadísticas para la carrera carrera");
+
+        TituloLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel41.setText("Promedio de aprobación");
+
+        TituloLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel44.setText("Promedios de notas obtenidas");
+
+        TituloLabel45.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel45.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel45.setText("En Exámenes:");
+
+        TituloLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel46.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel46.setText("En parciales:");
+
+        TituloLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel53.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel53.setText("Numero");
+
+        TituloLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel54.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel54.setText("Numero");
+
+        TituloLabel56.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel56.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel56.setText("Numero");
+
+        TituloLabel57.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel57.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grafica.png"))); // NOI18N
+
+        TituloLabel58.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel58.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel58.setText("Curso con más estudiantes cursando");
+
+        TituloLabel59.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel59.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel59.setText("Nombre");
+
+        TituloLabel60.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel60.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel60.setText("Curso con más aprobaciones");
+
+        TituloLabel61.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel61.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel61.setText("Nombre");
+
+        TituloLabel62.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel62.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel62.setText("Curso con mejor promedio de aprobación");
+
+        TituloLabel63.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel63.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel63.setText("Nombre");
+
+        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton3.setText("En sede seleccionada");
+        jRadioButton3.setFocusPainted(false);
+
+        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton4.setText("En todas las sedes");
+        jRadioButton4.setFocusPainted(false);
+
+        javax.swing.GroupLayout EstadisticasCarreraPanelLayout = new javax.swing.GroupLayout(EstadisticasCarreraPanel);
+        EstadisticasCarreraPanel.setLayout(EstadisticasCarreraPanelLayout);
+        EstadisticasCarreraPanelLayout.setHorizontalGroup(
+            EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(jRadioButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton4))
+                    .addComponent(TituloLabel41)
+                    .addComponent(TituloLabel56)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel57)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloEstadisticasTotales1))
+                    .addComponent(TituloLabel44)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel54))
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel53)))
+                .addGap(44, 44, 44)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel58)
+                    .addComponent(TituloLabel59)
+                    .addComponent(TituloLabel60)
+                    .addComponent(TituloLabel61)
+                    .addComponent(TituloLabel62)
+                    .addComponent(TituloLabel63))
+                .addContainerGap(138, Short.MAX_VALUE))
+        );
+        EstadisticasCarreraPanelLayout.setVerticalGroup(
+            EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel57)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(TituloEstadisticasTotales1)))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel56)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel45)
+                            .addComponent(TituloLabel54))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel46)
+                            .addComponent(TituloLabel53)))
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel59)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel60)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel61)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel63)))
+                .addGap(107, 107, 107))
+        );
+
+        PanelPrincipal.add(EstadisticasCarreraPanel, "card16");
+
+        EstadisticasCursoPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        TituloEstadisticasTotales2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        TituloEstadisticasTotales2.setForeground(new java.awt.Color(255, 255, 255));
+        TituloEstadisticasTotales2.setText("Estadísticas para el curso Curso");
+
+        TituloLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel42.setText("Promedio de aprobación");
+
+        TituloLabel47.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel47.setText("Promedios de notas obtenidas");
+
+        TituloLabel48.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel48.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel48.setText("En Exámenes:");
+
+        TituloLabel49.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel49.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel49.setText("En parciales:");
+
+        TituloLabel55.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel55.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel55.setText("Numero");
+
+        TituloLabel64.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel64.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel64.setText("Numero");
+
+        TituloLabel65.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel65.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel65.setText("Numero");
+
+        TituloLabel66.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel66.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grafica.png"))); // NOI18N
+
+        jRadioButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton5.setText("En sede seleccionada");
+        jRadioButton5.setFocusPainted(false);
+
+        jRadioButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton6.setText("En todas las sedes");
+        jRadioButton6.setFocusPainted(false);
+
+        javax.swing.GroupLayout EstadisticasCursoPanelLayout = new javax.swing.GroupLayout(EstadisticasCursoPanel);
+        EstadisticasCursoPanel.setLayout(EstadisticasCursoPanelLayout);
+        EstadisticasCursoPanelLayout.setHorizontalGroup(
+            EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(jRadioButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton6))
+                    .addComponent(TituloLabel42)
+                    .addComponent(TituloLabel65)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel66)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloEstadisticasTotales2))
+                    .addComponent(TituloLabel47)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel64))
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloLabel55)))
+                .addContainerGap(590, Short.MAX_VALUE))
+        );
+        EstadisticasCursoPanelLayout.setVerticalGroup(
+            EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel66)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(TituloEstadisticasTotales2)))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton5)
+                    .addComponent(jRadioButton6))
+                .addGap(18, 18, 18)
+                .addComponent(TituloLabel42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TituloLabel65)
+                .addGap(18, 18, 18)
+                .addComponent(TituloLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel48)
+                    .addComponent(TituloLabel64))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel49)
+                    .addComponent(TituloLabel55))
+                .addGap(147, 147, 147))
+        );
+
+        PanelPrincipal.add(EstadisticasCursoPanel, "card16");
 
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
@@ -2380,9 +2672,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(notificacionIcono)
                     .addComponent(nombreUsrLabel))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(VolverButton))
+            .addComponent(VolverButton, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -3391,6 +3681,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea DescMaterialTextArea;
     private javax.swing.JTextArea DescTextArea;
     private javax.swing.JButton DescargarMaterialButton;
+    private javax.swing.JPanel EstadisticasCarreraPanel;
+    private javax.swing.JPanel EstadisticasCursoPanel;
     private javax.swing.JPanel EstadisticasPanel;
     private javax.swing.JPanel ExamenesOpcion;
     private javax.swing.JPanel ExamenesPanel;
@@ -3429,6 +3721,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton SeleccionarParcial;
     private javax.swing.JButton SeleccionarSede;
     private javax.swing.JLabel TituloEstadisticasTotales;
+    private javax.swing.JLabel TituloEstadisticasTotales1;
+    private javax.swing.JLabel TituloEstadisticasTotales2;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel TituloLabel1;
     private javax.swing.JLabel TituloLabel10;
@@ -3464,8 +3758,30 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel TituloLabel39;
     private javax.swing.JLabel TituloLabel4;
     private javax.swing.JLabel TituloLabel40;
+    private javax.swing.JLabel TituloLabel41;
+    private javax.swing.JLabel TituloLabel42;
+    private javax.swing.JLabel TituloLabel44;
+    private javax.swing.JLabel TituloLabel45;
+    private javax.swing.JLabel TituloLabel46;
+    private javax.swing.JLabel TituloLabel47;
+    private javax.swing.JLabel TituloLabel48;
+    private javax.swing.JLabel TituloLabel49;
     private javax.swing.JLabel TituloLabel5;
+    private javax.swing.JLabel TituloLabel53;
+    private javax.swing.JLabel TituloLabel54;
+    private javax.swing.JLabel TituloLabel55;
+    private javax.swing.JLabel TituloLabel56;
+    private javax.swing.JLabel TituloLabel57;
+    private javax.swing.JLabel TituloLabel58;
+    private javax.swing.JLabel TituloLabel59;
     private javax.swing.JLabel TituloLabel6;
+    private javax.swing.JLabel TituloLabel60;
+    private javax.swing.JLabel TituloLabel61;
+    private javax.swing.JLabel TituloLabel62;
+    private javax.swing.JLabel TituloLabel63;
+    private javax.swing.JLabel TituloLabel64;
+    private javax.swing.JLabel TituloLabel65;
+    private javax.swing.JLabel TituloLabel66;
     private javax.swing.JLabel TituloLabel7;
     private javax.swing.JLabel TituloLabel8;
     private javax.swing.JLabel TituloLabel9;
@@ -3523,6 +3839,10 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
