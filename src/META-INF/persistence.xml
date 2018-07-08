@@ -23,6 +23,7 @@
     <class>Clases.ResultadoE</class>
     <class>Clases.ResultadoP</class>
     <class>Clases.CursoAprobado</class>
+    <class>Clases.Notificacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/javaee2018?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

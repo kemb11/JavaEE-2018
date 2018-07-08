@@ -14,4 +14,6 @@ public interface IContEstudiante {
     public abstract InscripcionE getInscripcionExamen(Examen examen);
     public abstract List<Estudiante> getEstudiantes();
     public abstract List<Estudiante> getEstudiantes(String palabra);
+    public abstract void notificacionVista(Notificacion notif);
+    public abstract void configEnviarMails(boolean opocion);
 }

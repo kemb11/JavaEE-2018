@@ -133,4 +133,30 @@ public class ContEstudiante implements IContEstudiante {
         EstudianteJpaController ejpa = new EstudianteJpaController();
         return ejpa.findEstudianteEntities(palabra);
     }
+    
+    @Override
+    public void notificacionVista(Notificacion notif){
+        notif.setVista(true);
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            Fabrica.getInstance().getEntity().merge(notif);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+        } catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    @Override
+    public void configEnviarMails(boolean opocion){
+        this.login.setEnviarMails(opocion);
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            Fabrica.getInstance().getEntity().merge(this.login);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+        } catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+            throw e;
+        }
+    }
 }

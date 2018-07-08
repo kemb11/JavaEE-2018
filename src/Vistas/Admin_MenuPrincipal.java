@@ -423,7 +423,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         VolverButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu Principal");
 
         PanelLateral.setBackground(new java.awt.Color(29, 131, 72));
@@ -872,7 +872,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(AprobadosRadioButton)
                     .addComponent(BuscarButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -980,7 +980,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarCarrera)
                     .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1325,11 +1325,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         Estudiante_Crear.setBackground(new java.awt.Color(73, 202, 114));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Selecciona una sede");
+        jLabel1.setText("Selecciona una sede:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Selecciona una carrera");
+        jLabel3.setText("Selecciona una carrera:");
 
         est_sede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         est_sede.addActionListener(new java.awt.event.ActionListener() {
@@ -1345,6 +1347,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cédula de identidad:");
 
@@ -1360,6 +1363,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Nombre : ");
 
@@ -1369,9 +1373,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Apellido :");
 
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Fecha de nacimiento:");
 
@@ -1386,6 +1392,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Email:");
 
@@ -1397,6 +1404,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Datos estudiante");
 
@@ -1404,6 +1412,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         est_txt_sede.setEditable(false);
         est_txt_sede.setColumns(20);
+        est_txt_sede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         est_txt_sede.setRows(5);
         jScrollPane1.setViewportView(est_txt_sede);
 
@@ -1411,12 +1420,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         est_txt_carrera.setEditable(false);
         est_txt_carrera.setColumns(20);
+        est_txt_carrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         est_txt_carrera.setRows(5);
         jScrollPane7.setViewportView(est_txt_carrera);
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Datos Sede");
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Datos Carrera");
 
@@ -1427,7 +1439,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(Estudiante_CrearLayout.createSequentialGroup()
                 .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Estudiante_CrearLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addContainerGap()
                         .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
@@ -1461,7 +1473,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         Estudiante_CrearLayout.setVerticalGroup(
             Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Estudiante_CrearLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(38, 38, 38)
                 .addGroup(Estudiante_CrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(Estudiante_CrearLayout.createSequentialGroup()
                         .addComponent(jLabel22)
@@ -1745,7 +1757,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(doc_ema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(doc_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(Docente_Crear, "card7");
@@ -1774,7 +1786,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         AsociarDocenteCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         AsociarDocenteCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/crear.png"))); // NOI18N
-        AsociarDocenteCurso.setText("Asociar a Curso");
+        AsociarDocenteCurso.setText("Asignar a Curso");
         AsociarDocenteCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AsociarDocenteCursoActionPerformed(evt);
@@ -2050,7 +2062,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel62)
                     .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerNoticia, "card11");
@@ -2717,7 +2729,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(TituloLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerCarreraPanel, "card17");
@@ -2899,7 +2911,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(VerMaterialSubidoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerCursoPanel, "card7");
@@ -2991,7 +3003,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DescargarMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(MaterialesSubidosPanel, "card15");
@@ -3087,7 +3099,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         AsociarDocentePanelLayout.setVerticalGroup(
             AsociarDocentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AsociarDocentePanelLayout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(tituloAsociarDocente)
                 .addGap(18, 18, 18)
                 .addGroup(AsociarDocentePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -3106,7 +3118,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         MarcarParciales.setBackground(new java.awt.Color(73, 202, 114));
 
-        marcarparciales_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        marcarparciales_titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        marcarparciales_titulo.setForeground(new java.awt.Color(255, 255, 255));
+        marcarparciales_titulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         marcarparciales_titulo.setText("jLabel66");
 
         try {
@@ -3114,35 +3128,55 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        marcarparciales_fecha1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         try {
             marcarparciales_fecha2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####-##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        marcarparciales_fecha2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jLabel66.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel66.setForeground(new java.awt.Color(255, 255, 255));
         jLabel66.setText("Fecha primer parcial :");
 
+        jLabel67.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel67.setForeground(new java.awt.Color(255, 255, 255));
         jLabel67.setText("Fecha segundo parcial :");
 
+        marcarparciales_notaMax1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaMax1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        marcarparciales_notaMax2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaMax2.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jLabel68.setText("Nota maxima del pardial :");
+        jLabel68.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel68.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel68.setText("Nota máxima del parcial :");
 
-        jLabel69.setText("Nota maxima del pardial :");
+        jLabel69.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel69.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel69.setText("Nota máxima del parcial :");
 
+        jLabel70.setForeground(new java.awt.Color(255, 255, 255));
         jLabel70.setText("DD/MM/AAAA-hh:mm");
 
+        jLabel71.setForeground(new java.awt.Color(255, 255, 255));
         jLabel71.setText("DD/MM/AAAA-hh:mm");
 
+        jLabel72.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel72.setForeground(new java.awt.Color(255, 255, 255));
         jLabel72.setText("Nota para ganar derecho de examen :");
 
+        marcarparciales_notaExa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaExa.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jLabel73.setText("Nota de aprobacion del curso :");
+        jLabel73.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel73.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel73.setText("Nota de aprobación del curso :");
 
+        marcarparciales_notaApro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcarparciales_notaApro.setModel(new javax.swing.SpinnerNumberModel());
 
         marcarparciales_aceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -3159,12 +3193,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         MarcarParcialesLayout.setHorizontalGroup(
             MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MarcarParcialesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(marcarparciales_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(MarcarParcialesLayout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(marcarparciales_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MarcarParcialesLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(MarcarParcialesLayout.createSequentialGroup()
                                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -3177,11 +3209,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(marcarparciales_fecha1)
                                     .addComponent(marcarparciales_notaMax1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)))
+                                    .addComponent(jLabel70, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(MarcarParcialesLayout.createSequentialGroup()
                                 .addComponent(jLabel72)
                                 .addGap(18, 18, 18)
-                                .addComponent(marcarparciales_notaExa, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(marcarparciales_notaExa, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(marcarparciales_aceptar))
                         .addGap(105, 105, 105)
                         .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(MarcarParcialesLayout.createSequentialGroup()
@@ -3197,18 +3230,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                     .addComponent(marcarparciales_notaMax2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(marcarparciales_fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel71))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MarcarParcialesLayout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(marcarparciales_aceptar)
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         MarcarParcialesLayout.setVerticalGroup(
             MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MarcarParcialesLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(marcarparciales_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel70)
                     .addComponent(jLabel71))
@@ -3232,7 +3261,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel73))
                 .addGap(27, 27, 27)
                 .addComponent(marcarparciales_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(MarcarParciales, "card21");
@@ -4105,7 +4134,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 Fabrica.getInstance().getContDocente().asociarACurso(curso, docente);
                 String nomDoc = docente.getNombres()+" "+docente.getApellidos();                
                 JOptionPane.showMessageDialog(this, "El docente "+nomDoc+" ahora esta a cargo del curso "+curso.getNombre()+
-                        " en la sede "+Fabrica.getInstance().getContEdu().getSede(), "", JOptionPane.INFORMATION_MESSAGE);
+                        " en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre(), "Docente asignado", JOptionPane.INFORMATION_MESSAGE);
                 VolverButton.doClick();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
@@ -4310,7 +4339,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
                 Docente docente = (Docente) DocentesTable.getModel().getValueAt(DocentesTable.getSelectedRow(), 0);
                 String nomDoc = docente.getNombres()+" "+docente.getApellidos();
-                tituloAsociarDocente.setText("Asociar al docente "+nomDoc+" a un curso");
+                tituloAsociarDocente.setText("Asignar docente "+nomDoc+" a un curso");
                 modelo = (DefaultTableModel) CursosTableAsociarDoc.getModel();
 
                 while (modelo.getRowCount() > 0) {

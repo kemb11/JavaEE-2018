@@ -260,6 +260,32 @@ public class ContAdmin implements IContAdmin {
             throw new InternalException("Los parciales de este año ya fueron marcados");
         }
     }
+    
+    @Override
+    public void enviarNotificacion(String titulo,String texto, Usuario destinatario){
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            Notificacion notificacion = new Notificacion();
+            notificacion.setTitulo(titulo);
+            notificacion.setTexto(texto);
+            notificacion.setFecha(new Date());
+            notificacion.setUsuario(destinatario);
+            notificacion.setVista(false);
+            destinatario.setNotificacion(notificacion);
+            Fabrica.getInstance().getEntity().persist(notificacion);
+            Fabrica.getInstance().getEntity().merge(destinatario);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+            
+            if(destinatario.isEnviarMails()){
+                SendEmail.EnviarMail(destinatario.getEmail(), titulo, texto);
+            }
+        }catch (UnsupportedEncodingException ex) {
+            throw new InternalException("Error al enviar mail");
+        }catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+            throw e;
+        }
+    }
 }
 /*
 package Clases;

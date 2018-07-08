@@ -161,6 +161,15 @@ public class Curso implements Serializable {
         
         return false;
     }
+    
+    public CursoSede getCursoSede(Sede sede){
+        for (CursoSede cursoSede : cursoSedes) {
+            if(cursoSede.getSede().equals(sede)){
+                return cursoSede;
+            }
+        }
+        return null;
+    }
 
     @Override
     public int hashCode() {

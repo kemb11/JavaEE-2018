@@ -2872,7 +2872,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             ca.setFecha(new Date());
                             ca.setAprobado(true);
                             ca.setEstudiante(ie.getEstudiante());
-                            ie.getEstudiante().CursoAprobado(ca);
+                            String nota = String.valueOf(re.getNota())+"/"+String.valueOf(e.getNotaApro());
+                            ie.getEstudiante().CursoAprobado(ca, nota);
                         }
                     }
                     if (subirNota_chkFecha.isSelected()) {
@@ -2973,14 +2974,16 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             ca.setFecha(new Date());
                             ca.setAprobado(true);
                             ca.setEstudiante(nota.getEstudiante());
-                            nota.getEstudiante().CursoAprobado(ca);
+                            String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
+                            nota.getEstudiante().CursoAprobado(ca, notaEst);
                         }else{
                             CursoAprobado ca = new CursoAprobado();
                             ca.setCurso(p.getCurso().getCurso());
                             ca.setFecha(new Date());
                             ca.setAprobado(false);
                             ca.setEstudiante(nota.getEstudiante());
-                            nota.getEstudiante().CursoAprobado(ca);
+                            String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
+                            nota.getEstudiante().CursoAprobado(ca, notaEst);
                         }
                     }
                 }

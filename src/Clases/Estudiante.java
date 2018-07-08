@@ -37,6 +37,7 @@ public class Estudiante extends Usuario {
     private List<InscripcionE> examenes;
     @OneToMany
     private List<ResultadoP> notasParciales;
+    private boolean enviarMails;
 
     public void setCi(String ci) {
         this.ci = ci;
@@ -228,13 +229,28 @@ public class Estudiante extends Usuario {
             S.setEstudiante(this);
         }
     }
+
+    public boolean isEnviarMails() {
+        return enviarMails;
+    }
+
+    public void setEnviarMails(boolean enviarMails) {
+        this.enviarMails = enviarMails;
+    }
     
-    public void CursoAprobado(CursoAprobado ca){
+    public void CursoAprobado(CursoAprobado ca, String nota){
         if(this.cursoAprobados == null) this.cursoAprobados = new ArrayList<>();
         if(!this.cursoAprobados.contains(ca)){
             this.cursoAprobados.add(ca);            
             Fabrica.getInstance().getEntity().persist(ca);
             Fabrica.getInstance().getEntity().merge(this);
+            if(ca.isAprobado()){
+                String texto = "Felicitanciones, ha aprobado el curso "+ ca.getCurso().getNombre()+" pertenecienta a la carrera "+ ca.getCurso().getCarrera().getNombre()+" con nota "+nota;
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Curso aprobado", texto, this);
+            }else{
+                String texto = "Felicitanciones, ha ganado elderecho a examen del curso "+ ca.getCurso().getNombre()+" pertenecienta a la carrera "+ ca.getCurso().getCarrera().getNombre()+" con nota "+nota;
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Derecho a examen", texto, this);
+            }
         }
     }
     
@@ -284,6 +300,16 @@ public class Estudiante extends Usuario {
             }
         }
         return true;
+    }
+    
+    public int cantNotifNoVista(){
+        int cant = 0;
+        for (Notificacion notif : notificaciones) {
+            if(notif.isVista() == false){
+                cant += 1;
+            }
+        }
+        return cant;
     }
 
 }

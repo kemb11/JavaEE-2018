@@ -42,13 +42,7 @@ public class ContDocente implements IContDocente{
     public boolean subirMaterial(String titulo, String descripcion, String rutaArchivo, Curso curso){
         String extension = FilenameUtils.getExtension(rutaArchivo);
         Sede sedeSelec = Fabrica.getInstance().getContEdu().getSede();
-        CursoSede cursoSede = null;
-        for (CursoSede cursoS : curso.getCursoSedes()) {
-            if(cursoS.getSede().equals(sedeSelec)){
-                cursoSede = cursoS;
-                break;
-            }
-        }        
+        CursoSede cursoSede = curso.getCursoSede(sedeSelec);
         
         if(cursoSede!=null){
             Material material = new Material();
@@ -73,7 +67,14 @@ public class ContDocente implements IContDocente{
             String rutaDestino = "MaterialDeEstudio/"+cursoSede.getId()+"/"+material.getId()+"."+extension;
             if(copiarArchivo(rutaArchivo, rutaDestino)){
                 material.setRutaArchivo(rutaDestino);
-                em.merge(material);
+                em.merge(material);                
+
+                for (InscripcionC inscripcion : cursoSede.getEstudiantesActuales()) {
+                    String texto = "Se ha subido nuevo material al curso "+curso.getNombre()+" de a la carrera "+
+                    curso.getCarrera().getNombre()+", dictado en la sede "+cursoSede.getSede().getNombre();
+                    Fabrica.getInstance().getContAdmin().enviarNotificacion("Nuevo material en el curso", texto, inscripcion.getEstudiante());
+                }
+                
                 return true;
             }else{
                 try {
@@ -160,9 +161,11 @@ public class ContDocente implements IContDocente{
             InscripcionEJpaController iejpa = new InscripcionEJpaController();
             for(InscripcionE ie : e.getEstudiantesInscritos()){
                 iejpa.edit(ie);
+                Curso curso = e.getCurso().getCurso();
+                String texto = "Se ha subido tu resultado para el exámen "+curso.getNombre()+" de la carrera "+curso.getCarrera().getNombre();
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Resultado de exámen", texto, ie.getEstudiante());   
             }
             ejpa.edit(e);
-            e.getCurso().notificarAlumnos("Examenes corregidos", "Examen de "+ e.getCurso().getCurso().getNombre()+" ha sido corregido.\nYa puede revisar sus notas");
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -173,7 +176,11 @@ public class ContDocente implements IContDocente{
         ParcialJpaController pjpa = new ParcialJpaController();
         try {
             pjpa.edit(p);
-            p.getCurso().notificarAlumnos("Parcial corregido", p.getInstancia() + " parcial de "+ p.getCurso().getCurso().getNombre()+" ha sido corregido.\nYa puede revisar sus notas");
+            for (InscripcionC estudiante : p.getCurso().getEstudiantesActuales()) {
+                Curso curso = p.getCurso().getCurso();
+                String texto = "Se ha subido tu resultado para el parcial "+curso.getNombre()+" de la carrera "+curso.getCarrera().getNombre();
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Resultado de parcial", texto, estudiante.getEstudiante());   
+            }
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,24 +190,71 @@ public class ContDocente implements IContDocente{
         for (CursoSede cursoSede : curso.getCursoSedes()) {
             if(cursoSede.getSede().equals(Fabrica.getInstance().getContEdu().getSede())){
                 Docente docAnt = cursoSede.getDocente();
-                if(docAnt.equals(docente)){
-                    throw new Exception("El docente ya esta a cargo de este curso en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre());
+                if(docAnt != null){
+                    if(docAnt.equals(docente)){
+                        throw new Exception("El docente ya esta a cargo de este curso en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre());
+                    }
+                    docAnt.quitarClase(cursoSede);
                 }
-                docAnt.quitarClase(cursoSede);
                 cursoSede.setDocente(docente);
                 docente.setClase(cursoSede);
                 EntityManager em = Fabrica.getInstance().getEntity();
                 em.getTransaction().begin();
                 try {
+                    if(docAnt!=null){
+                        em.merge(docAnt);
+                    }
                     em.merge(docente);
-                    em.merge(docAnt);
                     em.merge(cursoSede);
                     em.getTransaction().commit();
+                    
+                    if(docAnt!=null){
+                        String texto = "Ya no esta a cargo del curso "+curso.getNombre()+" de a la carrera "+
+                        curso.getCarrera().getNombre()+", dictado en la sede "+cursoSede.getSede().getNombre();
+                        Fabrica.getInstance().getContAdmin().enviarNotificacion("Cambio de docente", texto, docAnt);
+                    }
+                    
+                    String texto = "Ha sido asignado al curso "+curso.getNombre()+" pertenecienta a la carrera "+
+                    curso.getCarrera().getNombre()+", a dictarse en la sede "+cursoSede.getSede().getNombre();
+                    Fabrica.getInstance().getContAdmin().enviarNotificacion("Ha sido asignado a un nuevo curso", texto, docente);
+                    
+                    for (InscripcionC inscripcion : cursoSede.getEstudiantesActuales()) {
+                        String nomDoc = docente.getNombres()+" "+docente.getApellidos();
+                        texto = "El docente del curso "+curso.getNombre()+" de la carrera "+curso.getCarrera().getNombre()+"ha sido cambiado, "
+                                + "su nuevo docente es "+nomDoc;
+                        Fabrica.getInstance().getContAdmin().enviarNotificacion("Cambio de docente", texto, inscripcion.getEstudiante());
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     em.getTransaction().rollback();
                 }
             }
+        }
+    }
+    
+    @Override
+    public void notificacionVista(Notificacion notif){
+        notif.setVista(true);
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            Fabrica.getInstance().getEntity().merge(notif);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+        } catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+            throw e;
+        }
+    }
+    
+    @Override
+    public void configEnviarMails(boolean opocion){
+        this.login.setEnviarMails(opocion);
+        Fabrica.getInstance().getEntity().getTransaction().begin();
+        try {
+            Fabrica.getInstance().getEntity().merge(this.login);
+            Fabrica.getInstance().getEntity().getTransaction().commit();
+        } catch (Exception e) {
+            Fabrica.getInstance().getEntity().getTransaction().rollback();
+            throw e;
         }
     }
 }
