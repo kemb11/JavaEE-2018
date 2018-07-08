@@ -162,6 +162,7 @@ public class ContDocente implements IContDocente{
                 iejpa.edit(ie);
             }
             ejpa.edit(e);
+            e.getCurso().notificarAlumnos("Examenes corregidos", "Examen de "+ e.getCurso().getCurso().getNombre()+" ha sido corregido.\nYa puede revisar sus notas");
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,6 +173,7 @@ public class ContDocente implements IContDocente{
         ParcialJpaController pjpa = new ParcialJpaController();
         try {
             pjpa.edit(p);
+            p.getCurso().notificarAlumnos("Parcial corregido", p.getInstancia() + " parcial de "+ p.getCurso().getCurso().getNombre()+" ha sido corregido.\nYa puede revisar sus notas");
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
         }

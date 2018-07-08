@@ -20,46 +20,24 @@ import javax.persistence.Temporal;
  * @author rodri
  */
 @Entity
-@Table(name="inscripcionc")
-public class InscripcionC implements Serializable {
+
+@Table(name="cursoAprobado")
+public class CursoAprobado implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Estudiante estudiante;
-    @ManyToOne
-    private CursoSede curso;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
+    private boolean aprobado;
+    @ManyToOne
+    private Curso curso;
+    @ManyToOne
+    private Estudiante estudiante;
 
     public Long getId() {
         return id;
-    }
-
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
-
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
-
-    public CursoSede getCurso() {
-        return curso;
-    }
-
-    public void setCurso(CursoSede curso) {
-        this.curso = curso;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public void setId(Long id) {
@@ -76,10 +54,10 @@ public class InscripcionC implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InscripcionC)) {
+        if (!(object instanceof CursoAprobado)) {
             return false;
         }
-        InscripcionC other = (InscripcionC) object;
+        CursoAprobado other = (CursoAprobado) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -88,12 +66,41 @@ public class InscripcionC implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Inscripcion[ id=" + id + " ]";
+        return "Clases.CursoAarovado[ id=" + id + " ]";
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public boolean isAprobado() {
+        return aprobado;
+    }
+
+    public void setAprobado(boolean aprobado) {
+        this.aprobado = aprobado;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
     
-    public boolean isAprobado(Curso c){
-        return estudiante.cursoAprobado(c);    
-    } 
     
     
 }

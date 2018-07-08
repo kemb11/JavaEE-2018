@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,6 +27,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="curso")
 public class Curso implements Serializable {
+
+    @OneToMany(mappedBy = "curso")
+    private List<CursoAprobado> cursoAprobados;
 
     @ManyToOne
     private Carrera carrera;
@@ -51,8 +55,6 @@ public class Curso implements Serializable {
     private boolean optativo;
     @OneToMany(cascade = CascadeType.ALL)
     private List<CursoSede> cursoSedes;
-    @ManyToMany
-    private List<Estudiante> estudiantesAprobados;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Previa> previas;
 
@@ -96,10 +98,6 @@ public class Curso implements Serializable {
         this.cursoSedes = cursoSedes;
     }
 
-    public void setEstudiantesAprobados(List<Estudiante> estudiantesAprobados) {
-        this.estudiantesAprobados = estudiantesAprobados;
-    }
-
         public String getNombre() {
         return nombre;
     }
@@ -116,8 +114,13 @@ public class Curso implements Serializable {
         return horarios;
     }
 
-    public List<Estudiante> getEstudiantesAprobados() {
-        return estudiantesAprobados;
+    public List<Estudiante> getListaEstudiantesAprobados() {
+        List<Estudiante> estudiantes = new ArrayList<>();
+        if(this.cursoAprobados != null)
+            for(CursoAprobado ca : this.cursoAprobados){
+                estudiantes.add(ca.getEstudiante());
+            }
+        return estudiantes;
     }
 
     public boolean isOptativo() {
@@ -190,6 +193,19 @@ public class Curso implements Serializable {
         }else{
             return this.carrera.primerperiodo();
         }
+    }
+
+    public List<CursoAprobado> getEstudiantesAprobados() {
+        return cursoAprobados;
+    }
+
+    public void setEstudiantesAprobados(List<CursoAprobado> cursoAprobados) {
+        this.cursoAprobados = cursoAprobados;
+    }
+    
+    public void setEstudianteAprobado(CursoAprobado Estudiante) {
+        if(this.cursoAprobados == null) this.cursoAprobados = new ArrayList<>();
+        this.cursoAprobados.add(Estudiante);
     }
     
 }

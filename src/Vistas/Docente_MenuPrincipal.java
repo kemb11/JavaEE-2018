@@ -2867,7 +2867,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         ResultadoE re = (ResultadoE) modelo.getValueAt(i, 0);
                         ie.setNota(re);
                         if (e.getNotaApro() <= re.getNota()) {
-                            ie.getEstudiante().CursoAprobado(e.getCurso().getCurso());
+                            CursoAprobado ca = new CursoAprobado();
+                            ca.setCurso(p.getCurso().getCurso());
+                            ca.setFecha(new Date());
+                            ca.setAprobado(true);
+                            ca.setEstudiante(ie.getEstudiante());
+                            ie.getEstudiante().CursoAprobado(ca);
                         }
                     }
                     if (subirNota_chkFecha.isSelected()) {
@@ -2963,7 +2968,19 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     if (p.getInstancia().equals("Segundo")) {
                         ResultadoP notaAnterior = nota.getEstudiante().AprobacionParcial(p);
                         if (notaAnterior.getNota() + nota.getNota() > p.getCurso().getAproParciales()) {
-                            nota.getEstudiante().CursoAprobado(p.getCurso().getCurso());
+                            CursoAprobado ca = new CursoAprobado();
+                            ca.setCurso(p.getCurso().getCurso());
+                            ca.setFecha(new Date());
+                            ca.setAprobado(true);
+                            ca.setEstudiante(nota.getEstudiante());
+                            nota.getEstudiante().CursoAprobado(ca);
+                        }else{
+                            CursoAprobado ca = new CursoAprobado();
+                            ca.setCurso(p.getCurso().getCurso());
+                            ca.setFecha(new Date());
+                            ca.setAprobado(false);
+                            ca.setEstudiante(nota.getEstudiante());
+                            nota.getEstudiante().CursoAprobado(ca);
                         }
                     }
                 }

@@ -21,6 +21,9 @@ import javax.persistence.Temporal;
 public class Estudiante extends Usuario {
 
     @OneToMany(mappedBy = "estudiante")
+    private List<CursoAprobado> cursoAprobados;
+
+    @OneToMany(mappedBy = "estudiante")
     private List<CarreraEstudiante> carreraEstudiante;
 
     @OneToMany(mappedBy = "estudiante")
@@ -30,8 +33,6 @@ public class Estudiante extends Usuario {
     private Date FechaNac;
     @ManyToMany
     private List<Sede> sedes;
-    @ManyToMany
-    private List<Curso> cursosAprobados;
     @OneToMany(mappedBy = "estudiante")
     private List<InscripcionE> examenes;
     @OneToMany
@@ -51,10 +52,6 @@ public class Estudiante extends Usuario {
 
     public void setFechaNac(Date FechaNac) {
         this.FechaNac = FechaNac;
-    }
-
-    public void setCursosAprobados(List<Curso> cursosAprobados) {
-        this.cursosAprobados = cursosAprobados;
     }
 
     public void setExamenes(List<InscripcionE> examenes) {
@@ -81,8 +78,13 @@ public class Estudiante extends Usuario {
         return inscripciones;
     }
 
-    public List<Curso> getCursosAprobados() {
-        return cursosAprobados;
+    public List<Curso> getListaCursosAprobados() {
+        List<Curso> cursos = new ArrayList<>();
+        if(this.cursoAprobados != null)
+            for(CursoAprobado ca : this.cursoAprobados){
+                cursos.add(ca.getCurso());
+            }
+        return cursos;
     }
 
     public List<InscripcionE> getExamenes() {
@@ -227,15 +229,17 @@ public class Estudiante extends Usuario {
         }
     }
     
-    public void CursoAprobado(Curso c){
-        if(this.cursosAprobados == null) this.cursosAprobados = new ArrayList<>();
-        if(!this.cursosAprobados.contains(c)){
-            this.cursosAprobados.add(c);
+    public void CursoAprobado(CursoAprobado ca){
+        if(this.cursoAprobados == null) this.cursoAprobados = new ArrayList<>();
+        if(!this.cursoAprobados.contains(ca)){
+            this.cursoAprobados.add(ca);            
+            Fabrica.getInstance().getEntity().persist(ca);
             Fabrica.getInstance().getEntity().merge(this);
         }
     }
     
     public ResultadoP AprobacionParcial(Parcial parcial){
+        if(this.notasParciales!=null)
         for(ResultadoP rp: this.notasParciales){
             if(rp.getParcial().getCurso().equals(parcial.getCurso())){
                 int dias=(int) ((parcial.getFecha().getTime()-rp.getParcial().getFecha().getTime())/86400000);
@@ -245,6 +249,41 @@ public class Estudiante extends Usuario {
             }
         }
         return null;
+    }
+    
+    public boolean derechoExamen(Curso c){
+        if(this.cursoAprobados != null)
+            for(CursoAprobado ca : this.cursoAprobados){
+                if(ca.getCurso().equals(c) && ca.isAprobado() == false){
+                    return true;
+                }
+            }
+        return false;
+    }
+    
+    public boolean cursoAprobado(Curso c){
+        if(this.cursoAprobados != null)
+            for(CursoAprobado ca : this.cursoAprobados){
+                if(ca.getCurso().equals(c) && ca.isAprobado() == true){
+                    return true;
+                }
+            }
+        return false;
+    }
+    
+    public boolean previasAprobadas(Curso c){
+        if(c.getPrevias() != null && !c.getPrevias().isEmpty()){
+            for(Previa p : c.getPrevias()){
+                if(p.isExamenAprobado()){
+                    if(!this.cursoAprobado(p.getCurso()))
+                        return false;
+                }else{
+                    if(!this.derechoExamen(p.getCurso()))
+                        return false;
+                }
+            }
+        }
+        return true;
     }
 
 }
