@@ -55,7 +55,7 @@ public class CursoSede implements Serializable {
     public void setDerechoExamen(int derechoExamen) {
         this.derechoExamen = derechoExamen;
     }
-    
+
     public void setMaxParciales(int maxParciales) {
         this.maxParciales = maxParciales;
     }
@@ -67,9 +67,7 @@ public class CursoSede implements Serializable {
     public void setAproParciales(int aproParciales) {
         this.aproParciales = aproParciales;
     }
-    
-    
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -78,8 +76,7 @@ public class CursoSede implements Serializable {
     public Long getId() {
         return id;
     }
-    
-    
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -91,7 +88,7 @@ public class CursoSede implements Serializable {
     public void setMateriales(List<Material> materiales) {
         this.materiales = materiales;
     }
-    
+
     public void setMaterial(Material material) {
         this.materiales.add(material);
     }
@@ -146,7 +143,9 @@ public class CursoSede implements Serializable {
     }
 
     public void setInscripcion(InscripcionC ins) {
-        if(this.inscripciones == null) inscripciones = new ArrayList<>();
+        if (this.inscripciones == null) {
+            inscripciones = new ArrayList<>();
+        }
         this.inscripciones.add(ins);
     }
 
@@ -193,17 +192,21 @@ public class CursoSede implements Serializable {
 
     public void notificarAlumnos(String titulo, String mensaje) {
         for (InscripcionC i : inscripciones) {
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
-                if (!i.isAprobado(curso) || i.getFecha().after(año)) {
-                    try {
-                        SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
-                    } catch (UnsupportedEncodingException ex) {
-                        Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            if (!i.isAprobado(curso)) {
+                try {
+                    SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ParseException ex) {
+            }
+        }
+    }
+
+    public void notificarAlumnosActuales(String titulo, String mensaje) {
+        for (InscripcionC i : this.getEstudiantesActuales()) {
+            try {
+                SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
+            } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -211,25 +214,27 @@ public class CursoSede implements Serializable {
 
     public List<InscripcionC> getEstudiantesActuales() {
         List<InscripcionC> retornar = new ArrayList<>();
-        if(inscripciones != null)
-        for (InscripcionC i : inscripciones) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date año;
-            try {
-                año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
-                if (i.getFecha().after(año)) {
-                    retornar.add(i);
+        if (inscripciones != null) {
+            for (InscripcionC i : inscripciones) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date año;
+                try {
+                    año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
+                    if (i.getFecha().after(año)) {
+                        retornar.add(i);
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (ParseException ex) {
-                Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return retornar;
     }
 
     void setParcial(Parcial p) {
-        if(this.parciales == null)
+        if (this.parciales == null) {
             this.parciales = new ArrayList<>();
+        }
         this.parciales.add(p);
     }
 
@@ -238,10 +243,13 @@ public class CursoSede implements Serializable {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date año;
             año = dateFormat.parse("01/01/" + String.valueOf(Calendar.YEAR));
-            if(this.parciales != null)
-                for(Parcial p : this.parciales)
-                    if(año.before(p.getFecha()))
+            if (this.parciales != null) {
+                for (Parcial p : this.parciales) {
+                    if (año.before(p.getFecha())) {
                         return true;
+                    }
+                }
+            }
             return false;
         } catch (ParseException ex) {
             Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);

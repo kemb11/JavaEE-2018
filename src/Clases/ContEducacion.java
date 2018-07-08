@@ -103,7 +103,7 @@ public class ContEducacion implements IContEducacion {
     public List<Curso> listarCursosAprobados(String buscar) {
         List<Curso> cursosRetornar = new ArrayList<>();
         Estudiante e = Fabrica.getInstance().getContEst().getLogin();
-        for (Curso c : e.getCursosAprobados()) {
+        for (Curso c : e.getListaCursosAprobados()) {
             if (c.estaEnSede(this.sede)) {
                 String nombreCurso = c.getNombre().toLowerCase();
                 buscar = buscar.toLowerCase();

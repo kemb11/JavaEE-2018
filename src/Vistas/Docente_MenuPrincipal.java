@@ -2867,7 +2867,13 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         ResultadoE re = (ResultadoE) modelo.getValueAt(i, 0);
                         ie.setNota(re);
                         if (e.getNotaApro() <= re.getNota()) {
-                            ie.getEstudiante().CursoAprobado(e.getCurso().getCurso(), re.getNota());
+                            CursoAprobado ca = new CursoAprobado();
+                            ca.setCurso(p.getCurso().getCurso());
+                            ca.setFecha(new Date());
+                            ca.setAprobado(true);
+                            ca.setEstudiante(ie.getEstudiante());
+                            String nota = String.valueOf(re.getNota())+"/"+String.valueOf(e.getNotaApro());
+                            ie.getEstudiante().CursoAprobado(ca, nota);
                         }
                     }
                     if (subirNota_chkFecha.isSelected()) {
@@ -2963,8 +2969,21 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     if (p.getInstancia().equals("Segundo")) {
                         ResultadoP notaAnterior = nota.getEstudiante().AprobacionParcial(p);
                         if (notaAnterior.getNota() + nota.getNota() > p.getCurso().getAproParciales()) {
-                            Curso cursoParcial = p.getCurso().getCurso();
-                            nota.getEstudiante().CursoAprobado(cursoParcial, nota.getNota());
+                            CursoAprobado ca = new CursoAprobado();
+                            ca.setCurso(p.getCurso().getCurso());
+                            ca.setFecha(new Date());
+                            ca.setAprobado(true);
+                            ca.setEstudiante(nota.getEstudiante());
+                            String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
+                            nota.getEstudiante().CursoAprobado(ca, notaEst);
+                        }else{
+                            CursoAprobado ca = new CursoAprobado();
+                            ca.setCurso(p.getCurso().getCurso());
+                            ca.setFecha(new Date());
+                            ca.setAprobado(false);
+                            ca.setEstudiante(nota.getEstudiante());
+                            String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
+                            nota.getEstudiante().CursoAprobado(ca, notaEst);
                         }
                     }
                 }

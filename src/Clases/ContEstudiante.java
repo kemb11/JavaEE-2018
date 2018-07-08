@@ -37,10 +37,14 @@ public class ContEstudiante implements IContEstudiante {
                 for (CursoSede cs : curso.getCursoSedes()) {
                     if(cs.getSede().equals(sede)){
                         if(this.login.estaInscriptoEnCarrera(cs.getCurso().getCarrera())){
-                            if(this.login.setIncripcionC(cs) == false){
-                                throw new Exception("Ya está inscrito a este curso");
-                            }                
-                            return true;
+                            if(this.login.previasAprobadas(curso)){
+                                if(this.login.setIncripcionC(cs) == false){
+                                    throw new Exception("Ya está inscrito a este curso");
+                                }                
+                                return true;
+                            }else{
+                                throw new Exception("No se puede inscribir con previas");
+                            }
                         }else{
                             throw new Exception("Debe estar inscrito en la carrera en la cual se dicta el curso");
                         }
@@ -83,10 +87,14 @@ public class ContEstudiante implements IContEstudiante {
                 if(examen.getCurso().getSede().equals(sede)){
                     if(this.login.estaInscriptoEnCarrera(examen.getCurso().getCurso().getCarrera())){
                         if(this.login.estaInscriptoEnCurso(examen.getCurso().getCurso())){
-                            if(this.login.setIncripcionE(examen))
-                                return true;
-                            else
-                                throw new Exception("Ya está inscrito a este exámen");
+                            if(this.login.derechoExamen(examen.getCurso().getCurso())){
+                                if(this.login.setIncripcionE(examen))
+                                    return true;
+                                else
+                                    throw new Exception("Ya está inscrito a este exámen");
+                            }else{
+                                throw new Exception("No tiene derecho a examen");
+                            }
                         }else{
                             throw new Exception("Debe estar inscrito en el curso en el cual se dará el exámen");
                         }
