@@ -118,6 +118,7 @@ public class Curso implements Serializable {
         List<Estudiante> estudiantes = new ArrayList<>();
         if(this.cursoAprobados != null)
             for(CursoAprobado ca : this.cursoAprobados){
+                if(ca.isAprobado())
                 estudiantes.add(ca.getEstudiante());
             }
         return estudiantes;
