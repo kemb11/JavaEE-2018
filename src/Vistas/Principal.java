@@ -6,11 +6,16 @@
 package Vistas;
 
 import Clases.Fabrica;
+import java.awt.CardLayout;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -25,13 +30,20 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //centrar
         
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/cargando.gif"));
+        imagenGif.setIcon(icon);
+        icon.setImageObserver(imagenGif);
+        
+        Contenedor.add(IniciarPanel, "iniciar");
+        Contenedor.add(CargandoPanel, "cargando");
+        
+        mostrarCargando(false);
     }
 
     public void vaciar() {
         IdTextField.setText("");
         PasswordField.setText("");
     }
-
     
 
     /**
@@ -43,17 +55,59 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        IdTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        PasswordField = new javax.swing.JPasswordField();
-        IniciarButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        Contenedor = new javax.swing.JPanel();
+        CargandoPanel = new javax.swing.JPanel();
+        imagenGif = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        IniciarPanel = new javax.swing.JPanel();
+        PasswordField = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        IdTextField = new javax.swing.JTextField();
+        IniciarButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ingresar");
+        setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Id:");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/login.png"))); // NOI18N
+
+        Contenedor.setLayout(new java.awt.CardLayout());
+
+        imagenGif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cargando.gif"))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Cargando...");
+
+        javax.swing.GroupLayout CargandoPanelLayout = new javax.swing.GroupLayout(CargandoPanel);
+        CargandoPanel.setLayout(CargandoPanelLayout);
+        CargandoPanelLayout.setHorizontalGroup(
+            CargandoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CargandoPanelLayout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(CargandoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imagenGif)
+                    .addComponent(jLabel4))
+                .addGap(39, 39, 39))
+        );
+        CargandoPanelLayout.setVerticalGroup(
+            CargandoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CargandoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imagenGif)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(99, Short.MAX_VALUE))
+        );
+
+        Contenedor.add(CargandoPanel, "card3");
+
+        PasswordField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Contraseña:");
 
         IdTextField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         IdTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -61,11 +115,6 @@ public class Principal extends javax.swing.JFrame {
                 IdTextFieldActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Contraseña:");
-
-        PasswordField.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         IniciarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         IniciarButton.setText("Iniciar");
@@ -75,34 +124,28 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/login.png"))); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Id:");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(IdTextField)
-                            .addComponent(PasswordField)
-                            .addComponent(IniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(52, Short.MAX_VALUE))
+        javax.swing.GroupLayout IniciarPanelLayout = new javax.swing.GroupLayout(IniciarPanel);
+        IniciarPanel.setLayout(IniciarPanelLayout);
+        IniciarPanelLayout.setHorizontalGroup(
+            IniciarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IniciarPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(IniciarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(IniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(IniciarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addComponent(IdTextField)
+                        .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+        IniciarPanelLayout.setVerticalGroup(
+            IniciarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IniciarPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,9 +153,38 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(IniciarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        Contenedor.add(IniciarPanel, "card2");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(jLabel3)
+                .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(44, Short.MAX_VALUE)
+                    .addComponent(Contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(44, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel3)
+                .addContainerGap(241, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(119, Short.MAX_VALUE)
+                    .addComponent(Contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(19, Short.MAX_VALUE)))
         );
 
         pack();
@@ -123,35 +195,68 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_IdTextFieldActionPerformed
 
     private void IniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarButtonActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:       
 
         String id = IdTextField.getText();
         String pass = new String(PasswordField.getPassword());
         if (!(id.isEmpty() && pass.isEmpty())) {
-            try {
-                String tipo = Fabrica.getInstance().getContAdmin().login(id, pass);
-                switch(tipo){
-                    case "estudiante":
-                        Estudiante_MenuPrincipal em = new Estudiante_MenuPrincipal();
-                        em.setVisible(true);
-                        break;
-                    case "docente":
-                        Docente_MenuPrincipal dm = new Docente_MenuPrincipal();
-                        dm.setVisible(true);
-                        break;
-                    case "admin":
-                        Admin_MenuPrincipal am = new Admin_MenuPrincipal();
-                        am.setVisible(true);
-                        break;
+
+            new SwingWorker<String, Void>(){
+                @Override
+                protected String doInBackground() throws Exception {
+                    try {
+                        String tipo = Fabrica.getInstance().getContAdmin().login(id, pass);
+                        return tipo;
+                    } catch (InternalException ex) {
+                        //JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+                        return null;
+                    }
                 }
-            } catch (InternalException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
-            }
+
+                @Override
+                protected void done(){
+
+                    try {
+                        String tipo = get(); // asi se obtiene lo que retorna el doInBackground
+                        if(tipo!=null){
+                            switch(tipo){
+                                case "estudiante":
+                                Estudiante_MenuPrincipal em = new Estudiante_MenuPrincipal();
+                                em.setVisible(true);
+                                break;
+                                case "docente":
+                                Docente_MenuPrincipal dm = new Docente_MenuPrincipal();
+                                dm.setVisible(true);
+                                break;
+                                case "admin":
+                                Admin_MenuPrincipal am = new Admin_MenuPrincipal();
+                                am.setVisible(true);
+                                break;
+                            }
+                        }else{
+                            //ha ocurrido un error
+                        }
+                    } catch (InterruptedException | ExecutionException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    mostrarCargando(false);
+                }
+            }.execute();
         } else {
             JOptionPane.showMessageDialog(this, "Rellene los campos", "Error", JOptionPane.WARNING_MESSAGE);
         }
+        mostrarCargando(true);
     }//GEN-LAST:event_IniciarButtonActionPerformed
 
+    public void mostrarCargando(boolean mostrar){        
+        if(mostrar){
+            CardLayout cl = (CardLayout)(Contenedor.getLayout());
+            cl.show(Contenedor, "cargando");
+        }else{
+            CardLayout cl = (CardLayout)(Contenedor.getLayout());
+            cl.show(Contenedor, "iniciar");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -194,12 +299,17 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CargandoPanel;
+    private javax.swing.JPanel Contenedor;
     private javax.swing.JTextField IdTextField;
     private javax.swing.JButton IniciarButton;
+    private javax.swing.JPanel IniciarPanel;
     private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JLabel imagenGif;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -115,14 +115,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(VerNoticia, "ver noticia");
         
         opcionSeleccionada(SedesOpcion, "sedes");
-
-        notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        JLabel text = new JLabel("9");
-        text.setForeground(Color.red);
-        text.setFont(new Font("Dialog", Font.BOLD, 13));
-        notificacionIcono.add(text);
-
     }
 
     /**
@@ -419,7 +411,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         marcarparciales_notaApro = new javax.swing.JSpinner();
         marcarparciales_aceptar = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
-        notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         VolverButton = new javax.swing.JButton();
 
@@ -970,7 +961,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         CarrerasPanelLayout.setVerticalGroup(
             CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1258,7 +1249,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarEstudiante)
                     .addComponent(BuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane6)
                 .addGap(18, 18, 18)
                 .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1724,7 +1715,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(Docente_CrearLayout.createSequentialGroup()
                         .addGap(230, 230, 230)
                         .addComponent(doc_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 548, Short.MAX_VALUE))
+                .addGap(0, 448, Short.MAX_VALUE))
             .addGroup(Docente_CrearLayout.createSequentialGroup()
                 .addGap(289, 289, 289)
                 .addComponent(jLabel45)
@@ -1810,9 +1801,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         DocenteLayout.setHorizontalGroup(
             DocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DocenteLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(DocenteLayout.createSequentialGroup()
                         .addComponent(BuscarDocentes, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1830,13 +1822,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(DocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarDocente)
                     .addComponent(BuscarDocentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane12)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(DocenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AsociarDocenteCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inscribirDocente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
+            .addGroup(DocenteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         PanelPrincipal.add(Docente, "cardSedes");
@@ -1949,10 +1943,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(exa_fecfin)
                                 .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                                 .addGroup(ExamenCursoLayout.createSequentialGroup()
                                     .addComponent(jLabel51)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                                     .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(ExamenCursoLayout.createSequentialGroup()
                                     .addComponent(jLabel48)
@@ -2560,7 +2554,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(notaAproCurTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(notaExonExCurTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
         CrearCursoPanelLayout.setVerticalGroup(
             CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2685,7 +2679,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCarreraPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+                    .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
                     .addGroup(VerCarreraPanelLayout.createSequentialGroup()
                         .addGroup(VerCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(NombreCarreraLabel)
@@ -2834,7 +2828,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                    .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
                     .addComponent(jScrollPane25)
                     .addComponent(TituloLabel4)
                     .addComponent(TituloLabel9)
@@ -2864,7 +2858,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(TituloLabel16)
                     .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VerMaterialSubidoButton))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         VerCursoPanelLayout.setVerticalGroup(
             VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2988,7 +2982,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                         .addComponent(TituloLabel21, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(tituloMateriales))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         MaterialesSubidosPanelLayout.setVerticalGroup(
             MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3230,7 +3224,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                     .addComponent(marcarparciales_notaMax2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(marcarparciales_fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel71))))))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         MarcarParcialesLayout.setVerticalGroup(
             MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3268,19 +3262,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
-        notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        notificacionIcono.setForeground(new java.awt.Color(255, 0, 0));
-        notificacionIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/notification.png"))); // NOI18N
-        notificacionIcono.setToolTipText("Notifiaciones");
-        notificacionIcono.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                notificacionIconoMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                notificacionIconoMouseExited(evt);
-            }
-        });
-
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/perfil2.png"))); // NOI18N
         jLabel15.setToolTipText("Ver Perfil");
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -3309,10 +3290,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(VolverButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 833, Short.MAX_VALUE)
                 .addComponent(jLabel15)
-                .addGap(18, 18, 18)
-                .addComponent(notificacionIcono)
                 .addContainerGap())
         );
         PanelCabeceraLayout.setVerticalGroup(
@@ -3321,8 +3300,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(VolverButton)
-                    .addComponent(jLabel15)
-                    .addComponent(notificacionIcono))
+                    .addComponent(jLabel15))
                 .addContainerGap())
         );
 
@@ -3334,8 +3312,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(PanelLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(PanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(PanelCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3594,22 +3574,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private void btnBuscarExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarExamenActionPerformed
 
     }//GEN-LAST:event_btnBuscarExamenActionPerformed
-
-    private void jLabel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jLabel15MouseEntered
-
-    private void jLabel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jLabel15MouseExited
-
-    private void notificacionIconoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificacionIconoMouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_notificacionIconoMouseEntered
-
-    private void notificacionIconoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificacionIconoMouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_notificacionIconoMouseExited
 
     private void NoticiasOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoticiasOpcionMouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -4169,6 +4133,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private void marcarparciales_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcarparciales_aceptarActionPerformed
         
     }//GEN-LAST:event_marcarparciales_aceptarActionPerformed
+
+    private void jLabel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_jLabel15MouseExited
+
+    private void jLabel15MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_jLabel15MouseEntered
 
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -4953,7 +4925,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel notaAprobCurLabel;
     private javax.swing.JTextField notaExonExCurTextField;
     private javax.swing.JLabel notaExonExLabel;
-    private javax.swing.JLabel notificacionIcono;
     private javax.swing.JPanel panelBorrarSede;
     private javax.swing.JPanel panelModSede;
     private javax.swing.JPanel panelNuevaSede;
