@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,7 @@ import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
  *
  * @author Usuario
  */
+
 public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private List<Sede> sedes = new ArrayList<>();
@@ -52,12 +54,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private Curso cursoExamen;
     private boolean crearCarrera = false;
 
+    DefaultListModel listaSedes = new DefaultListModel();
+    DefaultListModel listaCarreras = new DefaultListModel();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public Admin_MenuPrincipal() {
         initComponents();
-        DefaultListModel listaSedes = new DefaultListModel();
-        DefaultListModel listaCarreras = new DefaultListModel();
+        
         list_aec_carreras.setModel(listaSedes);
         list_aec_carreras.setModel(listaCarreras);
         
@@ -371,6 +374,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jScrollPane20 = new javax.swing.JScrollPane();
         list_aec_carreras = new javax.swing.JList<>();
         btn_aec_agregarCarrera = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel62 = new javax.swing.JLabel();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -2753,11 +2758,25 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        list_aec_sedes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                list_aec_sedesValueChanged(evt);
+            }
+        });
         jScrollPane19.setViewportView(list_aec_sedes);
 
         jScrollPane20.setViewportView(list_aec_carreras);
 
         btn_aec_agregarCarrera.setText("Agregar Carrera");
+        btn_aec_agregarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aec_agregarCarreraActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setText("Sedes");
+
+        jLabel62.setText("Carreras");
 
         javax.swing.GroupLayout agregarEstudianteCarreraLayout = new javax.swing.GroupLayout(agregarEstudianteCarrera);
         agregarEstudianteCarrera.setLayout(agregarEstudianteCarreraLayout);
@@ -2769,13 +2788,20 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btn_aec_agregarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
-                            .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
                             .addComponent(txt_aec_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(btn_aec_buscar))))
+                            .addComponent(btn_aec_buscar))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, agregarEstudianteCarreraLayout.createSequentialGroup()
+                            .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(agregarEstudianteCarreraLayout.createSequentialGroup()
+                                    .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agregarEstudianteCarreraLayout.createSequentialGroup()
+                                    .addComponent(jLabel30)
+                                    .addGap(111, 111, 111)))
+                            .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel62)
+                                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
                 .addContainerGap(485, Short.MAX_VALUE))
         );
         agregarEstudianteCarreraLayout.setVerticalGroup(
@@ -2785,13 +2811,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_aec_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_aec_buscar))
+                .addGap(22, 22, 22)
+                .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel62))
                 .addGap(18, 18, 18)
                 .addGroup(agregarEstudianteCarreraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_aec_agregarCarrera)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(agregarEstudianteCarrera, "card19");
@@ -3622,11 +3652,56 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void btn_aec_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aec_buscarActionPerformed
         // TODO add your handling code here:
-        HashMap<String,String> map = Fabrica.getInstance().getContEst().getInfoEstudiante(txt_aec_cedula.getText());
+        String ci = txt_aec_cedula.getText();
+        listaSedes.clear();
+        listaCarreras.clear();
+        HashMap<String,String> map = Fabrica.getInstance().getContEst().getInfoEstudiante(ci);
         if(!map.isEmpty()){
-            
+            Estudiante e = Fabrica.getInstance().getContEst().getEstudiante(ci);
+            List<Sede> ls = e.getSedes();
+            if(ls.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El estudiante no está inscripto en ninguna sede.");
+            }
+            else {
+                Iterator<Sede> it = ls.listIterator();
+                while( it.hasNext() ) {
+                    listaSedes.addElement( it.next().getNombre() );
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No existe un estudiante con esta cédula.");
         }
     }//GEN-LAST:event_btn_aec_buscarActionPerformed
+
+    private void list_aec_sedesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_aec_sedesValueChanged
+        // TODO add your handling code here:
+        listaCarreras.clear();
+        String s = list_aec_sedes.getSelectedValue();
+        List<Carrera> lc = Fabrica.getInstance().getContAdmin().getCarrerasSede(s);
+        if(lc.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Esta sede no tiene carreras asociadas");
+        }
+        else{
+            Iterator<Carrera> it = lc.listIterator();
+            while(it.hasNext()) {
+                listaCarreras.addElement( it.next().getNombre() );
+            }
+        }
+    }//GEN-LAST:event_list_aec_sedesValueChanged
+
+    private void btn_aec_agregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aec_agregarCarreraActionPerformed
+        // TODO add your handling code here:
+        String carrera = list_aec_carreras.getSelectedValue();
+        String sede = list_aec_sedes.getSelectedValue();
+        String ci = txt_aec_cedula.getText();
+        if(!carrera.isEmpty() && !sede.isEmpty() && !ci.isEmpty() ){
+            Fabrica.getInstance().getContAdmin().inscribirEstudianteCarrera(ci, sede, carrera);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una sede y carrera.");
+        }
+    }//GEN-LAST:event_btn_aec_agregarCarreraActionPerformed
 
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -4230,6 +4305,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -4264,6 +4340,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;

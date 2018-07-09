@@ -234,6 +234,29 @@ public class ContAdmin implements IContAdmin {
             Logger.getLogger(ContAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @Override
+    public List<Carrera> getCarrerasSede(String nombreSede) {
+        List<Carrera> lc = new ArrayList<>();
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(nombreSede);
+        lc = s.getCarreras();
+        return lc;
+    }
+    
+    @Override
+    public void inscribirEstudianteCarrera(String ci, String sede, String carrera) {
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        Estudiante e = ejpa.findEstudianteCedula(ci);
+        
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(sede);
+        
+        CarreraJpaController cjpa = new CarreraJpaController();
+        Carrera c = cjpa.getCarreraByNombre(carrera);
+        
+        e.getCarreras().add(c);
+        e.getSedes().add(s);
+    }
 }
 /*
 package Clases;

@@ -10,6 +10,9 @@ public interface IContAdmin {
     public abstract void nuevaNoticia(String titulo, String texto, List<String> etiquetas);
     public abstract List<Noticia> listarNoticias(String buscar);
     
+    public abstract List<Carrera> getCarrerasSede(String nombreSede);
+    public abstract void inscribirEstudianteCarrera(String ci, String sede, String carrera);
+    
     public abstract void crearSedeVar(String nombre, String direccion, String telefono) throws Exception;
     public abstract List<String> getSedes();
     public abstract void borrarSede(String nombre);

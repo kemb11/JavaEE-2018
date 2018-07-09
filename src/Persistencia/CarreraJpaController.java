@@ -25,6 +25,16 @@ public class CarreraJpaController implements Serializable {
     public CarreraJpaController() {
     }
 
+    public Carrera getCarreraByNombre(String nombreCarrera) {
+        List<Carrera> lc = this.findCarreraEntities();
+        for( Carrera l : lc) {
+            if(l.getNombre().equals(nombreCarrera)) {
+                return l;
+            }
+        }
+        return new Carrera();
+    }
+    
     public EntityManager getEntityManager() {
         return Fabrica.getInstance().getEntity();
     }
@@ -146,5 +156,7 @@ public class CarreraJpaController implements Serializable {
         } finally {
         }
     }
+    
+    
     
 }
