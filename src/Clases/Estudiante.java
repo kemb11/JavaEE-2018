@@ -26,6 +26,7 @@ public class Estudiante extends Usuario {
     @OneToMany(mappedBy = "estudiante")
     private List<InscripcionC> inscripciones;
     private String ci, nombres, apellidos;
+    private boolean habilitado; 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date FechaNac;
     @ManyToMany
@@ -36,7 +37,16 @@ public class Estudiante extends Usuario {
     private List<InscripcionE> examenes;
     @OneToMany
     private List<ResultadoP> notasParciales;
+    
+    
+    public boolean isHabilitado() {
+        return habilitado;
+    }
 
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+    
     public void setCi(String ci) {
         this.ci = ci;
     }

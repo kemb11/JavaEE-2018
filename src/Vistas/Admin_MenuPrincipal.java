@@ -358,7 +358,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         FechaNacEditar = new javax.swing.JFormattedTextField();
         jLabel68 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        in_est = new javax.swing.JButton();
         estudianteCIBuscar = new javax.swing.JFormattedTextField();
         buscarEstEditar = new javax.swing.JButton();
         agregarEstudianteSede = new javax.swing.JPanel();
@@ -2604,7 +2604,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Inhabilitar");
+        in_est.setText("Inhabilitar");
+        in_est.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                in_estActionPerformed(evt);
+            }
+        });
 
         try {
             estudianteCIBuscar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.###.###-#")));
@@ -2629,7 +2634,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(estudianteEditarLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
+                        .addComponent(in_est))
                     .addGroup(estudianteEditarLayout.createSequentialGroup()
                         .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel64)
@@ -2683,7 +2688,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(estudianteEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(in_est))
                 .addContainerGap(161, Short.MAX_VALUE))
         );
 
@@ -3703,6 +3708,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_aec_agregarCarreraActionPerformed
 
+    private void in_estActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_estActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que desea inhabilitar este estudiante?");
+        if(dialogResult == JOptionPane.YES_OPTION) { 
+            Estudiante e = Fabrica.getInstance().getContEst().getEstudiante(estudianteCIBuscar.getText());
+            e.setHabilitado(false);
+        }
+    }//GEN-LAST:event_in_estActionPerformed
+
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
 
@@ -4275,13 +4289,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel exa_titulo;
     private javax.swing.JFormattedTextField finPrimerSemestre;
     private javax.swing.JFormattedTextField finSegundoSemestre;
+    private javax.swing.JButton in_est;
     private javax.swing.JFormattedTextField inicioPrimerSemestre;
     private javax.swing.JFormattedTextField inicioSegundoSemestre;
     private javax.swing.JButton inscribirDocente;
     private javax.swing.JButton inscribirEstudiante;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
