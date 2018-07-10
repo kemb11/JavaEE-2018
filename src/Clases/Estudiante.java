@@ -263,6 +263,12 @@ public class Estudiante extends Usuario {
                 String texto = "Felicitanciones, ha ganado elderecho a examen del curso " + ca.getCurso().getNombre() + " pertenecienta a la carrera " + ca.getCurso().getCarrera().getNombre() + " con nota " + nota;
                 Fabrica.getInstance().getContAdmin().enviarNotificacion("Derecho a examen", texto, this);
             }
+            if(this.isCarreraAprobada(ca.getCurso().getCarrera())){
+                String texto = "Felicitanciones, ha completado la carrera " + ca.getCurso().getCarrera().getNombre();
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Felicitadiones", texto, this);
+                this.getCarreraEstudiante(ca.getCurso().getCarrera()).setAprobada(true);
+                Fabrica.getInstance().getEntity().persist(this.getCarreraEstudiante(ca.getCurso().getCarrera()));
+            }
         }
     }
 
@@ -377,6 +383,33 @@ public class Estudiante extends Usuario {
                 }
             }
         }
+    }
+    
+    public boolean isCarreraAprobada(Carrera c){
+        int creditos = 0;
+        if(this.getListaCursosAprobados() != null){
+            for(Curso cur : this.getListaCursosAprobados()){
+                if(!c.getCursos().contains(cur) && !cur.isOptativo())
+                    return false;
+                else{
+                    if(c.getCursos().contains(cur))
+                        creditos += cur.getCreditos();
+                }
+            }
+        }
+        if(creditos >= c.getCreditos())
+            return true;
+        return false;
+    }
+    
+    public CarreraEstudiante getCarreraEstudiante(Carrera c){
+        if(this.carreraEstudiante != null){
+            for(CarreraEstudiante ce : this.carreraEstudiante){
+                if(ce.getCarrera().equals(c))
+                    return ce;
+            }            
+        }
+        return null;
     }
 
 }
