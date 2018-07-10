@@ -93,7 +93,10 @@ public class InscripcionC implements Serializable {
     
     public boolean isAprobado(Curso c){
         return estudiante.cursoAprobado(c);    
-    } 
+    }
     
+    public boolean isHabilitado(){
+        return this.estudiante.habilitadoCarrera(this.curso.getCurso().getCarrera());
+    }    
     
 }

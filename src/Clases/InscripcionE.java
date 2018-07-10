@@ -117,5 +117,9 @@ public class InscripcionE implements Serializable {
             return "No se ha corregido";
         }
     }
+    
+    public boolean isHabilitado(){
+        return this.estudiante.habilitadoCarrera(this.examen.getCurso().getCurso().getCarrera());
+    }
 
 }
