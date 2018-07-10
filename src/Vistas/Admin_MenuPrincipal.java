@@ -2581,6 +2581,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(CrearCursoPanel, "card12");
 
+        estudianteEditar.setBackground(new java.awt.Color(73, 202, 114));
+
         jLabel64.setText("Nombre: ");
 
         jLabel65.setText("Apellido: ");
@@ -2597,6 +2599,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         jLabel68.setText("Datos del estudiante");
 
+        jButton1.setBackground(new java.awt.Color(73, 202, 114));
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2604,6 +2607,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        in_est.setBackground(new java.awt.Color(73, 202, 114));
         in_est.setText("Inhabilitar");
         in_est.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2617,6 +2621,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        buscarEstEditar.setBackground(new java.awt.Color(73, 202, 114));
         buscarEstEditar.setText("Buscar");
         buscarEstEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2702,6 +2707,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        btn_aes_buscar.setBackground(new java.awt.Color(73, 202, 114));
         btn_aes_buscar.setText("Buscar");
         btn_aes_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2711,6 +2717,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         cb_aes_sedes.setEnabled(false);
 
+        btn_aes_agregar.setBackground(new java.awt.Color(73, 202, 114));
         btn_aes_agregar.setText("Agregar");
         btn_aes_agregar.setEnabled(false);
         btn_aes_agregar.addActionListener(new java.awt.event.ActionListener() {
