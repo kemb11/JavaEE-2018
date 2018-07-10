@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import Persistencia.DocenteJpaController;
 import Persistencia.ExamenJpaController;
 import Persistencia.InscripcionEJpaController;
 import Persistencia.ParcialJpaController;
@@ -272,5 +273,24 @@ public class ContDocente implements IContDocente {
             Fabrica.getInstance().getEntity().getTransaction().rollback();
             throw e;
         }
+    }
+    
+    @Override
+    public Docente getDocenteByCedula(String ci) {
+        DocenteJpaController djpa = new DocenteJpaController();
+        return djpa.getDocenteByCedula(ci);
+    }
+    @Override
+    public void confirmarCambios(Docente d) {
+        DocenteJpaController djpa = DocenteJpaController();
+        try {
+            djpa.edit(d);
+        } catch (Exception ex) {
+            Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private DocenteJpaController DocenteJpaController() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

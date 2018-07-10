@@ -1,9 +1,15 @@
 
 package Clases;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface IContEstudiante {
+ 
+    public abstract HashMap<String,String> getInfoEstudiante(String ci);
+    public abstract void confirmarMod(String ci, String nombre, String apellido, String email, String fechaNac);
+    public abstract Estudiante getEstudiante(String ci);
+    public abstract void inhabilitarEstudiante(String ci);
     public abstract Estudiante getLogin();
     public abstract void login(String id);
     public abstract boolean inscripcionCurso(Curso c) throws Exception;

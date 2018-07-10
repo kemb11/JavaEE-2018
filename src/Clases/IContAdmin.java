@@ -6,9 +6,15 @@ import java.util.Map;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 public interface IContAdmin {
+    
+    public abstract void agregarEstudianteSede(String sede, String ci);
+    public abstract List<Carrera> getCarrerasSede(String nombreSede);
+    
     public abstract String login(String user, String Pass) throws InternalException;     
     public abstract void nuevaNoticia(String titulo, String texto, List<String> etiquetas);
     public abstract List<Noticia> listarNoticias(String buscar);
+    
+    public abstract void inscribirEstudianteCarrera(String ci, String sede, String carrera);
     
     public abstract void crearSedeVar(String nombre, String direccion, String telefono) throws Exception;
     public abstract List<String> getSedes();

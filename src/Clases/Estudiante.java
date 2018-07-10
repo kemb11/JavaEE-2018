@@ -42,8 +42,19 @@ public class Estudiante extends Usuario {
     private List<InscripcionE> examenes;
     @OneToMany
     private List<ResultadoP> notasParciales;
-    private boolean enviarMails;
+    private boolean enviarMails, habilitado = true;
 
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+    
+    
+    
     public void setCi(String ci) {
         this.ci = ci;
     }
