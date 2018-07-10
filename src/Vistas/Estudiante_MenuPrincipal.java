@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -109,6 +111,13 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         
         setCantidadNotif();
         
+        try {
+            this.setIconImage(ImageIO.read(getClass().getResource("/Iconos/logoApp.png")));
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+        }
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/cargandoGrande.gif"));
         imgCargando.setIcon(icon);
         icon.setImageObserver(imgCargando); 
@@ -152,6 +161,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         EstadisticasOpcion = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         PanelPrincipal = new javax.swing.JPanel();
         CursosPanel = new javax.swing.JPanel();
         BuscarTextField = new javax.swing.JTextField();
@@ -653,32 +664,48 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/logoApp.png"))); // NOI18N
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Gestión Educativa");
+
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
         PanelLateral.setLayout(PanelLateralLayout);
         PanelLateralLayout.setHorizontalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addGroup(PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelLateralLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLateralLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(CursosOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CarrerasOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SedesOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(NoticiasOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ExamenesOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ParcialesOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, 0))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLateralLayout.createSequentialGroup()
-                .addGap(0, 24, Short.MAX_VALUE)
-                .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(ParcialesOpcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLateralLayout.createSequentialGroup()
+                        .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(PanelLateralLayout.createSequentialGroup()
+                .addGroup(PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel21))
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addContainerGap()
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
                 .addComponent(CursosOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2925,7 +2952,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(VerCarreraPanel, "card17");
 
-        PanelCabecera.setBackground(new java.awt.Color(255, 51, 51));
+        PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         notificacionIcono.setForeground(new java.awt.Color(255, 0, 0));
@@ -4545,6 +4572,8 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

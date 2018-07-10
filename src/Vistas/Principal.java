@@ -7,9 +7,12 @@ package Vistas;
 
 import Clases.Fabrica;
 import java.awt.CardLayout;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -33,6 +36,13 @@ public class Principal extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/cargando.gif"));
         imagenGif.setIcon(icon);
         icon.setImageObserver(imagenGif);
+        
+        try {
+            this.setIconImage(ImageIO.read(getClass().getResource("/Iconos/logoApp.png")));
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+        }
         
         Contenedor.add(IniciarPanel, "iniciar");
         Contenedor.add(CargandoPanel, "cargando");

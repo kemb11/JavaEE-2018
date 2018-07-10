@@ -78,9 +78,21 @@
               <Component id="ExamenesOpcion" alignment="1" max="32767" attributes="0"/>
               <Component id="ParcialesOpcion" alignment="0" max="32767" attributes="0"/>
               <Component id="EstadisticasOpcion" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="SedeSelec" min="-2" pref="146" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="SedeSelec" min="-2" pref="146" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -88,7 +100,11 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="CursosOpcion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="CarrerasOpcion" min="-2" max="-2" attributes="0"/>
@@ -102,7 +118,7 @@
                   <Component id="ParcialesOpcion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="EstadisticasOpcion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Component id="SedeSelec" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -526,6 +542,24 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="jLabel27">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Iconos/logoApp.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel29">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Gesti&#xf3;n Educativa"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="PanelPrincipal">
@@ -1407,35 +1441,30 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel24" max="32767" attributes="0"/>
-                                          <Component id="jLabel23" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel26" max="32767" attributes="0"/>
-                                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="verExamen_notaAprobacion" min="-2" max="-2" attributes="0"/>
-                                          <Component id="verExamen_notaTotal" min="-2" max="-2" attributes="0"/>
-                                          <Component id="verExamen_fecha" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel24" max="32767" attributes="0"/>
+                                      <Component id="jLabel23" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel26" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="jScrollPane1" alignment="0" pref="582" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane18" alignment="0" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="verExamen_notaAprobacion" min="-2" max="-2" attributes="0"/>
+                                      <Component id="verExamen_notaTotal" min="-2" max="-2" attributes="0"/>
+                                      <Component id="verExamen_fecha" min="-2" pref="132" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <Component id="jScrollPane1" alignment="0" pref="582" max="32767" attributes="0"/>
+                              <Component id="jScrollPane18" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="verExamen_titulo" min="-2" pref="474" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="verExamen_titulo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="454" max="32767" attributes="0"/>
                   </Group>
@@ -1444,8 +1473,8 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="verExamen_titulo" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="verExamen_titulo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1465,7 +1494,7 @@
                       <Component id="jScrollPane1" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="90" max="32767" attributes="0"/>
+                      <EmptySpace pref="108" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1473,36 +1502,78 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="verExamen_titulo">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel23"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel23">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Fecha de realizaci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="verExamen_fecha">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel24"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota de aprobaci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="verExamen_notaAprobacion">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel25"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel26">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota total del examen:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="verExamen_notaTotal">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel25"/>
               </Properties>
             </Component>
@@ -1766,8 +1837,8 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane10" min="-2" pref="465" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -1775,22 +1846,20 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="verNoticia_titulo" min="-2" pref="247" max="-2" attributes="0"/>
-                                  <Component id="verNoticia_fecha" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="verNoticia_fecha" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="verNoticia_titulo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="520" max="32767" attributes="0"/>
+                      <EmptySpace pref="594" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="verNoticia_titulo" min="-2" pref="44" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="verNoticia_titulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="verNoticia_fecha" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1801,7 +1870,7 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane9" min="-2" pref="92" max="-2" attributes="0"/>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace pref="49" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1809,18 +1878,37 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="verNoticia_titulo">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Titulo"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Fecha de creaci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="verNoticia_fecha">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel3"/>
               </Properties>
             </Component>
@@ -1846,6 +1934,12 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Etiquetas"/>
               </Properties>
             </Component>
@@ -1882,54 +1976,47 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="subirNota_Titulo" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane11" min="-2" pref="829" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane12" min="-2" pref="330" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane11" min="-2" pref="829" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane12" min="-2" pref="330" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="subirNota_notaApro" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="subirNota_notaMax" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="subirNota_nota" min="-2" pref="63" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="subirNota_btnAgregar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="subirNota_notaApro" min="-2" max="-2" attributes="0"/>
+                                          <Component id="subirNota_notaMax" min="-2" max="-2" attributes="0"/>
+                                          <Component id="subirNota_nota" min="-2" pref="63" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="subirNota_Eliminar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_cancelar_subirNotaExamen" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_aceptar_subirNotaExamen" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="subirNota_chkFecha" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="subirNota_fechaMuestra" min="-2" pref="115" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jLabel19" min="-2" pref="127" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="subirNota_btnAgregar" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
-                              <Component id="subirNota_Titulo" min="-2" pref="386" max="-2" attributes="0"/>
+                              <Component id="subirNota_Eliminar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_cancelar_subirNotaExamen" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_aceptar_subirNotaExamen" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="subirNota_chkFecha" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="subirNota_fechaMuestra" min="-2" pref="115" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel19" min="-2" pref="127" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="193" max="32767" attributes="0"/>
+                      <EmptySpace pref="218" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1937,8 +2024,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="subirNota_Titulo" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="subirNota_Titulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane12" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
@@ -2074,31 +2161,67 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota del estudiante:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota m&#xe1;xima del examen:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="subirNota_notaMax">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel18"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota de aprobaci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="subirNota_notaApro">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel18"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="subirNota_Titulo">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel19"/>
               </Properties>
             </Component>
@@ -2155,38 +2278,31 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="subirNota_TituloParcial" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane15" alignment="0" min="-2" pref="829" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="jScrollPane16" min="-2" pref="330" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane15" alignment="0" min="-2" pref="829" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane16" min="-2" pref="330" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                              <Component id="subirNota_notaParcial" min="-2" pref="63" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="subirNota_btnAgregarParcial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="subirNota_notaParcial" min="-2" pref="63" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="subirNota_EliminarParcial" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_cancelar_subirNotaParcial" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_aceptar_subirNotaParcial" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="subirNota_btnAgregarParcial" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
-                              <Component id="subirNota_TituloParcial" min="-2" pref="386" max="-2" attributes="0"/>
+                              <Component id="subirNota_EliminarParcial" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_cancelar_subirNotaParcial" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btn_aceptar_subirNotaParcial" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="193" max="32767" attributes="0"/>
+                      <EmptySpace pref="218" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2194,7 +2310,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="subirNota_TituloParcial" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="subirNota_TituloParcial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane16" alignment="1" min="-2" pref="184" max="-2" attributes="0"/>
@@ -2207,7 +2323,7 @@
                               <Component id="subirNota_btnAgregarParcial" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane15" min="-2" pref="153" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -2315,11 +2431,23 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota del estudiante:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="subirNota_TituloParcial">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel19"/>
               </Properties>
             </Component>
@@ -3243,33 +3371,28 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jLabel25" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel28" max="32767" attributes="0"/>
-                                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="verParcial_notaTotal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="verParcial_fecha" min="-2" pref="169" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel25" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel28" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="jScrollPane19" alignment="0" pref="537" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane20" alignment="0" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="verParcial_notaTotal" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="verParcial_fecha" min="-2" pref="169" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <Component id="jScrollPane19" alignment="0" pref="537" max="32767" attributes="0"/>
+                              <Component id="jScrollPane20" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                              <Component id="verParcial_titulo" min="-2" pref="412" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="verParcial_titulo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="499" max="32767" attributes="0"/>
                   </Group>
@@ -3278,9 +3401,9 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="verParcial_titulo" min="-2" pref="46" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="verParcial_titulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="verParcial_fecha" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -3294,7 +3417,7 @@
                       <Component id="jScrollPane19" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane20" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="90" max="32767" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -3302,26 +3425,56 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="verParcial_titulo">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel23"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Fecha de realizaci&#xf3;n:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="verParcial_fecha">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel24"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel28">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nota total del parcial:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="verParcial_notaTotal">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="jLabel25"/>
               </Properties>
             </Component>

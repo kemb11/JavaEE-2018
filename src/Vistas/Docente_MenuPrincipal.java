@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -118,6 +120,13 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         setCantidadNotif();
         
+        try {
+            this.setIconImage(ImageIO.read(getClass().getResource("/Iconos/logoApp.png")));
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+        }
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/cargandoGrande.gif"));
         imgCargando.setIcon(icon);
     }
@@ -160,6 +169,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         EstadisticasOpcion = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         PanelPrincipal = new javax.swing.JPanel();
         CursosPanel = new javax.swing.JPanel();
         BuscarTextField = new javax.swing.JTextField();
@@ -691,6 +702,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/logoApp.png"))); // NOI18N
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Gestión Educativa");
+
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
         PanelLateral.setLayout(PanelLateralLayout);
         PanelLateralLayout.setHorizontalGroup(
@@ -703,14 +720,26 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             .addComponent(ParcialesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel27))
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel29)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addContainerGap()
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel29)
+                .addGap(18, 18, 18)
                 .addComponent(CursosOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -724,7 +753,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(ParcialesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1310,18 +1339,32 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         VerExamenPanel.setBackground(new java.awt.Color(73, 202, 114));
 
+        verExamen_titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verExamen_titulo.setForeground(new java.awt.Color(255, 255, 255));
         verExamen_titulo.setText("jLabel23");
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Fecha de realización:");
 
+        verExamen_fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verExamen_fecha.setForeground(new java.awt.Color(255, 255, 255));
         verExamen_fecha.setText("jLabel24");
 
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Nota de aprobación:");
 
+        verExamen_notaAprobacion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verExamen_notaAprobacion.setForeground(new java.awt.Color(255, 255, 255));
         verExamen_notaAprobacion.setText("jLabel25");
 
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Nota total del examen:");
 
+        verExamen_notaTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verExamen_notaTotal.setForeground(new java.awt.Color(255, 255, 255));
         verExamen_notaTotal.setText("jLabel25");
 
         verExamen_tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -1360,34 +1403,31 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         VerExamenPanelLayout.setHorizontalGroup(
             VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(70, 70, 70)))
-                                .addGap(18, 18, 18)
-                                .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(verExamen_notaAprobacion)
-                                    .addComponent(verExamen_notaTotal)
-                                    .addComponent(verExamen_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
-                            .addComponent(jScrollPane18)))
-                    .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(verExamen_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                            .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(VerExamenPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(70, 70, 70)))
+                            .addGap(18, 18, 18)
+                            .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(verExamen_notaAprobacion)
+                                .addComponent(verExamen_notaTotal)
+                                .addComponent(verExamen_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                        .addComponent(jScrollPane18))
+                    .addComponent(verExamen_titulo))
                 .addContainerGap(454, Short.MAX_VALUE))
         );
         VerExamenPanelLayout.setVerticalGroup(
             VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerExamenPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(verExamen_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(verExamen_titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(VerExamenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
@@ -1404,7 +1444,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerExamenPanel, "card7");
@@ -1542,17 +1582,26 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         VerNoticia.setBackground(new java.awt.Color(73, 202, 114));
 
+        verNoticia_titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verNoticia_titulo.setForeground(new java.awt.Color(255, 255, 255));
         verNoticia_titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verNoticia_titulo.setText("Titulo");
         verNoticia_titulo.setToolTipText("");
         verNoticia_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fecha de creación:");
 
+        verNoticia_fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verNoticia_fecha.setForeground(new java.awt.Color(255, 255, 255));
         verNoticia_fecha.setText("jLabel3");
 
         verNoticia_etiquetas.setEnabled(false);
         jScrollPane9.setViewportView(verNoticia_etiquetas);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Etiquetas");
 
         verNoticia_texto.setEditable(false);
@@ -1565,7 +1614,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         VerNoticiaLayout.setHorizontalGroup(
             VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerNoticiaLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addContainerGap()
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
@@ -1573,17 +1622,16 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(VerNoticiaLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(verNoticia_fecha))))
-                .addContainerGap(520, Short.MAX_VALUE))
+                        .addComponent(verNoticia_fecha))
+                    .addComponent(verNoticia_titulo))
+                .addContainerGap(594, Short.MAX_VALUE))
         );
         VerNoticiaLayout.setVerticalGroup(
             VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerNoticiaLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(38, 38, 38)
+                .addComponent(verNoticia_titulo)
+                .addGap(42, 42, 42)
                 .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(verNoticia_fecha))
@@ -1593,7 +1641,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerNoticia, "card11");
@@ -1663,16 +1711,28 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         subirNota_nota.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nota del estudiante:");
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Nota máxima del examen:");
 
+        subirNota_notaMax.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        subirNota_notaMax.setForeground(new java.awt.Color(255, 255, 255));
         subirNota_notaMax.setText("jLabel18");
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Nota de aprobación:");
 
+        subirNota_notaApro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        subirNota_notaApro.setForeground(new java.awt.Color(255, 255, 255));
         subirNota_notaApro.setText("jLabel18");
 
+        subirNota_Titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        subirNota_Titulo.setForeground(new java.awt.Color(255, 255, 255));
         subirNota_Titulo.setText("jLabel19");
 
         btn_aceptar_subirNotaExamen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1705,49 +1765,45 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         SubirNotaExamenLayout.setHorizontalGroup(
             SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SubirNotaExamenLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(subirNota_Titulo)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                                        .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel17)
-                                            .addComponent(jLabel18))
-                                        .addGap(50, 50, 50)
-                                        .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(subirNota_notaApro)
-                                            .addComponent(subirNota_notaMax)
-                                            .addComponent(subirNota_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(subirNota_btnAgregar)))
-                            .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                                .addComponent(subirNota_Eliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_cancelar_subirNotaExamen)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_aceptar_subirNotaExamen))
-                            .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                                .addComponent(subirNota_chkFecha)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(subirNota_fechaMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18))
+                                .addGap(18, 18, 18)
+                                .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(subirNota_notaApro)
+                                    .addComponent(subirNota_notaMax)
+                                    .addComponent(subirNota_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(subirNota_btnAgregar)))
                     .addGroup(SubirNotaExamenLayout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(subirNota_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                        .addComponent(subirNota_Eliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_cancelar_subirNotaExamen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_aceptar_subirNotaExamen))
+                    .addGroup(SubirNotaExamenLayout.createSequentialGroup()
+                        .addComponent(subirNota_chkFecha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(subirNota_fechaMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         SubirNotaExamenLayout.setVerticalGroup(
             SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaExamenLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(subirNota_Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subirNota_Titulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(SubirNotaExamenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaExamenLayout.createSequentialGroup()
@@ -1846,8 +1902,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         subirNota_notaParcial.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Nota del estudiante:");
 
+        subirNota_TituloParcial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        subirNota_TituloParcial.setForeground(new java.awt.Color(255, 255, 255));
         subirNota_TituloParcial.setText("jLabel19");
 
         btn_aceptar_subirNotaParcial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1864,36 +1924,32 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         SubirNotaParcialLayout.setHorizontalGroup(
             SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SubirNotaParcialLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(subirNota_TituloParcial)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(SubirNotaParcialLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(SubirNotaParcialLayout.createSequentialGroup()
-                                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(SubirNotaParcialLayout.createSequentialGroup()
-                                        .addComponent(jLabel20)
-                                        .addGap(76, 76, 76)
-                                        .addComponent(subirNota_notaParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(subirNota_btnAgregarParcial)))
-                            .addGroup(SubirNotaParcialLayout.createSequentialGroup()
-                                .addComponent(subirNota_EliminarParcial)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_cancelar_subirNotaParcial)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_aceptar_subirNotaParcial))))
+                                .addComponent(jLabel20)
+                                .addGap(18, 18, 18)
+                                .addComponent(subirNota_notaParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(subirNota_btnAgregarParcial)))
                     .addGroup(SubirNotaParcialLayout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(subirNota_TituloParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                        .addComponent(subirNota_EliminarParcial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_cancelar_subirNotaParcial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_aceptar_subirNotaParcial)))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         SubirNotaParcialLayout.setVerticalGroup(
             SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SubirNotaParcialLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(subirNota_TituloParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(subirNota_TituloParcial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1903,7 +1959,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(subirNota_notaParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(106, 106, 106)
                         .addComponent(subirNota_btnAgregarParcial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(SubirNotaParcialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2416,14 +2472,24 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         VerParcialPanel.setBackground(new java.awt.Color(73, 202, 114));
 
+        verParcial_titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verParcial_titulo.setForeground(new java.awt.Color(255, 255, 255));
         verParcial_titulo.setText("jLabel23");
 
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Fecha de realización:");
 
+        verParcial_fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verParcial_fecha.setForeground(new java.awt.Color(255, 255, 255));
         verParcial_fecha.setText("jLabel24");
 
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
         jLabel28.setText("Nota total del parcial:");
 
+        verParcial_notaTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        verParcial_notaTotal.setForeground(new java.awt.Color(255, 255, 255));
         verParcial_notaTotal.setText("jLabel25");
 
         verParcial_tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -2462,33 +2528,30 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         VerParcialPanelLayout.setHorizontalGroup(
             VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(70, 70, 70)))
-                                .addGap(18, 18, 18)
-                                .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(verParcial_notaTotal)
-                                    .addComponent(verParcial_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-                            .addComponent(jScrollPane20)))
-                    .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(verParcial_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                            .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(VerParcialPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(70, 70, 70)))
+                            .addGap(18, 18, 18)
+                            .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(verParcial_notaTotal)
+                                .addComponent(verParcial_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                        .addComponent(jScrollPane20))
+                    .addComponent(verParcial_titulo))
                 .addContainerGap(499, Short.MAX_VALUE))
         );
         VerParcialPanelLayout.setVerticalGroup(
             VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VerParcialPanelLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(verParcial_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
+                .addComponent(verParcial_titulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(VerParcialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(verParcial_fecha))
@@ -2500,7 +2563,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(VerParcialPanel, "card7");
@@ -5139,7 +5202,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
