@@ -273,7 +273,7 @@ public class ContEducacion implements IContEducacion {
     }
 
     @Override
-    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera) throws Exception {
+    public void nuevoCurso(String nombre, int creditos, int semestre, String descripcion, String horario, boolean optativo, Carrera carrera, ArrayList<Boolean> tiposPrevia) throws Exception {
         Curso curso = new Curso();
         curso.setNombre(nombre);
         curso.setCreditos(creditos);
@@ -283,11 +283,12 @@ public class ContEducacion implements IContEducacion {
         curso.setOptativo(optativo);
 
         List<Previa> previasCur = new ArrayList<>();
+        int indice = 0;
         for (Curso cursoPrevia : previasSelec) {
             Previa p = new Previa();
             p.setCurso(curso);
             p.setCursoPrevia(cursoPrevia);
-            p.setExamenAprobado(false);
+            p.setExamenAprobado(tiposPrevia.get(indice));
             previasCur.add(p);
         }
 

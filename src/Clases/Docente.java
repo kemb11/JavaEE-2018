@@ -73,4 +73,14 @@ public class Docente extends Usuario {
     public void setEnviarMails(boolean enviarMails) {
         this.enviarMails = enviarMails;
     }
+    
+    public int cantNotifNoVista() {
+        int cant = 0;
+        for (Notificacion notif : notificaciones) {
+            if (notif.isVista() == false) {
+                cant += 1;
+            }
+        }
+        return cant;
+    }
 }

@@ -15,14 +15,17 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,6 +38,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JFileChooser;
+import javax.swing.SwingWorker;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 /**
@@ -93,6 +97,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(SubirMaterialPanel, "subirMaterial");
         PanelPrincipal.add(VerPerfilPanel, "verPerfil");
         PanelPrincipal.add(MaterialesSubidosPanel, "verMaterial");
+        PanelPrincipal.add(EstadisticasCursoPanel, "estadisticasCurso");
+        PanelPrincipal.add(EstadisticasCarreraPanel, "estadisticasCarrera");
+        PanelPrincipal.add(EstadisticasPanel, "estadisticas");
+        PanelPrincipal.add(CargandoPanel, "cargando");
 
 //        String nombres = Fabrica.getInstance().getContEst().getLogin().getNombres();
 //        String apellidos = Fabrica.getInstance().getContEst().getLogin().getApellidos();
@@ -103,16 +111,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         opciones.add(NoticiasOpcion);
         opciones.add(ExamenesOpcion);
         opciones.add(ParcialesOpcion);
+        opciones.add(EstadisticasOpcion);
 
         //Por defecto que muestre las sedes
         opcionSeleccionada(SedesOpcion, "sedes");
 
-        notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        JLabel text = new JLabel("9");
-        text.setForeground(Color.red);
-        text.setFont(new Font("Dialog", Font.BOLD, 13));
-        notificacionIcono.add(text);
+        setCantidadNotif();
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Iconos/cargandoGrande.gif"));
+        imgCargando.setIcon(icon);
     }
 
     /**
@@ -127,6 +134,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         buttonGroupCursos = new javax.swing.ButtonGroup();
         buttonGroupExamenes = new javax.swing.ButtonGroup();
         buttonGroupParciales = new javax.swing.ButtonGroup();
+        buttonGroupEstadCurso = new javax.swing.ButtonGroup();
+        buttonGroupEstadCarrera = new javax.swing.ButtonGroup();
+        buttonGroupEstadSede = new javax.swing.ButtonGroup();
         PanelLateral = new javax.swing.JPanel();
         CursosOpcion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -147,6 +157,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         ParcialesOpcion = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        EstadisticasOpcion = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
         PanelPrincipal = new javax.swing.JPanel();
         CursosPanel = new javax.swing.JPanel();
         BuscarTextField = new javax.swing.JTextField();
@@ -156,6 +169,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         SubirMaterialButton = new javax.swing.JButton();
         TodosRadioButton = new javax.swing.JRadioButton();
         DictandoRadioButton = new javax.swing.JRadioButton();
+        InscripcionCButton1 = new javax.swing.JButton();
         BuscarButton = new javax.swing.JButton();
         CarrerasPanel = new javax.swing.JPanel();
         BuscarCarrera = new javax.swing.JTextField();
@@ -163,6 +177,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         btnBuscarCarrera = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         CarreraTable = new javax.swing.JTable();
+        btnEstadCarr = new javax.swing.JButton();
         SedesPanel = new javax.swing.JPanel();
         BuscarSede = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -309,6 +324,78 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         verParcial_tabla = new javax.swing.JTable();
         jScrollPane20 = new javax.swing.JScrollPane();
         verParcial_datosEstudiante = new javax.swing.JTextArea();
+        EstadisticasPanel = new javax.swing.JPanel();
+        TituloEstadisticasSede = new javax.swing.JLabel();
+        TituloLabel17 = new javax.swing.JLabel();
+        TituloLabel19 = new javax.swing.JLabel();
+        TituloLabel23 = new javax.swing.JLabel();
+        TituloLabel24 = new javax.swing.JLabel();
+        TituloLabel25 = new javax.swing.JLabel();
+        TituloLabel26 = new javax.swing.JLabel();
+        TituloLabel27 = new javax.swing.JLabel();
+        carrConMasEstSede = new javax.swing.JLabel();
+        TituloLabel28 = new javax.swing.JLabel();
+        carrConMasApSede = new javax.swing.JLabel();
+        TituloLabel29 = new javax.swing.JLabel();
+        carrConMejorPromApSede = new javax.swing.JLabel();
+        promNotaParSede = new javax.swing.JLabel();
+        promNotaExSede = new javax.swing.JLabel();
+        promApCarrSede = new javax.swing.JLabel();
+        promApCursosSede = new javax.swing.JLabel();
+        TituloLabel34 = new javax.swing.JLabel();
+        TituloLabel35 = new javax.swing.JLabel();
+        cursoConMasEstSede = new javax.swing.JLabel();
+        TituloLabel37 = new javax.swing.JLabel();
+        cursoConMasApSede = new javax.swing.JLabel();
+        TituloLabel39 = new javax.swing.JLabel();
+        cursoConMejorPromApSede = new javax.swing.JLabel();
+        EnSedeSelecRadioButton = new javax.swing.JRadioButton();
+        EnTodasSedesRadioButton = new javax.swing.JRadioButton();
+        EstadisticasCarreraPanel = new javax.swing.JPanel();
+        TituloEstadisticasCarrera = new javax.swing.JLabel();
+        TituloLabel41 = new javax.swing.JLabel();
+        TituloLabel44 = new javax.swing.JLabel();
+        TituloLabel45 = new javax.swing.JLabel();
+        TituloLabel46 = new javax.swing.JLabel();
+        promNotaParCarr = new javax.swing.JLabel();
+        promNotaExCarr = new javax.swing.JLabel();
+        promApCarr = new javax.swing.JLabel();
+        TituloLabel57 = new javax.swing.JLabel();
+        TituloLabel58 = new javax.swing.JLabel();
+        conMasEstCarr = new javax.swing.JLabel();
+        TituloLabel60 = new javax.swing.JLabel();
+        conMasApCarr = new javax.swing.JLabel();
+        TituloLabel62 = new javax.swing.JLabel();
+        conMejorPromApCarr = new javax.swing.JLabel();
+        EnSedeCarrRadioButton = new javax.swing.JRadioButton();
+        EnTodasCarrRadioButton = new javax.swing.JRadioButton();
+        EstadisticasCursoPanel = new javax.swing.JPanel();
+        TituloEstadisticasCurso = new javax.swing.JLabel();
+        TituloLabel42 = new javax.swing.JLabel();
+        TituloLabel47 = new javax.swing.JLabel();
+        TituloLabel48 = new javax.swing.JLabel();
+        TituloLabel49 = new javax.swing.JLabel();
+        promNotaParCurso = new javax.swing.JLabel();
+        promNotaExCurso = new javax.swing.JLabel();
+        promAprobCurso = new javax.swing.JLabel();
+        TituloLabel66 = new javax.swing.JLabel();
+        EnSelecCursoRadioButton = new javax.swing.JRadioButton();
+        EnTodasCursoRadioButton = new javax.swing.JRadioButton();
+        CargandoPanel = new javax.swing.JPanel();
+        imgCargando = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        NotificacionesPanel = new javax.swing.JPanel();
+        BuscarNotifiacion = new javax.swing.JTextField();
+        jScrollPane23 = new javax.swing.JScrollPane();
+        NotificacionesTable = new javax.swing.JTable();
+        VerNotificacionButton = new javax.swing.JButton();
+        btnBuscarNotificacion = new javax.swing.JButton();
+        VerNotificacion = new javax.swing.JPanel();
+        tituloVerNotificacion = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        fechaVerNotificacion = new javax.swing.JLabel();
+        jScrollPane24 = new javax.swing.JScrollPane();
+        textoVerNotificacion = new javax.swing.JTextArea();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -564,6 +651,46 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        EstadisticasOpcion.setBackground(new java.awt.Color(29, 131, 72));
+        EstadisticasOpcion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EstadisticasOpcionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EstadisticasOpcionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EstadisticasOpcionMouseExited(evt);
+            }
+        });
+
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/estadisticas-opcion.png"))); // NOI18N
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel42.setText("Estadísticas");
+
+        javax.swing.GroupLayout EstadisticasOpcionLayout = new javax.swing.GroupLayout(EstadisticasOpcion);
+        EstadisticasOpcion.setLayout(EstadisticasOpcionLayout);
+        EstadisticasOpcionLayout.setHorizontalGroup(
+            EstadisticasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasOpcionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel42)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+        EstadisticasOpcionLayout.setVerticalGroup(
+            EstadisticasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasOpcionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EstadisticasOpcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel41)
+                    .addComponent(jLabel42))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
         PanelLateral.setLayout(PanelLateralLayout);
         PanelLateralLayout.setHorizontalGroup(
@@ -573,11 +700,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             .addComponent(SedesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(NoticiasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(ExamenesOpcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ParcialesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addComponent(ParcialesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,6 +722,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(ExamenesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ParcialesOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -683,6 +813,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        InscripcionCButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        InscripcionCButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/estadisticas.png"))); // NOI18N
+        InscripcionCButton1.setText("Estadísticas");
+        InscripcionCButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InscripcionCButton1ActionPerformed(evt);
+            }
+        });
+
         BuscarButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         BuscarButton.setText("Buscar");
         BuscarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -709,7 +848,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CursosPanelLayout.createSequentialGroup()
                         .addComponent(VerCursoButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SubirMaterialButton))
+                        .addComponent(SubirMaterialButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(InscripcionCButton1))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -723,11 +864,12 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(DictandoRadioButton)
                     .addComponent(BuscarButton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(VerCursoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SubirMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SubirMaterialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(InscripcionCButton1))
                 .addContainerGap())
         );
 
@@ -791,6 +933,15 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(CarreraTable);
 
+        btnEstadCarr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEstadCarr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/estadisticas.png"))); // NOI18N
+        btnEstadCarr.setText("Estadísticas");
+        btnEstadCarr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadCarrActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CarrerasPanelLayout = new javax.swing.GroupLayout(CarrerasPanel);
         CarrerasPanel.setLayout(CarrerasPanelLayout);
         CarrerasPanelLayout.setHorizontalGroup(
@@ -799,7 +950,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(VerCarrera))
+                        .addComponent(VerCarrera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEstadCarr))
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -808,7 +961,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         CarrerasPanelLayout.setVerticalGroup(
             CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -818,9 +971,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarCarrera)
                     .addComponent(BuscarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(VerCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEstadCarr))
                 .addContainerGap())
         );
 
@@ -903,7 +1058,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(SedesPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         SedesPanelLayout.setVerticalGroup(
             SedesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1421,7 +1576,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(verNoticia_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(verNoticia_fecha))))
-                .addContainerGap(495, Short.MAX_VALUE))
+                .addContainerGap(520, Short.MAX_VALUE))
         );
         VerNoticiaLayout.setVerticalGroup(
             VerNoticiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1851,7 +2006,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(VerParcialesPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(VerCursosPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(VerExamenesPerfilButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(738, Short.MAX_VALUE))
+                .addContainerGap(759, Short.MAX_VALUE))
         );
         VerPerfilPanelLayout.setVerticalGroup(
             VerPerfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1957,7 +2112,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(rutaArchivoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(confirmarSubirMButton)
                     .addComponent(SelecArchivoButton))
-                .addContainerGap(658, Short.MAX_VALUE))
+                .addContainerGap(679, Short.MAX_VALUE))
         );
         SubirMaterialPanelLayout.setVerticalGroup(
             SubirMaterialPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2057,7 +2212,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                         .addComponent(TituloLabel14, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(tituloMateriales))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         MaterialesSubidosPanelLayout.setVerticalGroup(
             MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2177,7 +2332,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                     .addComponent(jScrollPane14)
                     .addComponent(TituloLabel4)
                     .addComponent(TituloLabel9)
@@ -2207,7 +2362,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(TituloLabel12)
                     .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VerMaterialSubidoButton))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         VerCursoPanelLayout.setVerticalGroup(
             VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2350,6 +2505,738 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.add(VerParcialPanel, "card7");
 
+        EstadisticasPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        TituloEstadisticasSede.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        TituloEstadisticasSede.setForeground(new java.awt.Color(255, 255, 255));
+        TituloEstadisticasSede.setText("Estadísticas para la sede Sede");
+
+        TituloLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel17.setText("Promedios de aprobación");
+
+        TituloLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel19.setText("De cursos:");
+
+        TituloLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel23.setText("De carreras:");
+
+        TituloLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel24.setText("Promedios de notas obtenidas");
+
+        TituloLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel25.setText("En Exámenes:");
+
+        TituloLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel26.setText("En parciales:");
+
+        TituloLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel27.setText("Carrera con más estudiantes cursando");
+
+        carrConMasEstSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carrConMasEstSede.setForeground(new java.awt.Color(255, 255, 255));
+        carrConMasEstSede.setText("Nombre");
+
+        TituloLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel28.setText("Carrera con más egresados");
+
+        carrConMasApSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carrConMasApSede.setForeground(new java.awt.Color(255, 255, 255));
+        carrConMasApSede.setText("No hay datos");
+
+        TituloLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel29.setText("Carrera con mejor promedio de egreso");
+
+        carrConMejorPromApSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        carrConMejorPromApSede.setForeground(new java.awt.Color(255, 255, 255));
+        carrConMejorPromApSede.setText("No hay datos");
+
+        promNotaParSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promNotaParSede.setForeground(new java.awt.Color(255, 255, 255));
+        promNotaParSede.setText("No hay datos");
+
+        promNotaExSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promNotaExSede.setForeground(new java.awt.Color(255, 255, 255));
+        promNotaExSede.setText("No hay datos");
+
+        promApCarrSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promApCarrSede.setForeground(new java.awt.Color(255, 255, 255));
+        promApCarrSede.setText("No hay datos");
+
+        promApCursosSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promApCursosSede.setForeground(new java.awt.Color(255, 255, 255));
+        promApCursosSede.setText("No hay datos");
+
+        TituloLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grafica.png"))); // NOI18N
+
+        TituloLabel35.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel35.setText("Curso con más estudiantes cursando");
+
+        cursoConMasEstSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cursoConMasEstSede.setForeground(new java.awt.Color(255, 255, 255));
+        cursoConMasEstSede.setText("No hay datos");
+
+        TituloLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel37.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel37.setText("Curso con más aprobaciones");
+
+        cursoConMasApSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cursoConMasApSede.setForeground(new java.awt.Color(255, 255, 255));
+        cursoConMasApSede.setText("No hay datos");
+
+        TituloLabel39.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel39.setText("Curso con mejor promedio de aprobación");
+
+        cursoConMejorPromApSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cursoConMejorPromApSede.setForeground(new java.awt.Color(255, 255, 255));
+        cursoConMejorPromApSede.setText("No hay datos");
+
+        buttonGroupEstadSede.add(EnSedeSelecRadioButton);
+        EnSedeSelecRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EnSedeSelecRadioButton.setSelected(true);
+        EnSedeSelecRadioButton.setText("Para sede seleccionada");
+        EnSedeSelecRadioButton.setFocusPainted(false);
+        EnSedeSelecRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                EnSedeSelecRadioButtonItemStateChanged(evt);
+            }
+        });
+        EnSedeSelecRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnSedeSelecRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroupEstadSede.add(EnTodasSedesRadioButton);
+        EnTodasSedesRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EnTodasSedesRadioButton.setText("Para todas las sedes");
+        EnTodasSedesRadioButton.setFocusPainted(false);
+        EnTodasSedesRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                EnTodasSedesRadioButtonItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EstadisticasPanelLayout = new javax.swing.GroupLayout(EstadisticasPanel);
+        EstadisticasPanel.setLayout(EstadisticasPanelLayout);
+        EstadisticasPanelLayout.setHorizontalGroup(
+            EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(EnSedeSelecRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EnTodasSedesRadioButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TituloLabel27)
+                            .addComponent(carrConMasEstSede)
+                            .addComponent(TituloLabel28)
+                            .addComponent(carrConMasApSede)
+                            .addComponent(TituloLabel29)
+                            .addComponent(carrConMejorPromApSede))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TituloLabel35)
+                            .addComponent(cursoConMasEstSede)
+                            .addComponent(TituloLabel37)
+                            .addComponent(cursoConMasApSede)
+                            .addComponent(TituloLabel39)
+                            .addComponent(cursoConMejorPromApSede))
+                        .addGap(169, 169, 169))
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TituloLabel17)
+                            .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(promApCursosSede))
+                            .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(promApCarrSede)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TituloLabel24)
+                            .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(promNotaExSede))
+                            .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                                .addComponent(TituloLabel26)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(promNotaParSede)))
+                        .addGap(271, 271, 271))
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloEstadisticasSede)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        EstadisticasPanelLayout.setVerticalGroup(
+            EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel34)
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(TituloEstadisticasSede)))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnSedeSelecRadioButton)
+                    .addComponent(EnTodasSedesRadioButton))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel19)
+                            .addComponent(promApCursosSede))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel23)
+                            .addComponent(promApCarrSede)))
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel25)
+                            .addComponent(promNotaExSede))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel26)
+                            .addComponent(promNotaParSede))))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(carrConMasEstSede)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(carrConMasApSede)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(carrConMejorPromApSede))
+                    .addGroup(EstadisticasPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel35)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cursoConMasEstSede)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cursoConMasApSede)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cursoConMejorPromApSede)))
+                .addGap(19, 19, 19))
+        );
+
+        PanelPrincipal.add(EstadisticasPanel, "card16");
+
+        EstadisticasCarreraPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        TituloEstadisticasCarrera.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        TituloEstadisticasCarrera.setForeground(new java.awt.Color(255, 255, 255));
+        TituloEstadisticasCarrera.setText("Estadísticas para la carrera carrera");
+
+        TituloLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel41.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel41.setText("Promedio de aprobación");
+
+        TituloLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel44.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel44.setText("Promedios de notas obtenidas");
+
+        TituloLabel45.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel45.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel45.setText("En Exámenes:");
+
+        TituloLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel46.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel46.setText("En parciales:");
+
+        promNotaParCarr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promNotaParCarr.setForeground(new java.awt.Color(255, 255, 255));
+        promNotaParCarr.setText("No hay datos");
+
+        promNotaExCarr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promNotaExCarr.setForeground(new java.awt.Color(255, 255, 255));
+        promNotaExCarr.setText("No hay datos");
+
+        promApCarr.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        promApCarr.setForeground(new java.awt.Color(255, 255, 255));
+        promApCarr.setText("No hay datos");
+
+        TituloLabel57.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel57.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grafica.png"))); // NOI18N
+
+        TituloLabel58.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel58.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel58.setText("Curso con más estudiantes cursando");
+
+        conMasEstCarr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        conMasEstCarr.setForeground(new java.awt.Color(255, 255, 255));
+        conMasEstCarr.setText("No hay datos");
+
+        TituloLabel60.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel60.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel60.setText("Curso con más aprobaciones");
+
+        conMasApCarr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        conMasApCarr.setForeground(new java.awt.Color(255, 255, 255));
+        conMasApCarr.setText("No hay datos");
+
+        TituloLabel62.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel62.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel62.setText("Curso con mejor promedio de aprobación");
+
+        conMejorPromApCarr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        conMejorPromApCarr.setForeground(new java.awt.Color(255, 255, 255));
+        conMejorPromApCarr.setText("No hay datos");
+
+        buttonGroupEstadCarrera.add(EnSedeCarrRadioButton);
+        EnSedeCarrRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EnSedeCarrRadioButton.setSelected(true);
+        EnSedeCarrRadioButton.setText("En sede seleccionada");
+        EnSedeCarrRadioButton.setFocusPainted(false);
+        EnSedeCarrRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                EnSedeCarrRadioButtonItemStateChanged(evt);
+            }
+        });
+        EnSedeCarrRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnSedeCarrRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroupEstadCarrera.add(EnTodasCarrRadioButton);
+        EnTodasCarrRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EnTodasCarrRadioButton.setText("En todas las sedes");
+        EnTodasCarrRadioButton.setFocusPainted(false);
+        EnTodasCarrRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                EnTodasCarrRadioButtonItemStateChanged(evt);
+            }
+        });
+        EnTodasCarrRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnTodasCarrRadioButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EstadisticasCarreraPanelLayout = new javax.swing.GroupLayout(EstadisticasCarreraPanel);
+        EstadisticasCarreraPanel.setLayout(EstadisticasCarreraPanelLayout);
+        EstadisticasCarreraPanelLayout.setHorizontalGroup(
+            EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(EnSedeCarrRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EnTodasCarrRadioButton))
+                    .addComponent(TituloLabel41)
+                    .addComponent(promApCarr)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel57)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloEstadisticasCarrera))
+                    .addComponent(TituloLabel44)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(promNotaExCarr))
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(promNotaParCarr)))
+                .addGap(44, 44, 44)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel58)
+                    .addComponent(conMasEstCarr)
+                    .addComponent(TituloLabel60)
+                    .addComponent(conMasApCarr)
+                    .addComponent(TituloLabel62)
+                    .addComponent(conMejorPromApCarr))
+                .addContainerGap(215, Short.MAX_VALUE))
+        );
+        EstadisticasCarreraPanelLayout.setVerticalGroup(
+            EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel57)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(TituloEstadisticasCarrera)))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnSedeCarrRadioButton)
+                    .addComponent(EnTodasCarrRadioButton))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(promApCarr)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel45)
+                            .addComponent(promNotaExCarr))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(EstadisticasCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TituloLabel46)
+                            .addComponent(promNotaParCarr)))
+                    .addGroup(EstadisticasCarreraPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel58)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(conMasEstCarr)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel60)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(conMasApCarr)
+                        .addGap(18, 18, 18)
+                        .addComponent(TituloLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(conMejorPromApCarr)))
+                .addGap(107, 107, 107))
+        );
+
+        PanelPrincipal.add(EstadisticasCarreraPanel, "card16");
+
+        EstadisticasCursoPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        TituloEstadisticasCurso.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        TituloEstadisticasCurso.setForeground(new java.awt.Color(255, 255, 255));
+        TituloEstadisticasCurso.setText("Estadísticas para el curso Curso");
+
+        TituloLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel42.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel42.setText("Promedio de aprobación");
+
+        TituloLabel47.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TituloLabel47.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel47.setText("Promedios de notas obtenidas");
+
+        TituloLabel48.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel48.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel48.setText("En exámenes:");
+
+        TituloLabel49.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        TituloLabel49.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel49.setText("En parciales:");
+
+        promNotaParCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promNotaParCurso.setForeground(new java.awt.Color(255, 255, 255));
+        promNotaParCurso.setText("No hay datos");
+
+        promNotaExCurso.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        promNotaExCurso.setForeground(new java.awt.Color(255, 255, 255));
+        promNotaExCurso.setText("No hay datos");
+
+        promAprobCurso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        promAprobCurso.setForeground(new java.awt.Color(255, 255, 255));
+        promAprobCurso.setText("No hay datos");
+
+        TituloLabel66.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TituloLabel66.setForeground(new java.awt.Color(255, 255, 255));
+        TituloLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grafica.png"))); // NOI18N
+
+        buttonGroupEstadCurso.add(EnSelecCursoRadioButton);
+        EnSelecCursoRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EnSelecCursoRadioButton.setSelected(true);
+        EnSelecCursoRadioButton.setText("En sede seleccionada");
+        EnSelecCursoRadioButton.setFocusPainted(false);
+        EnSelecCursoRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                EnSelecCursoRadioButtonItemStateChanged(evt);
+            }
+        });
+        EnSelecCursoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnSelecCursoRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroupEstadCurso.add(EnTodasCursoRadioButton);
+        EnTodasCursoRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EnTodasCursoRadioButton.setText("En todas las sedes");
+        EnTodasCursoRadioButton.setFocusPainted(false);
+        EnTodasCursoRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                EnTodasCursoRadioButtonItemStateChanged(evt);
+            }
+        });
+        EnTodasCursoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnTodasCursoRadioButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EstadisticasCursoPanelLayout = new javax.swing.GroupLayout(EstadisticasCursoPanel);
+        EstadisticasCursoPanel.setLayout(EstadisticasCursoPanelLayout);
+        EstadisticasCursoPanelLayout.setHorizontalGroup(
+            EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(EnSelecCursoRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(EnTodasCursoRadioButton))
+                    .addComponent(TituloLabel42)
+                    .addComponent(promAprobCurso)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel66)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TituloEstadisticasCurso))
+                    .addComponent(TituloLabel47)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel48)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(promNotaExCurso))
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addComponent(TituloLabel49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(promNotaParCurso)))
+                .addContainerGap(667, Short.MAX_VALUE))
+        );
+        EstadisticasCursoPanelLayout.setVerticalGroup(
+            EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TituloLabel66)
+                    .addGroup(EstadisticasCursoPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(TituloEstadisticasCurso)))
+                .addGap(18, 18, 18)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnSelecCursoRadioButton)
+                    .addComponent(EnTodasCursoRadioButton))
+                .addGap(18, 18, 18)
+                .addComponent(TituloLabel42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(promAprobCurso)
+                .addGap(18, 18, 18)
+                .addComponent(TituloLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel48)
+                    .addComponent(promNotaExCurso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EstadisticasCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloLabel49)
+                    .addComponent(promNotaParCurso))
+                .addGap(147, 147, 147))
+        );
+
+        PanelPrincipal.add(EstadisticasCursoPanel, "card16");
+
+        CargandoPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        imgCargando.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgCargando.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/cargandoGrande.gif"))); // NOI18N
+        imgCargando.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Cargando...");
+
+        javax.swing.GroupLayout CargandoPanelLayout = new javax.swing.GroupLayout(CargandoPanel);
+        CargandoPanel.setLayout(CargandoPanelLayout);
+        CargandoPanelLayout.setHorizontalGroup(
+            CargandoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CargandoPanelLayout.createSequentialGroup()
+                .addGap(395, 395, 395)
+                .addGroup(CargandoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CargandoPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel21))
+                    .addComponent(imgCargando))
+                .addContainerGap(524, Short.MAX_VALUE))
+        );
+        CargandoPanelLayout.setVerticalGroup(
+            CargandoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CargandoPanelLayout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(imgCargando)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21)
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(CargandoPanel, "card19");
+
+        NotificacionesPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        BuscarNotifiacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BuscarNotifiacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                BuscarNotifiacionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                BuscarNotifiacionFocusLost(evt);
+            }
+        });
+        BuscarNotifiacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarNotifiacionActionPerformed(evt);
+            }
+        });
+        BuscarNotifiacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarNotifiacionKeyReleased(evt);
+            }
+        });
+
+        NotificacionesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Objeto", "Título", "Fecha"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane23.setViewportView(NotificacionesTable);
+
+        VerNotificacionButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        VerNotificacionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/ver_verde.png"))); // NOI18N
+        VerNotificacionButton.setText("Ver Notificación");
+        VerNotificacionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerNotificacionButtonActionPerformed(evt);
+            }
+        });
+
+        btnBuscarNotificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBuscarNotificacion.setText("Buscar");
+        btnBuscarNotificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarNotificacionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout NotificacionesPanelLayout = new javax.swing.GroupLayout(NotificacionesPanel);
+        NotificacionesPanel.setLayout(NotificacionesPanelLayout);
+        NotificacionesPanelLayout.setHorizontalGroup(
+            NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                .addGroup(NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(VerNotificacionButton))
+                    .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(BuscarNotifiacion, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarNotificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(NotificacionesPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25))
+        );
+        NotificacionesPanelLayout.setVerticalGroup(
+            NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NotificacionesPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(NotificacionesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarNotificacion)
+                    .addComponent(BuscarNotifiacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(VerNotificacionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        PanelPrincipal.add(NotificacionesPanel, "cardSedes");
+
+        VerNotificacion.setBackground(new java.awt.Color(73, 202, 114));
+
+        tituloVerNotificacion.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tituloVerNotificacion.setForeground(new java.awt.Color(255, 255, 255));
+        tituloVerNotificacion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tituloVerNotificacion.setToolTipText("");
+        tituloVerNotificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Fecha:");
+
+        fechaVerNotificacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fechaVerNotificacion.setForeground(new java.awt.Color(255, 255, 255));
+        fechaVerNotificacion.setText("-");
+
+        textoVerNotificacion.setEditable(false);
+        textoVerNotificacion.setColumns(20);
+        textoVerNotificacion.setLineWrap(true);
+        textoVerNotificacion.setRows(5);
+        jScrollPane24.setViewportView(textoVerNotificacion);
+
+        javax.swing.GroupLayout VerNotificacionLayout = new javax.swing.GroupLayout(VerNotificacion);
+        VerNotificacion.setLayout(VerNotificacionLayout);
+        VerNotificacionLayout.setHorizontalGroup(
+            VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerNotificacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                    .addGroup(VerNotificacionLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaVerNotificacion))
+                    .addComponent(tituloVerNotificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(594, Short.MAX_VALUE))
+        );
+        VerNotificacionLayout.setVerticalGroup(
+            VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VerNotificacionLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(tituloVerNotificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(VerNotificacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(fechaVerNotificacion))
+                .addGap(186, 186, 186))
+        );
+
+        PanelPrincipal.add(VerNotificacion, "card11");
+
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
         notificacionIcono.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -2357,6 +3244,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         notificacionIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/notification.png"))); // NOI18N
         notificacionIcono.setToolTipText("Notifiaciones");
         notificacionIcono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notificacionIconoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 notificacionIconoMouseEntered(evt);
             }
@@ -3156,6 +4046,126 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         opcionSeleccionada(CursosOpcion, "verMaterial");
     }//GEN-LAST:event_VerMaterialSubidoButtonActionPerformed
 
+    private void EnSedeSelecRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EnSedeSelecRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            opcionSeleccionada(EstadisticasOpcion, "estadisticas");
+        }
+    }//GEN-LAST:event_EnSedeSelecRadioButtonItemStateChanged
+
+    private void EnSedeSelecRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnSedeSelecRadioButtonActionPerformed
+
+    }//GEN-LAST:event_EnSedeSelecRadioButtonActionPerformed
+
+    private void EnTodasSedesRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EnTodasSedesRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            opcionSeleccionada(EstadisticasOpcion, "estadisticas");
+        }
+    }//GEN-LAST:event_EnTodasSedesRadioButtonItemStateChanged
+
+    private void EnSedeCarrRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EnSedeCarrRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            opcionSeleccionada(CarrerasOpcion, "estadisticasCarrera");
+        }
+    }//GEN-LAST:event_EnSedeCarrRadioButtonItemStateChanged
+
+    private void EnSedeCarrRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnSedeCarrRadioButtonActionPerformed
+
+    }//GEN-LAST:event_EnSedeCarrRadioButtonActionPerformed
+
+    private void EnTodasCarrRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EnTodasCarrRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            opcionSeleccionada(CarrerasOpcion, "estadisticasCarrera");
+        }
+    }//GEN-LAST:event_EnTodasCarrRadioButtonItemStateChanged
+
+    private void EnTodasCarrRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnTodasCarrRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EnTodasCarrRadioButtonActionPerformed
+
+    private void EnSelecCursoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EnSelecCursoRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            opcionSeleccionada(CursosOpcion, "estadisticasCurso");
+        }
+    }//GEN-LAST:event_EnSelecCursoRadioButtonItemStateChanged
+
+    private void EnSelecCursoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnSelecCursoRadioButtonActionPerformed
+
+    }//GEN-LAST:event_EnSelecCursoRadioButtonActionPerformed
+
+    private void EnTodasCursoRadioButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_EnTodasCursoRadioButtonItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            opcionSeleccionada(CursosOpcion, "estadisticasCurso");
+        }
+    }//GEN-LAST:event_EnTodasCursoRadioButtonItemStateChanged
+
+    private void EnTodasCursoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnTodasCursoRadioButtonActionPerformed
+
+    }//GEN-LAST:event_EnTodasCursoRadioButtonActionPerformed
+
+    private void EstadisticasOpcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasOpcionMouseClicked
+        if (Fabrica.getInstance().getContEdu().getSede() != null) {
+            opcionSeleccionada(EstadisticasOpcion, "estadisticas");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una sede");
+        }
+    }//GEN-LAST:event_EstadisticasOpcionMouseClicked
+
+    private void EstadisticasOpcionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasOpcionMouseEntered
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_EstadisticasOpcionMouseEntered
+
+    private void EstadisticasOpcionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadisticasOpcionMouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_EstadisticasOpcionMouseExited
+
+    private void InscripcionCButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InscripcionCButton1ActionPerformed
+        if (CursosTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un curso", "Advertencia", WARNING_MESSAGE);
+        } else {
+            opcionSeleccionada(CursosOpcion, "estadisticasCurso");            
+        }
+    }//GEN-LAST:event_InscripcionCButton1ActionPerformed
+
+    private void btnEstadCarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadCarrActionPerformed
+        if (CarreraTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una carrera", "Advertencia", WARNING_MESSAGE);
+        } else {
+            opcionSeleccionada(CarrerasOpcion, "estadisticasCarrera");            
+        }
+    }//GEN-LAST:event_btnEstadCarrActionPerformed
+
+    private void notificacionIconoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificacionIconoMouseClicked
+        opcionSeleccionada(null, "notificaciones");
+    }//GEN-LAST:event_notificacionIconoMouseClicked
+
+    private void BuscarNotifiacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarNotifiacionFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionFocusGained
+
+    private void BuscarNotifiacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BuscarNotifiacionFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionFocusLost
+
+    private void BuscarNotifiacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNotifiacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionActionPerformed
+
+    private void BuscarNotifiacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarNotifiacionKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarNotifiacionKeyReleased
+
+    private void VerNotificacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerNotificacionButtonActionPerformed
+        if(NotificacionesTable.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una notificación", "Advertencia", WARNING_MESSAGE);
+        }else{
+            opcionSeleccionada(null, "verNotificacion");
+        }
+    }//GEN-LAST:event_VerNotificacionButtonActionPerformed
+
+    private void btnBuscarNotificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNotificacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarNotificacionActionPerformed
+
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
@@ -3269,6 +4279,52 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 listarMateriales();
                 this.setTitle("Menú: Material Subido");
                 break;
+            case "notificaciones":  
+                List<Notificacion> notificaciones = Fabrica.getInstance().getContDocente().getLogin().getNotificaciones();
+                DefaultTableModel modeloNotif = (DefaultTableModel) NotificacionesTable.getModel();
+
+                while (modeloNotif.getRowCount() > 0) {
+                    modeloNotif.removeRow(0);
+                }
+
+                if (notificaciones.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No tienes notificaciones");
+                } else {
+                    for (Notificacion notif : notificaciones) {
+                        Object[] datos = {notif, notif.getTitulo(), dateFormat.format(notif.getFecha()), notif.isVista()};
+                        modeloNotif.addRow(datos);
+                    }
+                }
+                
+                this.setTitle("Menú: Notificaciones");
+                break;
+            case "verNotificacion":
+                Notificacion notificacion = (Notificacion) NotificacionesTable.getModel().getValueAt(NotificacionesTable.getSelectedRow(), 0);
+                tituloVerNotificacion.setText(notificacion.getTitulo());
+                textoVerNotificacion.setText(notificacion.getTexto());
+                fechaVerNotificacion.setText(dateFormat.format(notificacion.getFecha()));
+                Fabrica.getInstance().getContEst().notificacionVista(notificacion);
+                setCantidadNotif();
+                this.setTitle("Menú: Ver Notificación");
+                break;
+            case "estadisticasCurso":
+                control = false; //se muestra despues desde la funcion cargarEstadisticas()
+                cargarEstadisticas("estadisticasCurso");
+                this.setTitle("Menú: Estadísticas Curso");
+                break;
+            case "estadisticasCarrera":
+                control = false; //se muestra despues desde la funcion cargarEstadisticas()
+                cargarEstadisticas("estadisticasCarrera");
+                this.setTitle("Menú: Estadísticas Carrera");
+                break;
+            case "estadisticas":
+                control = false; //se muestra despues desde la funcion cargarEstadisticas()
+                cargarEstadisticas("estadisticas");
+                this.setTitle("Menú: Estadísticas Sede");
+                break;
+            case "verCarrera":
+                modelo = (DefaultTableModel) CarreraTable.getModel();
+                Carrera carrera = (Carrera) modelo.getValueAt(CarreraTable.getSelectedRow(), 0);
         }
 
         if (control) {
@@ -3634,6 +4690,270 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             volver.remove(volver.size() - 1); //borrar la ventana actual
         }
     }
+    
+    public void cargarEstadisticas(String tipo){
+        new SwingWorker<Object[], Void>(){
+            @Override
+            protected Object[] doInBackground() throws Exception {
+                System.out.println(".doInBackground() "+tipo);
+                switch(tipo){
+                    case "estadisticasCurso":
+                        Curso curso = (Curso) CursosTable.getModel().getValueAt(CursosTable.getSelectedRow(), 0);
+                        boolean enTodas = EnTodasCursoRadioButton.isSelected();
+                        double promExamenes = Fabrica.getInstance().getContEstad().promedioExamenesCurso(enTodas, curso);
+                        double promParciales = Fabrica.getInstance().getContEstad().promedioParcialesCurso(enTodas, curso);
+                        double promAprobacion = Fabrica.getInstance().getContEstad().promedioAprobacionCurso(enTodas, curso);
+                        
+                        Object[] promedios = {promExamenes, promParciales, promAprobacion};
+                        return promedios;
+                    case "estadisticasCarrera":
+                        Carrera carrera = (Carrera) CarreraTable.getModel().getValueAt(CarreraTable.getSelectedRow(), 0);
+                        boolean enTodasCarr = EnTodasCarrRadioButton.isSelected();
+                        
+                        double promExamenesCarr = Fabrica.getInstance().getContEstad().promedioExamenesCarrera(enTodasCarr, carrera);
+                        double promParcialesCarr = Fabrica.getInstance().getContEstad().promedioParcialesCarrera(enTodasCarr, carrera);
+                        double promAprobacionCarr = Fabrica.getInstance().getContEstad().promedioAprobacionCarrera(enTodasCarr, carrera);
+                        Object[] cursoConMasEstCarr = Fabrica.getInstance().getContEstad().cursoConMasEstudiantesCursandoCarrera(enTodasCarr, carrera);
+                        Object[] cursoConMasApCarr =  Fabrica.getInstance().getContEstad().cursoConMasAprobacionesCarrera(enTodasCarr, carrera);
+                        Object[] cursoConMejorPromApCarr =  Fabrica.getInstance().getContEstad().cursoConMejorPrmedioAprobacionCarrera(enTodasCarr, carrera);
+                        Object[] promediosCarr = {promExamenesCarr, promParcialesCarr, promAprobacionCarr, cursoConMasEstCarr, cursoConMasApCarr, cursoConMejorPromApCarr};
+                        return promediosCarr;                        
+                    case "estadisticas":
+                        boolean enTodasSede = EnTodasSedesRadioButton.isSelected();
+                        
+                        double promExamenesSede = Fabrica.getInstance().getContEstad().promedioExamenesSede(enTodasSede);
+                        double promParcialesSede = Fabrica.getInstance().getContEstad().promedioParcialesSede(enTodasSede);
+                        double promApCursosSede = Fabrica.getInstance().getContEstad().promedioAprobacionCursoSede(enTodasSede);
+                        double promApCarrerasSede = Fabrica.getInstance().getContEstad().promedioAprobacionCarreraSede(enTodasSede);
+                        Object[] cursoConMasEstSede = Fabrica.getInstance().getContEstad().cursoConMasEstudiantesCursandoSede(enTodasSede);
+                        Object[] cursoConMasApSede =  Fabrica.getInstance().getContEstad().cursoConMasAprobacionesCarreraSede(enTodasSede);
+                        Object[] cursoConMejorPromApSede =  Fabrica.getInstance().getContEstad().cursoConMejorPrmedioAprobacionCarreraSede(enTodasSede);
+                        Object[] carreraConMasEstCurs = Fabrica.getInstance().getContEstad().carreraConMasEstudiantesCursandoSede( enTodasSede);
+                        Object[] carreraConMasApSede = Fabrica.getInstance().getContEstad().carreraConMasAprobacionesSede(enTodasSede);
+                        Object[] carreraConMejorPromApSede = Fabrica.getInstance().getContEstad().carreraConMejorPrmedioAprobacionSede(enTodasSede);
+                        Object[] promediosSede = {promExamenesSede, promParcialesSede, promApCursosSede, promApCarrerasSede, cursoConMasEstSede, cursoConMasApSede, cursoConMejorPromApSede, carreraConMasEstCurs, carreraConMasApSede, carreraConMejorPromApSede};
+                        return promediosSede;
+                }
+                
+                return null;
+            }
+
+            @Override
+            protected void done(){
+                try{
+                    Object[] promedios = get(); // asi se obtiene lo que retorna el doInBackground
+                    if(promedios!=null){
+                        switch(tipo){
+                            case "estadisticasCurso":
+                                estadisticasCurso(promedios);
+                                break;
+                            case "estadisticasCarrera":
+                                estadisticasCarrera(promedios);
+                                break;
+                            case "estadisticas":
+                                estadisticasSede(promedios);
+                                break;
+                        }
+                        mostrarCargando(false, tipo);   
+                    }   
+                } catch (InterruptedException | ExecutionException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.execute();
+        mostrarCargando(true, null);  
+    }
+    
+    public void estadisticasCurso(Object[] promedios){
+        Curso curso = (Curso) CursosTable.getModel().getValueAt(CursosTable.getSelectedRow(), 0);
+        TituloEstadisticasCurso.setText("Estadísticas para el curso "+curso.getNombre()+" - "+curso.getCarrera().getNombre());
+        DecimalFormat df = new DecimalFormat("#.##");
+        
+        if((double)promedios[0] > -1){
+            promNotaExCurso.setText(df.format((double)promedios[0]));
+        }else{
+            promNotaExCurso.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[1] > -1){
+            promNotaParCurso.setText(df.format((double)promedios[1]));
+        }else{
+            promNotaParCurso.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[2] > -1){
+            promAprobCurso.setText(df.format((double)promedios[2])+"%");
+        }else{
+            promAprobCurso.setText("No hay datos disponibles");
+        }
+        
+        String panelMostrar = "estadisticasCurso";
+        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+        cl.show(PanelPrincipal, panelMostrar);
+        Object[] v = {panelMostrar, CursosOpcion};
+        volver.add(v);
+    }
+    
+    public void estadisticasCarrera(Object[] promedios){
+        Carrera carrera = (Carrera) CarreraTable.getModel().getValueAt(CarreraTable.getSelectedRow(), 0);
+        TituloEstadisticasCarrera.setText("Estadísticas para la carrera "+carrera.getNombre());
+        DecimalFormat df = new DecimalFormat("#.##");
+        
+        if((double)promedios[0] > -1){
+            promNotaExCarr.setText(df.format((double)promedios[0]));
+        }else{
+            promNotaExCarr.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[1] > -1){
+            promNotaParCarr.setText(df.format((double)promedios[1]));
+        }else{
+            promNotaParCarr.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[2] > -1){
+            promApCarr.setText(df.format((double)promedios[2])+"%");
+        }else{
+            promApCarr.setText("No hay datos disponibles");
+        }
+        
+        Object[] cursoAux = (Object[]) promedios[3]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Curso curso = (Curso) cursoAux[0];
+            conMasEstCarr.setText(curso.getNombre()+": "+String.valueOf((int)cursoAux[1]));
+        }else{
+            conMasEstCarr.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[4]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Curso curso = (Curso) cursoAux[0];
+            conMasApCarr.setText(curso.getNombre()+": "+String.valueOf((int)cursoAux[1]));
+        }else{
+            conMasApCarr.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[5]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Curso curso = (Curso) cursoAux[0];
+            conMejorPromApCarr.setText(curso.getNombre()+": "+df.format((double)cursoAux[1])+"%");
+        }else{
+            conMejorPromApCarr.setText("No hay datos disponibles");
+        }
+        
+        String panelMostrar = "estadisticasCarrera";
+        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+        cl.show(PanelPrincipal, panelMostrar);
+        Object[] v = {panelMostrar, CarrerasOpcion};
+        volver.add(v);
+    }
+    
+    public void estadisticasSede(Object[] promedios){
+        Sede sede = Fabrica.getInstance().getContEdu().getSede();
+        TituloEstadisticasSede.setText("Estadísticas para la sede "+sede.getNombre());
+        DecimalFormat df = new DecimalFormat("#.##");
+                        
+        if((double)promedios[0] > -1){
+            promNotaExSede.setText(df.format((double)promedios[0]));
+        }else{
+            promNotaExSede.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[1] > -1){
+            promNotaParSede.setText(df.format((double)promedios[1]));
+        }else{
+            promNotaParSede.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[2] > -1){
+            promApCursosSede.setText(df.format((double)promedios[2])+"%");
+        }else{
+            promApCursosSede.setText("No hay datos disponibles");
+        }
+        
+        if((double)promedios[3] > -1){
+            promApCarrSede.setText(df.format((double)promedios[3])+"%");
+        }else{
+            promApCarrSede.setText("No hay datos disponibles");
+        }
+        
+        Object[] cursoAux = (Object[]) promedios[4]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Curso curso = (Curso) cursoAux[0];
+            cursoConMasEstSede.setText(curso.getNombre()+": "+String.valueOf((int)cursoAux[1]));
+        }else{
+            cursoConMasEstSede.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[5]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Curso curso = (Curso) cursoAux[0];
+            cursoConMasApSede.setText(curso.getNombre()+": "+String.valueOf((int)cursoAux[1]));
+        }else{
+            cursoConMasApSede.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[6]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Curso curso = (Curso) cursoAux[0];
+            cursoConMejorPromApSede.setText(curso.getNombre()+": "+df.format((double)cursoAux[1])+"%");
+        }else{
+            cursoConMejorPromApSede.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[7]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Carrera carrera = (Carrera) cursoAux[0];
+            carrConMasEstSede.setText(carrera.getNombre()+": "+String.valueOf((int)cursoAux[1]));
+        }else{
+            carrConMasEstSede.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[8]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Carrera carrera = (Carrera) cursoAux[0];
+            carrConMasApSede.setText(carrera.getNombre()+": "+String.valueOf((int)cursoAux[1]));
+        }else{
+            carrConMasApSede.setText("No hay datos disponibles");
+        }
+        
+        cursoAux = (Object[]) promedios[9]; // curso y cantidad
+        if(cursoAux[0] != null){
+            Carrera carrera = (Carrera) cursoAux[0];
+            carrConMejorPromApSede.setText(carrera.getNombre()+": "+df.format((double)cursoAux[1])+"%");
+        }else{
+            carrConMejorPromApSede.setText("No hay datos disponibles");
+        }
+        
+        String panelMostrar = "estadisticas";
+        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+        cl.show(PanelPrincipal, panelMostrar);
+        Object[] v = {panelMostrar, CarrerasOpcion};
+        volver.add(v);
+    }
+    
+    public void mostrarCargando(boolean mostrar, String panelMostar){
+        CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
+        if(mostrar){
+            cl.show(PanelPrincipal, "cargando");
+        }else{
+            cl.show(PanelPrincipal, panelMostar);
+        }
+    }
+    
+    public void setCantidadNotif(){
+        int cant = Fabrica.getInstance().getContDocente().getLogin().cantNotifNoVista();
+        notificacionIcono.removeAll();
+        notificacionIcono.revalidate();
+        notificacionIcono.repaint();
+        if(cant > 0){
+            notificacionIcono.setLayout(new FlowLayout(FlowLayout.CENTER));
+            JLabel text = new JLabel(String.valueOf(cant));
+            text.setForeground(Color.red);
+            text.setFont(new Font("Dialog", Font.BOLD, 13));
+            notificacionIcono.add(text);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AuxLabel;
@@ -3644,9 +4964,11 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField BuscarCarrera;
     private javax.swing.JTextField BuscarExamenTextField;
     private javax.swing.JTextField BuscarNoticia;
+    private javax.swing.JTextField BuscarNotifiacion;
     private javax.swing.JTextField BuscarParcialTextField;
     private javax.swing.JTextField BuscarSede;
     private javax.swing.JTextField BuscarTextField;
+    private javax.swing.JPanel CargandoPanel;
     private javax.swing.JTable CarreraTable;
     private javax.swing.JPanel CarrerasOpcion;
     private javax.swing.JPanel CarrerasPanel;
@@ -3659,10 +4981,21 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea DescTextArea;
     private javax.swing.JButton DescargarMaterialButton;
     private javax.swing.JRadioButton DictandoRadioButton;
+    private javax.swing.JRadioButton EnSedeCarrRadioButton;
+    private javax.swing.JRadioButton EnSedeSelecRadioButton;
+    private javax.swing.JRadioButton EnSelecCursoRadioButton;
+    private javax.swing.JRadioButton EnTodasCarrRadioButton;
+    private javax.swing.JRadioButton EnTodasCursoRadioButton;
+    private javax.swing.JRadioButton EnTodasSedesRadioButton;
+    private javax.swing.JPanel EstadisticasCarreraPanel;
+    private javax.swing.JPanel EstadisticasCursoPanel;
+    private javax.swing.JPanel EstadisticasOpcion;
+    private javax.swing.JPanel EstadisticasPanel;
     private javax.swing.JPanel ExamenesOpcion;
     private javax.swing.JPanel ExamenesPanel;
     private javax.swing.JTable ExamenesTable;
     private javax.swing.JTextArea HorariosTextArea;
+    private javax.swing.JButton InscripcionCButton1;
     private javax.swing.JPanel MaterialesSubidosPanel;
     private javax.swing.JTable MaterialesSubidosTable;
     private javax.swing.JRadioButton MisExmenesRadioButton;
@@ -3670,6 +5003,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel NoticiasOpcion;
     private javax.swing.JPanel NoticiasPanel;
     private javax.swing.JTable NoticiasTable;
+    private javax.swing.JPanel NotificacionesPanel;
+    private javax.swing.JTable NotificacionesTable;
     private javax.swing.JLabel OptativoLabel;
     private javax.swing.JPanel PanelCabecera;
     private javax.swing.JPanel PanelLateral;
@@ -3691,16 +5026,45 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel SubirNotaParcial;
     private javax.swing.JButton SubirNotasParcial;
     private javax.swing.JTextField TituloArchivoTextField;
+    private javax.swing.JLabel TituloEstadisticasCarrera;
+    private javax.swing.JLabel TituloEstadisticasCurso;
+    private javax.swing.JLabel TituloEstadisticasSede;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel TituloLabel12;
     private javax.swing.JLabel TituloLabel13;
     private javax.swing.JLabel TituloLabel14;
     private javax.swing.JLabel TituloLabel16;
+    private javax.swing.JLabel TituloLabel17;
     private javax.swing.JLabel TituloLabel18;
+    private javax.swing.JLabel TituloLabel19;
     private javax.swing.JLabel TituloLabel20;
     private javax.swing.JLabel TituloLabel21;
     private javax.swing.JLabel TituloLabel22;
+    private javax.swing.JLabel TituloLabel23;
+    private javax.swing.JLabel TituloLabel24;
+    private javax.swing.JLabel TituloLabel25;
+    private javax.swing.JLabel TituloLabel26;
+    private javax.swing.JLabel TituloLabel27;
+    private javax.swing.JLabel TituloLabel28;
+    private javax.swing.JLabel TituloLabel29;
+    private javax.swing.JLabel TituloLabel34;
+    private javax.swing.JLabel TituloLabel35;
+    private javax.swing.JLabel TituloLabel37;
+    private javax.swing.JLabel TituloLabel39;
     private javax.swing.JLabel TituloLabel4;
+    private javax.swing.JLabel TituloLabel41;
+    private javax.swing.JLabel TituloLabel42;
+    private javax.swing.JLabel TituloLabel44;
+    private javax.swing.JLabel TituloLabel45;
+    private javax.swing.JLabel TituloLabel46;
+    private javax.swing.JLabel TituloLabel47;
+    private javax.swing.JLabel TituloLabel48;
+    private javax.swing.JLabel TituloLabel49;
+    private javax.swing.JLabel TituloLabel57;
+    private javax.swing.JLabel TituloLabel58;
+    private javax.swing.JLabel TituloLabel60;
+    private javax.swing.JLabel TituloLabel62;
+    private javax.swing.JLabel TituloLabel66;
     private javax.swing.JLabel TituloLabel7;
     private javax.swing.JLabel TituloLabel8;
     private javax.swing.JLabel TituloLabel9;
@@ -3715,6 +5079,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton VerExamenesPerfilButton;
     private javax.swing.JButton VerMaterialSubidoButton;
     private javax.swing.JPanel VerNoticia;
+    private javax.swing.JPanel VerNotificacion;
+    private javax.swing.JButton VerNotificacionButton;
     private javax.swing.JPanel VerParcialPanel;
     private javax.swing.JButton VerParcialesPerfilButton;
     private javax.swing.JPanel VerPerfilPanel;
@@ -3722,22 +5088,38 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarExamen;
     private javax.swing.JButton btnBuscarNoticia;
+    private javax.swing.JButton btnBuscarNotificacion;
     private javax.swing.JButton btnBuscarParcial;
     private javax.swing.JButton btnBuscarSede;
+    private javax.swing.JButton btnEstadCarr;
     private javax.swing.JButton btn_aceptar_subirNotaExamen;
     private javax.swing.JButton btn_aceptar_subirNotaParcial;
     private javax.swing.JButton btn_cancelar_subirNotaExamen;
     private javax.swing.JButton btn_cancelar_subirNotaParcial;
     private javax.swing.ButtonGroup buttonGroupCursos;
+    private javax.swing.ButtonGroup buttonGroupEstadCarrera;
+    private javax.swing.ButtonGroup buttonGroupEstadCurso;
+    private javax.swing.ButtonGroup buttonGroupEstadSede;
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.ButtonGroup buttonGroupParciales;
+    private javax.swing.JLabel carrConMasApSede;
+    private javax.swing.JLabel carrConMasEstSede;
+    private javax.swing.JLabel carrConMejorPromApSede;
     private javax.swing.JLabel carreraCurLabel;
     private javax.swing.JLabel ciPefilLabel;
+    private javax.swing.JLabel conMasApCarr;
+    private javax.swing.JLabel conMasEstCarr;
+    private javax.swing.JLabel conMejorPromApCarr;
     private javax.swing.JButton confirmarSubirMButton;
+    private javax.swing.JLabel cursoConMasApSede;
+    private javax.swing.JLabel cursoConMasEstSede;
+    private javax.swing.JLabel cursoConMejorPromApSede;
     private javax.swing.JTextArea descArchTextArea;
     private javax.swing.JLabel emailPerfilLabel;
     private javax.swing.JLabel fechaNacPerfilLabel;
+    private javax.swing.JLabel fechaVerNotificacion;
     private javax.swing.JLabel idPerfilLabel;
+    private javax.swing.JLabel imgCargando;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3751,6 +5133,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -3758,6 +5142,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3778,6 +5164,8 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
+    private javax.swing.JScrollPane jScrollPane23;
+    private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -3790,6 +5178,16 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel notaAprobCurLabel;
     private javax.swing.JLabel notaExonExLabel;
     private javax.swing.JLabel notificacionIcono;
+    private javax.swing.JLabel promApCarr;
+    private javax.swing.JLabel promApCarrSede;
+    private javax.swing.JLabel promApCursosSede;
+    private javax.swing.JLabel promAprobCurso;
+    private javax.swing.JLabel promNotaExCarr;
+    private javax.swing.JLabel promNotaExCurso;
+    private javax.swing.JLabel promNotaExSede;
+    private javax.swing.JLabel promNotaParCarr;
+    private javax.swing.JLabel promNotaParCurso;
+    private javax.swing.JLabel promNotaParSede;
     private javax.swing.JLabel rutaArchivoLabel;
     private javax.swing.JButton subirNota_Eliminar;
     private javax.swing.JButton subirNota_EliminarParcial;
@@ -3808,7 +5206,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JSpinner subirNota_notaParcial;
     private javax.swing.JTable subirNota_notas;
     private javax.swing.JTable subirNota_notasParcial;
+    private javax.swing.JTextArea textoVerNotificacion;
     private javax.swing.JLabel tituloMateriales;
+    private javax.swing.JLabel tituloVerNotificacion;
     private javax.swing.JButton verExamen;
     private javax.swing.JTextArea verExamen_datosEstudiante;
     private javax.swing.JLabel verExamen_fecha;
