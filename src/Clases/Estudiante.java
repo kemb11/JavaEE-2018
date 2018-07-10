@@ -362,5 +362,16 @@ public class Estudiante extends Usuario {
             }
         }
     }
+    
+    public void habilitarCarrera(Carrera c) {
+        if (this.carreraEstudiante != null) {
+            for (CarreraEstudiante ce : this.carreraEstudiante) {
+                if (ce.getCarrera().equals(c)) {
+                    ce.habilitar();
+                    break;
+                }
+            }
+        }
+    }
 
 }
