@@ -3252,7 +3252,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="verExamen_datosEstudiante1">
+                <Component class="javax.swing.JTextArea" name="verParcial_datosEstudiante">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>

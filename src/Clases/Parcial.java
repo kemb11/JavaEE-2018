@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import Persistencia.ResultadoPJpaController;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
@@ -68,10 +69,12 @@ public class Parcial extends Prueba {
         if(this.notasEstudiantes == null)
             this.notasEstudiantes = new ArrayList<>();
         this.notasEstudiantes.add(resultadoP);
+        ResultadoPJpaController rjpa = new ResultadoPJpaController();
+        rjpa.create(resultadoP);
     }
     
     public boolean editable() {
-        if(this.notasEstudiantes != null) {
+        if(this.notasEstudiantes != null && this.notasEstudiantes.size() > 0) {
             return false;
         }
         return true;

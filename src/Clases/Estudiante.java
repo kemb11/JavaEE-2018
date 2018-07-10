@@ -6,10 +6,14 @@
  */
 package Clases;
 
+import Persistencia.CursoAprobadoJpaController;
+import Persistencia.EstudianteJpaController;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.ManyToMany;
@@ -248,8 +252,9 @@ public class Estudiante extends Usuario {
             this.cursoAprobados = new ArrayList<>();
         }
         if (!this.cursoAprobados.contains(ca)) {
+            CursoAprobadoJpaController cajpa = new CursoAprobadoJpaController();
+            cajpa.create(ca);
             this.cursoAprobados.add(ca);
-            Fabrica.getInstance().getEntity().persist(ca);
             Fabrica.getInstance().getEntity().merge(this);
             if (ca.isAprobado()) {
                 String texto = "Felicitanciones, ha aprobado el curso " + ca.getCurso().getNombre() + " pertenecienta a la carrera " + ca.getCurso().getCarrera().getNombre() + " con nota " + nota;
@@ -257,6 +262,12 @@ public class Estudiante extends Usuario {
             } else {
                 String texto = "Felicitanciones, ha ganado elderecho a examen del curso " + ca.getCurso().getNombre() + " pertenecienta a la carrera " + ca.getCurso().getCarrera().getNombre() + " con nota " + nota;
                 Fabrica.getInstance().getContAdmin().enviarNotificacion("Derecho a examen", texto, this);
+            }
+            if(this.isCarreraAprobada(ca.getCurso().getCarrera())){
+                String texto = "Felicitanciones, ha completado la carrera " + ca.getCurso().getCarrera().getNombre();
+                Fabrica.getInstance().getContAdmin().enviarNotificacion("Felicitadiones", texto, this);
+                this.getCarreraEstudiante(ca.getCurso().getCarrera()).setAprobada(true);
+                Fabrica.getInstance().getEntity().persist(this.getCarreraEstudiante(ca.getCurso().getCarrera()));
             }
         }
     }
@@ -323,19 +334,19 @@ public class Estudiante extends Usuario {
         }
         return cant;
     }
-    
-    public Sede enQueSedeAprobo(CursoAprobado cursoAp){
+
+    public Sede enQueSedeAprobo(CursoAprobado cursoAp) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        
+
         for (InscripcionC inscripcion : this.inscripciones) {
             String[] array1 = dateFormat.format(inscripcion.getFecha()).split("-"); // divide la fecha, 0=dia, 1=mes, 2=año
             String[] array2 = dateFormat.format(cursoAp.getFecha()).split("-");
-            
-            if(array1[2].equals(array2[2])){
+
+            if (array1[2].equals(array2[2])) {
                 return inscripcion.getCurso().getSede();
             }
         }
-        
+
         return null;
     }
 
@@ -377,6 +388,44 @@ public class Estudiante extends Usuario {
             }
         }
         
+        return null;
+    }
+
+    public void habilitarCarrera(Carrera c) {
+        if (this.carreraEstudiante != null) {
+            for (CarreraEstudiante ce : this.carreraEstudiante) {
+                if (ce.getCarrera().equals(c)) {
+                    ce.habilitar();
+                    break;
+                }
+            }
+        }
+    }
+    
+    public boolean isCarreraAprobada(Carrera c){
+        int creditos = 0;
+        if(this.getListaCursosAprobados() != null){
+            for(Curso cur : this.getListaCursosAprobados()){
+                if(!c.getCursos().contains(cur) && !cur.isOptativo())
+                    return false;
+                else{
+                    if(c.getCursos().contains(cur))
+                        creditos += cur.getCreditos();
+                }
+            }
+        }
+        if(creditos >= c.getCreditos())
+            return true;
+        return false;
+    }
+    
+    public CarreraEstudiante getCarreraEstudiante(Carrera c){
+        if(this.carreraEstudiante != null){
+            for(CarreraEstudiante ce : this.carreraEstudiante){
+                if(ce.getCarrera().equals(c))
+                    return ce;
+            }            
+        }
         return null;
     }
 

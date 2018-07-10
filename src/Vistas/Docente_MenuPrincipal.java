@@ -71,9 +71,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         subirNota_notas.getColumnModel().removeColumn(subirNota_notas.getColumnModel().getColumn(0));
         subirNota_EstudiantesParcial.getColumnModel().removeColumn(subirNota_EstudiantesParcial.getColumnModel().getColumn(0));
         subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(0));
-        subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(1));
+        subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(0));
         MaterialesSubidosTable.getColumnModel().removeColumn(MaterialesSubidosTable.getColumnModel().getColumn(0));
         verExamen_tabla.getColumnModel().removeColumn(verExamen_tabla.getColumnModel().getColumn(0));
+        verParcial_tabla.getColumnModel().removeColumn(verParcial_tabla.getColumnModel().getColumn(0));
 
         // Agregar los paneles al contenedor(cardlayout)
         PanelPrincipal.add(CursosPanel, "cursos");
@@ -307,7 +308,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         jScrollPane19 = new javax.swing.JScrollPane();
         verParcial_tabla = new javax.swing.JTable();
         jScrollPane20 = new javax.swing.JScrollPane();
-        verExamen_datosEstudiante1 = new javax.swing.JTextArea();
+        verParcial_datosEstudiante = new javax.swing.JTextArea();
         PanelCabecera = new javax.swing.JPanel();
         notificacionIcono = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -2296,10 +2297,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         });
         jScrollPane19.setViewportView(verParcial_tabla);
 
-        verExamen_datosEstudiante1.setEditable(false);
-        verExamen_datosEstudiante1.setColumns(20);
-        verExamen_datosEstudiante1.setRows(5);
-        jScrollPane20.setViewportView(verExamen_datosEstudiante1);
+        verParcial_datosEstudiante.setEditable(false);
+        verParcial_datosEstudiante.setColumns(20);
+        verParcial_datosEstudiante.setRows(5);
+        jScrollPane20.setViewportView(verParcial_datosEstudiante);
 
         javax.swing.GroupLayout VerParcialPanelLayout = new javax.swing.GroupLayout(VerParcialPanel);
         VerParcialPanel.setLayout(VerParcialPanelLayout);
@@ -2902,34 +2903,38 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         if (subirNota_EstudiantesParcial.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un estudiante", "Error", WARNING_MESSAGE);
         } else {
-            DefaultTableModel modelo = (DefaultTableModel) subirNota_EstudiantesParcial.getModel();
-            InscripcionC ic = (InscripcionC) modelo.getValueAt(subirNota_EstudiantesParcial.getSelectedRow(), 0);
-            ResultadoP res = new ResultadoP();
-            res.setFecha(new Date());
-            res.setNota((int) subirNota_notaParcial.getValue());
-            res.setEstudiante(ic.getEstudiante());
-            DefaultTableModel modelo2 = (DefaultTableModel) subirNota_notasParcial.getModel();
-            Object[] datos = {null};
-            if (res.getParcial().getInstancia().equals("Segundo")) {
-                String aprobado = "Aprobado";
-                if (res.getNota() + res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getDerechoExamen()) {
-                    aprobado = "Reprobado";
-                } else {
-                    if (res.getNota() + res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getAproParciales()) {
-                        aprobado = "Derecho a Examen";
+            if(((int) subirNota_notaParcial.getValue()) > p.getNotaMaxima()){
+                JOptionPane.showMessageDialog(this, "La nota maxima es " + String.valueOf(p.getNotaMaxima()) +" puntos" , "Error", WARNING_MESSAGE);
+            }else{
+                DefaultTableModel modelo = (DefaultTableModel) subirNota_EstudiantesParcial.getModel();
+                InscripcionC ic = (InscripcionC) modelo.getValueAt(subirNota_EstudiantesParcial.getSelectedRow(), 0);
+                ResultadoP res = new ResultadoP();
+                res.setFecha(new Date());
+                res.setNota((int) subirNota_notaParcial.getValue());
+                res.setEstudiante(ic.getEstudiante());
+                DefaultTableModel modelo2 = (DefaultTableModel) subirNota_notasParcial.getModel();
+                Object[] datos = {null};
+                if (p.getInstancia().equals("Segundo")) {
+                    String aprobado = "Aprobado";
+                    if (res.getNota() + res.getEstudiante().AprobacionParcial(p).getNota() < p.getCurso().getDerechoExamen()) {
+                        aprobado = "Reprobado";
+                    } else {
+                        if (res.getNota() + res.getEstudiante().AprobacionParcial(p).getNota() < p.getCurso().getAproParciales()) {
+                            aprobado = "Derecho a Examen";
+                        }
                     }
+                    Object[] aux = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota(), aprobado};
+                    datos = aux;
+                } else {
+                    subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(subirNota_notasParcial.getColumnModel().getColumnCount() - 1));
+                    Object[] aux = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota()};
+                    datos = aux;
                 }
-                Object[] aux = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota(), aprobado};
-                datos = aux;
-            } else {
-                subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(subirNota_notasParcial.getColumnModel().getColumnCount() - 1));
-                Object[] aux = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota()};
-                datos = aux;
+                modelo2.addRow(datos);
+                resizeColumnWidth(subirNota_notasParcial);
+                modelo.removeRow(subirNota_EstudiantesParcial.getSelectedRow());
+                subirNota_notaParcial.setValue(((SpinnerNumberModel) subirNota_notaParcial.getModel()).getMinimum());
             }
-            modelo2.addRow(datos);
-            resizeColumnWidth(subirNota_notasParcial);
-            modelo.removeRow(subirNota_EstudiantesParcial.getSelectedRow());
-            subirNota_notaParcial.setValue(((SpinnerNumberModel) subirNota_notaParcial.getModel()).getMinimum());
         }
     }//GEN-LAST:event_subirNota_btnAgregarParcialActionPerformed
 
@@ -2966,6 +2971,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             if (modelo.getRowCount() > 0) {
                 for (int i = 0; i < modelo.getRowCount(); i++) {
                     ResultadoP nota = (ResultadoP) modelo.getValueAt(i, 0);
+                    nota.setParcial(p);
                     p.setNota(nota);
                     if (p.getInstancia().equals("Segundo")) {
                         ResultadoP notaAnterior = nota.getEstudiante().AprobacionParcial(p);
@@ -2975,7 +2981,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             ca.setFecha(new Date());
                             ca.setAprobado(true);
                             ca.setEstudiante(nota.getEstudiante());
-                            String notaEst = String.valueOf(nota.getNota() + notaAnterior.getNota()) + "/" + String.valueOf(p.getNotaMaxima());
+                            String notaEst = String.valueOf(nota.getNota() + notaAnterior.getNota()) + "/" + String.valueOf(p.getCurso().getMaxParciales());
                             nota.getEstudiante().CursoAprobado(ca, notaEst);
                         } else {
                             if (notaAnterior.getNota() + nota.getNota() > p.getCurso().getDerechoExamen()) {
@@ -2984,7 +2990,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                                 ca.setFecha(new Date());
                                 ca.setAprobado(false);
                                 ca.setEstudiante(nota.getEstudiante());
-                                String notaEst = String.valueOf(nota.getNota() + notaAnterior.getNota()) + "/" + String.valueOf(p.getNotaMaxima());
+                                String notaEst = String.valueOf(nota.getNota() + notaAnterior.getNota()) + "/" + String.valueOf(p.getCurso().getMaxParciales());
                                 nota.getEstudiante().CursoAprobado(ca, notaEst);
                             }
                         }
@@ -3132,9 +3138,9 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_verExamen_tablaMouseClicked
 
     private void verParcial_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verParcial_tablaMouseClicked
-        if (verExamen_tabla.getSelectedRow() != -1) {
-            ResultadoP rp = (ResultadoP) verExamen_tabla.getModel().getValueAt(verExamen_tabla.getSelectedRow(), 0);
-            verExamen_datosEstudiante.setText(rp.toString());
+        if (verParcial_tabla.getSelectedRow() != -1) {
+            ResultadoP rp = (ResultadoP) verParcial_tabla.getModel().getValueAt(verParcial_tabla.getSelectedRow(), 0);
+            verParcial_datosEstudiante.setText(rp.toString());
         }
     }//GEN-LAST:event_verParcial_tablaMouseClicked
 
@@ -3586,6 +3592,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         verExamen_fecha.setText(dateFormat.format(e.getFecha()));
         verExamen_notaAprobacion.setText(String.valueOf(e.getNotaApro()));
         verExamen_notaTotal.setText(String.valueOf(e.getNotaMax()));
+        verExamen_datosEstudiante.setText("");
         DefaultTableModel modelo = (DefaultTableModel) verExamen_tabla.getModel();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
@@ -3604,6 +3611,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
         verParcial_fecha.setText(dateFormat.format(p.getFecha()));
         verParcial_notaTotal.setText(String.valueOf(p.getNotaMaxima()));
         DefaultTableModel modelo = (DefaultTableModel) verParcial_tabla.getModel();
+        verParcial_datosEstudiante.setText("");
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
@@ -3803,7 +3811,6 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel tituloMateriales;
     private javax.swing.JButton verExamen;
     private javax.swing.JTextArea verExamen_datosEstudiante;
-    private javax.swing.JTextArea verExamen_datosEstudiante1;
     private javax.swing.JLabel verExamen_fecha;
     private javax.swing.JLabel verExamen_notaAprobacion;
     private javax.swing.JLabel verExamen_notaTotal;
@@ -3814,6 +3821,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea verNoticia_texto;
     private javax.swing.JLabel verNoticia_titulo;
     private javax.swing.JButton verParcial;
+    private javax.swing.JTextArea verParcial_datosEstudiante;
     private javax.swing.JLabel verParcial_fecha;
     private javax.swing.JLabel verParcial_notaTotal;
     private javax.swing.JTable verParcial_tabla;

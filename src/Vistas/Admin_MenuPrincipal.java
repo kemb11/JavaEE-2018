@@ -51,10 +51,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private List<Sede> sedes = new ArrayList<>();
     private List<Carrera> carreras = new ArrayList<>();
+    private List<Carrera> carrerasH = new ArrayList<>();
+    private List<Carrera> carrerasD = new ArrayList<>();
     private List<Curso> previas = new ArrayList<>();
     private Curso cursoExamen;
     private Curso cursoParcial;
     private boolean crearCarrera = false;
+    private Estudiante estudiante;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -105,7 +108,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         PanelPrincipal.add(VerCarreraPanel, "verCarrera");
         PanelPrincipal.add(MaterialesSubidosPanel, "verMaterial");
         PanelPrincipal.add(AsociarDocentePanel, "asociarDocente");
-        
+        PanelPrincipal.add(habilitarDeshabilitarPanel, "h/d");
+
         opciones.add(CursosOpcion);
         opciones.add(CarrerasOpcion);
         opciones.add(SedesOpcion);
@@ -113,7 +117,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         opciones.add(EstudiantesOpcion);
         opciones.add(DocentesOpcion);
         PanelPrincipal.add(VerNoticia, "ver noticia");
-        
+
         opcionSeleccionada(SedesOpcion, "sedes");
     }
 
@@ -188,6 +192,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         SeleccionarExamen = new javax.swing.JButton();
         btnBuscarEstudiante = new javax.swing.JButton();
         inscribirEstudiante = new javax.swing.JButton();
+        habilitarDeshabilitar = new javax.swing.JButton();
         panelNuevaSede = new javax.swing.JPanel();
         sede_txt_nombre = new javax.swing.JTextField();
         sede_txt_direccion = new javax.swing.JTextField();
@@ -410,6 +415,17 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel73 = new javax.swing.JLabel();
         marcarparciales_notaApro = new javax.swing.JSpinner();
         marcarparciales_aceptar = new javax.swing.JButton();
+        habilitarDeshabilitarPanel = new javax.swing.JPanel();
+        lbl_hd_estudiante = new javax.swing.JLabel();
+        jScrollPane27 = new javax.swing.JScrollPane();
+        list_hd_deshabilitadas = new javax.swing.JList<>();
+        deshabilitar_btn = new javax.swing.JButton();
+        habilitar_btn = new javax.swing.JButton();
+        jScrollPane28 = new javax.swing.JScrollPane();
+        list_hd_habilitadas = new javax.swing.JList<>();
+        jLabel74 = new javax.swing.JLabel();
+        jLabel75 = new javax.swing.JLabel();
+        btn_hd_aceptar = new javax.swing.JButton();
         PanelCabecera = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         VolverButton = new javax.swing.JButton();
@@ -699,6 +715,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         PanelPrincipal.setBackground(new java.awt.Color(73, 202, 114));
         PanelPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.setPreferredSize(new java.awt.Dimension(850, 607));
         PanelPrincipal.setLayout(new java.awt.CardLayout());
 
         CursosPanel.setBackground(new java.awt.Color(73, 202, 114));
@@ -850,7 +867,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(NuevosParciales))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         CursosPanelLayout.setVerticalGroup(
             CursosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -961,7 +978,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(CarrerasPanelLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         CarrerasPanelLayout.setVerticalGroup(
             CarrerasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1224,6 +1241,15 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        habilitarDeshabilitar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        habilitarDeshabilitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grupo.png"))); // NOI18N
+        habilitarDeshabilitar.setText("Habilitar/Desahabilitar de carrera");
+        habilitarDeshabilitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                habilitarDeshabilitarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EstudianteLayout = new javax.swing.GroupLayout(Estudiante);
         Estudiante.setLayout(EstudianteLayout);
         EstudianteLayout.setHorizontalGroup(
@@ -1239,8 +1265,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(EstudianteLayout.createSequentialGroup()
                         .addComponent(inscribirEstudiante)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SeleccionarExamen)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(SeleccionarExamen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(habilitarDeshabilitar)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         EstudianteLayout.setVerticalGroup(
             EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1250,11 +1278,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscarEstudiante)
                     .addComponent(BuscarEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane6)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(EstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SeleccionarExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inscribirEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inscribirEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(habilitarDeshabilitar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -1715,7 +1744,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(Docente_CrearLayout.createSequentialGroup()
                         .addGap(230, 230, 230)
                         .addComponent(doc_btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 448, Short.MAX_VALUE))
+                .addGap(0, 378, Short.MAX_VALUE))
             .addGroup(Docente_CrearLayout.createSequentialGroup()
                 .addGap(289, 289, 289)
                 .addComponent(jLabel45)
@@ -1943,10 +1972,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(exa_fecfin)
                                 .addComponent(exa_fec, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(exa_fecini, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                 .addGroup(ExamenCursoLayout.createSequentialGroup()
                                     .addComponent(jLabel51)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                                     .addComponent(exa_nota_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(ExamenCursoLayout.createSequentialGroup()
                                     .addComponent(jLabel48)
@@ -2554,7 +2583,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(notaAproCurTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(notaExonExCurTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         CrearCursoPanelLayout.setVerticalGroup(
             CrearCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2679,7 +2708,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCarreraPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+                    .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
                     .addGroup(VerCarreraPanelLayout.createSequentialGroup()
                         .addGroup(VerCarreraPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(NombreCarreraLabel)
@@ -2828,7 +2857,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(VerCursoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                    .addComponent(jScrollPane24, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                     .addComponent(jScrollPane25)
                     .addComponent(TituloLabel4)
                     .addComponent(TituloLabel9)
@@ -2858,7 +2887,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(TituloLabel16)
                     .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(VerMaterialSubidoButton))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         VerCursoPanelLayout.setVerticalGroup(
             VerCursoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2982,7 +3011,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
                         .addComponent(TituloLabel21, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(tituloMateriales))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         MaterialesSubidosPanelLayout.setVerticalGroup(
             MaterialesSubidosPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3224,7 +3253,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                                     .addComponent(marcarparciales_notaMax2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(marcarparciales_fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel71))))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         MarcarParcialesLayout.setVerticalGroup(
             MarcarParcialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3259,6 +3288,101 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         );
 
         PanelPrincipal.add(MarcarParciales, "card21");
+
+        habilitarDeshabilitarPanel.setBackground(new java.awt.Color(73, 202, 114));
+
+        lbl_hd_estudiante.setText("jLabel74");
+
+        list_hd_deshabilitadas.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        list_hd_deshabilitadas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        list_hd_deshabilitadas.setToolTipText("");
+        list_hd_deshabilitadas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane27.setViewportView(list_hd_deshabilitadas);
+
+        deshabilitar_btn.setText(">");
+        deshabilitar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deshabilitar_btnActionPerformed(evt);
+            }
+        });
+
+        habilitar_btn.setText("<");
+        habilitar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                habilitar_btnActionPerformed(evt);
+            }
+        });
+
+        jScrollPane28.setViewportView(list_hd_habilitadas);
+
+        jLabel74.setText("Habilitadas");
+
+        jLabel75.setText("Deshabilitadas");
+
+        btn_hd_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/check-square.png"))); // NOI18N
+        btn_hd_aceptar.setText("Aceptar");
+        btn_hd_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hd_aceptarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout habilitarDeshabilitarPanelLayout = new javax.swing.GroupLayout(habilitarDeshabilitarPanel);
+        habilitarDeshabilitarPanel.setLayout(habilitarDeshabilitarPanelLayout);
+        habilitarDeshabilitarPanelLayout.setHorizontalGroup(
+            habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_hd_estudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                                .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)
+                                        .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(deshabilitar_btn)
+                                            .addComponent(habilitar_btn)))
+                                    .addComponent(jLabel74))
+                                .addGap(29, 29, 29)
+                                .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel75)
+                                    .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(btn_hd_aceptar)))
+                .addContainerGap(418, Short.MAX_VALUE))
+        );
+        habilitarDeshabilitarPanelLayout.setVerticalGroup(
+            habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbl_hd_estudiante, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel74)
+                    .addComponent(jLabel75))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(habilitarDeshabilitarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(habilitarDeshabilitarPanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(deshabilitar_btn)
+                        .addGap(47, 47, 47)
+                        .addComponent(habilitar_btn))
+                    .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(btn_hd_aceptar)
+                .addContainerGap(255, Short.MAX_VALUE))
+        );
+
+        PanelPrincipal.add(habilitarDeshabilitarPanel, "card22");
 
         PanelCabecera.setBackground(new java.awt.Color(73, 202, 114));
 
@@ -3641,7 +3765,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
-        
+
     }//GEN-LAST:event_sede_btn_crearActionPerformed
 
     private void SeleccionarSede1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarSede1ActionPerformed
@@ -3779,10 +3903,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_DocentesOpcionMouseClicked
 
     private void AsociarDocenteCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AsociarDocenteCursoActionPerformed
-        if(DocentesTable.getSelectedRow() != -1)
+        if (DocentesTable.getSelectedRow() != -1) {
             opcionSeleccionada(DocentesOpcion, "asociarDocente");
-        else
+        } else {
             JOptionPane.showMessageDialog(this, "Seleccione un docente", "Advertencia", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_AsociarDocenteCursoActionPerformed
 
     private void inscribirDocenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscribirDocenteActionPerformed
@@ -3790,10 +3915,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_inscribirDocenteActionPerformed
 
     private void NuevoExamenCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoExamenCursoActionPerformed
-        if(CursosTable.getSelectedRow() != -1)
+        if (CursosTable.getSelectedRow() != -1) {
             opcionSeleccionada(CursosOpcion, "crear examen");
-        else
+        } else {
             JOptionPane.showMessageDialog(this, "Seleccione un curso", "Advertencia", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_NuevoExamenCursoActionPerformed
 
@@ -3807,21 +3933,21 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void exa_btn_deselecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_deselecActionPerformed
         int index = exa_list_selec.getSelectedIndex();
-        if(index != -1){
-        DefaultListModel model2 = (DefaultListModel)exa_list_selec.getModel();
-        DefaultListModel model = (DefaultListModel)exa_list_noselec.getModel();
-        model.addElement(model2.get(index));
-        model2.remove(index);
+        if (index != -1) {
+            DefaultListModel model2 = (DefaultListModel) exa_list_selec.getModel();
+            DefaultListModel model = (DefaultListModel) exa_list_noselec.getModel();
+            model.addElement(model2.get(index));
+            model2.remove(index);
         }
     }//GEN-LAST:event_exa_btn_deselecActionPerformed
 
     private void exa_btn_selecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exa_btn_selecActionPerformed
         int index = exa_list_noselec.getSelectedIndex();
-        if(index != -1){
-        DefaultListModel model = (DefaultListModel)exa_list_selec.getModel();
-        DefaultListModel model2 = (DefaultListModel)exa_list_noselec.getModel();
-        model.addElement(model2.get(index));
-        model2.remove(index);
+        if (index != -1) {
+            DefaultListModel model = (DefaultListModel) exa_list_selec.getModel();
+            DefaultListModel model2 = (DefaultListModel) exa_list_noselec.getModel();
+            model.addElement(model2.get(index));
+            model2.remove(index);
         }
     }//GEN-LAST:event_exa_btn_selecActionPerformed
 
@@ -3835,9 +3961,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_creditosCarrTextFieldActionPerformed
 
     private void crearCursoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearCursoButtonActionPerformed
-        if(NombreCarrTextField.getText().isEmpty()){
+        if (NombreCarrTextField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un nombre para la carrera", "Advertencia", WARNING_MESSAGE);
-        }else{
+        } else {
             opcionSeleccionada(CursosOpcion, "crearCurso");
         }
     }//GEN-LAST:event_crearCursoButtonActionPerformed
@@ -3851,12 +3977,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void SelecSedeCarrComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecSedeCarrComboBoxActionPerformed
         int indexSede = SelecSedeCarrComboBox.getSelectedIndex();
-        if(indexSede > 0){
+        if (indexSede > 0) {
             indexSede = indexSede - 1; // -1 porque el primer iten se "Seleccionar..."
             Sede sede = sedes.get(indexSede);
-            if(Fabrica.getInstance().getContEdu().selecSedeCarr(sede)){
+            if (Fabrica.getInstance().getContEdu().selecSedeCarr(sede)) {
                 DefaultTableModel modelo = (DefaultTableModel) selecSedeCarrTable.getModel();
-                Object[] datos = {sede,sede.getNombre()};
+                Object[] datos = {sede, sede.getNombre()};
                 modelo.addRow(datos);
             }
         }
@@ -3868,11 +3994,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void quitarSedeCarrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarSedeCarrButtonActionPerformed
         int fila = selecSedeCarrTable.getSelectedRow();
-        if(fila >= 0){
+        if (fila >= 0) {
             DefaultTableModel modelo = (DefaultTableModel) selecSedeCarrTable.getModel();
-            Fabrica.getInstance().getContEdu().eliminarSedeSelec((Sede)modelo.getValueAt(fila, 0));
+            Fabrica.getInstance().getContEdu().eliminarSedeSelec((Sede) modelo.getValueAt(fila, 0));
             modelo.removeRow(fila);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una sede", "Advertencia", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_quitarSedeCarrButtonActionPerformed
@@ -3885,12 +4011,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         String finPSAux = finPrimerSemestre.getText();
         String inicioSSAux = inicioSegundoSemestre.getText();
         String finSSAux = finSegundoSemestre.getText();
-        
-        if(nombre.isEmpty() || creditosAux.isEmpty() || descripcion.isEmpty() || 
-            inicioPSAux.equals("  /  /    ") || finPSAux.equals("  /  /    ") || inicioSSAux.equals("  /  /    ") || finSSAux.equals("  /  /    ")){
+
+        if (nombre.isEmpty() || creditosAux.isEmpty() || descripcion.isEmpty()
+                || inicioPSAux.equals("  /  /    ") || finPSAux.equals("  /  /    ") || inicioSSAux.equals("  /  /    ") || finSSAux.equals("  /  /    ")) {
             JOptionPane.showMessageDialog(this, "No pueden quedar campos vacíos", "Advertencia", WARNING_MESSAGE);
-        }else{
-            if(Fabrica.getInstance().getContEdu().seleccionoAlgunaSede() == false){
+        } else {
+            if (Fabrica.getInstance().getContEdu().seleccionoAlgunaSede() == false) {
                 JOptionPane.showMessageDialog(this, "Debe seleccionar al menos un sede", "Advertencia", WARNING_MESSAGE);
                 return; // corta aca
             }
@@ -3900,32 +4026,32 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 Date finPS = dateFormat.parse(finPSAux);
                 Date inicioSS = dateFormat.parse(inicioSegundoSemestre.getText());
                 Date finSS = dateFormat.parse(finSegundoSemestre.getText());
-                
-                List<Date> fechas= new ArrayList<>();
+
+                List<Date> fechas = new ArrayList<>();
                 fechas.add(inicioPS);
                 fechas.add(finPS);
                 fechas.add(inicioSS);
                 fechas.add(finSS);
-                if(controlarAnioFechas(fechas)==false){
+                if (controlarAnioFechas(fechas) == false) {
                     JOptionPane.showMessageDialog(this, "Las fechas deben ser de un mismo año calendario", "Advertencia", WARNING_MESSAGE);
                     return; // corta aca
                 }
 
-                if(inicioPS.before(new Date()) || finPS.before(new Date()) || inicioSS.before(new Date()) || finSS.before(new Date())){
+                if (inicioPS.before(new Date()) || finPS.before(new Date()) || inicioSS.before(new Date()) || finSS.before(new Date())) {
                     JOptionPane.showMessageDialog(this, "Las fechas deben ser posteriores a la actual", "Advertencia", WARNING_MESSAGE);
-                }else{
-                    if(finPS.before(inicioPS) || finSS.before(inicioSS)){
+                } else {
+                    if (finPS.before(inicioPS) || finSS.before(inicioSS)) {
                         JOptionPane.showMessageDialog(this, "Las fechas de fin deben ser posteriores a las de inicio", "Advertencia", WARNING_MESSAGE);
-                    }else{
-                        if(inicioSS.before(inicioPS) || finSS.before(finPS)){
+                    } else {
+                        if (inicioSS.before(inicioPS) || finSS.before(finPS)) {
                             JOptionPane.showMessageDialog(this, "Las fechas del segundo semestre deben ser posteriores a las del primer semestre", "Advertencia", WARNING_MESSAGE);
-                        }else{
-                            try{
-                                Fabrica.getInstance().getContEdu().nuevaCarrera(nombre, creditos, descripcion, inicioPS,finPS,inicioSS,finSS);
+                        } else {
+                            try {
+                                Fabrica.getInstance().getContEdu().nuevaCarrera(nombre, creditos, descripcion, inicioPS, finPS, inicioSS, finSS);
                                 JOptionPane.showMessageDialog(this, "Se ha creado la carrera correctamente");
                                 limpiarPanelCrearCarrera();
                                 VolverButton.doClick();
-                            }catch (Exception ex) {
+                            } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
                             }
                         }
@@ -3948,35 +4074,35 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private void ConfirmarCurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCurButtonActionPerformed
         String nombre = NombreCurTextField.getText();
         String creditos = creditosCurTextField.getText();
-        int semestre = SemestreComboBox.getSelectedIndex()+1; // +1 porque el index comienza en 0 y el primer item es 1
+        int semestre = SemestreComboBox.getSelectedIndex() + 1; // +1 porque el index comienza en 0 y el primer item es 1
         String descripcion = DescCurTextArea.getText();
         String horario = HorarioCurTextArea.getText();
         int opt = OptativoComboBox.getSelectedIndex();
         boolean optativo;
-        if(opt==0){
+        if (opt == 0) {
             optativo = false;
-        }else{
+        } else {
             optativo = true;
         }
-        
-        if(nombre.isEmpty()||descripcion.isEmpty()||horario.isEmpty()||creditos.trim().isEmpty()){
+
+        if (nombre.isEmpty() || descripcion.isEmpty() || horario.isEmpty() || creditos.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "No pueden quedar campos vacíos", "Advertencia", WARNING_MESSAGE);
-        }else{
+        } else {
             try {
-                
+
                 Carrera c;
-                if(crearCarrera){
+                if (crearCarrera) {
                     c = null; // se esta creando curso para nueva carrera, la carrera temporal se obtiene en el controlador
-                }else{
+                } else {
                     c = (Carrera) CarreraTable.getModel().getValueAt(CarreraTable.getSelectedRow(), 0);
                 }
                 Fabrica.getInstance().getContEdu().nuevoCurso(nombre, Integer.valueOf(creditos), semestre, descripcion, horario, optativo, c);
                 JOptionPane.showMessageDialog(this, "Se ha creado el curso correctamente");
                 limpiarPanelCrearCurso();
 
-                if(crearCarrera){
+                if (crearCarrera) {
                     DefaultTableModel modelo = (DefaultTableModel) CursosCrearCarrTable.getModel();
-                    Object[] datos = {nombre,Integer.valueOf(creditos),semestre,optativo};
+                    Object[] datos = {nombre, Integer.valueOf(creditos), semestre, optativo};
                     modelo.addRow(datos);
                     VolverButton.doClick();
                 }
@@ -3993,16 +4119,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void SelecPreviaCurComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecPreviaCurComboBoxActionPerformed
         int indexPrevia = SelecPreviaCurComboBox.getSelectedIndex();
-        if(previas.isEmpty() == false && indexPrevia > 0){
+        if (previas.isEmpty() == false && indexPrevia > 0) {
             indexPrevia = indexPrevia - 1; // -1 porque el primer iten se "Seleccionar..."
             Curso previa = previas.get(indexPrevia);
-            if(Fabrica.getInstance().getContEdu().esPrevia(previa)){
+            if (Fabrica.getInstance().getContEdu().esPrevia(previa)) {
                 DefaultTableModel modelo = (DefaultTableModel) selecPreviaCurTable.getModel();
                 List<Curso> cursosSonPrevia = Fabrica.getInstance().getContEdu().selecSonPrevia(previa);
-                if(cursosSonPrevia != null){
+                if (cursosSonPrevia != null) {
                     for (Curso curso : cursosSonPrevia) {
                         for (int i = 0; i < modelo.getRowCount(); i++) {
-                            if(curso.equals((Curso)modelo.getValueAt(i, 0))){
+                            if (curso.equals((Curso) modelo.getValueAt(i, 0))) {
                                 modelo.removeRow(i);
                             }
                         }
@@ -4010,7 +4136,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                     }
                 }
 
-                Object[] datos = {previa,previa.getNombre(), "Curso"};
+                Object[] datos = {previa, previa.getNombre(), "Curso"};
                 modelo.addRow(datos);
             }
         }
@@ -4022,11 +4148,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void quitarPreviaCurButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarPreviaCurButtonActionPerformed
         int fila = selecPreviaCurTable.getSelectedRow();
-        if(fila >= 0){
+        if (fila >= 0) {
             DefaultTableModel modelo = (DefaultTableModel) selecPreviaCurTable.getModel();
-            Fabrica.getInstance().getContEdu().eliminarPreviaSelec((Curso)modelo.getValueAt(fila, 0));
+            Fabrica.getInstance().getContEdu().eliminarPreviaSelec((Curso) modelo.getValueAt(fila, 0));
             modelo.removeRow(fila);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una previa", "Advertencia", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_quitarPreviaCurButtonActionPerformed
@@ -4052,7 +4178,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
     private void MaterialesSubidosTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaterialesSubidosTableKeyReleased
         // Si presionó la tecla arriba o abajo
-        if(evt.getKeyCode()== KeyEvent.VK_DOWN || evt.getKeyCode()== KeyEvent.VK_UP){
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN || evt.getKeyCode() == KeyEvent.VK_UP) {
             int row = MaterialesSubidosTable.getSelectedRow();
             DefaultTableModel modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
             Material material = (Material) modelo.getValueAt(row, 0);
@@ -4061,29 +4187,29 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MaterialesSubidosTableKeyReleased
 
     private void DescargarMaterialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescargarMaterialButtonActionPerformed
-        if(MaterialesSubidosTable.getSelectedRow()>-1){
+        if (MaterialesSubidosTable.getSelectedRow() > -1) {
             Material material = (Material) MaterialesSubidosTable.getModel().getValueAt(MaterialesSubidosTable.getSelectedRow(), 0);
-            if(material.getRutaArchivo() != null){
+            if (material.getRutaArchivo() != null) {
                 JFileChooser elegirArchivo = new JFileChooser();
                 elegirArchivo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 elegirArchivo.setAcceptAllFileFilterUsed(false);
                 elegirArchivo.setDialogTitle("Seleccionar carpeta");
 
-                int a= elegirArchivo.showDialog(this, "Seleccionar"); // guarda la accion que se realiza en el filechooser
+                int a = elegirArchivo.showDialog(this, "Seleccionar"); // guarda la accion que se realiza en el filechooser
 
-                if(a == JFileChooser.APPROVE_OPTION){ // la accion si se le da a abrir
+                if (a == JFileChooser.APPROVE_OPTION) { // la accion si se le da a abrir
                     //            File archivo = elegirarchivo.getSelectedFile(); // capturar el nombre y ruta
                     //            String RutaArchivo = archivo.getPath();
                     String carpetaDestino = elegirArchivo.getSelectedFile().toString();
 
-                    if(Fabrica.getInstance().getContEdu().descargarMaterial(carpetaDestino, material)){
-                        JOptionPane.showMessageDialog(this,"Se ha descargado el material correctamente","Descarga completa",javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    }else{
-                        JOptionPane.showMessageDialog(this,"Ha ocurrido un error al decargar el material, la descarga ha sido cancelada","Descarga cancelada",javax.swing.JOptionPane.ERROR_MESSAGE);
+                    if (Fabrica.getInstance().getContEdu().descargarMaterial(carpetaDestino, material)) {
+                        JOptionPane.showMessageDialog(this, "Se ha descargado el material correctamente", "Descarga completa", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ha ocurrido un error al decargar el material, la descarga ha sido cancelada", "Descarga cancelada", javax.swing.JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }else{
-                JOptionPane.showMessageDialog(this,"El tema seleccionado no tiene archivo","Aviso",javax.swing.JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "El tema seleccionado no tiene archivo", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_DescargarMaterialButtonActionPerformed
@@ -4094,11 +4220,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         } else {
             Curso curso = (Curso) CursosTableAsociarDoc.getModel().getValueAt(CursosTableAsociarDoc.getSelectedRow(), 0);
             Docente docente = (Docente) DocentesTable.getModel().getValueAt(DocentesTable.getSelectedRow(), 0);
-            try{
+            try {
                 Fabrica.getInstance().getContDocente().asociarACurso(curso, docente);
-                String nomDoc = docente.getNombres()+" "+docente.getApellidos();                
-                JOptionPane.showMessageDialog(this, "El docente "+nomDoc+" ahora esta a cargo del curso "+curso.getNombre()+
-                        " en la sede "+Fabrica.getInstance().getContEdu().getSede().getNombre(), "Docente asignado", JOptionPane.INFORMATION_MESSAGE);
+                String nomDoc = docente.getNombres() + " " + docente.getApellidos();
+                JOptionPane.showMessageDialog(this, "El docente " + nomDoc + " ahora esta a cargo del curso " + curso.getNombre()
+                        + " en la sede " + Fabrica.getInstance().getContEdu().getSede().getNombre(), "Docente asignado", JOptionPane.INFORMATION_MESSAGE);
                 VolverButton.doClick();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", WARNING_MESSAGE);
@@ -4131,7 +4257,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_NuevosParcialesActionPerformed
 
     private void marcarparciales_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcarparciales_aceptarActionPerformed
-        
+
     }//GEN-LAST:event_marcarparciales_aceptarActionPerformed
 
     private void jLabel15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseExited
@@ -4142,6 +4268,108 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_jLabel15MouseEntered
 
+    private void habilitarDeshabilitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habilitarDeshabilitarActionPerformed
+        if(this.EstudiantesTable.getSelectedRow() != -1){
+            opcionSeleccionada(EstudiantesOpcion, "h/d");
+        }else{
+            JOptionPane.showMessageDialog(this, "Seleccione un estudiante", "Error", WARNING_MESSAGE);            
+        }
+    }//GEN-LAST:event_habilitarDeshabilitarActionPerformed
+
+    private void habilitar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habilitar_btnActionPerformed
+        int index = this.list_hd_deshabilitadas.getSelectedIndex();
+        if (index != -1) {
+            Carrera c = this.carrerasD.get(index);
+            this.carrerasD.remove(index);
+            this.estudiante.habilitarCarrera(c);
+            this.carrerasH.add(c);
+            DefaultListModel model2 = (DefaultListModel) this.list_hd_deshabilitadas.getModel();
+            DefaultListModel model = (DefaultListModel) this.list_hd_habilitadas.getModel();
+            if (model2.getSize() == 1) {
+                this.habilitar_btn.setEnabled(false);
+            }
+            if (model.getSize() == 0) {
+                this.deshabilitar_btn.setEnabled(true);
+            }
+            model.addElement(model2.get(index));
+            model2.remove(index);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una carrera", "Error", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_habilitar_btnActionPerformed
+
+    private void deshabilitar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshabilitar_btnActionPerformed
+        int index = this.list_hd_habilitadas.getSelectedIndex();
+        if (index != -1) {
+            Carrera c = this.carrerasH.get(index);
+            this.carrerasH.remove(index);
+            this.estudiante.inhabilitarCarrera(c);
+            this.carrerasD.add(c);
+            DefaultListModel model = (DefaultListModel) this.list_hd_deshabilitadas.getModel();
+            DefaultListModel model2 = (DefaultListModel) this.list_hd_habilitadas.getModel();
+            if (model2.getSize() == 1) {
+                this.deshabilitar_btn.setEnabled(false);
+            }
+            if (model.getSize() == 0) {
+                this.habilitar_btn.setEnabled(true);
+            }
+            model.addElement(model2.get(index));
+            model2.remove(index);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una carrera", "Error", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_deshabilitar_btnActionPerformed
+
+    private void btn_hd_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hd_aceptarActionPerformed
+        limpiarHD();
+        this.Volver();
+    }//GEN-LAST:event_btn_hd_aceptarActionPerformed
+
+    void limpiarHD() {
+        DefaultListModel model = new DefaultListModel();
+        DefaultListModel model2 = new DefaultListModel();
+        this.carrerasD.removeAll(carrerasD);
+        this.carrerasH.removeAll(carrerasH);
+        this.estudiante = null;
+        list_hd_habilitadas.setModel(model2);
+        list_hd_deshabilitadas.setModel(model);
+        this.Volver();
+    }
+
+    void cargarHD() {
+        DefaultListModel model = new DefaultListModel();
+        DefaultListModel model2 = new DefaultListModel();
+        DefaultTableModel modelo = (DefaultTableModel) EstudiantesTable.getModel();
+        Estudiante e = (Estudiante) modelo.getValueAt(EstudiantesTable.getSelectedRow(), 0);
+        lbl_hd_estudiante.setText("Carreras del estudiante " + e.getNombres() + " " + e.getApellidos() + " (" + e.getCi() + ")");
+        if (e.getCarreras() != null) {
+            for (Carrera c : e.getCarreras()) {
+                if (e.habilitadoCarrera(c)) {
+                    this.carrerasH.add(c);
+                } else {
+                    this.carrerasD.add(c);
+                }
+            }
+        }
+        if (this.carrerasH.isEmpty()) {
+            this.deshabilitar_btn.setEnabled(false);
+        } else {
+            for (Carrera c : this.carrerasH) {
+                model2.addElement(c.getNombre());
+            }
+        }
+        if (this.carrerasD.isEmpty()) {
+            this.habilitar_btn.setEnabled(false);
+        } else {
+            for (Carrera c : this.carrerasD) {
+                model.addElement(c.getNombre());
+            }
+        }
+        list_hd_habilitadas.setModel(model2);
+        list_hd_deshabilitadas.setModel(model);
+        this.estudiante = e;
+    }
+
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
 
@@ -4151,6 +4379,11 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         boolean control = true;
         switch (opcion) {
+            case "h/d":
+                limpiarHD();
+                cargarHD();
+                this.setTitle("Menú: Estudiante");
+                break;
             case "cursos":
                 //Por defecto listar todos
                 TodosRadioButton.setSelected(true);
@@ -4219,7 +4452,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 modelo = (DefaultTableModel) CursosTable.getModel();
                 Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
                 String opt = "No";
-                if(curso.isOptativo()){
+                if (curso.isOptativo()) {
                     opt = "Si";
                 }
 
@@ -4231,30 +4464,30 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 HorariosTextArea.setText(curso.getHorarios());
                 DescTextArea.setText(curso.getDescripcion());
                 carreraCurLabel.setText(curso.getCarrera().getNombre());
-                
+
                 DefaultTableModel modeloPrevias = (DefaultTableModel) PreviasCurTable.getModel();
                 modeloPrevias.setRowCount(0);
                 for (Previa previa : curso.getPrevias()) {
                     previa.getCursoPrevia();
-                    String tipoP = "Curso";
-                    if(previa.isExamenAprobado()){
-                       tipoP = "Exámen";
+                    String tipoP = "Curso aprobado";
+                    if (!previa.isExamenAprobado()) {
+                        tipoP = "Derecho a exámen";
                     }
                     Object[] datos = {previa.getCursoPrevia().getNombre(), tipoP};
                     modeloPrevias.addRow(datos);
-                }                
+                }
                 resizeColumnWidth(PreviasCurTable);
-                
+
                 this.setTitle("Menú: Ver Curso");
                 break;
             case "crearCurso":
-                if(crearCarrera == false){
+                if (crearCarrera == false) {
                     Carrera c = (Carrera) CarreraTable.getModel().getValueAt(CarreraTable.getSelectedRow(), 0);
                     carreraCrearCurLabel.setText(c.getNombre());
-                }else{ 
+                } else {
                     // Si no es porque se esta creando el curso dentro del crear carrera
                     carreraCrearCurLabel.setText(NombreCarrTextField.getText());
-                    
+
                     DefaultComboBoxModel modeloCombo = (DefaultComboBoxModel) SelecPreviaCurComboBox.getModel();
                     modeloCombo.removeAllElements();
                     modeloCombo.addElement("Seleccionar...");
@@ -4267,7 +4500,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 break;
             case "crearCarrera":
                 this.setTitle("Menú: Nuevo Carrera");
-                
+
                 DefaultComboBoxModel modeloComboSedeCarr = (DefaultComboBoxModel) SelecSedeCarrComboBox.getModel();
                 modeloComboSedeCarr.removeAllElements();
                 modeloComboSedeCarr.addElement("Seleccionar...");
@@ -4276,32 +4509,32 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 for (Sede s : sedes) {
                     modeloComboSedeCarr.addElement(s.getNombre());
                 }
-                
+
                 break;
             case "verCarrera":
                 modelo = (DefaultTableModel) CarreraTable.getModel();
                 Carrera carrera = (Carrera) modelo.getValueAt(CarreraTable.getSelectedRow(), 0);
-                
+
                 sedeCarreraLabel.setText(Fabrica.getInstance().getContEdu().getSede().getNombre());
                 NombreCarreraLabel.setText(carrera.getNombre());
                 creditosCarrLabel.setText(String.valueOf(carrera.getCreditos()));
                 descCarreraTextArea.setText(carrera.getDescripcion());
-                
+
                 DefaultTableModel modeloCursos = (DefaultTableModel) CursosCarreraTable.getModel();
                 modeloCursos.setRowCount(0);
                 for (Curso c : carrera.getCursos()) {
                     String optativo = "No";
-                    if(c.isOptativo()){
-                       optativo = "Si";
+                    if (c.isOptativo()) {
+                        optativo = "Si";
                     }
                     Object[] datos = {c, c.getNombre(), c.getCreditos(), optativo};
                     modeloCursos.addRow(datos);
-                }                
+                }
                 resizeColumnWidth(CursosCarreraTable);
-                
+
                 this.setTitle("Menú: Ver Carrera");
                 break;
-            case "verMaterial":  
+            case "verMaterial":
                 listarMateriales();
                 this.setTitle("Menú: Material Subido");
                 break;
@@ -4310,8 +4543,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 List<Curso> lista = contEdu.listarCursos(""); // parametro de busqueda, si es vacia lista todo                
 
                 Docente docente = (Docente) DocentesTable.getModel().getValueAt(DocentesTable.getSelectedRow(), 0);
-                String nomDoc = docente.getNombres()+" "+docente.getApellidos();
-                tituloAsociarDocente.setText("Asignar docente "+nomDoc+" a un curso");
+                String nomDoc = docente.getNombres() + " " + docente.getApellidos();
+                tituloAsociarDocente.setText("Asignar docente " + nomDoc + " a un curso");
                 modelo = (DefaultTableModel) CursosTableAsociarDoc.getModel();
 
                 while (modelo.getRowCount() > 0) {
@@ -4326,7 +4559,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                         if (cursoAD.isOptativo()) {
                             esOptativo = "Si";
                         }
-                        
+
                         Object[] datos = {cursoAD, cursoAD.getNombre(), String.valueOf(cursoAD.getCreditos()), esOptativo, cursoAD.getCarrera().getNombre()};
                         modelo.addRow(datos);
                     }
@@ -4623,8 +4856,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         HorarioCurTextArea.setText("");
         OptativoComboBox.setSelectedIndex(0);
     }
-    
-    private void limpiarPanelCrearCarrera(){
+
+    private void limpiarPanelCrearCarrera() {
         NombreCarrTextField.setText("");
         creditosCarrTextField.setText("");
         DescCarrTextArea.setText("");
@@ -4639,21 +4872,21 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         modelo = (DefaultTableModel) selecSedeCarrTable.getModel();
         modelo.setRowCount(0);
     }
-    
-    private void MostrarNoticia(){
+
+    private void MostrarNoticia() {
         int index = NoticiasTable.getSelectedRow();
-        if(index != -1){
+        if (index != -1) {
             Noticia n = (Noticia) NoticiasTable.getModel().getValueAt(index, 0);
             verNoticia_titulo.setText(n.getTitulo());
             verNoticia_fecha.setText(dateFormat.format(n.getFecha()));
             verNoticia_texto.setText(n.getTexto());
             DefaultListModel model = new DefaultListModel();
-            for(String etiqueta : n.getEtiquetas()){
+            for (String etiqueta : n.getEtiquetas()) {
                 model.addElement(etiqueta);
             }
             verNoticia_etiquetas.setModel(model);
             opcionSeleccionada(NoticiasPanel, "ver noticia");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una noticia", "Error", WARNING_MESSAGE);
         }
     }
@@ -4762,6 +4995,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_abrirnuevasede;
     private javax.swing.JButton btn_borrarSede;
     private javax.swing.JButton btn_borrarSede_1;
+    private javax.swing.JButton btn_hd_aceptar;
     private javax.swing.ButtonGroup buttonGroupCursos;
     private javax.swing.ButtonGroup buttonGroupExamenes;
     private javax.swing.JButton cancearAsociarDoc;
@@ -4776,6 +5010,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField creditosCarrTextField;
     private javax.swing.JTextField creditosCurTextField;
     private javax.swing.JTextArea descCarreraTextArea;
+    private javax.swing.JButton deshabilitar_btn;
     private javax.swing.JTextField doc_ape;
     private javax.swing.JButton doc_btn_agregar;
     private javax.swing.JFormattedTextField doc_ci;
@@ -4805,6 +5040,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel exa_titulo;
     private javax.swing.JFormattedTextField finPrimerSemestre;
     private javax.swing.JFormattedTextField finSegundoSemestre;
+    private javax.swing.JButton habilitarDeshabilitar;
+    private javax.swing.JPanel habilitarDeshabilitarPanel;
+    private javax.swing.JButton habilitar_btn;
     private javax.swing.JFormattedTextField inicioPrimerSemestre;
     private javax.swing.JFormattedTextField inicioSegundoSemestre;
     private javax.swing.JButton inscribirDocente;
@@ -4881,6 +5119,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
+    private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -4902,6 +5142,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane26;
+    private javax.swing.JScrollPane jScrollPane27;
+    private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -4909,6 +5151,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lbl_hd_estudiante;
+    private javax.swing.JList<String> list_hd_deshabilitadas;
+    private javax.swing.JList<String> list_hd_habilitadas;
     private javax.swing.JButton marcarparciales_aceptar;
     private javax.swing.JFormattedTextField marcarparciales_fecha1;
     private javax.swing.JFormattedTextField marcarparciales_fecha2;
@@ -4991,109 +5236,115 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         }
         this.resizeColumnWidth(DocentesTable);
     }
-    
-    private void seleccionarCursoExamen(){
+
+    private void seleccionarCursoExamen() {
         int index = CursosTable.getSelectedRow();
-        if(index != -1){
-            Curso c = (Curso)CursosTable.getModel().getValueAt(index, 0);
+        if (index != -1) {
+            Curso c = (Curso) CursosTable.getModel().getValueAt(index, 0);
             this.cursoExamen = c;
             exa_fec.setText("");
             exa_fecini.setText("");
             exa_fecfin.setText("");
-            exa_nota_apro.setValue(((SpinnerNumberModel)exa_nota_apro.getModel()).getMinimum());
+            exa_nota_apro.setValue(((SpinnerNumberModel) exa_nota_apro.getModel()).getMinimum());
             exa_nota_tot.setValue(((SpinnerNumberModel) exa_nota_tot.getModel()).getMinimum());
             DefaultListModel list = new DefaultListModel();
             exa_list_selec.setModel(new DefaultListModel<>());
-            for(CursoSede cs : c.getCursoSedes()){
+            for (CursoSede cs : c.getCursoSedes()) {
                 list.addElement(cs.getSede().getNombre());
             }
             exa_list_noselec.setModel(list);
-            exa_titulo.setText("Examen de "+ c.getNombre());
-        }else{
-                JOptionPane.showMessageDialog(this, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
+            exa_titulo.setText("Examen de " + c.getNombre());
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    private void crearExamen()throws InternalException{
+
+    private void crearExamen() throws InternalException {
         Date fecha = crearFecha(exa_fec.getText(), " de examen");
         Date fechai = crearFecha(exa_fecini.getText(), " de inicio de inscripcion");
         Date fechaf = crearFecha(exa_fecfin.getText(), " de fin de inscripcion");
         DefaultListModel<String> model = (DefaultListModel) exa_list_selec.getModel();
-        if(!fechaf.after(fechai))
+        if (!fechaf.after(fechai)) {
             throw new InternalException("La fecha de inicio deinscripcion debe ser antes de la fecha final de inscripcion");
-        if(!fecha.after(fechaf))
+        }
+        if (!fecha.after(fechaf)) {
             throw new InternalException("La fecha final de inscripcion debe ser antes del examen");
-        if(((int)exa_nota_tot.getValue()) <= ((int)exa_nota_apro.getValue()))
+        }
+        if (((int) exa_nota_tot.getValue()) <= ((int) exa_nota_apro.getValue())) {
             throw new InternalException("La nota de aprobación debe ser menor a la nota total");
-        if(model.isEmpty())
+        }
+        if (model.isEmpty()) {
             throw new InternalException("Seleccione al menos una sede");
+        }
         Examen e = new Examen();
         e.setFecha(fecha);
         e.setInicioInsripcion(fechai);
         e.setFinInsripcion(fechaf);
-        e.setNotaApro((int)exa_nota_apro.getValue());
-        e.setNotaMax((int)exa_nota_tot.getValue());
-        List<Sede> sedes = new ArrayList<>();        
-        for(int i=0; i<model.getSize();i++){
+        e.setNotaApro((int) exa_nota_apro.getValue());
+        e.setNotaMax((int) exa_nota_tot.getValue());
+        List<Sede> sedes = new ArrayList<>();
+        for (int i = 0; i < model.getSize(); i++) {
             sedes.add(Fabrica.getInstance().getContEdu().getSede(model.elementAt(i)));
         }
         Fabrica.getInstance().getContAdmin().crearExamen(e, sedes, cursoExamen);
         JOptionPane.showMessageDialog(this, "Se registró el examen", "Exito", JOptionPane.INFORMATION_MESSAGE);
         opcionSeleccionada(CursosOpcion, "cursos");
     }
-    
-    public Date crearFecha(String fecha, String campo)throws InternalException{
+
+    public Date crearFecha(String fecha, String campo) throws InternalException {
         try {
             Date retornar = null;
             SimpleDateFormat dateFormatAux = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
-            if(campo.equals(" de examen"))
+            if (campo.equals(" de examen")) {
                 retornar = dateFormatAux.parse(fecha);
-            if(campo.contains("parcial"))
+            }
+            if (campo.contains("parcial")) {
                 retornar = dateFormatAux.parse(fecha);
-            else
+            } else {
                 retornar = dateFormat.parse(fecha);
+            }
             return retornar;
         } catch (ParseException ex) {
             Logger.getLogger(Admin_MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            throw new InternalException("Formato de fecha"+campo+" incorrecto");
+            throw new InternalException("Formato de fecha" + campo + " incorrecto");
         }
     }
-    
-    public boolean controlarAnioFechas(List<Date> fechas){
+
+    public boolean controlarAnioFechas(List<Date> fechas) {
         int anioAnterior = -1;
         for (Date fecha : fechas) {
-            
+
             Date inicio = new Date();
             LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            int anio  = localDate.getYear();
-            if(anioAnterior!=-1 && anioAnterior!=anio){
+            int anio = localDate.getYear();
+            if (anioAnterior != -1 && anioAnterior != anio) {
                 return false;
             }
         }
-        
+
         return true;
     }
-    
+
     public void listarMateriales() {
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         Curso curso = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-        
+
         List<Material> lista = Fabrica.getInstance().getContEdu().listarMaterialCurso(curso);
-        
+
         modelo = (DefaultTableModel) MaterialesSubidosTable.getModel();
-        
+
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
         DescMaterialTextArea.setText("");
         tituloMateriales.setText("");
 
-        tituloMateriales.setText("Material subido para "+curso.getNombre());
+        tituloMateriales.setText("Material subido para " + curso.getNombre());
         if (lista.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No se han encontrado resultados");
         } else {
             for (Material material : lista) {
-                String nombreDocente = material.getDocente().getNombres()+" "+material.getDocente().getApellidos();
+                String nombreDocente = material.getDocente().getNombres() + " " + material.getDocente().getApellidos();
                 Object[] datos = {material, material.getTitulo(), dateFormat.format(material.getFechaSubida()), nombreDocente};
                 modelo.addRow(datos);
             }
@@ -5101,9 +5352,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         resizeColumnWidth(MaterialesSubidosTable);
     }
-    
-    void crearParciales(){
-        try{
+
+    void crearParciales() {
+        try {
             String fecha1 = marcarparciales_fecha1.getText();
             String fecha2 = marcarparciales_fecha2.getText();
             int nota1, nota2, notaApro, notaExa;
@@ -5111,8 +5362,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             nota2 = (int) marcarparciales_notaMax2.getModel().getValue();
             notaExa = (int) marcarparciales_notaExa.getModel().getValue();
             notaApro = (int) marcarparciales_notaApro.getModel().getValue();
-            if((nota1 + nota2) <= notaApro) throw new InternalException("La nota de aprobación debe ser menor a la suma de la nota de los dos parciales");
-            if( notaExa >= notaApro) throw new InternalException("La nota de derecho a examen debe ser menor a la de aprobación");
+            if ((nota1 + nota2) <= notaApro) {
+                throw new InternalException("La nota de aprobación debe ser menor a la suma de la nota de los dos parciales");
+            }
+            if (notaExa >= notaApro) {
+                throw new InternalException("La nota de derecho a examen debe ser menor a la de aprobación");
+            }
             Parcial p1 = new Parcial(), p2 = new Parcial();
             p1.setFecha(this.crearFecha(fecha1, " de primer parcial"));
             p2.setFecha(this.crearFecha(fecha2, " de segundo parcial"));
@@ -5120,26 +5375,26 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             p2.setInstancia("Segundo");
             p1.setNotaMaxima(nota1);
             p2.setNotaMaxima(nota2);
-            Fabrica.getInstance().getContAdmin().crearParciales(cursoParcial, p1, p2, notaApro, notaExa); 
+            Fabrica.getInstance().getContAdmin().crearParciales(cursoParcial, p1, p2, notaApro, notaExa);
             JOptionPane.showMessageDialog(this, "Se han marcado con éxito");
             this.Volver();
-            
-        }catch(InternalException ex){
+
+        } catch (InternalException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    void limpiarCrearParciales(){
+
+    void limpiarCrearParciales() {
         DefaultTableModel modelo = (DefaultTableModel) CursosTable.getModel();
         cursoParcial = (Curso) modelo.getValueAt(CursosTable.getSelectedRow(), 0);
-        this.marcarparciales_titulo.setText("Marcar parciales de "+ this.cursoParcial.getNombre());
-        marcarparciales_notaMax1.setValue(((SpinnerNumberModel)marcarparciales_notaMax1.getModel()).getMinimum());
-        marcarparciales_notaMax2.setValue(((SpinnerNumberModel)marcarparciales_notaMax2.getModel()).getMinimum());
-        marcarparciales_notaApro.setValue(((SpinnerNumberModel)marcarparciales_notaApro.getModel()).getMinimum());
-        marcarparciales_notaExa.setValue(((SpinnerNumberModel)marcarparciales_notaExa.getModel()).getMinimum());
-        
+        this.marcarparciales_titulo.setText("Marcar parciales de " + this.cursoParcial.getNombre());
+        marcarparciales_notaMax1.setValue(((SpinnerNumberModel) marcarparciales_notaMax1.getModel()).getMinimum());
+        marcarparciales_notaMax2.setValue(((SpinnerNumberModel) marcarparciales_notaMax2.getModel()).getMinimum());
+        marcarparciales_notaApro.setValue(((SpinnerNumberModel) marcarparciales_notaApro.getModel()).getMinimum());
+        marcarparciales_notaExa.setValue(((SpinnerNumberModel) marcarparciales_notaExa.getModel()).getMinimum());
+
     }
-    
+
     void Volver() {
         if (volver.size() > 1) {
             CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
