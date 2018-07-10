@@ -1,7 +1,12 @@
 package Clases;
 
 import Persistencia.EstudianteJpaController;
+import Persistencia.SedeJpaController;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ContEstudiante implements IContEstudiante {
 
@@ -157,6 +162,58 @@ public class ContEstudiante implements IContEstudiante {
         } catch (Exception e) {
             Fabrica.getInstance().getEntity().getTransaction().rollback();
             throw e;
+        }
+    }
+    @Override
+    public HashMap<String,String> getInfoEstudiante(String ci){
+        HashMap<String,String> map = new HashMap<>();
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        Estudiante e = ejpa.findEstudianteCedula(ci);
+        if(e != null){
+            map.put("nombre", e.getCi());
+            map.put("apellido", e.getApellidos());
+            map.put("email", e.getEmail());
+            map.put("fechaNac", e.getFechaNac().toString());
+        }
+        
+        return map;
+    }
+    @Override
+    public Estudiante getEstudiante(String ci){
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        return ejpa.findEstudianteCedula(ci);
+    }
+    
+    
+    
+    @Override
+    public void confirmarMod(String ci, String nombre, String apellido, String email, String fechanac){
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        Estudiante e = ejpa.findEstudianteCedula(ci);
+        e.setNombres(nombre);
+        e.setApellidos(apellido);
+        e.setEmail(email);
+        Date theSameDate;
+        try {
+            theSameDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(fechanac);
+            e.setFechaNac(theSameDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(ContEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ejpa.edit(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ContEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @Override
+    public void inhabilitarEstudiante(String ci) {
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        ejpa.findEstudianteCedula(ci).setHabilitado(false);
+        try {
+            ejpa.edit(ejpa.findEstudianteCedula(ci));
+        } catch (Exception ex) {
+            Logger.getLogger(ContEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

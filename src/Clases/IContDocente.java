@@ -23,4 +23,7 @@ public interface IContDocente {
     public abstract void asociarACurso(Curso curso, Docente docente) throws Exception;
     public abstract void notificacionVista(Notificacion notif);
     public abstract void configEnviarMails(boolean opocion);
+    
+    public abstract Docente getDocenteByCedula(String ci);
+    public abstract void confirmarCambios(Docente d);
 }

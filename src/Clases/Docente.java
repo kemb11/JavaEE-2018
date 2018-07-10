@@ -16,8 +16,18 @@ public class Docente extends Usuario {
     private Date FechaNac;
     @ManyToMany
     private List<CursoSede> clases;
-    private boolean enviarMails;
+    private boolean enviarMails, habilitado = true;
 
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+    
+    
     public String getCi() {
         return ci;
     }

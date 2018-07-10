@@ -187,4 +187,15 @@ public class DocenteJpaController implements Serializable {
         }
         return null;
     }
+    
+    public Docente getDocenteByCedula (String ci) {
+        List<Docente> docentes = this.findDocenteEntities();
+        Docente d1 = new Docente();
+        for(Docente d : docentes) {
+            if(d.getCi().equals(ci)) {
+                d1 = d;
+            }
+        }
+        return d1;
+    }
 }

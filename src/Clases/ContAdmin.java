@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 
 public class ContAdmin implements IContAdmin {
@@ -286,6 +288,49 @@ public class ContAdmin implements IContAdmin {
             throw e;
         }
     }
+    @Override
+    public void agregarEstudianteSede(String sede, String ci){
+        SedeJpaController sjpa = new SedeJpaController();
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        Estudiante e = ejpa.findEstudianteCedula(ci);
+        Sede s = sjpa.returnByNombre(sede);
+        e.getSedes().add(s);
+        try {
+            ejpa.edit(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ContAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    public List<Carrera> getCarrerasSede(String nombreSede) {
+        List<Carrera> lc = new ArrayList<>();
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(nombreSede);
+        lc = s.getCarreras();
+        return lc;
+    }
+    
+    @Override
+    public void inscribirEstudianteCarrera(String ci, String sede, String carrera) {
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        Estudiante e = ejpa.findEstudianteCedula(ci);
+        
+        SedeJpaController sjpa = new SedeJpaController();
+        Sede s = sjpa.returnByNombre(sede);
+        
+        CarreraJpaController cjpa = new CarreraJpaController();
+        Carrera c = cjpa.getCarreraByNombre(carrera);
+        
+        e.getCarreras().add(c);
+        e.getSedes().add(s);
+        
+        try {
+            ejpa.edit(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ContAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
 /*
 package Clases;
@@ -294,7 +339,7 @@ import Persistencia.*;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.List;1
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
