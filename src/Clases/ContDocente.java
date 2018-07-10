@@ -12,7 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -161,6 +164,8 @@ public class ContDocente implements IContDocente {
     @Override
     public void subirNotasExamen(Examen e) {
         try {
+            SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+            List<String> etiquetas = new ArrayList<>();
             ExamenJpaController ejpa = new ExamenJpaController();
             InscripcionEJpaController iejpa = new InscripcionEJpaController();
             for (InscripcionE ie : e.getEstudiantesInscritos()) {
@@ -169,6 +174,11 @@ public class ContDocente implements IContDocente {
                 String texto = "Se ha subido tu resultado para el exámen " + curso.getNombre() + " de la carrera " + curso.getCarrera().getNombre();
                 Fabrica.getInstance().getContAdmin().enviarNotificacion("Resultado de exámen", texto, ie.getEstudiante());
             }
+            etiquetas.add(e.getCurso().getCurso().getNombre());
+            etiquetas.add(e.getCurso().getSede().getNombre());
+            etiquetas.add(e.getCurso().getCurso().getCarrera().getNombre());
+            etiquetas.add("Examen");
+            Fabrica.getInstance().getContAdmin().nuevaNoticia("Se ha corregido Examen", "Examen de " + e.getCurso().getCurso() + " de la fecha " + date.format(e.getFecha())+" ha sido corregido", etiquetas);
             ejpa.edit(e);
         } catch (Exception ex) {
             Logger.getLogger(ContDocente.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,11 +187,18 @@ public class ContDocente implements IContDocente {
 
     @Override
     public void subirNotasParcial(Parcial p) {
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        List<String> etiquetas = new ArrayList<>();
         for (InscripcionC estudiante : p.getCurso().getEstudiantesActuales()) {
             Curso curso = p.getCurso().getCurso();
             String texto = "Se ha subido tu resultado para el parcial " + curso.getNombre() + " de la carrera " + curso.getCarrera().getNombre();
             Fabrica.getInstance().getContAdmin().enviarNotificacion("Resultado de parcial", texto, estudiante.getEstudiante());
         }
+        etiquetas.add(p.getCurso().getCurso().getNombre());
+        etiquetas.add(p.getCurso().getSede().getNombre());
+        etiquetas.add(p.getCurso().getCurso().getCarrera().getNombre());
+        etiquetas.add("Parcial");
+        Fabrica.getInstance().getContAdmin().nuevaNoticia("Se ha corregido Parcial", p.getInstancia() + " parcial de " + p.getCurso().getCurso() + " de la fecha " + date.format(p.getFecha())+" ha sido corregido", etiquetas);
         Fabrica.getInstance().getEntity().merge(p);
     }
 
