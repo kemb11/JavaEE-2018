@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
-@Table(name="estudiante")
+@Table(name = "estudiante")
 public class Estudiante extends Usuario {
 
     @OneToMany(mappedBy = "estudiante")
@@ -82,10 +82,11 @@ public class Estudiante extends Usuario {
 
     public List<Curso> getListaCursosAprobados() {
         List<Curso> cursos = new ArrayList<>();
-        if(this.cursoAprobados != null)
-            for(CursoAprobado ca : this.cursoAprobados){
+        if (this.cursoAprobados != null) {
+            for (CursoAprobado ca : this.cursoAprobados) {
                 cursos.add(ca.getCurso());
             }
+        }
         return cursos;
     }
 
@@ -137,35 +138,34 @@ public class Estudiante extends Usuario {
         this.sedes = sedes;
     }
 
-    
-    public boolean estaInscriptoEnSede(Sede sede){
+    public boolean estaInscriptoEnSede(Sede sede) {
         for (Sede s : this.sedes) {
-            if(s.equals(sede)){
+            if (s.equals(sede)) {
                 return true;
             }
-        }        
+        }
         return false;
     }
-    
-    public boolean estaInscriptoEnCarrera(Carrera carrera){
+
+    public boolean estaInscriptoEnCarrera(Carrera carrera) {
         for (Carrera c : getCarreras()) {
-            if(c.equals(carrera)){
+            if (c.equals(carrera) && this.habilitadoCarrera(c)) {
                 return true;
             }
-        }        
+        }
         return false;
     }
-    
-    public boolean estaInscriptoEnCurso(Curso curso){
+
+    public boolean estaInscriptoEnCurso(Curso curso) {
         for (InscripcionC ic : this.inscripciones) {
             Curso c = ic.getCurso().getCurso();
-            if(c.equals(curso)){
+            if (c.equals(curso)) {
                 return true;
             }
-        }        
+        }
         return false;
     }
-    
+
     public boolean setIncripcionE(Examen examen) throws Exception {
         if (buscarInscripcionExamen(examen)) {
             return false;
@@ -188,7 +188,7 @@ public class Estudiante extends Usuario {
             }
         }
     }
-    
+
     private boolean buscarInscripcionExamen(Examen examen) {
         for (InscripcionE inscripcion : this.examenes) {
             if (inscripcion.getExamen().equals(examen)) {
@@ -197,19 +197,22 @@ public class Estudiante extends Usuario {
         }
         return false;
     }
-    
-    public List<Carrera> getCarreras(){
+
+    public List<Carrera> getCarreras() {
         List<Carrera> list = new ArrayList<>();
-        if(carreraEstudiante != null)
-        for(CarreraEstudiante c : carreraEstudiante)
-            list.add(c.getCarrera());
+        if (carreraEstudiante != null) {
+            for (CarreraEstudiante c : carreraEstudiante) {
+                list.add(c.getCarrera());
+            }
+        }
         return list;
     }
-    
-    public void setCarrera(Carrera c){
-        if(carreraEstudiante == null)
+
+    public void setCarrera(Carrera c) {
+        if (carreraEstudiante == null) {
             carreraEstudiante = new ArrayList<>();
-        if(!estaInscriptoEnCarrera(c)){
+        }
+        if (!estaInscriptoEnCarrera(c)) {
             CarreraEstudiante ce = new CarreraEstudiante();
             ce.setEstudiante(this);
             ce.setCarrera(c);
@@ -221,11 +224,12 @@ public class Estudiante extends Usuario {
             Fabrica.getInstance().getEntity().persist(ce);
         }
     }
-    
-    public void setSede(Sede S){
-        if(sedes == null)
+
+    public void setSede(Sede S) {
+        if (sedes == null) {
             sedes = new ArrayList<>();
-        if(!this.sedes.contains(S)){
+        }
+        if (!this.sedes.contains(S)) {
             this.sedes.add(S);
             S.setEstudiante(this);
         }
@@ -238,75 +242,82 @@ public class Estudiante extends Usuario {
     public void setEnviarMails(boolean enviarMails) {
         this.enviarMails = enviarMails;
     }
-    
-    public void CursoAprobado(CursoAprobado ca, String nota){
-        if(this.cursoAprobados == null) this.cursoAprobados = new ArrayList<>();
-        if(!this.cursoAprobados.contains(ca)){
-            this.cursoAprobados.add(ca);            
+
+    public void CursoAprobado(CursoAprobado ca, String nota) {
+        if (this.cursoAprobados == null) {
+            this.cursoAprobados = new ArrayList<>();
+        }
+        if (!this.cursoAprobados.contains(ca)) {
+            this.cursoAprobados.add(ca);
             Fabrica.getInstance().getEntity().persist(ca);
             Fabrica.getInstance().getEntity().merge(this);
-            if(ca.isAprobado()){
-                String texto = "Felicitanciones, ha aprobado el curso "+ ca.getCurso().getNombre()+" pertenecienta a la carrera "+ ca.getCurso().getCarrera().getNombre()+" con nota "+nota;
+            if (ca.isAprobado()) {
+                String texto = "Felicitanciones, ha aprobado el curso " + ca.getCurso().getNombre() + " pertenecienta a la carrera " + ca.getCurso().getCarrera().getNombre() + " con nota " + nota;
                 Fabrica.getInstance().getContAdmin().enviarNotificacion("Curso aprobado", texto, this);
-            }else{
-                String texto = "Felicitanciones, ha ganado elderecho a examen del curso "+ ca.getCurso().getNombre()+" pertenecienta a la carrera "+ ca.getCurso().getCarrera().getNombre()+" con nota "+nota;
+            } else {
+                String texto = "Felicitanciones, ha ganado elderecho a examen del curso " + ca.getCurso().getNombre() + " pertenecienta a la carrera " + ca.getCurso().getCarrera().getNombre() + " con nota " + nota;
                 Fabrica.getInstance().getContAdmin().enviarNotificacion("Derecho a examen", texto, this);
             }
         }
     }
-    
-    public ResultadoP AprobacionParcial(Parcial parcial){
-        if(this.notasParciales!=null)
-        for(ResultadoP rp: this.notasParciales){
-            if(rp.getParcial().getCurso().equals(parcial.getCurso())){
-                int dias=(int) ((parcial.getFecha().getTime()-rp.getParcial().getFecha().getTime())/86400000);
-                if(!rp.getParcial().getInstancia().equals(parcial.getInstancia()) && dias < 120){
-                    return rp;
+
+    public ResultadoP AprobacionParcial(Parcial parcial) {
+        if (this.notasParciales != null) {
+            for (ResultadoP rp : this.notasParciales) {
+                if (rp.getParcial().getCurso().equals(parcial.getCurso())) {
+                    int dias = (int) ((parcial.getFecha().getTime() - rp.getParcial().getFecha().getTime()) / 86400000);
+                    if (!rp.getParcial().getInstancia().equals(parcial.getInstancia()) && dias < 120) {
+                        return rp;
+                    }
                 }
             }
         }
         return null;
     }
-    
-    public boolean derechoExamen(Curso c){
-        if(this.cursoAprobados != null)
-            for(CursoAprobado ca : this.cursoAprobados){
-                if(ca.getCurso().equals(c) && ca.isAprobado() == false){
+
+    public boolean derechoExamen(Curso c) {
+        if (this.cursoAprobados != null) {
+            for (CursoAprobado ca : this.cursoAprobados) {
+                if (ca.getCurso().equals(c) && ca.isAprobado() == false) {
                     return true;
                 }
             }
+        }
         return false;
     }
-    
-    public boolean cursoAprobado(Curso c){
-        if(this.cursoAprobados != null)
-            for(CursoAprobado ca : this.cursoAprobados){
-                if(ca.getCurso().equals(c) && ca.isAprobado() == true){
+
+    public boolean cursoAprobado(Curso c) {
+        if (this.cursoAprobados != null) {
+            for (CursoAprobado ca : this.cursoAprobados) {
+                if (ca.getCurso().equals(c) && ca.isAprobado() == true) {
                     return true;
                 }
             }
+        }
         return false;
     }
-    
-    public boolean previasAprobadas(Curso c){
-        if(c.getPrevias() != null && !c.getPrevias().isEmpty()){
-            for(Previa p : c.getPrevias()){
-                if(p.isExamenAprobado()){
-                    if(!this.cursoAprobado(p.getCurso()))
+
+    public boolean previasAprobadas(Curso c) {
+        if (c.getPrevias() != null && !c.getPrevias().isEmpty()) {
+            for (Previa p : c.getPrevias()) {
+                if (p.isExamenAprobado()) {
+                    if (!this.cursoAprobado(p.getCurso())) {
                         return false;
-                }else{
-                    if(!this.derechoExamen(p.getCurso()))
+                    }
+                } else {
+                    if (!this.derechoExamen(p.getCurso())) {
                         return false;
+                    }
                 }
             }
         }
         return true;
     }
-    
-    public int cantNotifNoVista(){
+
+    public int cantNotifNoVista() {
         int cant = 0;
         for (Notificacion notif : notificaciones) {
-            if(notif.isVista() == false){
+            if (notif.isVista() == false) {
                 cant += 1;
             }
         }
@@ -326,6 +337,30 @@ public class Estudiante extends Usuario {
         }
         
         return null;
+    }
+
+    public boolean habilitadoCarrera(Carrera c) {
+        if (this.carreraEstudiante != null) {
+            for (CarreraEstudiante ce : this.carreraEstudiante) {
+                if (ce.getCarrera().equals(c) && ce.isHabilitado()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void inhabilitarCarrera(Carrera c) {
+        if (this.carreraEstudiante != null) {
+            for (CarreraEstudiante ce : this.carreraEstudiante) {
+                if (ce.getCarrera().equals(c)) {
+                    ce.inhabilitar();
+                    break;
+                }
+            }
+        }
     }
 
 }

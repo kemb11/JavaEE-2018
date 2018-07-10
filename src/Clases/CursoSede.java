@@ -192,7 +192,7 @@ public class CursoSede implements Serializable {
 
     public void notificarAlumnos(String titulo, String mensaje) {
         for (InscripcionC i : inscripciones) {
-            if (!i.isAprobado(curso)) {
+            if (!i.isAprobado(curso) && i.isHabilitado()) {
                 try {
                     SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
                 } catch (UnsupportedEncodingException ex) {
@@ -204,10 +204,12 @@ public class CursoSede implements Serializable {
 
     public void notificarAlumnosActuales(String titulo, String mensaje) {
         for (InscripcionC i : this.getEstudiantesActuales()) {
-            try {
-                SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
+            if (i.isHabilitado()) {
+                try {
+                    SendEmail.EnviarMail(i.getEstudiante().getEmail(), titulo, mensaje);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(CursoSede.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

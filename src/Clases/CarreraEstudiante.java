@@ -20,6 +20,7 @@ public class CarreraEstudiante implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private boolean habilitado;
 
     public Long getId() {
         return id;
@@ -44,6 +45,7 @@ public class CarreraEstudiante implements Serializable {
 
     public void setEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
+        this.habilitar();
     }
 
     public Carrera getCarrera() {
@@ -103,5 +105,18 @@ public class CarreraEstudiante implements Serializable {
     public String toString() {
         return "Clases.CarreraEstudiante[ id=" + id + " ]";
     }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void inhabilitar(){
+        this.habilitado = false;
+        Fabrica.getInstance().getEntity().merge(this);
+    }
     
+    public void habilitar(){
+        this.habilitado = true;
+        Fabrica.getInstance().getEntity().merge(this);
+    }
 }

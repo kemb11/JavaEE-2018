@@ -2872,7 +2872,7 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             ca.setFecha(new Date());
                             ca.setAprobado(true);
                             ca.setEstudiante(ie.getEstudiante());
-                            String nota = String.valueOf(re.getNota())+"/"+String.valueOf(e.getNotaApro());
+                            String nota = String.valueOf(re.getNota()) + "/" + String.valueOf(e.getNotaApro());
                             ie.getEstudiante().CursoAprobado(ca, nota);
                         }
                     }
@@ -2909,20 +2909,21 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
             res.setNota((int) subirNota_notaParcial.getValue());
             res.setEstudiante(ic.getEstudiante());
             DefaultTableModel modelo2 = (DefaultTableModel) subirNota_notasParcial.getModel();
-            Object[] datos = { null};
+            Object[] datos = {null};
             if (res.getParcial().getInstancia().equals("Segundo")) {
                 String aprobado = "Aprobado";
-                if (res.getNota()+res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getDerechoExamen()) {
+                if (res.getNota() + res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getDerechoExamen()) {
                     aprobado = "Reprobado";
-                }else{ 
-                    if(res.getNota()+res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getAproParciales())
+                } else {
+                    if (res.getNota() + res.getEstudiante().AprobacionParcial(res.getParcial()).getNota() < res.getParcial().getCurso().getAproParciales()) {
                         aprobado = "Derecho a Examen";
+                    }
                 }
-                Object[] aux = {res, ic , ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota(), aprobado};
+                Object[] aux = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota(), aprobado};
                 datos = aux;
             } else {
-                subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(subirNota_notasParcial.getColumnModel().getColumnCount()-1));
-                Object[] aux = {res, ic , ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota()};
+                subirNota_notasParcial.getColumnModel().removeColumn(subirNota_notasParcial.getColumnModel().getColumn(subirNota_notasParcial.getColumnModel().getColumnCount() - 1));
+                Object[] aux = {res, ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos(), res.getNota()};
                 datos = aux;
             }
             modelo2.addRow(datos);
@@ -2974,18 +2975,19 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                             ca.setFecha(new Date());
                             ca.setAprobado(true);
                             ca.setEstudiante(nota.getEstudiante());
-                            String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
+                            String notaEst = String.valueOf(nota.getNota() + notaAnterior.getNota()) + "/" + String.valueOf(p.getNotaMaxima());
                             nota.getEstudiante().CursoAprobado(ca, notaEst);
-                        }else{
-                            if(notaAnterior.getNota() + nota.getNota() > p.getCurso().getDerechoExamen()){
-                            CursoAprobado ca = new CursoAprobado();
-                            ca.setCurso(p.getCurso().getCurso());
-                            ca.setFecha(new Date());
-                            ca.setAprobado(false);
-                            ca.setEstudiante(nota.getEstudiante());
-                            String notaEst = String.valueOf(nota.getNota()+notaAnterior.getNota())+"/"+String.valueOf(p.getNotaMaxima());
-                            nota.getEstudiante().CursoAprobado(ca, notaEst);
-                        }}
+                        } else {
+                            if (notaAnterior.getNota() + nota.getNota() > p.getCurso().getDerechoExamen()) {
+                                CursoAprobado ca = new CursoAprobado();
+                                ca.setCurso(p.getCurso().getCurso());
+                                ca.setFecha(new Date());
+                                ca.setAprobado(false);
+                                ca.setEstudiante(nota.getEstudiante());
+                                String notaEst = String.valueOf(nota.getNota() + notaAnterior.getNota()) + "/" + String.valueOf(p.getNotaMaxima());
+                                nota.getEstudiante().CursoAprobado(ca, notaEst);
+                            }
+                        }
                     }
                 }
                 Fabrica.getInstance().getContDocente().subirNotasParcial(p);
@@ -3498,8 +3500,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 modelo.removeRow(0);
             }
             for (InscripcionE ie : e.getEstudiantesInscritos()) {
-                Object[] datos = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos()};
-                modelo.addRow(datos);
+                if (ie.isHabilitado()) {
+                    Object[] datos = {ie, ie.getEstudiante().getCi(), ie.getEstudiante().getNombres() + " " + ie.getEstudiante().getApellidos()};
+                    modelo.addRow(datos);
+                }
             }
             modelo = (DefaultTableModel) subirNota_notas.getModel();
             while (modelo.getRowCount() > 0) {
@@ -3521,8 +3525,10 @@ public class Docente_MenuPrincipal extends javax.swing.JFrame {
                 modelo.removeRow(0);
             }
             for (InscripcionC ic : p.getCurso().getEstudiantesActuales()) {
-                Object[] datos = {ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos()};
-                modelo.addRow(datos);
+                if (ic.isHabilitado()) {
+                    Object[] datos = {ic, ic.getEstudiante().getCi(), ic.getEstudiante().getNombres() + " " + ic.getEstudiante().getApellidos()};
+                    modelo.addRow(datos);
+                }
             }
             modelo = (DefaultTableModel) subirNota_notasParcial.getModel();
             if (p.getInstancia().equals("Primer")) {
