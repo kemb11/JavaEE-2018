@@ -156,15 +156,10 @@ public class ContEstadisticas implements IContEstadisticas{
     
     @Override
     public double promedioAprobacionCarrera(boolean enTodasSedes, Carrera carrera){
-        int inscriptos = 0;
-        int aprobados = 0;
-        
         Sede sede = Fabrica.getInstance().getContEdu().getSede();
         
-        for (Curso curso : carrera.getCursos()) {
-            inscriptos += curso.cantidadDeInscriptos(enTodasSedes);
-            aprobados += curso.cantidadDeAprobados(enTodasSedes);
-        }
+        int inscriptos = carrera.cantidadInscriptos();
+        int aprobados = carrera.cantidadAprobados(enTodasSedes);        
         
         if(inscriptos != 0){
             double promedio = (aprobados*100)/inscriptos; // regla de tres       
@@ -195,11 +190,7 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(cursoRetornar[0] != null){
-            return cursoRetornar;
-        }else{
-            return null;
-        }
+        return cursoRetornar;
     }
     
     @Override
@@ -219,11 +210,7 @@ public class ContEstadisticas implements IContEstadisticas{
             
         }
         
-        if(cursoRetornar[0] != null){
-            return cursoRetornar;
-        }else{
-            return null;
-        }
+        return cursoRetornar;
     }
     
     @Override
@@ -242,11 +229,7 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(cursoRetornar[0] != null){
-            return cursoRetornar;
-        }else{
-            return null;
-        }
+        return cursoRetornar;
     }
     
     /// Estadisticas Sedes ///
@@ -329,7 +312,7 @@ public class ContEstadisticas implements IContEstadisticas{
     }
     
     @Override
-    public double promedioAprobacionSede(boolean enTodasSedes){
+    public double promedioAprobacionCursoSede(boolean enTodasSedes){
         int inscriptos = 0;
         int aprobados = 0;
         
@@ -353,6 +336,34 @@ public class ContEstadisticas implements IContEstadisticas{
         
         if(inscriptos != 0){
             double promedio = (aprobados*100)/inscriptos; // regla de tres   
+            return promedio;
+        }else{
+            return -1;
+        }
+    }
+    
+    @Override
+    public double promedioAprobacionCarreraSede(boolean enTodasSedes){
+        int inscriptos = 0;
+        int aprobados = 0;   
+        Sede sedeSelec = Fabrica.getInstance().getContEdu().getSede();
+        
+        List<Carrera> carrerasRecorridas = new ArrayList<>(); // Esto es porque una carrera puede estar en mas de una sede
+        
+        for (Sede sede : Fabrica.getInstance().getContEdu().listarSedes()) {
+            if(enTodasSedes == true || sedeSelec.equals(sede)){ // para que no recorra toda la sede al pedo
+                for (Carrera carrera : sede.getCarreras()) {
+                    if(carrerasRecorridas.contains(carrera)==false){
+                        inscriptos += carrera.cantidadInscriptos();
+                        aprobados += carrera.cantidadAprobados(enTodasSedes);   
+                    }
+                    carrerasRecorridas.add(carrera);
+                }
+            }
+        }
+        
+        if(inscriptos != 0){
+            double promedio = (aprobados*100)/inscriptos; // regla de tres       
             return promedio;
         }else{
             return -1;
@@ -390,11 +401,7 @@ public class ContEstadisticas implements IContEstadisticas{
                 }
             }
         }
-        if(cursoRetornar[0] != null){
-            return cursoRetornar;
-        }else{
-            return null;
-        }
+        return cursoRetornar;
     }
     
     @Override
@@ -424,16 +431,12 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(cursoRetornar[0] != null){
-            return cursoRetornar;
-        }else{
-            return null;
-        }
+        return cursoRetornar;
     }
     
     @Override
     public Object[] cursoConMejorPrmedioAprobacionCarreraSede(boolean enTodasSedes){
-        Object[] cursoRetornar ={null, 0};
+        Object[] cursoRetornar ={null, 0.0};
         
         Sede sedeSelec = Fabrica.getInstance().getContEdu().getSede();
         
@@ -458,11 +461,7 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(cursoRetornar[0] != null){
-            return cursoRetornar;
-        }else{
-            return null;
-        }
+        return cursoRetornar;
     }
     
     @Override
@@ -497,11 +496,7 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(carreraRetornar[0] != null){
-            return carreraRetornar;
-        }else{
-            return null;
-        }
+        return carreraRetornar;
     }
     
     @Override
@@ -516,10 +511,7 @@ public class ContEstadisticas implements IContEstadisticas{
             if(enTodasSedes == true || sedeSelec.equals(sede)){ // para que no recorra toda la sede al pedo
                 for (Carrera carrera : sede.getCarreras()) {
                     if(carrerasRecorridas.contains(carrera)==false){
-                        int aprobados = 0;
-                        for (Curso curso : carrera.getCursos()) {
-                            aprobados += curso.cantidadDeAprobados(enTodasSedes);
-                        }
+                        int aprobados = carrera.cantidadAprobados(enTodasSedes);
 
                         int aprobdosAnt = (int) carreraRetornar[1];
                         if(aprobados > aprobdosAnt){
@@ -532,16 +524,12 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(carreraRetornar[0] != null){
-            return carreraRetornar;
-        }else{
-            return null;
-        }
+        return carreraRetornar;
     }
     
     @Override
     public Object[] carreraConMejorPrmedioAprobacionSede(boolean enTodasSedes){
-        Object[] carreraRetornar ={null, 0};
+        Object[] carreraRetornar ={null, 0.0};
         
         Sede sedeSelec = Fabrica.getInstance().getContEdu().getSede();
         
@@ -563,10 +551,6 @@ public class ContEstadisticas implements IContEstadisticas{
             }
         }
         
-        if(carreraRetornar[0] != null){
-            return carreraRetornar;
-        }else{
-            return null;
-        }
+        return carreraRetornar;
     }
 }

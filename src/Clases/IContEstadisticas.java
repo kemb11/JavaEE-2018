@@ -26,7 +26,8 @@ public interface IContEstadisticas {
     //Sedes
     public abstract double promedioParcialesSede(boolean enTodasSedes);
     public abstract double promedioExamenesSede(boolean enTodasSedes);
-    public abstract double promedioAprobacionSede(boolean enTodasSedes);
+    public abstract double promedioAprobacionCursoSede(boolean enTodasSedes);
+    public abstract double promedioAprobacionCarreraSede(boolean enTodasSedes);
     public abstract Object[] cursoConMasEstudiantesCursandoSede(boolean enTodasSedes);
     public abstract Object[] cursoConMasAprobacionesCarreraSede(boolean enTodasSedes);
     public abstract Object[] cursoConMejorPrmedioAprobacionCarreraSede(boolean enTodasSedes);

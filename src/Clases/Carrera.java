@@ -137,6 +137,33 @@ public class Carrera implements Serializable {
     public int getCreditos() {
         return creditos;
     }
+    
+    public int cantidadAprobados(boolean todasSedes){
+        int aprobados = 0;
+        for (CarreraEstudiante carreraEst : this.carreraEstudiantes) {
+            if(carreraEst.isAprobada()){
+                carreraEst.getCarrera().getCursos();
+                Sede sede = Fabrica.getInstance().getContEdu().getSede();
+                CursoSede cs = carreraEst.getEstudiante().ultimoCursoAprobado(this);
+                if(todasSedes || (cs != null && cs.getSede().equals(sede))){
+                    aprobados += 1;
+                }
+            }
+        }
+        
+        return aprobados;
+    }
+    
+    public int cantidadInscriptos(){
+        int inscripciones = 0;
+        for (CarreraEstudiante carreraEst : this.carreraEstudiantes) {
+            if(carreraEst.isHabilitado()){
+                inscripciones += 1;
+            }
+        }
+        
+        return inscripciones;
+    }
 
     @Override
     public int hashCode() {

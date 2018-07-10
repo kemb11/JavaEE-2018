@@ -362,5 +362,22 @@ public class Estudiante extends Usuario {
             }
         }
     }
+    
+    public CursoSede ultimoCursoAprobado(Carrera carrera){
+        Date fechaAnterior = null;
+        Curso cursoRetornar = null;
+        for (CursoAprobado cursoAprobado : this.cursoAprobados) {
+            if(cursoAprobado.getCurso().getCarrera().equals(carrera)){
+                if(cursoAprobado.getFecha().after(fechaAnterior)){
+                    fechaAnterior = cursoAprobado.getFecha();
+                    cursoRetornar = cursoAprobado.getCurso();
+                    Sede sede = this.enQueSedeAprobo(cursoAprobado);
+                    return cursoRetornar.getCursoSede(sede);
+                }
+            }
+        }
+        
+        return null;
+    }
 
 }
