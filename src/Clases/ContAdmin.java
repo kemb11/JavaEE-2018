@@ -256,6 +256,12 @@ public class ContAdmin implements IContAdmin {
         
         e.getCarreras().add(c);
         e.getSedes().add(s);
+        
+        try {
+            ejpa.edit(e);
+        } catch (Exception ex) {
+            Logger.getLogger(ContAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 /*

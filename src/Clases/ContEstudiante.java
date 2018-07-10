@@ -182,5 +182,14 @@ public class ContEstudiante implements IContEstudiante {
         }
     }
     
-    
+    @Override
+    public void inhabilitarEstudiante(String ci) {
+        EstudianteJpaController ejpa = new EstudianteJpaController();
+        ejpa.findEstudianteCedula(ci).setHabilitado(false);
+        try {
+            ejpa.edit(ejpa.findEstudianteCedula(ci));
+        } catch (Exception ex) {
+            Logger.getLogger(ContEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

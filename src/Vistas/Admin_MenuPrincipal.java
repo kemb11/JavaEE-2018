@@ -3712,8 +3712,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int dialogResult = JOptionPane.showConfirmDialog(null, "¿Seguro que desea inhabilitar este estudiante?");
         if(dialogResult == JOptionPane.YES_OPTION) { 
-            Estudiante e = Fabrica.getInstance().getContEst().getEstudiante(estudianteCIBuscar.getText());
-            e.setHabilitado(false);
+            Fabrica.getInstance().getContEst().inhabilitarEstudiante(estudianteCIBuscar.getText());
         }
     }//GEN-LAST:event_in_estActionPerformed
 

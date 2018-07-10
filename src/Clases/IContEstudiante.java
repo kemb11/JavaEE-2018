@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface IContEstudiante {
+    
+    
+    public abstract void inhabilitarEstudiante(String ci);
     public abstract Estudiante getLogin();
     public abstract Estudiante getEstudiante(String ci);
     public abstract boolean login(String id, String pass) throws Exception;
