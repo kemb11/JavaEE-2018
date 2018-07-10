@@ -208,7 +208,7 @@ public class Principal extends javax.swing.JFrame {
                         String tipo = Fabrica.getInstance().getContAdmin().login(id, pass);
                         return tipo;
                     } catch (InternalException ex) {
-                        //JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.WARNING_MESSAGE);
+                        mostrarMensajeError(ex.getMessage());
                         return null;
                     }
                 }
@@ -257,6 +257,11 @@ public class Principal extends javax.swing.JFrame {
             cl.show(Contenedor, "iniciar");
         }
     }
+    
+    public void mostrarMensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.WARNING_MESSAGE);
+    }
+    
     /**
      * @param args the command line arguments
      */

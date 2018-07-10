@@ -6,6 +6,7 @@
  */
 package Clases;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -310,6 +311,21 @@ public class Estudiante extends Usuario {
             }
         }
         return cant;
+    }
+    
+    public Sede enQueSedeAprobo(CursoAprobado cursoAp){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        
+        for (InscripcionC inscripcion : this.inscripciones) {
+            String[] array1 = dateFormat.format(inscripcion.getFecha()).split("-"); // divide la fecha, 0=dia, 1=mes, 2=año
+            String[] array2 = dateFormat.format(cursoAp.getFecha()).split("-");
+            
+            if(array1[2].equals(array2[2])){
+                return inscripcion.getCurso().getSede();
+            }
+        }
+        
+        return null;
     }
 
 }

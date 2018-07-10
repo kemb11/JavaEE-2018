@@ -8,6 +8,10 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupParciales">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupEstadCurso">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupEstadCarrera">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -39,7 +43,6 @@
                   <Component id="PanelPrincipal" max="32767" attributes="0"/>
                   <Component id="PanelCabecera" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -503,6 +506,8 @@
                               <Component id="VerCursoButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="InscripcionCButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="InscripcionCButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="800" max="-2" attributes="0"/>
                       </Group>
@@ -527,6 +532,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="VerCursoButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="InscripcionCButton" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="InscripcionCButton1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -675,6 +681,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarButtonActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="InscripcionCButton1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Iconos/estadisticas.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Estad&#xed;sticas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InscripcionCButton1ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="CarrerasPanel">
@@ -697,6 +717,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="VerCarrera" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnEstadCarr" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -722,9 +744,12 @@
                           <Component id="BuscarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane4" pref="334" max="32767" attributes="0"/>
+                      <Component id="jScrollPane4" pref="333" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="VerCarrera" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="VerCarrera" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnEstadCarr" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -817,6 +842,20 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnEstadCarr">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Iconos/estadisticas.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Estad&#xed;sticas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadCarrActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="SedesPanel">
@@ -851,7 +890,7 @@
                               <Component id="jScrollPane3" min="-2" pref="800" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="102" max="32767" attributes="0"/>
+                      <EmptySpace pref="167" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -864,7 +903,7 @@
                           <Component id="BuscarSede" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" pref="334" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" pref="369" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="SeleccionarSede" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -3440,35 +3479,35 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
+                              <Component id="EnTodasCarrRadioButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="TituloLabel41" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel56" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="promApCarr" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TituloLabel57" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloEstadisticasTotales1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TituloEstadisticasCarrera" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="TituloLabel44" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TituloLabel45" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel54" min="-2" max="-2" attributes="0"/>
+                              <Component id="promNotaExCarr" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TituloLabel46" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel53" min="-2" max="-2" attributes="0"/>
+                              <Component id="promNotaParCarr" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="TituloLabel58" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel59" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="conMasEstCarr" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="TituloLabel60" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel61" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="conMasApCarr" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="TituloLabel62" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel63" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="conMejorPromApCarr" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="138" max="32767" attributes="0"/>
                   </Group>
@@ -3482,45 +3521,45 @@
                           <Component id="TituloLabel57" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="TituloEstadisticasTotales1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TituloEstadisticasCarrera" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EnTodasCarrRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="TituloLabel41" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel56" min="-2" max="-2" attributes="0"/>
+                              <Component id="promApCarr" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="TituloLabel44" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="TituloLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TituloLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="promNotaExCarr" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="TituloLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TituloLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="promNotaParCarr" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="TituloLabel58" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel59" min="-2" max="-2" attributes="0"/>
+                              <Component id="conMasEstCarr" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="TituloLabel60" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel61" min="-2" max="-2" attributes="0"/>
+                              <Component id="conMasApCarr" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="TituloLabel62" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel63" min="-2" max="-2" attributes="0"/>
+                              <Component id="conMejorPromApCarr" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
@@ -3529,7 +3568,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="TituloEstadisticasTotales1">
+            <Component class="javax.swing.JLabel" name="TituloEstadisticasCarrera">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="20" style="1"/>
@@ -3584,7 +3623,7 @@
                 <Property name="text" type="java.lang.String" value="En parciales:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel53">
+            <Component class="javax.swing.JLabel" name="promNotaParCarr">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3595,7 +3634,7 @@
                 <Property name="text" type="java.lang.String" value="Numero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel54">
+            <Component class="javax.swing.JLabel" name="promNotaExCarr">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3606,7 +3645,7 @@
                 <Property name="text" type="java.lang.String" value="Numero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel56">
+            <Component class="javax.swing.JLabel" name="promApCarr">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -3641,7 +3680,7 @@
                 <Property name="text" type="java.lang.String" value="Curso con m&#xe1;s estudiantes cursando"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel59">
+            <Component class="javax.swing.JLabel" name="conMasEstCarr">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3663,7 +3702,7 @@
                 <Property name="text" type="java.lang.String" value="Curso con m&#xe1;s aprobaciones"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel61">
+            <Component class="javax.swing.JLabel" name="conMasApCarr">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3685,7 +3724,7 @@
                 <Property name="text" type="java.lang.String" value="Curso con mejor promedio de aprobaci&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel63">
+            <Component class="javax.swing.JLabel" name="conMejorPromApCarr">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3698,15 +3737,22 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="jRadioButton3">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupEstadCarrera"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="En sede seleccionada"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+            <Component class="javax.swing.JRadioButton" name="EnTodasCarrRadioButton">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupEstadCarrera"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
@@ -3735,27 +3781,27 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jRadioButton5" min="-2" max="-2" attributes="0"/>
+                              <Component id="EnSelecCursoRadioButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jRadioButton6" min="-2" max="-2" attributes="0"/>
+                              <Component id="EnTodasCursoRadioButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="TituloLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel65" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="promAprobCurso" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TituloLabel66" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloEstadisticasTotales2" min="-2" max="-2" attributes="0"/>
+                              <Component id="TituloEstadisticasCurso" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="TituloLabel47" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TituloLabel48" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel64" min="-2" max="-2" attributes="0"/>
+                              <Component id="promNotaExCurso" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="TituloLabel49" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TituloLabel55" min="-2" max="-2" attributes="0"/>
+                              <Component id="promNotaParCurso" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="590" max="32767" attributes="0"/>
@@ -3770,29 +3816,29 @@
                           <Component id="TituloLabel66" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                              <Component id="TituloEstadisticasTotales2" min="-2" max="-2" attributes="0"/>
+                              <Component id="TituloEstadisticasCurso" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jRadioButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EnSelecCursoRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EnTodasCursoRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="TituloLabel42" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="TituloLabel65" min="-2" max="-2" attributes="0"/>
+                      <Component id="promAprobCurso" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="TituloLabel47" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TituloLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel64" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="promNotaExCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TituloLabel49" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TituloLabel55" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="promNotaParCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
                   </Group>
@@ -3800,7 +3846,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="TituloEstadisticasTotales2">
+            <Component class="javax.swing.JLabel" name="TituloEstadisticasCurso">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="20" style="1"/>
@@ -3841,7 +3887,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="En Ex&#xe1;menes:"/>
+                <Property name="text" type="java.lang.String" value="En ex&#xe1;menes:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="TituloLabel49">
@@ -3855,7 +3901,7 @@
                 <Property name="text" type="java.lang.String" value="En parciales:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel55">
+            <Component class="javax.swing.JLabel" name="promNotaParCurso">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3866,7 +3912,7 @@
                 <Property name="text" type="java.lang.String" value="Numero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel64">
+            <Component class="javax.swing.JLabel" name="promNotaExCurso">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -3877,7 +3923,7 @@
                 <Property name="text" type="java.lang.String" value="Numero"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="TituloLabel65">
+            <Component class="javax.swing.JLabel" name="promAprobCurso">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -3901,22 +3947,97 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton5">
+            <Component class="javax.swing.JRadioButton" name="EnSelecCursoRadioButton">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupEstadCurso"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="En sede seleccionada"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton6">
+            <Component class="javax.swing.JRadioButton" name="EnTodasCursoRadioButton">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="buttonGroupEstadCurso"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="En todas las sedes"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EnTodasCursoRadioButtonActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="CargandoPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="72" green="ca" red="49" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="card19"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="395" max="-2" attributes="0"/>
+                              <Component id="imgCargando" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="431" max="-2" attributes="0"/>
+                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="423" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <Component id="imgCargando" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="208" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="imgCargando">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Iconos/cargandoGrande.gif"/>
+                </Property>
+                <Property name="verticalTextPosition" type="int" value="3"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel18">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="24" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Cargando..."/>
               </Properties>
             </Component>
           </SubComponents>

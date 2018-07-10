@@ -218,4 +218,32 @@ public class Curso implements Serializable {
         this.cursoAprobados.add(Estudiante);
     }
     
+    public int cantidadDeInscriptos(boolean todasSedes){ //si todasSedes = false -> cantidades solo para sede seleccionada
+        int inscriptos = 0;
+        for (CursoSede cursoSede : this.cursoSedes) {
+            Sede sede = Fabrica.getInstance().getContEdu().getSede();
+            if(todasSedes || sede.equals(cursoSede.getSede())){
+                inscriptos += cursoSede.getInscripciones().size();
+            }
+        }
+        return inscriptos;
+    }
+    
+    public int cantidadDeAprobados(boolean todasSedes){ //si todasSedes = false -> cantidades solo para sede seleccionada
+        int aprobados = 0;
+        if(todasSedes==false){
+            Sede sede = Fabrica.getInstance().getContEdu().getSede();
+            for (CursoAprobado cursoAp : this.cursoAprobados) {
+                Sede sedeAp = cursoAp.getEstudiante().enQueSedeAprobo(cursoAp);
+                if(sedeAp!=null && sedeAp.equals(sede)){
+                    aprobados += 1;
+                }
+            }
+        }else{
+            aprobados = this.cursoAprobados.size();
+        }
+        
+        return aprobados;
+    }
+    
 }

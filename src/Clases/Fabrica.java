@@ -32,6 +32,9 @@ public class Fabrica {
     public IContDocente getContDocente(){
         return ContDocente.getInstance();
     }
+    public IContEstadisticas getContEstad(){
+        return ContEstadisticas.getInstance();
+    }
 
     public EntityManager getEntity() {
         return em;
