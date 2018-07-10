@@ -4236,9 +4236,9 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 modeloPrevias.setRowCount(0);
                 for (Previa previa : curso.getPrevias()) {
                     previa.getCursoPrevia();
-                    String tipoP = "Curso";
-                    if(previa.isExamenAprobado()){
-                       tipoP = "Exámen";
+                    String tipoP = "Curso aprobado";
+                    if(!previa.isExamenAprobado()){
+                       tipoP = "Derecho a exámen";
                     }
                     Object[] datos = {previa.getCursoPrevia().getNombre(), tipoP};
                     modeloPrevias.addRow(datos);
