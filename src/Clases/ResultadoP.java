@@ -97,7 +97,7 @@ public class ResultadoP implements Serializable {
     @Override
     public String toString() {
         String retornar = "Estudiante : " + this.estudiante.getNombres() + " " + this.estudiante.getApellidos() + " (" + this.estudiante.getCi() + ")";
-        retornar = retornar.concat("\nNota : " + String.valueOf((int) this.nota));
+        retornar = retornar.concat("\nNota : " + String.valueOf((int) this.nota)) +"/"+String.valueOf((int) this.parcial.getNotaMaxima());
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         retornar = retornar.concat("\nFecha de corrección : " + date.format(this.fecha));
         return retornar;
