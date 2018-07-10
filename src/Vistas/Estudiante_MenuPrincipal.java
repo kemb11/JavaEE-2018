@@ -2587,6 +2587,11 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         EnSelecCursoRadioButton.setSelected(true);
         EnSelecCursoRadioButton.setText("En sede seleccionada");
         EnSelecCursoRadioButton.setFocusPainted(false);
+        EnSelecCursoRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnSelecCursoRadioButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroupEstadCurso.add(EnTodasCursoRadioButton);
         EnTodasCursoRadioButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -2756,14 +2761,16 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         );
         PanelCabeceraLayout.setVerticalGroup(
             PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
+            .addGroup(PanelCabeceraLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15)
-                    .addComponent(notificacionIcono)
-                    .addComponent(nombreUsrLabel))
-                .addContainerGap())
-            .addComponent(VolverButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCabeceraLayout.createSequentialGroup()
+                        .addGroup(PanelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15)
+                            .addComponent(notificacionIcono)
+                            .addComponent(nombreUsrLabel))
+                        .addContainerGap())
+                    .addComponent(VolverButton, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -3318,7 +3325,9 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_InscripcionCButton1ActionPerformed
 
     private void EnTodasCursoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnTodasCursoRadioButtonActionPerformed
-        // TODO add your handling code here:
+        if(EnTodasCursoRadioButton.isSelected()){
+            opcionSeleccionada(CursosOpcion, "estadisticasCurso");
+        }
     }//GEN-LAST:event_EnTodasCursoRadioButtonActionPerformed
 
     private void btnEstadCarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadCarrActionPerformed
@@ -3328,6 +3337,12 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             opcionSeleccionada(CarrerasOpcion, "estadisticasCarrera");            
         }
     }//GEN-LAST:event_btnEstadCarrActionPerformed
+
+    private void EnSelecCursoRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnSelecCursoRadioButtonActionPerformed
+        if(EnSelecCursoRadioButton.isSelected()){
+            opcionSeleccionada(CursosOpcion, "estadisticasCurso");
+        }
+    }//GEN-LAST:event_EnSelecCursoRadioButtonActionPerformed
 
     //opcionSelec = panel lateral seleccionado a cambiar de color, si es null es un panel del principal
     void opcionSeleccionada(JPanel opcionSelec, String opcion) {
@@ -3835,10 +3850,10 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
                                 estadisticasCurso(promedios);
                                 break;
                             case "estadisticasCarrera":
-                                estadisticasCurso(promedios);
+                                estadisticasCarrera(promedios);
                                 break;
                             case "estadisticas":
-                                estadisticasCurso(promedios);
+                                //estadisticasSede(promedios);
                                 break;
                         }
                         mostrarCargando(false, tipo);   
@@ -3857,13 +3872,13 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         DecimalFormat df = new DecimalFormat("#.##");
         
         if((double)promedios[0] > -1){
-            promNotaExCurso.setText(df.format((double)promedios[0])+"%");
+            promNotaExCurso.setText(df.format((double)promedios[0]));
         }else{
             promNotaExCurso.setText("No hay datos disponibles");
         }
         
         if((double)promedios[1] > -1){
-            promNotaParCurso.setText(df.format((double)promedios[1])+"%");
+            promNotaParCurso.setText(df.format((double)promedios[1]));
         }else{
             promNotaParCurso.setText("No hay datos disponibles");
         }
@@ -3877,7 +3892,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         String panelMostrar = "estadisticasCurso";
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
         cl.show(PanelPrincipal, panelMostrar);
-        Object[] v = {CursosOpcion, panelMostrar};
+        Object[] v = {panelMostrar, CursosOpcion};
         volver.add(v);
     }
     
@@ -3887,19 +3902,19 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         DecimalFormat df = new DecimalFormat("#.##");
         
         if((double)promedios[0] > -1){
-            promNotaExCarr.setText(df.format((double)promedios[0])+"%");
+            promNotaExCarr.setText(df.format((double)promedios[0]));
         }else{
             promNotaExCarr.setText("No hay datos disponibles");
         }
         
         if((double)promedios[1] > -1){
-            promNotaParCarr.setText(df.format((double)promedios[1])+"%");
+            promNotaParCarr.setText(df.format((double)promedios[1]));
         }else{
             promNotaParCarr.setText("No hay datos disponibles");
         }
         
         if((double)promedios[2] > -1){
-            promApCarr.setText(df.format((double)promedios[2])+"%");
+            promApCarr.setText(df.format((double)promedios[2]));
         }else{
             promApCarr.setText("No hay datos disponibles");
         }
@@ -3912,7 +3927,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             conMasEstCarr.setText("No hay datos disponibles");
         }
         
-        cursoAux = (Object[]) promedios[3]; // curso y cantidad
+        cursoAux = (Object[]) promedios[4]; // curso y cantidad
         if(cursoAux[0] != null){
             Curso curso = (Curso) cursoAux[0];
             conMasApCarr.setText(curso.getNombre()+": "+String.valueOf((int)cursoAux[1]));
@@ -3920,10 +3935,10 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
             conMasApCarr.setText("No hay datos disponibles");
         }
         
-        cursoAux = (Object[]) promedios[3]; // curso y cantidad
+        cursoAux = (Object[]) promedios[5]; // curso y cantidad
         if(cursoAux[0] != null){
             Curso curso = (Curso) cursoAux[0];
-            conMejorPromApCarr.setText(curso.getNombre()+": "+df.format((double)cursoAux[1]));
+            conMejorPromApCarr.setText(curso.getNombre()+": "+df.format((double)cursoAux[1])+"%");
         }else{
             conMejorPromApCarr.setText("No hay datos disponibles");
         }
@@ -3931,7 +3946,7 @@ public class Estudiante_MenuPrincipal extends javax.swing.JFrame {
         String panelMostrar = "estadisticas";
         CardLayout cl = (CardLayout) (PanelPrincipal.getLayout());
         cl.show(PanelPrincipal, panelMostrar);
-        Object[] v = {CarrerasOpcion, panelMostrar};
+        Object[] v = {panelMostrar, CarrerasOpcion};
         volver.add(v);
     }
     

@@ -68,8 +68,10 @@ public class ContEstadisticas implements IContEstadisticas{
                     System.out.println("\t-> inscripciones: "+examen.getEstudiantesInscritos().size());
                     for (InscripcionE inscripcion : examen.getEstudiantesInscritos()) {
                         System.out.println("\t\t-> "+inscripcion.getId());
-                        suma += inscripcion.getNota().getNota();
-                        cantEx += 1;
+                        if(inscripcion.getNota() != null){
+                            suma += inscripcion.getNota().getNota();
+                            cantEx += 1;
+                        }
                     }
                 }
             }
@@ -134,8 +136,10 @@ public class ContEstadisticas implements IContEstadisticas{
                 if(enTodasSedes == true || sede.equals(cursoSede.getSede())){
                         for (Examen examen : cursoSede.getExmenes()) {
                             for (InscripcionE inscripcion : examen.getEstudiantesInscritos()) {
-                                suma += inscripcion.getNota().getNota();
-                                cantCursos += 1;
+                                if(inscripcion.getNota() != null){
+                                    suma += inscripcion.getNota().getNota();
+                                    cantCursos += 1;
+                                }
                             }
                         }
                     }
@@ -224,7 +228,7 @@ public class ContEstadisticas implements IContEstadisticas{
     
     @Override
     public Object[] cursoConMejorPrmedioAprobacionCarrera(boolean enTodasSedes, Carrera carrera){
-        Object[] cursoRetornar ={null, 0};
+        Object[] cursoRetornar ={null, 0.0};
         
         Sede sede = Fabrica.getInstance().getContEdu().getSede();
         
@@ -301,8 +305,10 @@ public class ContEstadisticas implements IContEstadisticas{
                                 if(enTodasSedes == true || sedeSelec.equals(cursoSede.getSede())){
                                     for (Examen examen : cursoSede.getExmenes()) {
                                         for (InscripcionE inscripcion : examen.getEstudiantesInscritos()) {
-                                            suma += inscripcion.getNota().getNota();
-                                            cantCursos += 1;
+                                            if(inscripcion.getNota() != null){
+                                                suma += inscripcion.getNota().getNota();
+                                                cantCursos += 1;
+                                            }
                                         }
                                     }
                                 }
