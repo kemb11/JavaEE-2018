@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.DefaultComboBoxModel;
@@ -135,6 +137,13 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         opciones.add(EstadisticasOpcion);
 
         opcionSeleccionada(SedesOpcion, "sedes");
+        
+        try {
+            this.setIconImage(ImageIO.read(getClass().getResource("/Iconos/logoApp.png")));
+        }
+        catch (IOException exc) {
+            exc.printStackTrace();
+        }
     }
 
     /**
@@ -174,6 +183,8 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         EstadisticasOpcion = new javax.swing.JPanel();
         jLabel76 = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
+        jLabel89 = new javax.swing.JLabel();
         PanelPrincipal = new javax.swing.JPanel();
         CursosPanel = new javax.swing.JPanel();
         BuscarTextField = new javax.swing.JTextField();
@@ -225,6 +236,7 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jLabel90 = new javax.swing.JLabel();
         Estudiante_Crear = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -843,6 +855,12 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/logoApp.png"))); // NOI18N
+
+        jLabel89.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel89.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel89.setText("Gestión Educativa");
+
         javax.swing.GroupLayout PanelLateralLayout = new javax.swing.GroupLayout(PanelLateral);
         PanelLateral.setLayout(PanelLateralLayout);
         PanelLateralLayout.setHorizontalGroup(
@@ -852,17 +870,29 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             .addComponent(SedesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(NoticiasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(EstudiantesOpcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(DocentesOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(EstadisticasOpcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(PanelLateralLayout.createSequentialGroup()
+                .addGroup(PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(SedeSelec, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel88))
+                    .addGroup(PanelLateralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel89)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelLateralLayout.setVerticalGroup(
             PanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLateralLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addContainerGap()
+                .addComponent(jLabel88)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel89)
+                .addGap(18, 18, 18)
                 .addComponent(CursosOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CarrerasOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1482,6 +1512,14 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         panelNuevaSede.setBackground(new java.awt.Color(73, 202, 114));
 
+        sede_txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        sede_txt_direccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        sede_txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        sede_btn_crear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sede_btn_crear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/crear.png"))); // NOI18N
         sede_btn_crear.setText("Agregar");
         sede_btn_crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1489,47 +1527,60 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Nombre");
 
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Direción");
 
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Teléfono");
+
+        jLabel90.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel90.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel90.setText("Nueva Sede");
 
         javax.swing.GroupLayout panelNuevaSedeLayout = new javax.swing.GroupLayout(panelNuevaSede);
         panelNuevaSede.setLayout(panelNuevaSedeLayout);
         panelNuevaSedeLayout.setHorizontalGroup(
             panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNuevaSedeLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(27, 27, 27)
                 .addGroup(panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel24)
+                    .addComponent(jLabel90)
                     .addGroup(panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(sede_txt_nombre)
+                        .addComponent(sede_btn_crear)
+                        .addComponent(jLabel26)
+                        .addComponent(jLabel25)
+                        .addComponent(jLabel24)
+                        .addComponent(sede_txt_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                         .addComponent(sede_txt_direccion)
-                        .addComponent(sede_txt_telefono)
-                        .addComponent(sede_btn_crear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(sede_txt_telefono)))
+                .addContainerGap(763, Short.MAX_VALUE))
         );
         panelNuevaSedeLayout.setVerticalGroup(
             panelNuevaSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNuevaSedeLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel90)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel24)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sede_txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel25)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sede_txt_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel26)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sede_txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(sede_btn_crear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(panelNuevaSede, "card8");
@@ -1735,7 +1786,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         panelBorrarSede.setBackground(new java.awt.Color(73, 202, 114));
 
         btn_borrarSede_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_borrarSede_1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\delete.png")); // NOI18N
         btn_borrarSede_1.setText("Borrar Sede");
         btn_borrarSede_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1785,7 +1835,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel29.setText("Telefono");
 
         mod_btn_confirmar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        mod_btn_confirmar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\check-square.png")); // NOI18N
         mod_btn_confirmar.setText("Confirmar cambios");
         mod_btn_confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1794,7 +1843,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         });
 
         btn_borrarSede.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_borrarSede.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\delete.png")); // NOI18N
         btn_borrarSede.setText("Borrar Sede");
         btn_borrarSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4136,7 +4184,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         }
 
         btn_ed_buscarDocente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_ed_buscarDocente.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\search.png")); // NOI18N
         btn_ed_buscarDocente.setText("Buscar");
         btn_ed_buscarDocente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4155,7 +4202,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jLabel80.setText("Repetir password");
 
         btn_ed_aceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_ed_aceptar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\check-square.png")); // NOI18N
         btn_ed_aceptar.setText("Aceptar");
         btn_ed_aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4164,7 +4210,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         });
 
         btn_ed_inh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_ed_inh.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\delete.png")); // NOI18N
         btn_ed_inh.setText("Inhabilitar");
         btn_ed_inh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4256,7 +4301,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(73, 202, 114));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\check-square.png")); // NOI18N
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4266,7 +4310,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         in_est.setBackground(new java.awt.Color(73, 202, 114));
         in_est.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        in_est.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\delete.png")); // NOI18N
         in_est.setText("Inhabilitar");
         in_est.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4282,7 +4325,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         buscarEstEditar.setBackground(new java.awt.Color(73, 202, 114));
         buscarEstEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        buscarEstEditar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\search.png")); // NOI18N
         buscarEstEditar.setText("Buscar");
         buscarEstEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4370,7 +4412,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         btn_aes_buscar.setBackground(new java.awt.Color(73, 202, 114));
         btn_aes_buscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_aes_buscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\check-square.png")); // NOI18N
         btn_aes_buscar.setText("Buscar");
         btn_aes_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4382,7 +4423,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         btn_aes_agregar.setBackground(new java.awt.Color(73, 202, 114));
         btn_aes_agregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_aes_agregar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\crear.png")); // NOI18N
         btn_aes_agregar.setText("Agregar");
         btn_aes_agregar.setEnabled(false);
         btn_aes_agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -4431,7 +4471,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         }
 
         btn_aec_buscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_aec_buscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\search.png")); // NOI18N
         btn_aec_buscar.setText("Buscar");
         btn_aec_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4449,7 +4488,6 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
         jScrollPane30.setViewportView(list_aec_carreras);
 
         btn_aec_agregarCarrera.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_aec_agregarCarrera.setIcon(new javax.swing.ImageIcon("C:\\Users\\kapo_\\OneDrive\\Documentos\\NetBeansProjects\\JavaEE-2018\\src\\Iconos\\crear.png")); // NOI18N
         btn_aec_agregarCarrera.setText("Agregar Carrera");
         btn_aec_agregarCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4883,11 +4921,16 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
 
         /*Fabrica f = Fabrica.getInstance();
         IContAdmin ica = f.getContAdmin();*/
-        try {
-            Fabrica.getInstance().getContAdmin().crearSedeVar(nombreSede, direccionSede, telefonoSede);
-            opcionSeleccionada(SedesOpcion, "sedes");
-        } catch (Exception e) {
-
+        
+        if(nombreSede.isEmpty() || direccionSede.isEmpty() || telefonoSede.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No pueden quedar campos vacíos", "Advertencia", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
+                Fabrica.getInstance().getContAdmin().crearSedeVar(nombreSede, direccionSede, telefonoSede);
+                opcionSeleccionada(SedesOpcion, "sedes");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_sede_btn_crearActionPerformed
@@ -6606,7 +6649,10 @@ public class Admin_MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
